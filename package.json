@@ -26,6 +26,9 @@
   },
   "dependencies": {
     "express": "^4.16.4",
+    "moment": "^2.22.2",
+    "mongodb": "^3.1.10",
+    "mongoose": "^5.3.14",
     "react": "^16.6.3",
     "react-bootstrap": "^0.32.4",
     "react-dom": "^16.6.3"

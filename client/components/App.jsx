@@ -1,7 +1,9 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
+import { FormGroup, FormControl, ControlLabel, HelpBlock } from 'react-bootstrap';
 
 
-class App extends React.Components {
+class App extends React.Component {
     constructor(props, context) {
     super(props, context);
 
@@ -26,22 +28,44 @@ class App extends React.Components {
 
   render() {
     return (
-      <form>
-        <FormGroup
-          controlId="formBasicText"
-          validationState={this.getValidationState()}
-        >
-          <ControlLabel>Working example with validation</ControlLabel>
-          <FormControl
-            type="text"
-            value={this.state.value}
-            placeholder="Enter text"
-            onChange={this.handleChange}
-          />
-          <FormControl.Feedback />
-          <HelpBlock>Validation is based on string length.</HelpBlock>
-        </FormGroup>
-      </form>
+      <div>
+        <div>
+          <form>
+            <FormGroup
+              controlId="formBasicText"
+              validationState={this.getValidationState()}
+            >
+              <ControlLabel>Title (optional)</ControlLabel>
+              <FormControl
+                type="text"
+                value={this.state.value}
+                placeholder="Enter text"
+                onChange={this.handleChange}
+              />
+              <FormControl.Feedback />
+              <HelpBlock>Validation is based on string length.</HelpBlock>
+            </FormGroup>
+          </form>
+        </div>
+        <div>
+          <form>
+            <FormGroup
+              controlId="formBasicText"
+              validationState={this.getValidationState()}
+            >
+              <ControlLabel>Document Link</ControlLabel>
+              <FormControl
+                type="text"
+                value={this.state.value}
+                placeholder="Enter text"
+                onChange={this.handleChange}
+              />
+              <FormControl.Feedback />
+              <HelpBlock>Validation is based on string length.</HelpBlock>
+            </FormGroup>
+          </form>
+        </div>
+      </div>
     );
   }
 
