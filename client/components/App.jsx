@@ -23,33 +23,30 @@ class App extends React.Component {
     this.subjectToAddChange = this.subjectToAddChange.bind(this);
     this.subjectChange = this.subjectChange.bind(this);
     this.addSubject = this.addSubject.bind(this);
+    this.deleteSubject = this.deleteSubject.bind(this);
 
   }
 
   componentDidMount() {
+    console.log(this.state.count)
     fetch ('/docs')
     .then(res => { return res.json() })
     .then(data => { this.setState({
       docs: data
     })})
     .catch(err => { console.log('Error at GET', err) })
+
+  //get subjects from local storage
+   var subjectArray = [];
+    for (var key in localStorage) {
+      if (typeof localStorage[key] === 'string') {
+        subjectArray.push(localStorage[key]);
+      }
+    }
+    this.setState({
+      subjects: subjectArray
+    })
   }
-
-  // getValidationStateTitle() {
-  //   const length = this.state.title.length;
-  //   if (length > 10) return 'success';
-  //   else if (length > 5) return 'warning';
-  //   else if (length > 0) return 'error';
-  //   return null;
-  // }
-
-  //  getValidationStateUrl() {
-  //   const length = this.state.url.length;
-  //   if (length > 10) return 'success';
-  //   else if (length > 5) return 'warning';
-  //   else if (length > 0) return 'error';
-  //   return null;
-  // }
 
   titleChange(e) {
     this.setState({ title: e.target.value });
@@ -66,11 +63,15 @@ class App extends React.Component {
   }
   addSubject(e) {
     e.preventDefault();
-    this.setState({
-      subjects: [...this.state.subjects, this.state.subjectToAdd]
-    })
+    localStorage.setItem(this.state.subjectToAdd, this.state.subjectToAdd);
+    location.reload();
   }
 
+  deleteSubject(e) {
+    e.preventDefault();
+    localStorage.removeItem(this.state.subjectToAdd);
+    location.reload();
+  }
 
   handleSubmit() {
     var data = {
@@ -94,7 +95,6 @@ class App extends React.Component {
   }
 
   render() {
-    console.log(this.state.subjects)
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
@@ -119,6 +119,7 @@ class App extends React.Component {
             </div>
             <input type="text" placeholder="Enter subject" value={this.state.subjectToAdd} onChange={this.subjectToAddChange} />
             <input type="submit" value="Add" onClick={this.addSubject}/>
+            <input type="submit" value="Delete" onClick={this.deleteSubject}/>
           </div>
           <div>
             <input type="submit" value="Submit" />
