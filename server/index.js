@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const Document = require('../db/Document.js');
+const db = require('../db/index.js');
 
 const app = express();
 
@@ -23,8 +24,11 @@ app.post('/', (req, res) => {
   .catch(err => res.status(500).send('Could not post document', err))
 });
 
-app.get('/', (req, res) => {
-
+app.get('/docs', (req, res) => {
+  Document.findOne({ title: 'String Methods'}, (err, result) => {
+    if (err) { res.status(500).send('Could not get document') }
+    else { res.send(result) }
+  })
 });
 
 

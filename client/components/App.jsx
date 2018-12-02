@@ -10,8 +10,18 @@ class App extends React.Component {
     this.handleChange = this.handleChange.bind(this);
 
     this.state = {
-      value: ''
+      value: '',
+      docs: []
     };
+  }
+
+  componentDidMount() {
+    fetch ('/docs')
+    .then(res => { console.log(res.json(res)) })
+    .then(data => { this.setState({
+       docs: data
+    })})
+    .catch(err => { console.log('Error at GET', err) })
   }
 
   getValidationState() {
