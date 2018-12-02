@@ -17,12 +17,13 @@ class App extends React.Component {
 
   componentDidMount() {
     fetch ('/docs')
-    .then(res => { console.log(res.json(res)) })
+    .then(res => { return res.json() })
     .then(data => { this.setState({
-       docs: data
+      docs: data
     })})
     .catch(err => { console.log('Error at GET', err) })
   }
+
 
   getValidationState() {
     const length = this.state.value.length;
@@ -37,7 +38,8 @@ class App extends React.Component {
   }
 
   render() {
-    return (
+    console.log(this.state.docs)
+        return (
       <div>
         <div>
           <form>
@@ -77,7 +79,9 @@ class App extends React.Component {
         </div>
       </div>
     );
-  }
+
+    }
+
 
 }
 

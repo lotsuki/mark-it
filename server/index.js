@@ -25,9 +25,9 @@ app.post('/', (req, res) => {
 });
 
 app.get('/docs', (req, res) => {
-  Document.findOne({ title: 'String Methods'}, (err, result) => {
+  Document.find().exec((err, results) => {
     if (err) { res.status(500).send('Could not get document') }
-    else { res.send(result) }
+    else { res.send(results) }
   })
 });
 
