@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 const Subjects = ({props, subjects}) => (
   <div>
     <label>Subject</label>
@@ -12,8 +11,6 @@ const Subjects = ({props, subjects}) => (
     </select>
   </div>
 );
-
-
 
 
 export default Subjects;
