@@ -6,6 +6,8 @@ import Subjects from './Subjects.jsx';
 import Title from './Title.jsx';
 import Site from './Site.jsx';
 import AddSubjects from './AddSubjects.jsx';
+import style from '../style.css.js';
+import Header from './Header.jsx';
 
 
 class App extends React.Component {
@@ -98,15 +100,23 @@ class App extends React.Component {
 
   render() {
     return (
-
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <Title title={this.state.title} titleChange={this.titleChange}/>
-          <Site url={this.state.url} urlChange={this.urlChange}/>
-          <Subjects subjects={this.state.subjects} handleChange={this.subjectChange}/>
-          <input type="submit" value="Submit" />
-        </form>
-         <AddSubjects subjects={this.state.subjects} subjectToAdd={this.state.subjectToAdd} subjectToAddChange={this.subjectToAddChange} addSubject={this.addSubject} deleteSubject={this.deleteSubject}/>
+      <div style={style.container}>
+        <Header />
+        <div style={style.formContainer}>
+          <div style={style.formWrapper}>
+            <form style={style.form} onSubmit={this.handleSubmit}>
+              <Title title={this.state.title} titleChange={this.titleChange}/>
+              <Site url={this.state.url} urlChange={this.urlChange}/>
+              <Subjects subjects={this.state.subjects} handleChange={this.subjectChange}/>
+              <div style={style.submitWrapper}>
+                <input style={style.submit} type="submit" value="Submit" />
+              </div>
+            </form>
+          </div>
+        </div>
+        <AddSubjects subjects={this.state.subjects} subjectToAdd={this.state.subjectToAdd} subjectToAddChange={this.subjectToAddChange} addSubject={this.addSubject} deleteSubject={this.deleteSubject}/>
+        <div>
+        </div>
       </div>
 
 
