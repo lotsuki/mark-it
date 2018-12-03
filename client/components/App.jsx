@@ -98,17 +98,18 @@ class App extends React.Component {
 
   render() {
     return (
+
       <div>
         <form onSubmit={this.handleSubmit}>
           <Title title={this.state.title} titleChange={this.titleChange}/>
           <Site url={this.state.url} urlChange={this.urlChange}/>
           <Subjects subjects={this.state.subjects} handleChange={this.subjectChange}/>
-          <AddSubjects subjectToAdd={this.state.subjectToAdd} subjectToAddChange={this.subjectToAddChange} addSubject={this.addSubject} deleteSubject={this.deleteSubject}/>
-
-            <input type="submit" value="Submit" />
-
+          <input type="submit" value="Submit" />
         </form>
+         <AddSubjects subjects={this.state.subjects} subjectToAdd={this.state.subjectToAdd} subjectToAddChange={this.subjectToAddChange} addSubject={this.addSubject} deleteSubject={this.deleteSubject}/>
       </div>
+
+
     );
   }
 };
