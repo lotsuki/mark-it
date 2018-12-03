@@ -4,7 +4,7 @@ import style from '../style.css.js';
 const Subjects = ({ props, subjects, handleChange }) => (
   <div style={style.subjectsContainer}>
     <div style={style.subjectsLabel}>
-      <label>Subject:</label>
+      <label>Subject</label>
     </div>
     <div style={style.subjectsSelect}>
       <select id="subjects" onChange={handleChange}>

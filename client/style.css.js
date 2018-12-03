@@ -8,7 +8,7 @@ const style = {
     background: "#e5e1e1",
     margin: "30px",
     padding: "20px",
-    borderRadius: "10px"
+    borderRadius: "5px"
   },
   formWrapper: {
     display: "flex",
@@ -34,7 +34,8 @@ const style = {
     textAlign: "center"
   },
   titleInput: {
-    flex: "2"
+    flex: "2",
+    padding: "5px"
   },
   siteWrapper: {
     display: "flex",
@@ -45,25 +46,32 @@ const style = {
     textAlign: "center"
   },
   siteInput: {
-    flex: "2"
+    flex: "2",
+    padding: "5px"
   },
   subjectsContainer: {
     display: "flex",
-    justifyContent: "center",
-    margin: "5px"
+    flexFlow: "column",
+    alignItems: "center",
+    margin: "10px"
   },
   subjectsLabel: {
+    display: "flex",
     margin: "3px"
   },
   subjectsSelect: {
+    display: "flex",
     margin: "3px"
   },
   submitWrapper: {
-    // display: "flex",
-    // justifyContent: "center"
+    display: "flex",
+    justifyContent: "flex-end"
   },
   submit: {
     margin: "3px"
+  },
+  subjectContainer: {
+    margin: "15px"
   }
 
 };

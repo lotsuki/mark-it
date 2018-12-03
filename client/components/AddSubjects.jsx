@@ -1,7 +1,8 @@
 import React from 'react';
+import style from '../style.css.js';
 
 const AddSubjects = ({ subjects, subjectToAdd, subjectToAddChange, addSubject, deleteSubject }) => (
-  <div>
+  <div style={style.subjectContainer}>
     <div>
       <div>
         <label>Add Subject</label>
