@@ -3,7 +3,7 @@ import style from '../style.css.js';
 
 const Header = () => (
   <div>
-    <div style={style.header}>Hello, Documents!</div>
+    <div style={style.header}>Hello, Bookmarks!</div>
   </div>
 );
 

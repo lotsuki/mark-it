@@ -8,6 +8,7 @@ import Site from './Site.jsx';
 import AddSubjects from './AddSubjects.jsx';
 import style from '../style.css.js';
 import Header from './Header.jsx';
+import Board from './Board.jsx';
 
 
 class App extends React.Component {
@@ -114,7 +115,7 @@ class App extends React.Component {
             </form>
           </div>
         </div>
-        <AddSubjects subjects={this.state.subjects} subjectToAdd={this.state.subjectToAdd} subjectToAddChange={this.subjectToAddChange} addSubject={this.addSubject} deleteSubject={this.deleteSubject}/>
+        <Board subjects={this.state.subjects} subjectToAdd={this.state.subjectToAdd} subjectToAddChange={this.subjectToAddChange} addSubject={this.addSubject} deleteSubject={this.deleteSubject}/>
         <div>
         </div>
       </div>

@@ -70,8 +70,28 @@ const style = {
   submit: {
     margin: "3px"
   },
+  boardContainer: {
+    margin: "30px"
+  },
   subjectContainer: {
-    margin: "15px"
+    display: "flex",
+    justifyContent: "flex-end",
+    marginBottom: "25px"
+  },
+
+  boardHeader: {
+    fontWeight: "bold",
+    fontSize: "30px",
+    fontFamily: "Helvetica Narrow, sans-serif",
+    textAlign: "center"
+  },
+  boardWrapper: {
+    display: "flex",
+    flexFlow: "row",
+    justifyContent: "flex-start"
+  },
+  boardButtons: {
+    margin: "30px"
   }
 
 };
