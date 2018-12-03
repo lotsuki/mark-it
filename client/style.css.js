@@ -91,7 +91,11 @@ const style = {
     justifyContent: "flex-start"
   },
   boardButtons: {
-    margin: "30px"
+    margin: "40px"
+  },
+  dropdown: {
+    background: "white",
+    color: "black"
   }
 
 };

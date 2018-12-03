@@ -1,5 +1,6 @@
 import React from 'react';
 import AddSubjects from './AddSubjects.jsx';
+import Dropdown from './Dropdown.jsx';
 import style from '../style.css.js';
 
 
@@ -11,7 +12,7 @@ const Board = ({ subjects, subjectToAdd, subjectToAddChange, addSubject, deleteS
      <AddSubjects subjects={subjects} subjectToAdd={subjectToAdd} subjectToAddChange={subjectToAddChange} addSubject={addSubject} deleteSubject={deleteSubject}/>
      <div style={style.boardWrapper}>
     {subjects.map(subject => {
-      return <div style={style.boardButtons}><input key={subject} type="submit" value={subject}/></div>
+      return <Dropdown  key={subject} subject={subject} />
     })}
     </div>
   </div>

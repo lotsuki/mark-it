@@ -80,10 +80,12 @@ class App extends React.Component {
 
   handleSubmit() {
     var data = {
-      title: this.state.title,
-      url: this.state.url,
       subject: this.state.subject,
-      date: moment().format('MM-DD-YYYY')
+      sites: [{
+        title: this.state.title,
+        url: this.state.url,
+        date: moment().format('MM-DD-YYYY')
+      }]
     }
     fetch('/', {
       method: 'post',

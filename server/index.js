@@ -13,10 +13,12 @@ app.use(express.static(`${__dirname}/../public`));
 
 app.post('/', (req, res) => {
   Document.create({
-    title: req.body.title,
-    url: req.body.url,
     subject: req.body.subject,
-    date: req.body.date
+    sites: [{
+      title: req.body.sites[0].title,
+      url: req.body.sites[0].url,
+      date: req.body.sites[0].date
+    }]
   })
   .then(() => {
     db.close();
@@ -31,6 +33,13 @@ app.get('/docs', (req, res) => {
     else { res.send(results) }
   })
 });
+
+// app.get('/subject', (req, res) => {
+//   Document.find({subject: }).exec((err, results) => {
+//     if (err) { res.status(500).send('Could not get document') }
+//     else { res.send(results) }
+//   })
+// });
 
 
 
