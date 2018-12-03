@@ -12,19 +12,34 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(`${__dirname}/../public`));
 
 app.post('/', (req, res) => {
-  Document.create({
-    subject: req.body.subject,
-    sites: [{
-      title: req.body.sites[0].title,
-      url: req.body.sites[0].url,
-      date: req.body.sites[0].date
-    }]
-  })
-  .then(() => {
-    db.close();
-    res.send('Document posted');
-  })
-  .catch(err => res.status(500).send('Could not post document', err))
+  Document.countDocuments({subject: req.body.subject}, (err, count) => {
+    if (count > 0) {
+      Document.updateOne({subject: req.body.subject}, {$push: {sites: {
+        title: req.body.sites[0].title,
+        url: req.body.sites[0].url,
+        date: req.body.sites[0].date
+      }}})
+      .then(() => {
+        db.close();
+        res.send('Document posted');
+      })
+      .catch(err => res.status(500).send('Could not post document', err));
+    } else {
+      Document.create({
+        subject: req.body.subject,
+        sites: [{
+          title: req.body.sites[0].title,
+          url: req.body.sites[0].url,
+          date: req.body.sites[0].date
+        }]
+      })
+      .then(() => {
+        db.close();
+        res.send('Document posted');
+      })
+      .catch(err => res.status(500).send('Could not post document', err));
+    }
+  });
 });
 
 app.get('/docs', (req, res) => {
@@ -35,7 +50,7 @@ app.get('/docs', (req, res) => {
 });
 
 // app.get('/subject', (req, res) => {
-//   Document.find({subject: }).exec((err, results) => {
+//   Document.find().exec((err, results) => {
 //     if (err) { res.status(500).send('Could not get document') }
 //     else { res.send(results) }
 //   })

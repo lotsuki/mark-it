@@ -16,12 +16,12 @@ class App extends React.Component {
     super(props, context);
 
     this.state = {
+      data: [],
+      subjects: [],
       title: '',
       url: '',
       subject: '',
-      subjectToAdd: '',
-      subjects: [],
-      docs: []
+      subjectToAdd: ''
     };
     this.titleChange = this.titleChange.bind(this);
     this.urlChange = this.urlChange.bind(this);
@@ -37,7 +37,7 @@ class App extends React.Component {
     fetch ('/docs')
     .then(res => { return res.json() })
     .then(data => { this.setState({
-      docs: data
+      data: data
     })})
     .catch(err => { console.log('Error at GET', err) })
 
@@ -86,7 +86,8 @@ class App extends React.Component {
         url: this.state.url,
         date: moment().format('MM-DD-YYYY')
       }]
-    }
+    };
+    console.log(data, 'DATA')
     fetch('/', {
       method: 'post',
       body: JSON.stringify(data),
@@ -94,9 +95,9 @@ class App extends React.Component {
         'Content-Type': 'application/json'
       }
     })
-    .then( res => res.json() )
+    .then( res => console.log(res.json()), 'POST RECEIVED')
     .then( data => this.setState({
-      docs: data
+      data: data
     }))
     .catch(err => { console.log('Could not post document', err); })
   }
@@ -117,7 +118,7 @@ class App extends React.Component {
             </form>
           </div>
         </div>
-        <Board subjects={this.state.subjects} subjectToAdd={this.state.subjectToAdd} subjectToAddChange={this.subjectToAddChange} addSubject={this.addSubject} deleteSubject={this.deleteSubject}/>
+        <Board subjects={this.state.subjects} sites={this.state.data.sites} subjectToAdd={this.state.subjectToAdd} subjectToAddChange={this.subjectToAddChange} addSubject={this.addSubject} deleteSubject={this.deleteSubject}/>
         <div>
         </div>
       </div>
