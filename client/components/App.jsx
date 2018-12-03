@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom';
 import { FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
 import moment from 'moment';
 import Subjects from './Subjects.jsx';
+import Title from './Title.jsx';
+import Site from './Site.jsx';
+import AddSubjects from './AddSubjects.jsx';
 
 
 class App extends React.Component {
@@ -28,7 +31,6 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.state.count)
     fetch ('/docs')
     .then(res => { return res.json() })
     .then(data => { this.setState({
@@ -98,32 +100,13 @@ class App extends React.Component {
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
-          <div>
-            <div>
-              <label>Title</label>
-            </div>
-            <input type="text" placeholder="Enter text" value={this.state.title} onChange={this.titleChange} />
-          </div>
-          <div>
-            <div>
-              <label>Site URL</label>
-            </div>
-            <input type="text" placeholder="Enter URL" value={this.state.url} onChange={this.urlChange} />
-          </div>
-          <div>
-            <Subjects subjects={this.state.subjects} handleChange={this.subjectChange}/>
-          </div>
-          <div>
-            <div>
-              <label>Add Subject</label>
-            </div>
-            <input type="text" placeholder="Enter subject" value={this.state.subjectToAdd} onChange={this.subjectToAddChange} />
-            <input type="submit" value="Add" onClick={this.addSubject}/>
-            <input type="submit" value="Delete" onClick={this.deleteSubject}/>
-          </div>
-          <div>
+          <Title title={this.state.title} titleChange={this.titleChange}/>
+          <Site url={this.state.url} urlChange={this.urlChange}/>
+          <Subjects subjects={this.state.subjects} handleChange={this.subjectChange}/>
+          <AddSubjects subjectToAdd={this.state.subjectToAdd} subjectToAddChange={this.subjectToAddChange} addSubject={this.addSubject} deleteSubject={this.deleteSubject}/>
+
             <input type="submit" value="Submit" />
-          </div>
+
         </form>
       </div>
     );
