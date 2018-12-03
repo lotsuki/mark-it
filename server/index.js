@@ -13,7 +13,10 @@ app.use(express.static(`${__dirname}/../public`));
 
 app.post('/', (req, res) => {
   Document.create({
-
+    title: req.body.title,
+    url: req.body.url,
+    subject: req.body.subject,
+    date: req.body.date
   })
   .then(() => {
     db.close();
