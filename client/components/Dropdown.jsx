@@ -11,44 +11,42 @@ class Dropdown extends React.Component {
       listOpen: false,
       siteTitle: this.props.title
     }
+    this.toggleList = this.toggleList.bind(this);
   }
 
-  // componentDidMount() {
-  //   fetch('/subject')
-  //   .then(res => res.json())
-  //   .then(data => {
-  //     this.setState({
-  //       data: data
-  //     })
-  //   })
-  //   .catch(err => { console.log('Could not get sites', err); })
-  //   //TODO: fix state props
-  // }
 
-  // toggleList() {
-  //   this.setState(prevState => ({
-  //     listOpen: !prevState.listOpen
-  //   }))
-  // }
-
+  toggleList() {
+    console.log('toggle')
+    this.setState({
+      listOpen: !this.state.listOpen
+    })
+  }
 
 
   render() {
-    return (
-      <div style={style.boardButtons} className="dropdown" onClick={() => this.toggleList()}>
-        <button style={style.dropdown} className="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">{this.props.subject}
+    if (this.state.listOpen) {
+      return (
+      <div style={style.boardButtons} className="dropdown" >
+        <button style={style.dropdown} className="dropdown" onClick={this.toggleList} type="button" data-toggle="dropdown">{this.props.subject}
         <span className="caret"></span></button>
-        <ul className="dropdown-menu">
-
-        </ul>
+        <div style={style.dropdownContent}>
+          {this.props.sites.map(site => (
+            <a key={site.url} href="#">{site.url}</a>
+          ))}
+         </div>
+      </div>
+      )
+    } else {
+    return (
+       <div style={style.boardButtons} className="dropdown" >
+        <button style={style.dropdown} className="dropdown" onClick={this.toggleList} type="button" data-toggle="dropdown">{this.props.subject}
+        <span className="caret"></span></button>
       </div>
     )
+   }
   }
 };
 
 
 export default Dropdown;
 
-  // {this.props.sites.map(site => {
-        //   <li><div>{site.title}</div><a href="#">{site.url}</a></li>
-        // })}

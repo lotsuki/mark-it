@@ -12,7 +12,7 @@ const Board = ({ data, subjects, subjectToAdd, subjectToAddChange, addSubject, d
      <AddSubjects subjects={subjects} subjectToAdd={subjectToAdd} subjectToAddChange={subjectToAddChange} addSubject={addSubject} deleteSubject={deleteSubject}/>
      <div style={style.boardWrapper}>
         {data.map(subject => {
-          return <Dropdown  key={subject.subject} subject={subject.subject} sites={subject.sites}/>
+          return <Dropdown  key={subject.subject} data={data} subject={subject.subject} sites={subject.sites}/>
         })}
     </div>
   </div>

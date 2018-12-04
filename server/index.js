@@ -34,11 +34,10 @@ app.post('/', (req, res) => {
         if (err) { console.log('err', err) }
         else {  Document.find().exec((err, results) => {
           if (err) { console.log('Cannot send back all data from post api, UPDATE'); }
-          else {
-            console.log(results)
-            res.send(results); }
-        }) }
-      })
+          else { res.send(results); }
+        });
+        }
+      });
     } else {
       Document.updateOne({subject: req.body.subject}, {$push: {sites: {
         title: req.body.sites[0].title,
@@ -48,70 +47,25 @@ app.post('/', (req, res) => {
         if (err) { console.log('Could not update data', err); }
         else {
           Document.find().exec((err, results) => {
-          if (err) { console.log('Cannot send back all data from post api, UPDATE'); }
-          else {
-            console.log(results)
-            res.send(results); }
-        })
+            if (err) { console.log('Cannot send back all data from post api, UPDATE'); }
+            else { res.send(results); }
+          });
         }
-      })
-      // .then(() => {
-      //   db.close();
-      // })
-      // .catch(err => res.status(500).send('Could not post document', err));
+      });
     }
   })
-  // console.log( Document.estimatedDocumentCount({subject: req.body.subject}, (err, count) => {
-  //   console.log(count)
-  //   if (err) { console.log('Error at document count', err) }
-  //   else if (count > 0) {
-  //     Document.updateOne({subject: req.body.subject}, {$push: {sites: {
-  //       title: req.body.sites[0].title,
-  //       url: req.body.sites[0].url,
-  //       date: req.body.sites[0].date
-  //     }}})
-  //     .then(() => {
-  //       db.close();
-  //       res.send('Document posted');
-  //     })
-  //     .catch(err => res.status(500).send('Could not post document', err));
-  //   } else {
-  //     Document.create({
-  //       subject: req.body.subject,
-  //       sites: [{
-  //         title: req.body.sites[0].title,
-  //         url: req.body.sites[0].url,
-  //         date: req.body.sites[0].date
-  //       }]
-  //     })
-  //     .then(() => {
-  //       db.close();
-  //       res.send('Document posted');
-  //     })
-  //     .catch(err => res.status(500).send('Could not post document', err));
-  //   }
-  // }))
-
-
 });
 
 app.get('/docs', (req, res) => {
   Document.find().exec((err, results) => {
     if (err) { res.status(500).send('Could not get document') }
-    else { res.send(results) }
+    else { res.send(results); }
   })
 });
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/index.html'));
 });
-
-// app.get('/subject', (req, res) => {
-//   Document.find().exec((err, results) => {
-//     if (err) { res.status(500).send('Could not get document') }
-//     else { res.send(results) }
-//   })
-// });
 
 
 

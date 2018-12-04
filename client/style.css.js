@@ -91,11 +91,28 @@ const style = {
     justifyContent: "flex-start"
   },
   boardButtons: {
-    margin: "40px"
+    margin: "40px",
+     position: "relative",
+    display: "inline-block"
   },
   dropdown: {
-    background: "white",
-    color: "black"
+    backgroundColor: "white",
+    color: "black",
+    height: "40px",
+    width: "80px",
+    padding: "5px",
+    fontSize: "16px",
+    borderRadius: "3px",
+    cursor: "pointer",
+
+  },
+  dropdownContent: {
+    display: "none",
+    position: "absolute",
+    backgroundColor: "#f1f1f1",
+    minWidth: "160px",
+    boxShadow: "0px 8px 16px 0px rgba(0,0,0,0.2)",
+    zIndex: "1"
   }
 
 };
