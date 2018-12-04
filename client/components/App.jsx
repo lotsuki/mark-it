@@ -21,7 +21,8 @@ class App extends React.Component {
       title: '',
       url: '',
       subject: '',
-      subjectToAdd: ''
+      subjectToAdd: '',
+      isLoading: true
     };
     this.titleChange = this.titleChange.bind(this);
     this.urlChange = this.urlChange.bind(this);
@@ -35,22 +36,22 @@ class App extends React.Component {
 
   componentDidMount() {
     fetch ('/docs')
-    .then(res => { return res.json() })
-    .then(data => { this.setState({
-      data: data
+    .then(res => res.json())
+    .then(results => {this.setState({
+      data: results,
+      isLoading: true
     })})
-    .catch(err => { console.log('Error at GET', err) })
+    .catch(err => { console.log('Error at GET', err) });
 
-  //get subjects from local storage
-   var subjectArray = [];
-    for (var key in localStorage) {
-      if (typeof localStorage[key] === 'string') {
-        subjectArray.push(localStorage[key]);
-      }
-    }
+    console.log(this.state.data, 'Data on mount after fetch')
+
+    var storageStr = localStorage.getItem('subjects');
+    var storage = JSON.parse(storageStr);
+
     this.setState({
-      subjects: subjectArray
+      subjects: storage
     })
+
   }
 
   titleChange(e) {
@@ -66,19 +67,72 @@ class App extends React.Component {
   subjectChange(e) {
     this.setState({ subject: e.target.value})
   }
+
   addSubject(e) {
     e.preventDefault();
-    localStorage.setItem(this.state.subjectToAdd, this.state.subjectToAdd);
+    var storage = this.state.subjects;
+
+    storage.push(this.state.subjectToAdd);
+    localStorage.setItem('subjects', JSON.stringify(storage));
+
+    this.setState({
+      subjects: storage
+    })
+
+    //get subjects from local storage
+    // var subjectArray = [];
+    // for (var key in localStorage) {
+    //   if (typeof localStorage[key] === 'string') {
+    //     subjectArray.push(localStorage[key]);
+    //   }
+    // }
+    // console.log(this.state.subjectToAdd)
+    // if (this.state.subjects.length > 0) {
+    //   this.setState(prevState => ({
+    //     subjects: [...prevState, this.state.subjectToAdd]
+    //   }))
+    // } else {
+    //   this.setState({
+    //     subjects: this.state.subjectToAdd
+    //   })
+    // }
+
     location.reload();
   }
 
   deleteSubject(e) {
     e.preventDefault();
-    localStorage.removeItem(this.state.subjectToAdd);
+    var storage = localStorage.getItem('subjects');
+    var parsed = JSON.parse(storage);
+    var subject = this.state.subjectToAdd;
+    console.log(subject, 'targetvalue')
+
+    new Promise((resolve, reject) => {
+      resolve('ok')
+    })
+    .then(() => {
+      for (var i = 0; i < parsed.length; i++) {
+        if (subject === parsed[i]) {
+          parsed.splice(i, 1);
+        }
+      }
+      return parsed;
+    })
+    .then(result => {
+      localStorage.setItem('subjects', JSON.stringify(result));
+      this.setState({
+        subjects: result
+      })
+    })
+    .catch(err => { console.log('Cannot delete subject', err) })
+
+
     location.reload();
   }
 
-  handleSubmit() {
+  handleSubmit(e) {
+    //e.preventDefault()
+    console.log('secondPOst')
     var data = {
       subject: this.state.subject,
       sites: [{
@@ -87,7 +141,7 @@ class App extends React.Component {
         date: moment().format('MM-DD-YYYY')
       }]
     };
-    console.log(data, 'DATA')
+
     fetch('/', {
       method: 'post',
       body: JSON.stringify(data),
@@ -95,20 +149,25 @@ class App extends React.Component {
         'Content-Type': 'application/json'
       }
     })
-    .then( res => console.log(res.json()), 'POST RECEIVED')
-    .then( data => this.setState({
-      data: data
-    }))
+    .then( res => res.json())
+    .then(results => {
+      this.setState({
+        data: results
+      })
+    })
     .catch(err => { console.log('Could not post document', err); })
   }
 
   render() {
+    if (!this.state.isLoading) {
+      return <div>Loading...</div>
+    }
     return (
       <div style={style.container}>
         <Header />
         <div style={style.formContainer}>
           <div style={style.formWrapper}>
-            <form style={style.form} onSubmit={this.handleSubmit}>
+            <form style={style.form} onSubmit={(e) => this.handleSubmit(e)}>
               <Title title={this.state.title} titleChange={this.titleChange}/>
               <Site url={this.state.url} urlChange={this.urlChange}/>
               <Subjects subjects={this.state.subjects} handleChange={this.subjectChange}/>
@@ -118,7 +177,7 @@ class App extends React.Component {
             </form>
           </div>
         </div>
-        <Board subjects={this.state.subjects} sites={this.state.data.sites} subjectToAdd={this.state.subjectToAdd} subjectToAddChange={this.subjectToAddChange} addSubject={this.addSubject} deleteSubject={this.deleteSubject}/>
+        <Board data={this.state.data} subjects={this.state.subjects} subjectToAdd={this.state.subjectToAdd} subjectToAddChange={this.subjectToAddChange} addSubject={this.addSubject} deleteSubject={this.deleteSubject}/>
         <div>
         </div>
       </div>

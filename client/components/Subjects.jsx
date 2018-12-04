@@ -10,6 +10,7 @@ const Subjects = ({ props, subjects, handleChange }) => (
       <select id="subjects" onChange={handleChange}>
         <option value="subjects">All Subjects</option>
         {subjects.map(subject => {
+          console.log(subject)
           return <option key={subject} value={subject}>{subject}</option>
         })}
       </select>

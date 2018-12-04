@@ -34,7 +34,6 @@ class Dropdown extends React.Component {
 
 
   render() {
-    console.log(this.props)
     return (
       <div style={style.boardButtons} className="dropdown" onClick={() => this.toggleList()}>
         <button style={style.dropdown} className="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">{this.props.subject}
