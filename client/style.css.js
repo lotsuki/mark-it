@@ -98,8 +98,8 @@ const style = {
   dropdown: {
     backgroundColor: "white",
     color: "black",
-    height: "40px",
-    width: "80px",
+    height: "50px",
+    width: "120px",
     padding: "5px",
     fontSize: "16px",
     borderRadius: "3px",

@@ -46,11 +46,14 @@ class App extends React.Component {
     console.log(this.state.data, 'Data on mount after fetch')
 
     var storageStr = localStorage.getItem('subjects');
-    var storage = JSON.parse(storageStr);
 
-    this.setState({
-      subjects: storage
-    })
+    if (storageStr) {
+      var storage = JSON.parse(storageStr);
+      this.setState({
+        subjects: storage
+      })
+    }
+
 
   }
 
@@ -78,25 +81,6 @@ class App extends React.Component {
     this.setState({
       subjects: storage
     })
-
-    //get subjects from local storage
-    // var subjectArray = [];
-    // for (var key in localStorage) {
-    //   if (typeof localStorage[key] === 'string') {
-    //     subjectArray.push(localStorage[key]);
-    //   }
-    // }
-    // console.log(this.state.subjectToAdd)
-    // if (this.state.subjects.length > 0) {
-    //   this.setState(prevState => ({
-    //     subjects: [...prevState, this.state.subjectToAdd]
-    //   }))
-    // } else {
-    //   this.setState({
-    //     subjects: this.state.subjectToAdd
-    //   })
-    // }
-
     location.reload();
   }
 
@@ -105,7 +89,17 @@ class App extends React.Component {
     var storage = localStorage.getItem('subjects');
     var parsed = JSON.parse(storage);
     var subject = this.state.subjectToAdd;
-    console.log(subject, 'targetvalue')
+
+    fetch(`/subject/${subject}`, {
+      method: 'delete',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(res => res.json())
+    .then(result => {
+      console.log(result, 'RESULT')
+    })
 
     new Promise((resolve, reject) => {
       resolve('ok')
@@ -116,9 +110,10 @@ class App extends React.Component {
           parsed.splice(i, 1);
         }
       }
-      return parsed;
+        return parsed;
     })
     .then(result => {
+      console.log(result, 'deleted')
       localStorage.setItem('subjects', JSON.stringify(result));
       this.setState({
         subjects: result
@@ -126,7 +121,7 @@ class App extends React.Component {
     })
     .catch(err => { console.log('Cannot delete subject', err) })
 
-
+    //TODO: delete subject from database
     location.reload();
   }
 

@@ -60,11 +60,19 @@ app.get('/docs', (req, res) => {
   Document.find().exec((err, results) => {
     if (err) { res.status(500).send('Could not get document') }
     else { res.send(results); }
-  })
+  });
 });
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/index.html'));
+});
+
+app.delete('/subject/:subject', (req, res) => {
+  var subject = req.params.subject;
+  Document.deleteOne({subject: subject}, (err) => {
+    if (err) { console.log('Could not delete subject: ', err); }
+    else { res.send(res.data) }
+  });
 });
 
 
