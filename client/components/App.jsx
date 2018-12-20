@@ -31,6 +31,7 @@ class App extends React.Component {
     this.subjectChange = this.subjectChange.bind(this);
     this.addSubject = this.addSubject.bind(this);
     this.deleteSubject = this.deleteSubject.bind(this);
+    this.toggle = this.toggle.bind(this);
 
   }
 
@@ -43,8 +44,6 @@ class App extends React.Component {
     })})
     .catch(err => { console.log('Error at GET', err) });
 
-    console.log(this.state.data, 'Data on mount after fetch')
-
     var storageStr = localStorage.getItem('subjects');
 
     if (storageStr) {
@@ -53,8 +52,6 @@ class App extends React.Component {
         subjects: storage
       })
     }
-
-
   }
 
   titleChange(e) {
@@ -85,6 +82,7 @@ class App extends React.Component {
   }
 
   deleteSubject(e) {
+    //TODO: refactor, minify
     e.preventDefault();
     var storage = localStorage.getItem('subjects');
     var parsed = JSON.parse(storage);
@@ -121,13 +119,10 @@ class App extends React.Component {
     })
     .catch(err => { console.log('Cannot delete subject', err) })
 
-    //TODO: delete subject from database
     location.reload();
   }
 
   handleSubmit(e) {
-    //e.preventDefault()
-    console.log('secondPOst')
     var data = {
       subject: this.state.subject,
       sites: [{
@@ -152,6 +147,9 @@ class App extends React.Component {
     })
     .catch(err => { console.log('Could not post document', err); })
   }
+  toggle() {
+    console.log('fuck')
+  }
 
   render() {
     if (!this.state.isLoading) {
@@ -172,12 +170,10 @@ class App extends React.Component {
             </form>
           </div>
         </div>
-        <Board data={this.state.data} subjects={this.state.subjects} subjectToAdd={this.state.subjectToAdd} subjectToAddChange={this.subjectToAddChange} addSubject={this.addSubject} deleteSubject={this.deleteSubject}/>
+        <Board data={this.state.data} title={this.state.title} subjects={this.state.subjects} subjectToAdd={this.state.subjectToAdd} subjectToAddChange={this.subjectToAddChange} addSubject={this.addSubject} deleteSubject={this.deleteSubject} toggle={this.toggle}/>
         <div>
         </div>
       </div>
-
-
     );
   }
 };

@@ -3,49 +3,52 @@ import style from '../style.css.js';
 
 
 class Dropdown extends React.Component {
-  constructor(props) {
-    super(props)
+  constructor() {
+    super();
 
     this.state = {
-      data: [],
-      listOpen: false,
-      siteTitle: this.props.title
+      showMenu: false,
     }
-    this.toggleList = this.toggleList.bind(this);
+    this.showMenu = this.showMenu.bind(this);
+    this.closeMenu = this.closeMenu.bind(this);
   }
 
+  showMenu(event) {
+    event.preventDefault();
 
-  toggleList() {
-    console.log('toggle')
-    this.setState({
-      listOpen: !this.state.listOpen
-    })
+    this.setState({ showMenu: true }, () => {
+      document.addEventListener('click', this.closeMenu);
+    });
   }
 
+  closeMenu() {
+    this.setState({ showMenu: false }, () => {
+      document.removeEventListener('click', this.closeMenu);
+    });
+  }
 
   render() {
-    if (this.state.listOpen) {
-      return (
-      <div style={style.boardButtons} className="dropdown" >
-        <button style={style.dropdown} className="dropdown" onClick={this.toggleList} type="button" data-toggle="dropdown">{this.props.subject}
-        <span className="caret"></span></button>
-        <div style={style.dropdownContent}>
-          {this.props.sites.map(site => (
-            <a key={site.url} href="#">{site.url}</a>
-          ))}
-         </div>
-      </div>
-      )
-    } else {
     return (
-       <div style={style.boardButtons} className="dropdown" >
-        <button style={style.dropdown} className="dropdown" onClick={this.toggleList} type="button" data-toggle="dropdown">{this.props.subject}
-        <span className="caret"></span></button>
+      <div style={style.dropdown} key={this.props.subject}>
+        <button style={style.dropbtn} onClick={this.showMenu}>
+          {this.props.subject}
+        </button>
+
+        {
+          this.state.showMenu
+            ? (
+              <div className="menu">
+              {this.props.sites.map(site => (
+                 <button> {site.title} </button>
+              ))}
+              </div>
+            )
+            : ( null )
+        }
       </div>
-    )
-   }
+    );
   }
-};
+}
 
 
 export default Dropdown;

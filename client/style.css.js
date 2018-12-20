@@ -90,27 +90,29 @@ const style = {
     flexFlow: "row",
     justifyContent: "flex-start"
   },
-  boardButtons: {
-    margin: "40px",
-     position: "relative",
+  dropdown: {
+    position: "relative",
     display: "inline-block"
   },
-  dropdown: {
+  dropbtn: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
     backgroundColor: "white",
     color: "black",
-    height: "50px",
-    width: "120px",
-    padding: "5px",
+    padding: "16px",
     fontSize: "16px",
-    borderRadius: "3px",
-    cursor: "pointer",
-
+    border: "1px gray solid",
+    width: "120px",
+    height: "50px",
+    margin: "30px"
   },
   dropdownContent: {
     display: "none",
     position: "absolute",
     backgroundColor: "#f1f1f1",
     minWidth: "160px",
+    overFlow: "auto",
     boxShadow: "0px 8px 16px 0px rgba(0,0,0,0.2)",
     zIndex: "1"
   }
