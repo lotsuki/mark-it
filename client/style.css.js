@@ -87,12 +87,15 @@ const style = {
   },
   boardWrapper: {
     display: "flex",
-    flexFlow: "row",
-    justifyContent: "flex-start"
+    flexFlow: "row wrap",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: "20px",
+    margin: "auto"
   },
-  dropdown: {
-    position: "relative",
-    display: "inline-block"
+  dropdownWrapper: {
+    width: "250px",
+    margin: "20px"
   },
   dropbtn: {
     display: "flex",
@@ -103,18 +106,25 @@ const style = {
     padding: "16px",
     fontSize: "16px",
     border: "1px gray solid",
-    width: "120px",
-    height: "50px",
-    margin: "30px"
+    height: "60px",
+    width: "inherit",
+    padding: "auto",
+    outline: "none"
+  },
+
+  dropdownContentWrapper: {
+    display: "flex",
+    flexFlow: "column wrap",
+    overFlow: "auto",
+
   },
   dropdownContent: {
-    display: "none",
-    position: "absolute",
-    backgroundColor: "#f1f1f1",
-    minWidth: "160px",
-    overFlow: "auto",
-    boxShadow: "0px 8px 16px 0px rgba(0,0,0,0.2)",
-    zIndex: "1"
+    backgroundColor: "white",
+    color: "black",
+    outline: "none",
+    border: "1px solid lightgray"
+  },
+  caret: {
   }
 
 };

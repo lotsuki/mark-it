@@ -29,17 +29,18 @@ class Dropdown extends React.Component {
 
   render() {
     return (
-      <div style={style.dropdown} key={this.props.subject}>
+      <div style={style.dropdownWrapper} key={this.props.subject}>
         <button style={style.dropbtn} onClick={this.showMenu}>
           {this.props.subject}
+          <span style={style.caret} className="caret"></span>
         </button>
 
         {
           this.state.showMenu
             ? (
-              <div className="menu">
+              <div style={style.dropdownContentWrapper} className="menu">
               {this.props.sites.map(site => (
-                 <button> {site.title} </button>
+                 <button style={style.dropdownContent}> {site.title} </button>
               ))}
               </div>
             )
