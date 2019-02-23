@@ -6,9 +6,9 @@ import Subjects from './Subjects.jsx';
 import Title from './Title.jsx';
 import Site from './Site.jsx';
 import AddSubjects from './AddSubjects.jsx';
-import style from '../style.css.js';
 import Header from './Header.jsx';
 import Board from './Board.jsx';
+import RestyledApp from './RestyledApp.jsx';
 
 
 class App extends React.Component {
@@ -171,8 +171,7 @@ class App extends React.Component {
           </div>
         </div>
         <Board data={this.state.data} title={this.state.title} subjects={this.state.subjects} subjectToAdd={this.state.subjectToAdd} subjectToAddChange={this.subjectToAddChange} addSubject={this.addSubject} deleteSubject={this.deleteSubject} toggle={this.toggle}/>
-        <div>
-        </div>
+        <RestyledApp />
       </div>
     );
   }

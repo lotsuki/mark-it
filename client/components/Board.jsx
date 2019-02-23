@@ -1,7 +1,6 @@
 import React from 'react';
 import AddSubjects from './AddSubjects.jsx';
 import Dropdown from './Dropdown.jsx';
-import style from '../style.css.js';
 
 
 class Board extends React.Component {

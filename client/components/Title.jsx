@@ -1,5 +1,4 @@
 import React from 'react';
-import style from '../style.css.js';
 
 
 const Title = ({title, titleChange}) => (

@@ -1,5 +1,5 @@
 import React from 'react';
-import style from '../style.css.js';
+
 
 const Subjects = ({ props, subjects, handleChange }) => {
   if(!subjects || subjects.length < 0) {
