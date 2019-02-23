@@ -4,11 +4,11 @@ import style from '../style.css.js';
 const Subjects = ({ props, subjects, handleChange }) => {
   if(!subjects || subjects.length < 0) {
     return (
-      <div style={style.subjectsContainer}>
-        <div style={style.subjectsLabel}>
+      <div className="subjectsContainer">
+        <div className="subjectsLabel">
           <label>Subject</label>
         </div>
-        <div style={style.subjectsSelect}>
+        <div className="subjectsSelect">
           <select id="subjects" onChange={handleChange}>
             <option value="subjects">All Subjects</option>
             </select>
@@ -17,15 +17,14 @@ const Subjects = ({ props, subjects, handleChange }) => {
       )
   } else {
     return (
-      <div style={style.subjectsContainer}>
-        <div style={style.subjectsLabel}>
+      <div className="subjectsContainer">
+        <div className="subjectsLabel">
           <label>Subject</label>
         </div>
-        <div style={style.subjectsSelect}>
+        <div className="subjectsSelect">
           <select id="subjects" onChange={handleChange}>
             <option value="subjects">All Subjects</option>
             {subjects.map(subject => {
-              console.log(subject)
               return <option key={subject} value={subject}>{subject}</option>
             })}
           </select>

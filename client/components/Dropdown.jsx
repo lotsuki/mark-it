@@ -7,14 +7,15 @@ class Dropdown extends React.Component {
     super();
 
     this.state = {
-      showMenu: false,
+      showMenu: false
     }
     this.showMenu = this.showMenu.bind(this);
     this.closeMenu = this.closeMenu.bind(this);
+    this.openPage = this.openPage.bind(this);
   }
 
-  showMenu(event) {
-    event.preventDefault();
+  showMenu(e) {
+    e.preventDefault();
 
     this.setState({ showMenu: true }, () => {
       document.addEventListener('click', this.closeMenu);
@@ -27,20 +28,24 @@ class Dropdown extends React.Component {
     });
   }
 
+  openPage(e, site) { //TODO: doesn't work without e parameter, why?
+    window.open(site.url)
+  }
+
   render() {
     return (
-      <div style={style.dropdownWrapper} key={this.props.subject}>
-        <button style={style.dropbtn} onClick={this.showMenu}>
+      <div className="dropdownWrapper" key={this.props.subject}>
+        <div className="dropbtn" onClick={this.showMenu}>
           {this.props.subject}
-          <span style={style.caret} className="caret"></span>
-        </button>
-
+          <span className="caret" className="caret"></span>
+        </div>
         {
           this.state.showMenu
             ? (
-              <div style={style.dropdownContentWrapper} className="menu">
+              <div className="dropdownContentWrapper" className="menu"
+              >
               {this.props.sites.map(site => (
-                 <button style={style.dropdownContent}> {site.title} </button>
+                 <button className="dropdownContent" key={site.url} onClick={e => this.openPage(e, site)}> {site.title} </button>
               ))}
               </div>
             )

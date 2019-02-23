@@ -156,16 +156,16 @@ class App extends React.Component {
       return <div>Loading...</div>
     }
     return (
-      <div style={style.container}>
+      <div className="container">
         <Header />
-        <div style={style.formContainer}>
-          <div style={style.formWrapper}>
-            <form style={style.form} onSubmit={(e) => this.handleSubmit(e)}>
+        <div className="formContainer">
+          <div className="formWrapper">
+            <form className="form" onSubmit={(e) => this.handleSubmit(e)}>
               <Title title={this.state.title} titleChange={this.titleChange}/>
               <Site url={this.state.url} urlChange={this.urlChange}/>
               <Subjects subjects={this.state.subjects} handleChange={this.subjectChange}/>
-              <div style={style.submitWrapper}>
-                <input style={style.submit} type="submit" value="Submit" />
+              <div className="submitWrapper">
+                <input className="submit" type="submit" value="Submit" />
               </div>
             </form>
           </div>

@@ -17,12 +17,12 @@ class Board extends React.Component {
   render() {
     const {data, subjects, subjectToAdd, subjectToAddChange, addSubject, deleteSubject} = this.props;
     return(
-      <div style={style.boardContainer}>
-        <div style={style.boardHeader}>
+      <div className="boardContainer">
+        <div className="boardHeader">
           <div>Bookmarks</div>
         </div>
          <AddSubjects subjects={subjects} subjectToAdd={subjectToAdd} subjectToAddChange={subjectToAddChange} addSubject={addSubject} deleteSubject={deleteSubject}/>
-         <div style={style.boardWrapper}>
+         <div className="boardWrapper">
             {data.map(subject => {
               return <Dropdown  key={subject.subject} subject={subject.subject} sites={subject.sites} />
             })}
