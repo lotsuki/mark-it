@@ -13,11 +13,23 @@ class RestyledApp extends React.Component {
           <div className="slogan">Slogan goes here</div>
         </div>
         <div className="listsContainer">
-          <div className="unreadWrapper">
-            <div className="unread"></div>
+          <div className="defaultsContainer">
+            <div className="defaultsWrapper">
+              <div className="bookmarksTitleWrapper">
+                <div className="bookmarksTitle">MARK IT</div>
+              </div>
+              <div className="defaults">
+                <div>All</div>
+                <div>Read</div>
+                <div>Favorites</div>
+              </div>
+            </div>
           </div>
-          <div className="readWrapper">
-            <div className="read"></div>
+          <div className="myBookmarksWrapper">
+            <div className="myBookmarksTitleWrapper">
+              <div className="myBookmarksTitle">My Bookmarks</div>
+              <div className="addSubject">+</div>
+            </div>
           </div>
         </div>
       </div>

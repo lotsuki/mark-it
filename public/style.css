@@ -145,6 +145,77 @@
     padding: 5px;
   }
 
+  .restyledHeaderWrapper {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+  }
+
+  .restyledHeader {
+    text-align: center;
+    font-size: 60px;
+    font-family: Arial;
+    font-weight: lighter;
+  }
+
+  .listsContainer {
+    display: flex;
+    flex-flow: column;
+    align-items: flex-start;
+    border: 1px solid gray;
+    width: 300px;
+    min-height: 600px;
+    margin: 40px 2px;
+  }
+
+  .defaultsContainer {
+    border-bottom: 1px solid lightgray;
+    min-height: 100px;
+    width: inherit;
+  }
+
+  .defaultsWrapper {
+
+  }
+
+  .defaults {
+    font-weight: bold;
+    font-family: Arial;
+  }
+
+  .myBookmarksWrapper {
+
+  }
+
+  .myBookmarksTitleWrapper {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 280px;
+    margin: 10px;
+  }
+
+  .myBookmarksTitle {
+    font-size: 13px;
+    color: gray;
+    font-family: Arial;
+  }
+
+  .addSubject {
+    font-size: 30px;
+    color: gray;
+    font-family: Arial;
+  }
+
+  .bookmarksTitleWrapper {
+    display: flex;
+    justify-content: center;
+  }
+
+  .bookmarksTitle {
+    font-family: Arial;
+  }
 
 
 
