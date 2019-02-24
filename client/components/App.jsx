@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
 import moment from 'moment';
 import Subjects from './Subjects.jsx';
 import Title from './Title.jsx';
@@ -8,7 +7,7 @@ import Site from './Site.jsx';
 import AddSubjects from './AddSubjects.jsx';
 import Header from './Header.jsx';
 import Board from './Board.jsx';
-import RestyledApp from './RestyledApp.jsx';
+import Xapp from './Xapp.jsx';
 
 
 class App extends React.Component {
@@ -22,6 +21,8 @@ class App extends React.Component {
       url: '',
       subject: '',
       subjectToAdd: '',
+      lists: [],
+      category: '',
       isLoading: true
     };
     this.titleChange = this.titleChange.bind(this);
@@ -31,8 +32,7 @@ class App extends React.Component {
     this.subjectChange = this.subjectChange.bind(this);
     this.addSubject = this.addSubject.bind(this);
     this.deleteSubject = this.deleteSubject.bind(this);
-    this.toggle = this.toggle.bind(this);
-
+    this.setCategory = this.setCategory.bind(this);
   }
 
   componentDidMount() {
@@ -62,10 +62,14 @@ class App extends React.Component {
     this.setState({ url: e.target.value })
   }
   subjectToAddChange(e) {
-    this.setState({ subjectToAdd: e.target.value})
+    this.setState({ subjectToAdd: e.target.value })
   }
   subjectChange(e) {
-    this.setState({ subject: e.target.value})
+    this.setState({ subject: e.target.value })
+  }
+
+  setCategory(e) {
+    this.setState({ category: e.target.value })
   }
 
   addSubject(e) {
@@ -124,6 +128,7 @@ class App extends React.Component {
 
   handleSubmit(e) {
     var data = {
+      category: this.state.currentList,
       subject: this.state.subject,
       sites: [{
         title: this.state.title,
@@ -147,11 +152,11 @@ class App extends React.Component {
     })
     .catch(err => { console.log('Could not post document', err); })
   }
-  toggle() {
-    console.log('fuck')
-  }
+
 
   render() {
+    const { data, category, subjects, subject, subjectToAdd, title, url, lists} = this.state;
+    const { titleChange, subjectChange, urlChange, addSubject, deleteSubject, subjectToAddChange, handleSubmit, setCategory } = this;
     if (!this.state.isLoading) {
       return <div>Loading...</div>
     }
@@ -160,19 +165,20 @@ class App extends React.Component {
         <Header />
         <div className="formContainer">
           <div className="formWrapper">
-            <form className="form" onSubmit={(e) => this.handleSubmit(e)}>
-              <Title title={this.state.title} titleChange={this.titleChange}/>
-              <Site url={this.state.url} urlChange={this.urlChange}/>
-              <Subjects subjects={this.state.subjects} handleChange={this.subjectChange}/>
+            <form className="form" onSubmit={(e) => handleSubmit(e)}>
+               <Title title={title} titleChange={titleChange}/>
+              <Site url={url} urlChange={urlChange}/>
+              <Subjects subjects={subjects} handleChange={subjectChange}/>
               <div className="submitWrapper">
-                <input className="submit" type="submit" value="Submit" />
+                 <input className="submit" type="submit" value="Submit" />
               </div>
             </form>
-          </div>
+           </div>
         </div>
-        <Board data={this.state.data} title={this.state.title} subjects={this.state.subjects} subjectToAdd={this.state.subjectToAdd} subjectToAddChange={this.subjectToAddChange} addSubject={this.addSubject} deleteSubject={this.deleteSubject} toggle={this.toggle}/>
-        <RestyledApp />
+        <Board data={data} title={title} subjects={subjects} subjectToAdd={subjectToAdd} subjectToAddChange={this.subjectToAddChange} addSubject={addSubject} deleteSubject={deleteSubject} />
+        <Xapp setCategory={setCategory} category={category} lists={lists} data={data} subjects={subjects} subject={subject} title={title} url={url} subjectChange={subjectChange} titleChange={titleChange} urlChange={urlChange} handleSubmit={handleSubmit}/>
       </div>
+
     );
   }
 };

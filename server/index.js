@@ -24,6 +24,7 @@ app.post('/', (req, res) => {
     if (err) { console.log('Error at POST', err); }
     else if (!result) {
       Document.create({
+        category: req.body.category,
         subject: req.body.subject,
         sites: [{
           title: req.body.sites[0].title,

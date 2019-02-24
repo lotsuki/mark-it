@@ -1,5 +1,9 @@
   .container {
-    margin: auto;
+    width: 100%;
+  }
+
+  .originalAppContainer {
+    width: 100%;
   }
 
   .formContainer {
@@ -92,9 +96,73 @@
   }
 
   .header {
-    font-weight: bold;
+    font-size: 60px;
+    font-family: Arial;
+    text-align: center;
+  }
+
+  .popup {
+    font-size: 45px;
+    float: left;
+    margin-top: 10px;
+  }
+
+  .openPopup {
+    cursor: pointer;
+    transition: all 0.3s ease-out;
+    text-decoration: none;
+    color: #5f636b;
+  }
+
+  .popupContainer {
+    position: fixed;
+    top: 0;
+    bottom: 10;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.3);
+    transition: opacity 500ms;
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  .popupContainer:target {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .popupWrapper {
+    margin: 70px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 5px;
+    width: 300px;
+    height: 600px;
+    position: relative;
+    transition: all 5s ease-in-out;
+  }
+
+  .closePopup {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    transition: all 200ms;
     font-size: 30px;
-    font-family: Helvetica Narrow sans-serif;
+    font-weight: bold;
+    text-decoration: none;
+    color: #333;
+  }
+
+  @media screen and (max-width: 700px){
+  .header{
+    width: 70%;
+  }
+  .popupWrapper{
+    width: 70%;
+  }
+}
+
+  .slogan {
     text-align: center;
   }
 
@@ -158,7 +226,14 @@
     font-weight: lighter;
   }
 
-  .listsContainer {
+  .bodyContainer {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .bookmarksContainer {
     display: flex;
     flex-flow: column;
     align-items: flex-start;
@@ -183,11 +258,11 @@
     font-family: Arial;
   }
 
-  .myBookmarksWrapper {
+  .unreadWrapper {
 
   }
 
-  .myBookmarksTitleWrapper {
+  .unreadTitleWrapper {
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
@@ -196,25 +271,45 @@
     margin: 10px;
   }
 
-  .myBookmarksTitle {
+  .unreadTitle {
     font-size: 13px;
     color: gray;
     font-family: Arial;
+  }
+
+  .mainCategory {
+    font-family: Arial;
+    padding: 5px 15px;
+    cursor: pointer;
   }
 
   .addSubject {
     font-size: 30px;
     color: gray;
     font-family: Arial;
+    cursor: pointer;
   }
 
-  .bookmarksTitleWrapper {
+  .bookmarksHeaderWrapper {
     display: flex;
     justify-content: center;
   }
 
-  .bookmarksTitle {
+  .bookmarksHeader {
     font-family: Arial;
+  }
+
+  .addBookmarksForm {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    width: 450px;
+
+  }
+
+  input {
+    flex: 2;
+    padding: 8px;
   }
 
 
