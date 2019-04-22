@@ -1,6 +1,5 @@
 # Project Name
-
-> To help organize and prioritize your bookmarks.
+To help organize and prioritize your bookmarks.
 
 
 ## Getting Started
