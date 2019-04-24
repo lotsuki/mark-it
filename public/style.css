@@ -2,59 +2,87 @@
     width: 100%;
   }
 
-  .originalAppContainer {
-    width: 100%;
+  .headerWrapper {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+  }
+
+  .header {
+    text-align: center;
+    font-size: 60px;
+    font-family: Arial;
+    font-weight: lighter;
+  }
+
+  .bodyContainer {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .appContainer {
+    display: flex;
+    flex-flow: column;
+    align-items: flex-start;
+    border: 1px solid gray;
+    width: 300px;
+    min-height: 600px;
+    margin: 40px 2px;
+  }
+
+  .quicklinksHeaderWrapper {
+    display: flex;
+    justify-content: center;
+  }
+
+  .quicklinksHeader {
+    font-family: Arial;
+  }
+
+  .quicklinksWrapper {
+    border-bottom: 1px solid lightgray;
+    min-height: 100px;
+    width: inherit;
+  }
+
+  .quicklinks {
+    font-weight: bold;
+    font-family: Arial;
+  }
+
+  .bookmarksContainer {
+
+  }
+
+  .bookmarksHeaderWrapper {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 280px;
+    margin: 10px;
+  }
+
+  .bookmarksHeader {
+    font-size: 13px;
+    color: gray;
+    font-family: Arial;
+  }
+
+  .addBookmark {
+    font-size: 30px;
+    color: gray;
+    font-family: Arial;
+    cursor: pointer;
   }
 
   .formContainer {
     display: flex;
-    justify-content: center;
-    background:#e5e1e1;
-    margin: 30px;
-    padding: 20px;
-    border-radius: 5px
-  }
-
-  .formWrapper {
-    display: flex;
     flex-flow: column nowrap;
-    align-items: stretch;
-    width: 80%;
-  }
-
-  .submitWrapper {
-    display: flex;
-    justify-content: flex-end;
-  }
-
-  .submit {
-    margin: 3px
-  }
-
-  .subjectContainer {
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 25px;
-  }
-
-  .boardContainer {
-    margin: 30px;
-  }
-
-  .boardHeader {
-    font-weight: bold;
-    font-size: 30px;
-    font-family: Helvetica Narrow sans-serif;
-    text-align: center;
-  }
-
-  .boardWrapper {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    margin: auto;
+    justify-content: center;
+    width: 450px;
   }
 
   .dropdownWrapper {
@@ -95,12 +123,67 @@
     width: 250px;
   }
 
-  .header {
+/*  .header {
     font-size: 60px;
     font-family: Arial;
     text-align: center;
+  }*/
+
+
+
+
+
+  .subjectContainer {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    margin: 10px;
   }
 
+  .subjectsLabel {
+    display: flex;
+    margin: 3px;
+  }
+
+  .subjectsSelect {
+    display: flex;
+    margin: 3px;
+  }
+  .subject {
+    font-family: Arial;
+    padding: 5px 15px;
+    cursor: pointer;
+  }
+
+  .subject:hover{
+    background-color: #e6e600;
+  }
+
+
+
+
+
+
+
+
+
+  input {
+    flex: 2;
+    padding: 8px;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+/*
   .popup {
     font-size: 45px;
     float: left;
@@ -113,7 +196,6 @@
     text-decoration: none;
     color: #5f636b;
   }
-
   .popupContainer {
     position: fixed;
     top: 0;
@@ -141,7 +223,6 @@
     position: relative;
     transition: all 5s ease-in-out;
   }
-
   .closePopup {
     position: absolute;
     top: 20px;
@@ -165,164 +246,7 @@
   .slogan {
     text-align: center;
   }
-
-  .siteWrapper {
-    display: flex;
-    justify-content: center;
-    margin: 5px;
-  }
-
-  .siteLabel {
-    text-align: center;
-  }
-
-  .siteInput {
-    flex: 2;
-    padding: 5px;
-  }
-
-  .subjectsContainer {
-    display: flex;
-    flex-flow: column;
-    align-items: center;
-    margin: 10px;
-  }
-
-  .subjectsLabel {
-    display: flex;
-    margin: 3px;
-  }
-
-  .subjectsSelect {
-    display: flex;
-    margin: 3px;
-  }
-  .subject {
-    font-family: Arial;
-    padding: 5px 15px;
-    cursor: pointer;
-  }
-
-  .subject:hover{
-    background-color: #e6e600;
-  }
-
-  .titleWrapper {
-    display: flex;
-    justify-content: center;
-    margin: 5px;
-  }
-
-  .titleLabel {
-    text-align: center;
-  }
-
-  .titleInput {
-    flex: 2;
-    padding: 5px;
-  }
-
-  .restyledHeaderWrapper {
-    display: flex;
-    flex-flow: column;
-    align-items: center;
-  }
-
-  .restyledHeader {
-    text-align: center;
-    font-size: 60px;
-    font-family: Arial;
-    font-weight: lighter;
-  }
-
-  .bodyContainer {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .bookmarksContainer {
-    display: flex;
-    flex-flow: column;
-    align-items: flex-start;
-    border: 1px solid gray;
-    width: 300px;
-    min-height: 600px;
-    margin: 40px 2px;
-  }
-
-  .quicklinksWrapper {
-    border-bottom: 1px solid lightgray;
-    min-height: 100px;
-    width: inherit;
-  }
-
-  .quicklinks {
-    font-weight: bold;
-    font-family: Arial;
-  }
-
-  .unreadWrapper .div {
-
-  }
-
-  .unreadTitleWrapper {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-between;
-    align-items: center;
-    width: 280px;
-    margin: 10px;
-  }
-
-  .unreadTitle {
-    font-size: 13px;
-    color: gray;
-    font-family: Arial;
-  }
-
-  .addSubject {
-    font-size: 30px;
-    color: gray;
-    font-family: Arial;
-    cursor: pointer;
-  }
-
-  .quicklinksHeaderWrapper {
-    display: flex;
-    justify-content: center;
-  }
-
-  .quicklinksHeader {
-    font-family: Arial;
-  }
-
-  .addBookmarksForm {
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: center;
-    width: 450px;
-
-  }
-
-  input {
-    flex: 2;
-    padding: 8px;
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
+*/
 
 
 

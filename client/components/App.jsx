@@ -161,7 +161,7 @@ class App extends React.Component {
       <div className="container">
         <Header />
         <div className="bodyContainer">
-          <div className="bookmarksContainer">
+          <div className="appContainer">
             <Quicklinks />
             <Bookmarks data={data} openDropdown={openDropdown}/>
           </div>

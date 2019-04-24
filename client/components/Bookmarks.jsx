@@ -2,12 +2,12 @@ import React from 'react';
 import Dropdown from './Dropdown.jsx';
 
 const Bookmarks = ({data, openDropdown}) => (
-  <div className="unreadWrapper">
-    <div className="unreadTitleWrapper">
-      <div className="unreadTitle">My Bookmarks</div>
-      <div className="addSubject">+</div>
+  <div className="bookmarksContainer">
+    <div className="bookmarksHeaderWrapper">
+      <div className="bookmarksHeader">My Bookmarks</div>
+      <div className="addBookmark">+</div>
     </div>
-    <div className="subjectsContainer" onClick={openDropdown}>
+    <div className="subjectContainer" onClick={openDropdown}>
       {data.map((site, i) => (
         <Dropdown  key={i} subject={site.subject} sites={site.sites} />
       ))}
