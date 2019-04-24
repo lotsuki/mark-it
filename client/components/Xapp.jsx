@@ -14,11 +14,6 @@ class Xapp extends React.Component {
 
   }
 
-//Components
-  //defaultLists
-  //unreadLists
-  //subjectToAdd
-
   render() {
     const { setCategory, category, lists, data, subjects, subject, title, url, subjectChange, titleChange, urlChange, handleSubmit } = this.props;
     return (

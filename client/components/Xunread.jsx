@@ -6,8 +6,8 @@ const Xunread = ({data}) => (
       <div className="unreadTitle">Unread</div>
       <div className="addSubject">+</div>
     </div>
-      {data.map(site => (
-        <div className="mainCategory" >{site.category}</div>
+      {data.map((site, i) => (
+        <div className="mainCategory" key={i}>{site.category}</div>
       ))}
   </div>
 );

@@ -22,8 +22,8 @@ class Board extends React.Component {
         </div>
          <AddSubjects subjects={subjects} subjectToAdd={subjectToAdd} subjectToAddChange={subjectToAddChange} addSubject={addSubject} deleteSubject={deleteSubject}/>
          <div className="boardWrapper">
-            {data.map(subject => {
-              return <Dropdown  key={subject.subject} subject={subject.subject} sites={subject.sites} />
+            {data.map((subject, i) => {
+              return <Dropdown  key={i} subject={subject.subject} sites={subject.sites} />
             })}
         </div>
       </div>

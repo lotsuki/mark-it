@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-class Dropdown extends React.Component {
+class Xdropdown extends React.Component {
   constructor() {
     super();
 
@@ -33,18 +33,18 @@ class Dropdown extends React.Component {
 
   render() {
     return (
-      <div className="dropdownWrapper" key={this.props.subject}>
-        <div className="dropbtn" onClick={this.showMenu}>
+      <div className="xdropdownWrapper">
+        <div className="xdropbtn" onClick={this.showMenu}>
           {this.props.subject}
-          <span className="caret" className="caret"></span>
+          <span className="caret"></span>
         </div>
         {
           this.state.showMenu
             ? (
-              <div className="dropdownContentWrapper" className="menu"
+              <div className="xdropdownContentWrapper" className="xmenu"
               >
               {this.props.sites.map((site, i) => (
-                 <button className="dropdownContent" key={i} onClick={e => this.openPage(e, site)}> {site.title} </button>
+                 <div className="xdropdownContent" key={i} onClick={e => this.openPage(e, site)}> {site.title} </div>
               ))}
               </div>
             )
@@ -56,5 +56,4 @@ class Dropdown extends React.Component {
 }
 
 
-export default Dropdown;
-
+export default Xdropdown;

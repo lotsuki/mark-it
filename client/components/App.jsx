@@ -22,7 +22,7 @@ class App extends React.Component {
       subject: '',
       subjectToAdd: '',
       lists: [],
-      category: '',
+      category: 'Bookmarks',
       isLoading: true
     };
     this.titleChange = this.titleChange.bind(this);
@@ -55,16 +55,20 @@ class App extends React.Component {
   }
 
   titleChange(e) {
+    console.log(e.target.value, 'title')
     this.setState({ title: e.target.value });
   }
 
   urlChange(e) {
+    console.log(e.target.value, 'url')
     this.setState({ url: e.target.value })
   }
   subjectToAddChange(e) {
+    console.log(e.target.value)
     this.setState({ subjectToAdd: e.target.value })
   }
   subjectChange(e) {
+    console.log(e.target.value, 'subject')
     this.setState({ subject: e.target.value })
   }
 
@@ -128,7 +132,7 @@ class App extends React.Component {
 
   handleSubmit(e) {
     var data = {
-      category: this.state.currentList,
+      category: this.state.category,
       subject: this.state.subject,
       sites: [{
         title: this.state.title,
@@ -155,6 +159,7 @@ class App extends React.Component {
 
 
   render() {
+    console.log(this.state.data)
     const { data, category, subjects, subject, subjectToAdd, title, url, lists} = this.state;
     const { titleChange, subjectChange, urlChange, addSubject, deleteSubject, subjectToAddChange, handleSubmit, setCategory } = this;
     if (!this.state.isLoading) {

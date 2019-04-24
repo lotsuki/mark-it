@@ -15,11 +15,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(`${__dirname}/../public`));
 
 app.post('/', (req, res) => {
-  var newPost = [];
-  mongoose.connect(uri, {
-    useNewUrlParser: true,
-    autoIndex: true
-  });
+  // mongoose.connect(uri, {
+  //   useNewUrlParser: true,
+  //   autoIndex: true
+  // });
+
   Document.findOne({subject: req.body.subject}, {lean: true}, (err, result) => {
     if (err) { console.log('Error at POST', err); }
     else if (!result) {
@@ -54,7 +54,7 @@ app.post('/', (req, res) => {
         }
       });
     }
-  })
+  });
 });
 
 app.get('/docs', (req, res) => {
