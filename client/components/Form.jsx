@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-const Xform = ({category, lists, setCategory, data, subjects, subject, title, url, subjectChange, titleChange, urlChange, handleSubmit}) => (
+const Form = ({category, lists, setCategory, data, subjects, subject, title, url, subjectChange, titleChange, urlChange, handleSubmit}) => (
   <div className="addBookmarksForm">
     <input type="text" className="inputList" placeholder="List category" value={category} onChange={setCategory}/>
     <input type="text" className="inputSubject" placeholder="Subject" value={subject} onChange={subjectChange}/>
@@ -12,4 +12,4 @@ const Xform = ({category, lists, setCategory, data, subjects, subject, title, ur
 );
 
 
-export default Xform;
+export default Form;

@@ -1,13 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import moment from 'moment';
-import Subjects from './Subjects.jsx';
-import Title from './Title.jsx';
-import Site from './Site.jsx';
-import AddSubjects from './AddSubjects.jsx';
+import Form from './Form.jsx';
 import Header from './Header.jsx';
-import Board from './Board.jsx';
-import Xapp from './Xapp.jsx';
+import Quicklinks from './Quicklinks.jsx';
+import Bookmarks from './Bookmarks.jsx';
 
 
 class App extends React.Component {
@@ -55,20 +52,16 @@ class App extends React.Component {
   }
 
   titleChange(e) {
-    console.log(e.target.value, 'title')
     this.setState({ title: e.target.value });
   }
 
   urlChange(e) {
-    console.log(e.target.value, 'url')
     this.setState({ url: e.target.value })
   }
   subjectToAddChange(e) {
-    console.log(e.target.value)
     this.setState({ subjectToAdd: e.target.value })
   }
   subjectChange(e) {
-    console.log(e.target.value, 'subject')
     this.setState({ subject: e.target.value })
   }
 
@@ -159,31 +152,22 @@ class App extends React.Component {
 
 
   render() {
-    console.log(this.state.data)
     const { data, category, subjects, subject, subjectToAdd, title, url, lists} = this.state;
-    const { titleChange, subjectChange, urlChange, addSubject, deleteSubject, subjectToAddChange, handleSubmit, setCategory } = this;
+    const { titleChange, subjectChange, urlChange, addSubject, deleteSubject, subjectToAddChange, handleSubmit, setCategory, openDropdown } = this;
     if (!this.state.isLoading) {
       return <div>Loading...</div>
     }
     return (
       <div className="container">
         <Header />
-        <div className="formContainer">
-          <div className="formWrapper">
-            <form className="form" onSubmit={(e) => handleSubmit(e)}>
-               <Title title={title} titleChange={titleChange}/>
-              <Site url={url} urlChange={urlChange}/>
-              <Subjects subjects={subjects} handleChange={subjectChange}/>
-              <div className="submitWrapper">
-                 <input className="submit" type="submit" value="Submit" />
-              </div>
-            </form>
-           </div>
+        <div className="bodyContainer">
+          <div className="bookmarksContainer">
+            <Quicklinks />
+            <Bookmarks data={data} openDropdown={openDropdown}/>
+          </div>
+          <Form setCategory={setCategory} category={category} lists={lists} data={data} subjects={subjects} subject={subject} title={title} url={url} subjectChange={subjectChange} titleChange={titleChange} urlChange={urlChange} handleSubmit={handleSubmit}/>
         </div>
-        <Board data={data} title={title} subjects={subjects} subjectToAdd={subjectToAdd} subjectToAddChange={this.subjectToAddChange} addSubject={addSubject} deleteSubject={deleteSubject} />
-        <Xapp setCategory={setCategory} category={category} lists={lists} data={data} subjects={subjects} subject={subject} title={title} url={url} subjectChange={subjectChange} titleChange={titleChange} urlChange={urlChange} handleSubmit={handleSubmit}/>
       </div>
-
     );
   }
 };
