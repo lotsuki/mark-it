@@ -9,9 +9,12 @@ const documentSchema = new Schema ({
   sites: [{
     title: String,
     url: String,
-    date: String
+    date: String,
+    priority: Boolean,
+    favorites: Boolean
   }]
 });
+
 
 const Document = mongoose.model('Document', documentSchema);
 
