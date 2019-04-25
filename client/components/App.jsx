@@ -2,9 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import moment from 'moment';
 import Form from './Form.jsx';
-import Header from './Header.jsx';
+//import Header from './Header.jsx';
 import Quicklinks from './Quicklinks.jsx';
 import Bookmarks from './Bookmarks.jsx';
+import Dropdown from './Dropdown.jsx';
 
 
 class App extends React.Component {
@@ -14,6 +15,8 @@ class App extends React.Component {
     this.state = {
       data: [],
       subjects: [],
+      quicklinks: [],
+      bookmarks: [],
       title: '',
       url: '',
       subject: '',
@@ -159,13 +162,9 @@ class App extends React.Component {
     }
     return (
       <div className="container">
-        <Header />
-        <div className="bodyContainer">
-          <div className="appContainer">
-            <Quicklinks />
-            <Bookmarks data={data} openDropdown={openDropdown}/>
-          </div>
-          <Form setCategory={setCategory} category={category} lists={lists} data={data} subjects={subjects} subject={subject} title={title} url={url} subjectChange={subjectChange} titleChange={titleChange} urlChange={urlChange} handleSubmit={handleSubmit}/>
+        <div className="appContainer">
+          <Quicklinks quicklinks={this.state.quicklinks}/>
+          <Bookmarks bookmarks={this.state.bookmarks} />
         </div>
       </div>
     );

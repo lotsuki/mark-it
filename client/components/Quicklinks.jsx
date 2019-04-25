@@ -1,18 +1,59 @@
 import React from 'react';
 
-const Quicklinks = () => (
-  <div className="quicklinksContainer">
-    <div className="quicklinksHeaderWrapper">
-      <div className="quicklinksHeader">Quick links</div>
-    </div>
-    <div className="quicklinksWrapper">
-      <div className="quicklinks">
-        <div>Starred</div>
-        <div>Favorites</div>
-        <div>Unread</div>
+class Quicklinks extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      showMenu: false
+    }
+    this.showMenu = this.showMenu.bind(this);
+    this.closeMenu = this.closeMenu.bind(this);
+  }
+
+  showMenu(e) {
+    e.preventDefault();
+
+    this.setState({ showMenu: true }, () => {
+      document.addEventListener('click', this.closeMenu);
+    });
+  }
+
+  closeMenu() {
+    this.setState({ showMenu: false }, () => {
+      document.removeEventListener('click', this.closeMenu);
+    });
+  }
+
+  render() {
+    return(
+      <div className="quicklinksContainer">
+        <div className="quicklinksHeaderWrapper">
+          <div className="quicklinksHeader" onClick={this.showMenu}>Quick links</div>
+        </div>
+        {
+          this.state.showMenu
+            ? (
+              <div className="dropdownContentWrapper" className="menu"
+              >
+              {this.props.quicklinks.map((quicklink, i) => (
+                 <a className="quicklink" href="#" key={i}>{quicklink.subject}</a>
+              ))}
+              </div>
+            )
+            : ( null )
+        }
       </div>
-    </div>
-  </div>
-);
+    );
+  }
+};
 
 export default Quicklinks;
+
+ // <div className="quicklinksWrapper">
+ //      <div className="quicklinks">
+ //        <div>Starred</div>
+ //        <div>Favorites</div>
+ //        <div>Unread</div>
+ //      </div>
+ //    </div>

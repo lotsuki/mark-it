@@ -1,8 +1,18 @@
-  .container {
+  html, body {
     width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
   }
 
-  .headerWrapper {
+  #app, .container {
+    width: inherit;
+    height: inherit;
+    margin: 0;
+    padding: 0;
+  }
+
+  /*.headerWrapper {
     display: flex;
     flex-flow: column;
     align-items: center;
@@ -13,38 +23,37 @@
     font-size: 60px;
     font-family: Arial;
     font-weight: lighter;
-  }
-
-  .bodyContainer {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-between;
-    align-items: center;
-  }
+  }*/
 
   .appContainer {
-    display: flex;
-    flex-flow: column;
-    align-items: flex-start;
-    border: 1px solid gray;
+    border-right: 1px solid gray;
+    height: inherit;
     width: 300px;
-    min-height: 600px;
-    margin: 40px 2px;
+  }
+
+  .quicklinksContainer {
+    width: inherit;
   }
 
   .quicklinksHeaderWrapper {
     display: flex;
-    justify-content: center;
+    width: inherit;
   }
 
-  .quicklinksHeader {
+  .quicklinksHeader, .bookmarksHeader {
     font-family: Arial;
   }
 
+  .quicklinksHeaderWrapper:hover, .bookmarksHeaderWrapper:hover {
+    background-color: #e6e600;
+    cursor: pointer;
+    width: inherit;
+  }
+
   .quicklinksWrapper {
-    border-bottom: 1px solid lightgray;
     min-height: 100px;
     width: inherit;
+
   }
 
   .quicklinks {
@@ -53,22 +62,16 @@
   }
 
   .bookmarksContainer {
-
+    display: flex;
+    width: inherit;
   }
 
   .bookmarksHeaderWrapper {
     display: flex;
     flex-flow: row nowrap;
-    justify-content: space-between;
     align-items: center;
-    width: 280px;
-    margin: 10px;
-  }
+    width: inherit;
 
-  .bookmarksHeader {
-    font-size: 13px;
-    color: gray;
-    font-family: Arial;
   }
 
   .addBookmark {
