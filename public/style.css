@@ -38,16 +38,22 @@
   .quicklinksHeaderWrapper {
     display: flex;
     width: inherit;
+      border-bottom: 1px solid lightgray;
   }
 
   .quicklinksHeader, .bookmarksHeader {
-    font-family: Arial;
+    font-family: Trebuchet MS, Helvetica, sans-serif;
+    text-align: center;
+    font-size: 2rem;
+    width: inherit;
+    padding: 1.5rem;
+    line-height: 1.5;
+
   }
 
   .quicklinksHeaderWrapper:hover, .bookmarksHeaderWrapper:hover {
     background-color: #e6e600;
     cursor: pointer;
-    width: inherit;
   }
 
   .quicklinksWrapper {
@@ -71,14 +77,16 @@
     flex-flow: row nowrap;
     align-items: center;
     width: inherit;
+    border-bottom: 1px solid lightgray;
 
   }
 
   .addBookmark {
-    font-size: 30px;
+    font-size: 2.5rem;
     color: gray;
     font-family: Arial;
     cursor: pointer;
+    margin: .5rem;
   }
 
   .formContainer {
