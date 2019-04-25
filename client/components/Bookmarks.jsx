@@ -46,13 +46,13 @@ class Bookmarks extends React.Component {
     return(
       <div className="bookmarksContainer">
         <div className="bookmarksHeaderWrapper">
-          <div className="bookmarksHeader">My Bookmarks</div>
+          <div className="bookmarksHeader" onClick={this.showMenu}>My Bookmarks</div>
           <div className="addBookmark">+</div>
         </div>
         {
           this.state.showMenu
             ? (
-              <div className="dropdownContentWrapper" className="menu"
+              <div className="bookmarks" className="menu"
               >
               {this.props.bookmarks.map((bookmark, i) => (
                  <a className="subject" href="#" key={i}>{bookmark.subject}</a>
