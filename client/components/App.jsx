@@ -7,6 +7,13 @@ import Quicklinks from './Quicklinks.jsx';
 import Bookmarks from './Bookmarks.jsx';
 import Dropdown from './Dropdown.jsx';
 
+//TODO:
+  //api post to set quicklinks and bookmarks (seed db with mock data)
+  //dropdown menu for quicklink and bookmark items
+  //search bar at top
+  //add bookmarks event
+  //site preview for bookmarks with embed tag
+  //css
 
 class App extends React.Component {
     constructor(props, context) {
@@ -15,8 +22,8 @@ class App extends React.Component {
     this.state = {
       data: [],
       subjects: [],
-      quicklinks: [{subject: 'Starred'}, {subject: 'Favorites'}, {subject: 'Read'}],
-      bookmarks: [{subject: 'Array'}, {subject: 'Inheritance'}, {subject: 'Objects'}],
+      quicklinks: [],
+      bookmarks: [],
       title: '',
       url: '',
       subject: '',

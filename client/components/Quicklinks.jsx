@@ -49,11 +49,3 @@ class Quicklinks extends React.Component {
 };
 
 export default Quicklinks;
-
- // <div className="quicklinksWrapper">
- //      <div className="quicklinks">
- //        <div>Starred</div>
- //        <div>Favorites</div>
- //        <div>Unread</div>
- //      </div>
- //    </div>
