@@ -15,8 +15,8 @@ class App extends React.Component {
     this.state = {
       data: [],
       subjects: [],
-      quicklinks: [],
-      bookmarks: [],
+      quicklinks: [{subject: 'Starred'}, {subject: 'Favorites'}, {subject: 'Read'}],
+      bookmarks: [{subject: 'Array'}, {subject: 'Inheritance'}, {subject: 'Objects'}],
       title: '',
       url: '',
       subject: '',

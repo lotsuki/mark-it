@@ -34,7 +34,7 @@ class Quicklinks extends React.Component {
         {
           this.state.showMenu
             ? (
-              <div className="dropdownContentWrapper" className="menu"
+              <div className="quicklinks" className="menu"
               >
               {this.props.quicklinks.map((quicklink, i) => (
                  <a className="quicklink" href="#" key={i}>{quicklink.subject}</a>

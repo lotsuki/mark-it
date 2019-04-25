@@ -6,6 +6,8 @@
   }
 
   #app, .container {
+    display: flex;
+    flex-flow: row nowrap;
     width: inherit;
     height: inherit;
     margin: 0;
@@ -26,19 +28,39 @@
   }*/
 
   .appContainer {
+    display: flex;
+    flex-flow:column nowrap;
     border-right: 1px solid gray;
     height: inherit;
     width: 300px;
   }
 
+  .menu {
+    display: flex;
+    flex-flow:column nowrap;
+    width: inherit;
+  }
+
+  .quicklink {
+    border-top: 1px solid lightgray;
+    color: #000;
+  }
+  .quicklink:hover {
+    color: #000;
+    background-color: #e6e600;
+    text-decoration: none;
+  }
+
   .quicklinksContainer {
+    display: flex;
+    flex-flow:column nowrap;
     width: inherit;
   }
 
   .quicklinksHeaderWrapper {
     display: flex;
+    flex-flow:column nowrap;
     width: inherit;
-      border-bottom: 1px solid lightgray;
   }
 
   .quicklinksHeader, .bookmarksHeader {
@@ -78,7 +100,7 @@
     align-items: center;
     width: inherit;
     border-bottom: 1px solid lightgray;
-
+    border-top: 1px solid lightgray;
   }
 
   .addBookmark {
@@ -94,6 +116,10 @@
     flex-flow: column nowrap;
     justify-content: center;
     width: 450px;
+  }
+
+  .quicklinks {
+    display: flex;
   }
 
   .dropdownWrapper {
