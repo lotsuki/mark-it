@@ -8,6 +8,7 @@ import Bookmarks from './Bookmarks.jsx';
 import Dropdown from './Dropdown.jsx';
 
 //TODO:
+  //unit tests for react
   //api post to set quicklinks and bookmarks (seed db with mock data)
   //dropdown menu for quicklink and bookmark items
   //search bar at top

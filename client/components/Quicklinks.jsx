@@ -31,6 +31,11 @@ class Quicklinks extends React.Component {
         <div className="quicklinksHeaderWrapper">
           <div className="quicklinksHeader" onClick={this.showMenu}>Quick links</div>
         </div>
+        <div className="quicklinksWrapper">
+          <div className="quicklink">Starred</div>
+          <div className="quicklink">Favorites</div>
+          <div className="quicklink">Read</div>
+        </div>
         {
           this.state.showMenu
             ? (
