@@ -29,8 +29,14 @@ class Bookmarks extends React.Component {
     return(
       <div className="bookmarksContainer">
         <div className="bookmarksHeaderWrapper">
-          <div className="bookmarksHeader" onClick={this.showMenu}>My Bookmarks</div>
+          <div className="bookmarksHeader" onClick={this.showMenu}>My Bookmarks
+          </div>
           <div className="addBookmark">+</div>
+        </div>
+        <div className="categoryWrapper">
+          <div className="category">Food</div>
+          <div className="category">Travel</div>
+          <div className="category">Tech</div>
         </div>
         {
           this.state.showMenu

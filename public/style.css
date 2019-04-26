@@ -57,7 +57,7 @@
 
   .quicklinksHeaderWrapper {
     display: flex;
-    flex-flow:column nowrap;
+    flex-flow: row nowrap;
     width: inherit;
   }
 
@@ -71,12 +71,12 @@
     letter-spacing: .05rem;
   }
 
-  .quicklink:hover {
+  .quicklink:hover, .category:hover {
     color: #FD7676;
     cursor: pointer;
   }
 
-  .quicklinksWrapper {
+  .quicklinksWrapper, .categoryWrapper {
     display: flex;
     flex-flow: column nowrap;
     line-height: 2.5rem;
@@ -100,16 +100,21 @@
   .bookmarksHeaderWrapper {
     display: flex;
     flex-flow: row nowrap;
+    justify-content: flex-end;
+    align-items: flex-end;
     width: inherit;
+    margin: 0;
+    padding: 0;
   }
 
   .addBookmark {
-    display: flex;
-    font-size: 2.5rem;
+    padding-bottom:0;
+    padding-right: .8rem;
+    font-size: 1.5rem;
     color: gray;
     font-family: Arial;
+    font-weight: bold;
     cursor: pointer;
-    margin: .5rem;
   }
 
  .subject {
