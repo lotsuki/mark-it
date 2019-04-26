@@ -3,15 +3,29 @@ const db = require('./index.js');
 
 const Schema = mongoose.Schema;
 
+// const documentSchema = new Schema ({
+//   category: String,
+//   subject: String,
+//   sites: [{
+//     title: String,
+//     url: String,
+//     date: String,
+//     starred: Boolean,
+//     favorites: Boolean
+//   }]
+// });
+
 const documentSchema = new Schema ({
   category: String,
-  subject: String,
-  sites: [{
-    title: String,
-    url: String,
-    date: String,
-    priority: Boolean,
-    favorites: Boolean
+  subjects: [{
+    subject: String,
+    sites: [{
+      title: String,
+      url: String,
+      date: String,
+      starred: Boolean,
+      favorites: Boolean
+    }]
   }]
 });
 

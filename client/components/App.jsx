@@ -25,12 +25,14 @@ class App extends React.Component {
       subjects: [],
       quicklinks: [],
       bookmarks: [],
-      title: '',
-      url: '',
-      subject: '',
+      title: 'Eating healthy',
+      url: 'https://www.gethealthy.com/',
+      subject: 'Health',
       subjectToAdd: '',
       lists: [],
-      category: 'Bookmarks',
+      category: 'Fitness',
+      starred: false,
+      favorites: false,
       isLoading: true
     };
     this.titleChange = this.titleChange.bind(this);
@@ -138,11 +140,11 @@ class App extends React.Component {
     var data = {
       category: this.state.category,
       subject: this.state.subject,
-      sites: [{
-        title: this.state.title,
-        url: this.state.url,
-        date: moment().format('MM-DD-YYYY')
-      }]
+      title: this.state.title,
+      url: this.state.url,
+      date: moment().format('MM-DD-YYYY'),
+      starred: this.state.starred,
+      favorites: this.state.favorites
     };
 
     fetch('/', {
@@ -174,6 +176,7 @@ class App extends React.Component {
           <Quicklinks quicklinks={this.state.quicklinks}/>
           <Bookmarks bookmarks={this.state.bookmarks} />
         </div>
+        <input type="submit" value="submit" onClick={handleSubmit}/>
       </div>
     );
   }

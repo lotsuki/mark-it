@@ -20,42 +20,111 @@ app.post('/', (req, res) => {
   //   autoIndex: true
   // });
 
-  Document.findOne({subject: req.body.subject}, {lean: true}, (err, result) => {
+  Document.findOne({category: req.body.category}, {lean: true}, (err, result) => {
     if (err) { console.log('Error at POST', err); }
     else if (!result) {
       Document.create({
         category: req.body.category,
-        subject: req.body.subject,
-        sites: [{
-          title: req.body.sites[0].title,
-          url: req.body.sites[0].url,
-          date: req.body.sites[0].date
+        subjects: [{
+          subject: req.body.subject,
+          sites: [{
+            title: req.body.title,
+            url: req.body.url,
+            date: req.body.date,
+            starred: req.body.starred,
+            favorites: req.body.favorites
+          }]
         }]
       }, (err, result) => {
-        if (err) { console.log('err', err) }
+        if (err) { console.log('err at new category post', err) }
         else {  Document.find().exec((err, results) => {
           if (err) { console.log('Cannot send back all data from post api, UPDATE'); }
-          else { res.send(results); }
+          else { res.send(result); }
         });
         }
       });
     } else {
-      Document.updateOne({subject: req.body.subject}, {$push: {sites: {
-        title: req.body.sites[0].title,
-        url: req.body.sites[0].url,
-        date: req.body.sites[0].date
-      }}},(err, result) => {
-        if (err) { console.log('Could not update data', err); }
-        else {
-          Document.find().exec((err, results) => {
-            if (err) { console.log('Cannot send back all data from post api, UPDATE'); }
-            else { res.send(results); }
+      //result.subjects.subject
+      Document.find({'subjects.subject': req.body.subject}, (err, result) => {
+        console.log(result, 'RESULT')
+        if (err) { console.log('Error at repeat subject POST', err); }
+        else if (result.length === 0) {
+          Document.findOneAndUpdate({category: req.body.category}, {$push: {subjects: {
+              subject: req.body.subject,
+              sites: [{
+                title: req.body.title,
+                url: req.body.url,
+                date: req.body.date,
+                starred: req.body.starred,
+                favorites: req.body.favorites
+              }]
+            }}}, (err, result) => {
+            if (err) { console.log('err at new category post', err) }
+            else {  Document.find().exec((err, results) => {
+              if (err) { console.log('Cannot send back all data from post api, UPDATE'); }
+              else { res.send(result); }
+            });
+            }
           });
+        } else {
+            Document.updateOne({'subjects.subject': req.body.subject}, {$push: {sites: {
+              title: req.body.title,
+              url: req.body.url,
+              date: req.body.date,
+              starred: req.body.starred,
+              favorites: req.body.favorites
+            }}},(err, result) => {
+              if (err) { console.log('Could not update data', err); }
+              else {
+                Document.find().exec((err, results) => {
+                  if (err) { console.log('Cannot send back all data from post api, UPDATE'); }
+                  else { res.send(result); }
+                });
+              }
+            });
+          }
+        });
+
         }
       });
-    }
-  });
 });
+
+//   Document.findOne({subject: req.body.subject}, {lean: true}, (err, result) => {
+//     if (err) { console.log('Error at POST', err); }
+//     else if (!result) {
+//       Document.create({
+//         category: req.body.category,
+//         subject: req.body.subject,
+//         sites: [{
+//           title: req.body.sites[0].title,
+//           url: req.body.sites[0].url,
+//           date: req.body.sites[0].date
+//         }]
+//       }, (err, result) => {
+//         if (err) { console.log('err', err) }
+//         else {  Document.find().exec((err, results) => {
+//           if (err) { console.log('Cannot send back all data from post api, UPDATE'); }
+//           else { res.send(results); }
+//         });
+//         }
+//       });
+//     } else {
+//       Document.updateOne({subject: req.body.subject}, {$push: {sites: {
+//         title: req.body.sites[0].title,
+//         url: req.body.sites[0].url,
+//         date: req.body.sites[0].date
+//       }}},(err, result) => {
+//         if (err) { console.log('Could not update data', err); }
+//         else {
+//           Document.find().exec((err, results) => {
+//             if (err) { console.log('Cannot send back all data from post api, UPDATE'); }
+//             else { res.send(results); }
+//           });
+//         }
+//       });
+//     }
+//   });
+// });
 
 app.get('/docs', (req, res) => {
   Document.find().exec((err, results) => {
