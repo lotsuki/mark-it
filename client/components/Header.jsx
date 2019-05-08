@@ -1,10 +1,10 @@
-import React from 'react';
+// import React from 'react';
 
-const Header = () => (
-  <div>
-    <div className="header">Hello, Bookmarks!</div>
-  </div>
-);
+// const Header = () => (
+//   <div className="headerWrapper">
+//     <div className="header">Organize and prioritize your bookmarks</div>
+//     <div className="slogan">Slogan goes here</div>
+//   </div>
+// );
 
-
-export default Header;
+// export default Header;

@@ -1,15 +1,41 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
 import moment from 'moment';
-import Subjects from './Subjects.jsx';
-import Title from './Title.jsx';
-import Site from './Site.jsx';
-import AddSubjects from './AddSubjects.jsx';
-import Header from './Header.jsx';
-import Board from './Board.jsx';
-import RestyledApp from './RestyledApp.jsx';
+import Form from './Form.jsx';
+//import Header from './Header.jsx';
+import Quicklinks from './Quicklinks.jsx';
+import Bookmarks from './Bookmarks.jsx';
+import Dropdown from './Dropdown.jsx';
 
+//TODO:
+  //unit tests for react
+  //api post to set quicklinks and bookmarks (seed db with mock data)
+  //dropdown menu for quicklink and bookmark items
+  //search bar at top
+  //add bookmarks event
+  //site preview for bookmarks with embed tag
+  //css
+
+//TESTS
+
+  //App
+    //does it render
+    //does it display quicklinks component when rendering
+    //does it display bookmakrs component when rendering
+
+    //testing api get
+    //invokes componentDidMOunt when loads
+    //componentDidMount fetches data
+    //componentDidMount sets state: properties
+
+    //titleChange sets title property
+    //urlChange sets url prop
+    //subjectChange sets subject prop
+
+    //testing api post
+    //handleSubmit sets data property
+    //when handleSubmit is called, propertys of data have values
+      //all values are strings
 
 class App extends React.Component {
     constructor(props, context) {
@@ -18,10 +44,16 @@ class App extends React.Component {
     this.state = {
       data: [],
       subjects: [],
+      quicklinks: [],
+      bookmarks: [],
       title: '',
       url: '',
       subject: '',
       subjectToAdd: '',
+      lists: [],
+      category: '',
+      starred: false,
+      favorites: false,
       isLoading: true
     };
     this.titleChange = this.titleChange.bind(this);
@@ -31,8 +63,7 @@ class App extends React.Component {
     this.subjectChange = this.subjectChange.bind(this);
     this.addSubject = this.addSubject.bind(this);
     this.deleteSubject = this.deleteSubject.bind(this);
-    this.toggle = this.toggle.bind(this);
-
+    this.setCategory = this.setCategory.bind(this);
   }
 
   componentDidMount() {
@@ -62,10 +93,14 @@ class App extends React.Component {
     this.setState({ url: e.target.value })
   }
   subjectToAddChange(e) {
-    this.setState({ subjectToAdd: e.target.value})
+    this.setState({ subjectToAdd: e.target.value })
   }
   subjectChange(e) {
-    this.setState({ subject: e.target.value})
+    this.setState({ subject: e.target.value })
+  }
+
+  setCategory(e) {
+    this.setState({ category: e.target.value })
   }
 
   addSubject(e) {
@@ -124,12 +159,13 @@ class App extends React.Component {
 
   handleSubmit(e) {
     var data = {
+      category: this.state.category,
       subject: this.state.subject,
-      sites: [{
-        title: this.state.title,
-        url: this.state.url,
-        date: moment().format('MM-DD-YYYY')
-      }]
+      title: this.state.title,
+      url: this.state.url,
+      date: moment().format('MM-DD-YYYY'),
+      starred: this.state.starred,
+      favorites: this.state.favorites
     };
 
     fetch('/', {
@@ -147,31 +183,21 @@ class App extends React.Component {
     })
     .catch(err => { console.log('Could not post document', err); })
   }
-  toggle() {
-    console.log('fuck')
-  }
+
 
   render() {
+    const { data, category, subjects, subject, subjectToAdd, title, url, lists} = this.state;
+    const { titleChange, subjectChange, urlChange, addSubject, deleteSubject, subjectToAddChange, handleSubmit, setCategory, openDropdown } = this;
     if (!this.state.isLoading) {
       return <div>Loading...</div>
     }
     return (
       <div className="container">
-        <Header />
-        <div className="formContainer">
-          <div className="formWrapper">
-            <form className="form" onSubmit={(e) => this.handleSubmit(e)}>
-              <Title title={this.state.title} titleChange={this.titleChange}/>
-              <Site url={this.state.url} urlChange={this.urlChange}/>
-              <Subjects subjects={this.state.subjects} handleChange={this.subjectChange}/>
-              <div className="submitWrapper">
-                <input className="submit" type="submit" value="Submit" />
-              </div>
-            </form>
-          </div>
+        <div className="appContainer">
+          <Quicklinks quicklinks={this.state.quicklinks}/>
+          <Bookmarks bookmarks={this.state.bookmarks} />
         </div>
-        <Board data={this.state.data} title={this.state.title} subjects={this.state.subjects} subjectToAdd={this.state.subjectToAdd} subjectToAddChange={this.subjectToAddChange} addSubject={this.addSubject} deleteSubject={this.deleteSubject} toggle={this.toggle}/>
-        <RestyledApp />
+        <input type="submit" value="submit" onClick={handleSubmit}/>
       </div>
     );
   }
