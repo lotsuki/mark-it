@@ -214,15 +214,10 @@
 
 
 
-
-
-
-
-
-
   input {
-    flex: 2;
-    padding: 8px;
+    height: 3rem;
+    width: 9rem;
+    margin: 1rem;
   }
 
 

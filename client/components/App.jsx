@@ -16,6 +16,27 @@ import Dropdown from './Dropdown.jsx';
   //site preview for bookmarks with embed tag
   //css
 
+//TESTS
+
+  //App
+    //does it render
+    //does it display quicklinks component when rendering
+    //does it display bookmakrs component when rendering
+
+    //testing api get
+    //invokes componentDidMOunt when loads
+    //componentDidMount fetches data
+    //componentDidMount sets state: properties
+
+    //titleChange sets title property
+    //urlChange sets url prop
+    //subjectChange sets subject prop
+
+    //testing api post
+    //handleSubmit sets data property
+    //when handleSubmit is called, propertys of data have values
+      //all values are strings
+
 class App extends React.Component {
     constructor(props, context) {
     super(props, context);
