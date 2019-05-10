@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import moment from 'moment';
@@ -16,27 +17,6 @@ import Dropdown from './Dropdown.jsx';
   //site preview for bookmarks with embed tag
   //css
 
-//TESTS
-
-  //App
-    //does it render
-    //does it display quicklinks component when rendering
-    //does it display bookmakrs component when rendering
-
-    //testing api get
-    //invokes componentDidMOunt when loads
-    //componentDidMount fetches data
-    //componentDidMount sets state: properties
-
-    //titleChange sets title property
-    //urlChange sets url prop
-    //subjectChange sets subject prop
-
-    //testing api post
-    //handleSubmit sets data property
-    //when handleSubmit is called, propertys of data have values
-      //all values are strings
-
 class App extends React.Component {
     constructor(props, context) {
     super(props, context);
@@ -46,12 +26,12 @@ class App extends React.Component {
       subjects: [],
       quicklinks: [],
       bookmarks: [],
-      title: '',
-      url: '',
-      subject: '',
+      title: 'title',
+      url: 'url',
+      subject: 'subject',
       subjectToAdd: '',
       lists: [],
-      category: '',
+      category: 'category',
       starred: false,
       favorites: false,
       isLoading: true
@@ -67,22 +47,12 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    fetch ('/docs')
-    .then(res => res.json())
-    .then(results => {this.setState({
-      data: results,
+    axios.get('/docs')
+    .then(result => {this.setState({
+      data: result,
       isLoading: true
     })})
     .catch(err => { console.log('Error at GET', err) });
-
-    var storageStr = localStorage.getItem('subjects');
-
-    if (storageStr) {
-      var storage = JSON.parse(storageStr);
-      this.setState({
-        subjects: storage
-      })
-    }
   }
 
   titleChange(e) {
@@ -168,20 +138,13 @@ class App extends React.Component {
       favorites: this.state.favorites
     };
 
-    fetch('/', {
-      method: 'post',
-      body: JSON.stringify(data),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-    .then( res => res.json())
-    .then(results => {
+    axios.post('/', data)
+    .then(result => {
       this.setState({
-        data: results
+        data: result
       })
     })
-    .catch(err => { console.log('Could not post document', err); })
+    .catch(err => { console.log('Could not post document', err); });
   }
 
 
