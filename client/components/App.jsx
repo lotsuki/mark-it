@@ -62,15 +62,16 @@ class App extends React.Component {
   urlChange(e) {
     this.setState({ url: e.target.value })
   }
-  subjectToAddChange(e) {
-    this.setState({ subjectToAdd: e.target.value })
-  }
+
   subjectChange(e) {
     this.setState({ subject: e.target.value })
   }
 
   setCategory(e) {
     this.setState({ category: e.target.value })
+  }
+  subjectToAddChange(e) {
+    this.setState({ subjectToAdd: e.target.value })
   }
 
   addSubject(e) {
@@ -160,8 +161,7 @@ class App extends React.Component {
           <Quicklinks quicklinks={this.state.quicklinks}/>
           <Bookmarks bookmarks={this.state.bookmarks} />
         </div>
-        <Form />
-        <input type="submit" value="submit" onClick={handleSubmit}/>
+        <Form setCategory={setCategory} subject={subject} titleChange={titleChange}  subjectChange={subjectChange} urlChange={urlChange} onClick={handleSubmit}/>
       </div>
     );
   }
