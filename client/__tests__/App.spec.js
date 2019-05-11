@@ -5,47 +5,18 @@ import Enzyme from '../../enzyme.config.js';
 
 
 describe('<App />', () => {
-  let wrapper;
-  beforeEach(() => {
-    wrapper = shallow(<App />);
+  it('renders without error', () => {
+    shallow(<App />);
   });
-  it('displays <Quicklinks /> when rendering', () => {
-    console.log(App);
+  it('invokes componentDidMount when loading', () => {
+    const spy = jest.spyOn(App.prototype, 'componentDidMount');
+    const wrapper = shallow(<App />);
+    wrapper.instance().componentDidMount();
+    expect(spy).toHaveBeenCalled();
+    spy.mockRestore();
   });
-  // it('displays <Bookmarks /> when rendering', () => {
-
-  // });
-  // it('invokes componentDidMount when loading', () => {
-
-  // });
-  // it('componentDidMount passes correct data to get request', () => {
-
-  // });
-  // it('componentDidMount sets state: properties', () => {
-
-  // });
-  // it('titleChange sets state: title', () => {
-
-  // });
-  // it('urlChange sets state: url', () => {
-
-  // });
-  // it('subjectChange sets state: subject', () => {
-
-  // });
-  // it('handleSubmit passes correct data to post request', () => {
-
-  // });
-  // it('handleSubmit receives data where all properties have a value', () => {
-
-  // });
-  // it('handleSubmit receives data where all properties are strings', () => {
-
-  // });
-  // it('handleSubmit sets state: data', () => {
-
-  // });
-  // it('after handleSubmit sets state, all ', () => {
-
-  // });
+  it('sets state: data', () => {
+    const wrapper = shallow(<App />);
+    expect(wrapper.state().data).toBeDefined();
+  });
 });

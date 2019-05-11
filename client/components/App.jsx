@@ -26,12 +26,12 @@ class App extends React.Component {
       subjects: [],
       quicklinks: [],
       bookmarks: [],
-      title: 'title',
-      url: 'url',
-      subject: 'subject',
+      title: '',
+      url: '',
+      subject: '',
       subjectToAdd: '',
       lists: [],
-      category: 'category',
+      category: '',
       starred: false,
       favorites: false,
       isLoading: true
@@ -151,9 +151,9 @@ class App extends React.Component {
   render() {
     const { data, category, subjects, subject, subjectToAdd, title, url, lists} = this.state;
     const { titleChange, subjectChange, urlChange, addSubject, deleteSubject, subjectToAddChange, handleSubmit, setCategory, openDropdown } = this;
-    if (!this.state.isLoading) {
-      return <div>Loading...</div>
-    }
+    // if (!this.state.isLoading) {
+    //   return <div>Loading...</div>
+    // }
     return (
       <div className="container">
         <div className="appContainer">
