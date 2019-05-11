@@ -130,8 +130,13 @@
   .formContainer {
     display: flex;
     flex-flow: column nowrap;
-    justify-content: center;
-    width: 450px;
+    width: 35rem;
+    margin: 1rem;
+  }
+
+  input {
+    height: 4rem;
+    width: 30rem;
   }
 
   .quicklinks {
@@ -214,11 +219,7 @@
 
 
 
-  input {
-    height: 3rem;
-    width: 9rem;
-    margin: 1rem;
-  }
+
 
 
 

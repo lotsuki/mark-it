@@ -160,6 +160,7 @@ class App extends React.Component {
           <Quicklinks quicklinks={this.state.quicklinks}/>
           <Bookmarks bookmarks={this.state.bookmarks} />
         </div>
+        <Form />
         <input type="submit" value="submit" onClick={handleSubmit}/>
       </div>
     );
