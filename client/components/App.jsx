@@ -26,24 +26,24 @@ class App extends React.Component {
       subjects: [],
       quicklinks: [],
       bookmarks: [],
-      title: '',
-      url: '',
-      subject: '',
+      // title: '',
+      // url: '',
+      // subject: '',
       subjectToAdd: '',
       lists: [],
-      category: '',
-      starred: false,
-      favorites: false,
+      //category: '',
+      // starred: false,
+      // favorites: false,
       isLoading: true
     };
-    this.titleChange = this.titleChange.bind(this);
-    this.urlChange = this.urlChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    // this.titleChange = this.titleChange.bind(this);
+    // this.urlChange = this.urlChange.bind(this);
+    // this.handleSubmit = this.handleSubmit.bind(this);
     this.subjectToAddChange = this.subjectToAddChange.bind(this);
-    this.subjectChange = this.subjectChange.bind(this);
+    //this.subjectChange = this.subjectChange.bind(this);
     this.addSubject = this.addSubject.bind(this);
     this.deleteSubject = this.deleteSubject.bind(this);
-    this.setCategory = this.setCategory.bind(this);
+    //this.setCategory = this.setCategory.bind(this);
   }
 
   componentDidMount() {
@@ -55,21 +55,21 @@ class App extends React.Component {
     .catch(err => { console.log('Error at GET', err) });
   }
 
-  titleChange(e) {
-    this.setState({ title: e.target.value });
-  }
+  // titleChange(e) {
+  //   this.setState({ title: e.target.value });
+  // }
 
-  urlChange(e) {
-    this.setState({ url: e.target.value })
-  }
+  // urlChange(e) {
+  //   this.setState({ url: e.target.value })
+  // }
 
-  subjectChange(e) {
-    this.setState({ subject: e.target.value })
-  }
+  // subjectChange(e) {
+  //   this.setState({ subject: e.target.value })
+  // }
 
-  setCategory(e) {
-    this.setState({ category: e.target.value })
-  }
+  // setCategory(e) {
+  //   this.setState({ category: e.target.value })
+  // }
   subjectToAddChange(e) {
     this.setState({ subjectToAdd: e.target.value })
   }
@@ -128,25 +128,25 @@ class App extends React.Component {
     location.reload();
   }
 
-  handleSubmit(e) {
-    var data = {
-      category: this.state.category,
-      subject: this.state.subject,
-      title: this.state.title,
-      url: this.state.url,
-      date: moment().format('MM-DD-YYYY'),
-      starred: this.state.starred,
-      favorites: this.state.favorites
-    };
+  // handleSubmit(e) {
+  //   var data = {
+  //     category: this.state.category,
+  //     subject: this.state.subject,
+  //     title: this.state.title,
+  //     url: this.state.url,
+  //     date: moment().format('MM-DD-YYYY'),
+  //     starred: this.state.starred,
+  //     favorites: this.state.favorites
+  //   };
 
-    axios.post('/', data)
-    .then(result => {
-      this.setState({
-        data: result
-      })
-    })
-    .catch(err => { console.log('Could not post document', err); });
-  }
+  //   axios.post('/', data)
+  //   .then(result => {
+  //     this.setState({
+  //       data: result
+  //     })
+  //   })
+  //   .catch(err => { console.log('Could not post document', err); });
+  // }
 
 
   render() {
