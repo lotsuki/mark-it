@@ -1,11 +1,15 @@
 import React from 'react';
 
+//TODO:
+  //make bookmarks categories dynamic by creating state prop: data
+
 class Bookmarks extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      showMenu: false
+      showMenu: false,
+      category: ''
     }
     this.showMenu = this.showMenu.bind(this);
     this.closeMenu = this.closeMenu.bind(this);
@@ -14,7 +18,10 @@ class Bookmarks extends React.Component {
   showMenu(e) {
     e.preventDefault();
 
-    this.setState({ showMenu: true }, () => {
+    this.setState({
+      showMenu: true,
+      category: e.target.innerText
+    }, () => {
       document.addEventListener('click', this.closeMenu);
     });
   }
@@ -26,14 +33,16 @@ class Bookmarks extends React.Component {
   }
 
   render() {
+    console.log(this.props)
+    const { category } = this.state;
     return(
       <div className="bookmarksContainer">
         <div className="bookmarksHeaderWrapper">
-          <div className="bookmarksHeader" onClick={this.showMenu}>My Bookmarks
+          <div className="bookmarksHeader" >My Bookmarks
           </div>
           <div className="addBookmark">+</div>
         </div>
-        <div className="categoryWrapper">
+        <div className="categoryWrapper" onClick={this.showMenu}>
           <div className="category">Food</div>
           <div className="category">Travel</div>
           <div className="category">Tech</div>
@@ -43,7 +52,7 @@ class Bookmarks extends React.Component {
             ? (
               <div className="bookmarks" className="menu"
               >
-              {this.props.bookmarks.map((bookmark, i) => (
+              {this.state.data.category.subjects.map((bookmark, i) => (
                  <a className="subject" href="#" key={i}>{bookmark.subject}</a>
               ))}
               </div>

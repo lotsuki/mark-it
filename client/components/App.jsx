@@ -118,7 +118,7 @@ class App extends React.Component {
       <div className="container">
         <div className="appContainer">
           <Quicklinks quicklinks={quicklinks}/>
-          <Bookmarks bookmarks={bookmarks} />
+          <Bookmarks bookmarks={data} />
         </div>
         <Form updateStateAfterPostReq={updateStateAfterPostReq}/>
       </div>

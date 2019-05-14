@@ -1,5 +1,6 @@
 import React from 'react';
 import App from './App.jsx';
+import FormInputs from './FormInputs.jsx';
 import axios from 'axios';
 import moment from 'moment';
 
@@ -65,13 +66,7 @@ class Form extends React.Component {
   render() {
     const { titleChange, subjectChange, urlChange, handleSubmit, setCategory} = this;
     return(
-      <div className="formContainer">
-        <input type="text" className="inputList" placeholder="List category" onChange={setCategory}/>
-        <input type="text" className="inputSubject" placeholder="Subject" onChange={subjectChange}/>
-        <input type="text" className="inputTitle" placeholder="Title" onChange={titleChange}/>
-        <input type="text" className="inputURL" placeholder="URL" onChange={urlChange}/>
-        <input type="submit" value="Add" onClick={handleSubmit}/>
-      </div>
+      <FormInputs setCategory={setCategory} titleChange={titleChange} subjectChange={subjectChange} urlChange={urlChange} handleSubmit={handleSubmit}/>
     );
   }
 };
