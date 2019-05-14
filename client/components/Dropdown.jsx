@@ -7,7 +7,7 @@ class Dropdown extends React.Component {
 
     this.state = {
       showMenu: false
-    }
+    };
     this.showMenu = this.showMenu.bind(this);
     this.closeMenu = this.closeMenu.bind(this);
     this.openPage = this.openPage.bind(this);
@@ -43,8 +43,8 @@ class Dropdown extends React.Component {
             ? (
               <div className="dropdownContentWrapper" className="menu"
               >
-              {this.props.sites.map(site => (
-                 <button className="dropdownContent" key={site.url} onClick={e => this.openPage(e, site)}> {site.title} </button>
+              {this.props.sites.map((site, i) => (
+                 <button className="dropdownContent" key={i} onClick={e => this.openPage(e, site)}> {site.title} </button>
               ))}
               </div>
             )
