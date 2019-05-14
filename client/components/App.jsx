@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import moment from 'moment';
@@ -15,27 +16,6 @@ import Dropdown from './Dropdown.jsx';
   //add bookmarks event
   //site preview for bookmarks with embed tag
   //css
-
-//TESTS
-
-  //App
-    //does it render
-    //does it display quicklinks component when rendering
-    //does it display bookmakrs component when rendering
-
-    //testing api get
-    //invokes componentDidMOunt when loads
-    //componentDidMount fetches data
-    //componentDidMount sets state: properties
-
-    //titleChange sets title property
-    //urlChange sets url prop
-    //subjectChange sets subject prop
-
-    //testing api post
-    //handleSubmit sets data property
-    //when handleSubmit is called, propertys of data have values
-      //all values are strings
 
 class App extends React.Component {
     constructor(props, context) {
@@ -67,22 +47,12 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    fetch ('/docs')
-    .then(res => res.json())
-    .then(results => {this.setState({
-      data: results,
+    axios.get('/docs')
+    .then(result => {this.setState({
+      data: result,
       isLoading: true
     })})
     .catch(err => { console.log('Error at GET', err) });
-
-    var storageStr = localStorage.getItem('subjects');
-
-    if (storageStr) {
-      var storage = JSON.parse(storageStr);
-      this.setState({
-        subjects: storage
-      })
-    }
   }
 
   titleChange(e) {
@@ -168,35 +138,29 @@ class App extends React.Component {
       favorites: this.state.favorites
     };
 
-    fetch('/', {
-      method: 'post',
-      body: JSON.stringify(data),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-    .then( res => res.json())
-    .then(results => {
+    axios.post('/', data)
+    .then(result => {
       this.setState({
-        data: results
+        data: result
       })
     })
-    .catch(err => { console.log('Could not post document', err); })
+    .catch(err => { console.log('Could not post document', err); });
   }
 
 
   render() {
     const { data, category, subjects, subject, subjectToAdd, title, url, lists} = this.state;
     const { titleChange, subjectChange, urlChange, addSubject, deleteSubject, subjectToAddChange, handleSubmit, setCategory, openDropdown } = this;
-    if (!this.state.isLoading) {
-      return <div>Loading...</div>
-    }
+    // if (!this.state.isLoading) {
+    //   return <div>Loading...</div>
+    // }
     return (
       <div className="container">
         <div className="appContainer">
           <Quicklinks quicklinks={this.state.quicklinks}/>
           <Bookmarks bookmarks={this.state.bookmarks} />
         </div>
+        <Form />
         <input type="submit" value="submit" onClick={handleSubmit}/>
       </div>
     );
