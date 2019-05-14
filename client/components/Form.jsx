@@ -1,5 +1,7 @@
 import React from 'react';
 import App from './App.jsx';
+import axios from 'axios';
+import moment from 'moment';
 
 
 
@@ -53,7 +55,8 @@ class Form extends React.Component {
     .then(result => {
       this.setState({
         data: result
-      })
+      });
+      this.props.updateStateAfterPostReq(result);
     })
     .catch(err => { console.log('Could not post document', err); });
   }

@@ -1,7 +1,6 @@
 import axios from 'axios';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import moment from 'moment';
 import Form from './Form.jsx';
 //import Header from './Header.jsx';
 import Quicklinks from './Quicklinks.jsx';
@@ -26,24 +25,13 @@ class App extends React.Component {
       subjects: [],
       quicklinks: [],
       bookmarks: [],
-      // title: '',
-      // url: '',
-      // subject: '',
       subjectToAdd: '',
       lists: [],
-      //category: '',
-      // starred: false,
-      // favorites: false,
       isLoading: true
     };
-    // this.titleChange = this.titleChange.bind(this);
-    // this.urlChange = this.urlChange.bind(this);
-    // this.handleSubmit = this.handleSubmit.bind(this);
     this.subjectToAddChange = this.subjectToAddChange.bind(this);
-    //this.subjectChange = this.subjectChange.bind(this);
     this.addSubject = this.addSubject.bind(this);
     this.deleteSubject = this.deleteSubject.bind(this);
-    //this.setCategory = this.setCategory.bind(this);
   }
 
   componentDidMount() {
@@ -55,21 +43,12 @@ class App extends React.Component {
     .catch(err => { console.log('Error at GET', err) });
   }
 
-  // titleChange(e) {
-  //   this.setState({ title: e.target.value });
-  // }
+  updateStateAfterPostReq(data) {
+    this.setState({
+      data: data
+    })
+  }
 
-  // urlChange(e) {
-  //   this.setState({ url: e.target.value })
-  // }
-
-  // subjectChange(e) {
-  //   this.setState({ subject: e.target.value })
-  // }
-
-  // setCategory(e) {
-  //   this.setState({ category: e.target.value })
-  // }
   subjectToAddChange(e) {
     this.setState({ subjectToAdd: e.target.value })
   }
@@ -128,40 +107,20 @@ class App extends React.Component {
     location.reload();
   }
 
-  // handleSubmit(e) {
-  //   var data = {
-  //     category: this.state.category,
-  //     subject: this.state.subject,
-  //     title: this.state.title,
-  //     url: this.state.url,
-  //     date: moment().format('MM-DD-YYYY'),
-  //     starred: this.state.starred,
-  //     favorites: this.state.favorites
-  //   };
-
-  //   axios.post('/', data)
-  //   .then(result => {
-  //     this.setState({
-  //       data: result
-  //     })
-  //   })
-  //   .catch(err => { console.log('Could not post document', err); });
-  // }
-
 
   render() {
-    const { data, category, subjects, subject, subjectToAdd, title, url, lists} = this.state;
-    const { titleChange, subjectChange, urlChange, addSubject, deleteSubject, subjectToAddChange, handleSubmit, setCategory, openDropdown } = this;
+    const { data, quicklinks, bookmarks} = this.state;
+    const { openDropdown, updateStateAfterPostReq } = this;
     // if (!this.state.isLoading) {
     //   return <div>Loading...</div>
     // }
     return (
       <div className="container">
         <div className="appContainer">
-          <Quicklinks quicklinks={this.state.quicklinks}/>
-          <Bookmarks bookmarks={this.state.bookmarks} />
+          <Quicklinks quicklinks={quicklinks}/>
+          <Bookmarks bookmarks={bookmarks} />
         </div>
-        <Form setCategory={setCategory} subject={subject} titleChange={titleChange}  subjectChange={subjectChange} urlChange={urlChange} onClick={handleSubmit}/>
+        <Form updateStateAfterPostReq={updateStateAfterPostReq}/>
       </div>
     );
   }
