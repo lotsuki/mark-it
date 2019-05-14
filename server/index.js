@@ -38,7 +38,7 @@ app.post('/', (req, res) => {
         }]
       }, (err, result) => {
         if (err) { console.log('err at new category post', err) }
-        else {  Document.find().exec((err, results) => {
+        else {  Document.find().exec((err, result) => {
           if (err) { console.log('Cannot send back all data from post api, UPDATE'); }
           else { res.send(result); }
         });
@@ -59,7 +59,7 @@ app.post('/', (req, res) => {
               }]
             }}}, (err, result) => {
             if (err) { console.log('err at new category post', err) }
-            else {  Document.find().exec((err, results) => {
+            else {  Document.find().exec((err, result) => {
               if (err) { console.log('Cannot send back all data from post api, UPDATE'); }
               else { res.send(result); }
             });
