@@ -1,9 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import helpers from '../lib/helpers.js';
 
 
 class Dropdown extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       showMenu: false
@@ -14,10 +16,7 @@ class Dropdown extends React.Component {
   }
 
   showMenu(e) {
-    e.preventDefault();
-
-    this.setState({ showMenu: true }, () => {
-      document.addEventListener('click', this.closeMenu);
+    this.setState({ showMenu: true }, () => { document.addEventListener('click', this.closeMenu);
     });
   }
 
@@ -27,29 +26,32 @@ class Dropdown extends React.Component {
     });
   }
 
-  openPage(e, site) { //TODO: doesn't work without e parameter, why?
+  openPage(e, site) {
     window.open(site.url)
   }
 
   render() {
+    const { data } = this.props;
     return (
-      <div className="dropdownWrapper" key={this.props.subject}>
+      <div className="categoryWrapper" key={this.props.subject}>
         <div className="dropbtn" onClick={this.showMenu}>
-          {this.props.subject}
-          <span className="caret" className="caret"></span>
-        </div>
-        {
-          this.state.showMenu
-            ? (
-              <div className="dropdownContentWrapper" className="menu"
-              >
-              {this.props.sites.map((site, i) => (
-                 <button className="dropdownContent" key={i} onClick={e => this.openPage(e, site)}> {site.title} </button>
-              ))}
+          {this.props.data.map(category => (
+            <div className="category" key={category.category}>{category.category}
+              {
+                this.state.showMenu
+                  ? (
+                    <div className="dropdownContentWrapper" className="menu"
+                    >
+                    {helpers.displayContent(data, category.category).map((subject, i) => (
+                      <a className="dropdownContent" href="#" key={i}> {subject} </a>
+                      ))}
+                    </div>
+                  )
+                  : ( null )
+              }
               </div>
-            )
-            : ( null )
-        }
+          ))}
+        </div>
       </div>
     );
   }
@@ -57,4 +59,12 @@ class Dropdown extends React.Component {
 
 
 export default Dropdown;
+
+Dropdown.propTypes = {
+  data: PropTypes.array
+};
+
+Dropdown.defaultProps = {
+  data: []
+};
 
