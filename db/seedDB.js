@@ -29,3 +29,50 @@ function inputMockBookmarks(mockData) {
 inputMockQuicklinks();
 inputMockBookmarks();
 
+var mockData = [
+  {
+    quicklink: true,
+    category: 'Starred',
+    subjects: []
+  },
+  {
+    quicklink: true,
+    category: 'Favorites',
+    subjects: []
+  },
+  {
+    quicklink: true,
+    category: 'Read',
+    subjects: []
+  },
+
+  {
+    category: 'Tech',
+    subjects: [{
+      subject: 'React',
+      sites: [{
+        title: 'Docs',
+        url: 'http',
+        date: '5/12/19'
+      }]
+    },
+    {
+      subject: 'Mongodb',
+      sites: [{
+        title: 'Docs',
+        url: 'http',
+        date: '5,23'
+      }]
+    }
+    ]
+
+  },
+  {
+    category: 'Travel',
+    subjects: []
+  },
+  {
+    category: 'Recipes',
+    subjects: []
+  }
+];

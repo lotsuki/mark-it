@@ -40,32 +40,18 @@ class Dropdown extends React.Component {
     window.open(site.url)
   }
 
-  filterCategories(data) {
-    for (var i = 0; i < data.length; i++) {
-      if (data[i].category === this.state.category) {
-        if (data[i].quicklink) {
-          return data[i].sites.map((site, i) => (
-             <a className="subject" href="#" key={i}>{site.title}</a>
-          ));
-        } else {
-          return data[i].subjects.map((subject, i) => (
-             <a className="subject" href="#" key={i}>{subject.subject}</a>
-          ))
-        }
-      }
-    }
-  }
 
   render() {
-    //let sites = filterCategories(this.props.menu);
+    console.log(this.props.menu, 'menu')
+    console.log(this.props.currentTarget, 'CT')
     return (
-      <div className="dropdownContainer" onClick={(e) => this.showMenu}>
+      <div className="dropdownContainer">
         {
           this.state.showMenu
             ? (
               <div className="dropdownContentWrapper" className="menu"
               >
-              {filterCategories(this.props.menu)}
+              {this.props.menu}
               </div>
             )
             : ( null )
@@ -79,9 +65,11 @@ class Dropdown extends React.Component {
 export default Dropdown;
 
 Dropdown.propTypes = {
-  menu: PropTypes.array
+  menu: PropTypes.array,
+  currentTarget: PropTypes.object
 }
 Dropdown.defaultProps = {
-  menu: []
+  menu: [],
+  currentTarget: {}
 }
 
