@@ -1,9 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import App from './App.jsx';
 import FormInputs from './FormInputs.jsx';
 import axios from 'axios';
 import moment from 'moment';
-
 
 
 class Form extends React.Component {
@@ -73,3 +73,11 @@ class Form extends React.Component {
 
 
 export default Form;
+
+
+
+Form.propTypes = {
+  updateStateAfterPostReq: PropTypes.func
+};
+
+

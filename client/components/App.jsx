@@ -6,13 +6,10 @@ import Form from './Form.jsx';
 import Quicklinks from './Quicklinks.jsx';
 import Bookmarks from './Bookmarks.jsx';
 import Dropdown from './Dropdown.jsx';
-import Sidebar from './Sidebar.jsx';
 import helpers from '../lib/helpers.js';
 
 //TODO:
   //unit tests for react
-  //api post to set quicklinks and bookmarks (seed db with mock data)
-  //dropdown menu for quicklink and bookmark items
   //search bar at top
   //add bookmarks event
   //site preview for bookmarks with embed tag
@@ -24,11 +21,8 @@ class App extends React.Component {
 
     this.state = {
       data: [],
-      subjects: [],
       quicklinks: [],
       bookmarks: [],
-      subjectToAdd: '',
-      lists: [],
       isLoading: true
     };
     this.subjectToAddChange = this.subjectToAddChange.bind(this);
@@ -39,7 +33,6 @@ class App extends React.Component {
   componentDidMount() {
     axios.get('/docs')
     .then(result => {
-      console.log(result, 'result')
       this.setState({
       data: result.data,
       isLoading: true,
@@ -111,12 +104,8 @@ class App extends React.Component {
     location.reload();
   }
 
-
-
-
   render() {
     const { data, quicklinks, bookmarks} = this.state;
-    const { openDropdown } = this;
     // if (!this.state.isLoading) {
     //   return <div>Loading...</div>
     // }
@@ -126,8 +115,7 @@ class App extends React.Component {
           <Quicklinks quicklinks={quicklinks}/>
           <Bookmarks bookmarks={data, bookmarks} />
         </div>
-        <Form updateStateAfterPostReq={helpers.updateStateAfterPostReq}/>
-        <Sidebar data={data} quicklinks={quicklinks} bookmarks={bookmarks}/>
+        <Form updateStateAfterPostReq={this.updateStateAfterPostReq}/>
       </div>
     );
   }

@@ -11,9 +11,11 @@ const SidebarHeader = ({sidebarHeader, addCategory}) => (
 
 export default SidebarHeader;
 
+
 SidebarHeader.propTypes = {
   sidebarHeader: PropTypes.string
-}
+};
+
 SidebarHeader.defaultProps = {
   sidebarHeader: 'Header'
-}
+};
