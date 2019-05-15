@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const SidebarHeader = ({sidebarHeader}) => (
+const SidebarHeader = ({sidebarHeader, addCategory}) => (
   <div className="sidebarHeaderWrapper">
     <div className="sidebarHeader" >{sidebarHeader}</div>
+    <div className="add" onClick={addCategory}>+</div>
   </div>
 );
 

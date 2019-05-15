@@ -58,15 +58,17 @@
   .sidebarHeaderWrapper {
     display: flex;
     flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
     width: inherit;
+    padding-left: 1.5rem;
+    padding-top: 1.5rem;
   }
 
   .sidebarHeader {
     font-family: Helvetica, sans-serif;
     font-size: 1.3rem;
     width: inherit;
-    padding-left: 1.5rem;
-    padding-top: 1.5rem;
     color: #a6a6a6;
     letter-spacing: .05rem;
   }
@@ -96,19 +98,9 @@
     flex-flow:column nowrap;
     width: inherit;
   }
-/*
-  .bookmarksHeaderWrapper {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: flex-end;
-    align-items: flex-end;
-    width: inherit;
-    margin: 0;
-    padding: 0;
-  }*/
 
-  .addBookmark {
-    padding-bottom:0;
+  .add {
+    display: flex;
     padding-right: .8rem;
     font-size: 1.5rem;
     color: gray;

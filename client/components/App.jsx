@@ -6,6 +6,8 @@ import Form from './Form.jsx';
 import Quicklinks from './Quicklinks.jsx';
 import Bookmarks from './Bookmarks.jsx';
 import Dropdown from './Dropdown.jsx';
+import Sidebar from './Sidebar.jsx';
+import helpers from '../lib/helpers.js';
 
 //TODO:
   //unit tests for react
@@ -37,16 +39,16 @@ class App extends React.Component {
   componentDidMount() {
     axios.get('/docs')
     .then(result => {this.setState({
-      data: result,
-      isLoading: true
+      data: result.data,
+      isLoading: true,
+      quicklinks: helpers.updateQuicklinks(result.data),
+      bookmarks: helpers.updateBookmarks(result.data)
     })})
     .catch(err => { console.log('Error at GET', err) });
   }
 
   updateStateAfterPostReq(data) {
-    this.setState({
-      data: data
-    })
+    this.setState({ data })
   }
 
   subjectToAddChange(e) {
@@ -108,9 +110,14 @@ class App extends React.Component {
   }
 
 
+
+
   render() {
+
     const { data, quicklinks, bookmarks} = this.state;
-    const { openDropdown, updateStateAfterPostReq } = this;
+    const { openDropdown } = this;
+    console.log(quicklinks, 'quicklinks')
+    console.log(bookmarks, 'bookmarks')
     // if (!this.state.isLoading) {
     //   return <div>Loading...</div>
     // }
@@ -120,7 +127,8 @@ class App extends React.Component {
           <Quicklinks quicklinks={quicklinks}/>
           <Bookmarks bookmarks={data} />
         </div>
-        <Form updateStateAfterPostReq={updateStateAfterPostReq}/>
+        <Form updateStateAfterPostReq={helpers.updateStateAfterPostReq}/>
+        <Sidebar data={data}/>
       </div>
     );
   }

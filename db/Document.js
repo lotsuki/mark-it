@@ -12,14 +12,18 @@ const documentSchema = new Schema ({
     sites: [{
       title: String,
       url: String,
-      date: String,
-      starred: Boolean,
-      favorites: Boolean
+      date: String
     }]
   }]
 });
 
 
+
 const Document = mongoose.model('Document', documentSchema);
 
 module.exports = Document;
+
+
+//first load page
+//add quicklink
+//add bookmark to quicklink

@@ -55,9 +55,9 @@ class Form extends React.Component {
     axios.post('/', data)
     .then(result => {
       this.setState({
-        data: result
+        data: result.data
       });
-      this.props.updateStateAfterPostReq(result);
+      this.props.updateStateAfterPostReq(result.data);
     })
     .catch(err => { console.log('Could not post document', err); });
   }
