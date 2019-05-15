@@ -6,11 +6,10 @@ import Form from './Form.jsx';
 import Quicklinks from './Quicklinks.jsx';
 import Bookmarks from './Bookmarks.jsx';
 import Dropdown from './Dropdown.jsx';
+import helpers from '../lib/helpers.js';
 
 //TODO:
   //unit tests for react
-  //api post to set quicklinks and bookmarks (seed db with mock data)
-  //dropdown menu for quicklink and bookmark items
   //search bar at top
   //add bookmarks event
   //site preview for bookmarks with embed tag
@@ -22,11 +21,8 @@ class App extends React.Component {
 
     this.state = {
       data: [],
-      subjects: [],
       quicklinks: [],
       bookmarks: [],
-      subjectToAdd: '',
-      lists: [],
       isLoading: true
     };
     this.subjectToAddChange = this.subjectToAddChange.bind(this);
@@ -36,17 +32,18 @@ class App extends React.Component {
 
   componentDidMount() {
     axios.get('/docs')
-    .then(result => {this.setState({
-      data: result,
-      isLoading: true
+    .then(result => {
+      this.setState({
+      data: result.data,
+      isLoading: true,
+      quicklinks: helpers.updateQuicklinks(result.data),
+      bookmarks: helpers.updateBookmarks(result.data)
     })})
     .catch(err => { console.log('Error at GET', err) });
   }
 
   updateStateAfterPostReq(data) {
-    this.setState({
-      data: data
-    })
+    this.setState({ data })
   }
 
   subjectToAddChange(e) {
@@ -107,10 +104,8 @@ class App extends React.Component {
     location.reload();
   }
 
-
   render() {
     const { data, quicklinks, bookmarks} = this.state;
-    const { openDropdown, updateStateAfterPostReq } = this;
     // if (!this.state.isLoading) {
     //   return <div>Loading...</div>
     // }
@@ -118,9 +113,9 @@ class App extends React.Component {
       <div className="container">
         <div className="appContainer">
           <Quicklinks quicklinks={quicklinks}/>
-          <Bookmarks bookmarks={bookmarks} />
+          <Bookmarks bookmarks={data, bookmarks} />
         </div>
-        <Form updateStateAfterPostReq={updateStateAfterPostReq}/>
+        <Form updateStateAfterPostReq={this.updateStateAfterPostReq}/>
       </div>
     );
   }

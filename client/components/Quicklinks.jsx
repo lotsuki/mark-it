@@ -1,56 +1,34 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import SidebarHeader from './SidebarHeader.jsx';
+import Dropdown from './Dropdown.jsx';
 
 class Quicklinks extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      showMenu: false
     }
-    this.showMenu = this.showMenu.bind(this);
-    this.closeMenu = this.closeMenu.bind(this);
-  }
-
-  showMenu(e) {
-    e.preventDefault();
-
-    this.setState({ showMenu: true }, () => {
-      document.addEventListener('click', this.closeMenu);
-    });
-  }
-
-  closeMenu() {
-    this.setState({ showMenu: false }, () => {
-      document.removeEventListener('click', this.closeMenu);
-    });
   }
 
   render() {
+    const { quicklinks } = this.props;
     return(
       <div className="quicklinksContainer">
-        <div className="quicklinksHeaderWrapper">
-          <div className="quicklinksHeader" onClick={this.showMenu}>Quick links</div>
-        </div>
-        <div className="quicklinksWrapper">
-          <div className="quicklink">Starred</div>
-          <div className="quicklink">Favorites</div>
-          <div className="quicklink">Read</div>
-        </div>
-        {
-          this.state.showMenu
-            ? (
-              <div className="quicklinks" className="menu"
-              >
-              {this.props.quicklinks.map((quicklink, i) => (
-                 <a className="quicklink" href="#" key={i}>{quicklink.subject}</a>
-              ))}
-              </div>
-            )
-            : ( null )
-        }
+        <SidebarHeader sidebarHeader="Quick links" />
+        <Dropdown data={quicklinks}/>
       </div>
     );
   }
 };
 
 export default Quicklinks;
+
+
+Quicklinks.propTypes = {
+  quicklinks: PropTypes.array
+};
+
+Quicklinks.defaultProps = {
+  quicklinks: []
+};

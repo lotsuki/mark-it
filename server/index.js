@@ -33,7 +33,8 @@ app.post('/', (req, res) => {
             url: req.body.url,
             date: req.body.date,
             starred: req.body.starred,
-            favorites: req.body.favorites
+            favorites: req.body.favorites,
+            read: req.body.read
           }]
         }]
       }, (err, result) => {
@@ -55,7 +56,8 @@ app.post('/', (req, res) => {
                 url: req.body.url,
                 date: req.body.date,
                 starred: req.body.starred,
-                favorites: req.body.favorites
+                favorites: req.body.favorites,
+                read: req.body.read
               }]
             }}}, (err, result) => {
             if (err) { console.log('err at new category post', err) }
@@ -72,7 +74,8 @@ app.post('/', (req, res) => {
                   url: req.body.url,
                   date: req.body.date,
                   starred: req.body.starred,
-                  favorites: req.body.favorites
+                  favorites: req.body.favorites,
+                  read: req.body.read
               }
           }},(err, result) => {
               if (err) { console.log('Could not update data', err); }
