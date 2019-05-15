@@ -41,7 +41,7 @@ class App extends React.Component {
     .then(result => {this.setState({
       data: result.data,
       isLoading: true,
-      quicklinks: helpers.updateQuicklinks(result.data),
+      quicklinks: helpers.updateQuicklinks(result.data)[0],
       bookmarks: helpers.updateBookmarks(result.data)
     })})
     .catch(err => { console.log('Error at GET', err) });
