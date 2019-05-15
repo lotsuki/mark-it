@@ -31,9 +31,7 @@ class Quicklinks extends React.Component {
     return(
       <div className="quicklinksContainer">
         <SidebarHeader sidebarHeader="Quick links" />
-        <div className="categoryWrapper" onClick={this.showMenu}>
-          <SidebarCategories categories={this.prop.quicklinks} />
-        </div>
+        <SidebarCategories categories={this.props.quicklinks} />
 
         {
           this.state.showMenu

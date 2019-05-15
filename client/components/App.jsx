@@ -38,10 +38,12 @@ class App extends React.Component {
 
   componentDidMount() {
     axios.get('/docs')
-    .then(result => {this.setState({
+    .then(result => {
+      console.log(result, 'result')
+      this.setState({
       data: result.data,
       isLoading: true,
-      quicklinks: helpers.updateQuicklinks(result.data)[0],
+      quicklinks: helpers.updateQuicklinks(result.data),
       bookmarks: helpers.updateBookmarks(result.data)
     })})
     .catch(err => { console.log('Error at GET', err) });
@@ -113,11 +115,8 @@ class App extends React.Component {
 
 
   render() {
-
     const { data, quicklinks, bookmarks} = this.state;
     const { openDropdown } = this;
-    console.log(quicklinks, 'quicklinks')
-    console.log(bookmarks, 'bookmarks')
     // if (!this.state.isLoading) {
     //   return <div>Loading...</div>
     // }

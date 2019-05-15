@@ -13,13 +13,21 @@ class SidebarCategories extends React.Component {
 
   render() {
     return(
-      <div>
-        {this.props.categories.map(category => {
-          <div className="category">{category}</div>
-        })}
+       <div className="categoryWrapper">
+        {this.props.categories.map(category => (
+          <div className="category" key={category.category}>{category.category}</div>
+        ))}
       </div>
     )
   }
 };
 
 export default SidebarCategories;
+
+
+SidebarCategories.propTypes = {
+  categories: PropTypes.array
+}
+SidebarCategories.defaultProps = {
+  categories: []
+}

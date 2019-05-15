@@ -1,12 +1,17 @@
 module.exports = {
   updateQuicklinks: function(data) {
     return data.filter(bookmark => {
-      if(bookmark.category === 'quicklinks') { return bookmark.subjects; }
+      if(bookmark.quicklink) {
+        return {
+          category: bookmark.category,
+          sites: bookmark.sites
+        };
+      }
     })
   },
   updateBookmarks: function(data) {
     return data.filter(bookmark => {
-      if(bookmark.category !== 'quicklinks') {
+      if(!bookmark.quicklink) {
         return {
           category: bookmark.category,
           subjects: bookmark.subjects
@@ -15,7 +20,6 @@ module.exports = {
     })
   },
   updateStateAfterPostReq: function(data) {
-    console.log('heyyyy')
     return data;
   }
 };

@@ -39,10 +39,8 @@ class Bookmarks extends React.Component {
     const { category } = this.state;
     return(
       <div className="bookmarksContainer">
-       <SidebarHeader sidebarHeader="My Bookmarks"/>
-        <div className="categoryWrapper" onClick={this.showMenu}>
-          <SidebarCategories categories={this.prop.bookmarks} />
-        </div>
+        <SidebarHeader sidebarHeader="My Bookmarks"/>
+        <SidebarCategories categories={this.props.bookmarks} />
         {
           this.state.showMenu
             ? (
