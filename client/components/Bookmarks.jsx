@@ -1,7 +1,9 @@
 import React from 'react';
+import SidebarHeader from './SidebarHeader.jsx';
 
 //TODO:
   //make bookmarks categories dynamic by creating state prop: data
+  //clean up render
 
 class Bookmarks extends React.Component {
   constructor(props) {
@@ -33,15 +35,10 @@ class Bookmarks extends React.Component {
   }
 
   render() {
-    console.log(this.props)
     const { category } = this.state;
     return(
       <div className="bookmarksContainer">
-        <div className="bookmarksHeaderWrapper">
-          <div className="bookmarksHeader" >My Bookmarks
-          </div>
-          <div className="addBookmark">+</div>
-        </div>
+       <SidebarHeader sidebarHeader="My Bookmarks"/>
         <div className="categoryWrapper" onClick={this.showMenu}>
           <div className="category">Food</div>
           <div className="category">Travel</div>

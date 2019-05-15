@@ -1,6 +1,6 @@
 import React from 'react';
 
-
+//TODO: default props
 const FormInputs = ({ setCategory, subjectChange, titleChange, urlChange, handleSubmit}) => (
   <div className="formContainer">
     <input type="text" className="inputList" placeholder="List category" onChange={setCategory}/>

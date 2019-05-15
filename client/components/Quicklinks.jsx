@@ -1,4 +1,5 @@
 import React from 'react';
+import SidebarHeader from './SidebarHeader.jsx';
 
 class Quicklinks extends React.Component {
   constructor(props) {
@@ -28,10 +29,8 @@ class Quicklinks extends React.Component {
   render() {
     return(
       <div className="quicklinksContainer">
-        <div className="quicklinksHeaderWrapper">
-          <div className="quicklinksHeader" onClick={this.showMenu}>Quick links</div>
-        </div>
-        <div className="quicklinksWrapper">
+        <SidebarHeader sidebarHeader="Quick links" />
+        <div className="quicklinksWrapper" onClick={this.showMenu}>
           <div className="quicklink">Starred</div>
           <div className="quicklink">Favorites</div>
           <div className="quicklink">Read</div>
