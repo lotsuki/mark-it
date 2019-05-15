@@ -1,40 +1,51 @@
 const Document = require("./Document.js");
 const db = require("./index.js");
-
-const initialDoc = [
+const bookmarks = [
   {
-    category: 'quicklinks',
-    subjects: [{
-      subject: 'Starred'
-    },
-    {
-      subject: 'Favorites'
-    },
-    {
-      subject: 'Read'
-    }]
+    quicklink: true,
+    category: 'Starred',
+    subjects: []
   },
+  {
+    quicklink: true,
+    category: 'Favorites',
+    subjects: []
+  },
+  {
+    quicklink: true,
+    category: 'Read',
+    subjects: []
+  },
+
   {
     category: 'Tech',
     subjects: []
   },
   {
     category: 'Travel',
-    subjects:[]
+    subjects: []
   },
   {
     category: 'Recipes',
-    subjects:[]
+    subjects: []
   }
 ];
 
 function inputInitialDoc() {
-  return Document.create(initialDoc)
+  return Document.create(bookmarks)
+    .catch(err => console.log('err: ', err));
+};
+
+function updateSchema() {
+  Document.updateMany({quicklink: true}, {$rename: {subjects: 'sites'}})
     .then(() => db.close())
-    .catch(err => console.log("err", err));
+    .catch(err => console.log('err: ', err));
 };
 
 inputInitialDoc();
+
+//fix later
+setTimeout(updateSchema, 300);
 
 
 

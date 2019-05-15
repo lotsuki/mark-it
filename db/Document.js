@@ -3,9 +3,10 @@ const db = require('./index.js');
 
 const Schema = mongoose.Schema;
 
-
+//test different schemas
 
 const documentSchema = new Schema ({
+  quicklink: Boolean,
   category: String,
   subjects: [{
     subject: String,
@@ -17,6 +18,21 @@ const documentSchema = new Schema ({
   }]
 });
 
+// const documentSchema = new Schema ({
+//   header: String,
+//   categories: [{
+//     category: String,
+//     subjects: [{
+//       subject: String,
+//       sites: [{
+//         title: String,
+//         url: String,
+//         date: String
+//       }]
+//     }]
+//   }]
+
+// });
 
 
 const Document = mongoose.model('Document', documentSchema);

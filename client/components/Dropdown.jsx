@@ -27,7 +27,7 @@ class Dropdown extends React.Component {
     });
   }
 
-  openPage(e, site) { //TODO: doesn't work without e parameter, why?
+  openPage(e, site) {
     window.open(site.url)
   }
 

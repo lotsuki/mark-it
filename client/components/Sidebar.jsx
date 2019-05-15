@@ -31,6 +31,7 @@ class Sidebar extends React.Component {
   render() {
     return(
       <div>
+        <SidebarCategories quicklinks/>
         {this.props.data.forEach(bookmark => {
           <div>bookmark.category</div>
         })}

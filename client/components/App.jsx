@@ -125,10 +125,10 @@ class App extends React.Component {
       <div className="container">
         <div className="appContainer">
           <Quicklinks quicklinks={quicklinks}/>
-          <Bookmarks bookmarks={data} />
+          <Bookmarks bookmarks={data, bookmarks} />
         </div>
         <Form updateStateAfterPostReq={helpers.updateStateAfterPostReq}/>
-        <Sidebar data={data}/>
+        <Sidebar data={data} quicklinks={quicklinks} bookmarks={bookmarks}/>
       </div>
     );
   }

@@ -13,7 +13,7 @@ class SidebarCategories extends React.Component {
 
   render() {
     return(
-      <div className="categoryWrapper">
+      <div>
         {this.props.categories.map(category => {
           <div className="category">{category}</div>
         })}
