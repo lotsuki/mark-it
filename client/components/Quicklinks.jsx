@@ -1,6 +1,7 @@
 import React from 'react';
 import SidebarHeader from './SidebarHeader.jsx';
 import SidebarCategories from './SidebarCategories.jsx';
+import Dropdown from './Dropdown.jsx';
 
 class Quicklinks extends React.Component {
   constructor(props) {
@@ -32,19 +33,7 @@ class Quicklinks extends React.Component {
       <div className="quicklinksContainer">
         <SidebarHeader sidebarHeader="Quick links" />
         <SidebarCategories categories={this.props.quicklinks} />
-
-        {
-          this.state.showMenu
-            ? (
-              <div className="quicklinks" className="menu"
-              >
-              {this.props.quicklinks.map((quicklink, i) => (
-                 <a className="quicklink" href="#" key={i}>{quicklink.subject}</a>
-              ))}
-              </div>
-            )
-            : ( null )
-        }
+        <Dropdown menu={this.props.quicklinks}/>
       </div>
     );
   }

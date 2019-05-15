@@ -13,7 +13,7 @@ class SidebarCategories extends React.Component {
 
   render() {
     return(
-       <div className="categoryWrapper">
+       <div className="categoryWrapper" onClick={(e) => this.props.onClick}>
         {this.props.categories.map(category => (
           <div className="category" key={category.category}>{category.category}</div>
         ))}
