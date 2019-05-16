@@ -7,7 +7,8 @@
     "start": "nodemon server/index.js",
     "build-dev": "webpack --watch",
     "test": "jest --watch --verbose",
-    "test:coverage": "jest --coverage --colors"
+    "test:coverage": "jest --coverage --colors",
+    "open:coverage": "node coverage/Icov-report/index.html"
   },
   "repository": {
     "type": "git",
