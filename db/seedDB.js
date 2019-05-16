@@ -33,7 +33,11 @@ var mockData = [
   {
     quicklink: true,
     category: 'Starred',
-    subjects: []
+    subjects: [{
+      title: 'Parsing data',
+      url: 'http',
+      date: '5/20'
+    }]
   },
   {
     quicklink: true,

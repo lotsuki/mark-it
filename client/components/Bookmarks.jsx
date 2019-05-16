@@ -4,7 +4,6 @@ import SidebarHeader from './SidebarHeader.jsx';
 import Dropdown from './Dropdown.jsx';
 
 
-
 class Bookmarks extends React.Component {
   constructor(props) {
     super(props);

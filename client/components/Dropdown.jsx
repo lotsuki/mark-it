@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import helpers from '../lib/helpers.js';
+import utils from '../lib/utils.js';
 
 
 class Dropdown extends React.Component {
@@ -42,7 +42,7 @@ class Dropdown extends React.Component {
                   ? (
                     <div className="dropdownContentWrapper" className="menu"
                     >
-                    {helpers.displayContent(data, category.category).map((subject, i) => (
+                    {utils.displayContent(data, category.category).map((subject, i) => (
                       <a className="dropdownContent" href="#" key={i}> {subject} </a>
                       ))}
                     </div>

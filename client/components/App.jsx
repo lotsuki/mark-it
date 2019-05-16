@@ -6,7 +6,7 @@ import Form from './Form.jsx';
 import Quicklinks from './Quicklinks.jsx';
 import Bookmarks from './Bookmarks.jsx';
 import Dropdown from './Dropdown.jsx';
-import helpers from '../lib/helpers.js';
+import utils from '../lib/utils.js';
 
 //TODO:
   //unit tests for react
@@ -28,6 +28,7 @@ class App extends React.Component {
     this.subjectToAddChange = this.subjectToAddChange.bind(this);
     this.addSubject = this.addSubject.bind(this);
     this.deleteSubject = this.deleteSubject.bind(this);
+    this.updateStateAfterPostReq = this.updateStateAfterPostReq.bind(this);
   }
 
   componentDidMount() {
@@ -36,13 +37,14 @@ class App extends React.Component {
       this.setState({
       data: result.data,
       isLoading: true,
-      quicklinks: helpers.updateQuicklinks(result.data),
-      bookmarks: helpers.updateBookmarks(result.data)
+      quicklinks: utils.updateQuicklinks(result.data),
+      bookmarks: utils.updateBookmarks(result.data)
     })})
     .catch(err => { console.log('Error at GET', err) });
   }
 
   updateStateAfterPostReq(data) {
+    console.log(this)
     this.setState({ data })
   }
 
@@ -113,7 +115,7 @@ class App extends React.Component {
       <div className="container">
         <div className="appContainer">
           <Quicklinks quicklinks={quicklinks}/>
-          <Bookmarks bookmarks={data, bookmarks} />
+          <Bookmarks bookmarks={bookmarks} />
         </div>
         <Form updateStateAfterPostReq={this.updateStateAfterPostReq}/>
       </div>
@@ -122,3 +124,6 @@ class App extends React.Component {
 };
 
 export default App;
+
+
+
