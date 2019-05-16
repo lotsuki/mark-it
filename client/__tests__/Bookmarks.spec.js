@@ -13,15 +13,22 @@ describe('<Bookmarks />', () => {
     shallow(<Bookmarks {...props}/>);
   });
   it('renders <SidebarHeader /> component', () => {
-    const wrapper = shallow(<Bookmarks />);
-    expect(wrapper.find(SidebarHeader)).to.have.lengthOf(1);
+    const wrapper = mount(<Bookmarks />);
+    expect(wrapper.children().find(SidebarHeader)).toBeDefined();
+    wrapper.unmount();
   });
   it('renders <Dropdown /> component', () => {
-    const wrapper = shallow(<Bookmarks />);
-    expect(wrapper.find(Dropdown)).to.have.lengthOf(1);
+    const wrapper = mount(<Bookmarks />);
+    expect(wrapper.children().find(Dropdown)).toBeDefined();
+    wrapper.unmount();
   });
-  it('includes 1 div with the class bookmarksContainer', () => {
+  it('renders a div with class bookmarksContainer', () => {
     const wrapper = shallow(<Bookmarks />);
-    expect(wrapper.find('div.bookmarksContainer')).to.have.lengthOf(1);
+    expect(wrapper.find('div.bookmarksContainer')).toBeDefined();
+  });
+  it('has 2 child components', () => {
+    const wrapper = mount(<Bookmarks />);
+    expect(wrapper.find('div.bookmarksContainer').children().length).toEqual(2);
+    wrapper.unmount();
   });
 });

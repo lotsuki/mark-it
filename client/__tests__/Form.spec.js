@@ -1,6 +1,7 @@
   import React from 'react';
   import { shallow, mount, render } from 'enzyme';
   import Form from '../components/Form';
+  import FormInputs from '../components/FormInputs';
   import mockData from '../../db/mockData.js';
   import mockUtils from '../__mocks__/utils.js';
 
@@ -55,19 +56,9 @@
     it('handleSubmit invokes updateStateAfterPostReq with correct arg', () => {
 
     });
+    it('returns FormInput component', () => {
+      const wrapper = mount(<Form />);
+      expect(wrapper.children().find(FormInputs)).toBeDefined();
+      wrapper.unmount();
+    });
   });
-
-  // it('titleChange sets state: title', () => {
-  //   const spy = jest.spyOn(App.prototype, 'titleChange');
-  //   const wrapper = shallow(<App />);
-  //   wrapper.instance().titleChange();
-  // });
-  // it('urlChange sets state: url', () => {
-
-  // });
-  // it('subjectChange sets state: subject', () => {
-
-  // });
-    // it('handleSubmit updates state: data', () => {
-  //   //need to create mock axios post req
-  // });
