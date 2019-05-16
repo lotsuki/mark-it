@@ -26,9 +26,9 @@ describe('<Bookmarks />', () => {
     const wrapper = shallow(<Bookmarks />);
     expect(wrapper.find('div.bookmarksContainer')).toBeDefined();
   });
-  it('has 2 child components', () => {
+  it('contains correct props', () => {
     const wrapper = mount(<Bookmarks />);
-    expect(wrapper.find('div.bookmarksContainer').children().length).toEqual(2);
+    expect(wrapper.props('bookmarks')).toBeDefined();
     wrapper.unmount();
   });
 });

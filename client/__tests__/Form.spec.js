@@ -61,4 +61,9 @@
       expect(wrapper.children().find(FormInputs)).toBeDefined();
       wrapper.unmount();
     });
+    it('contains correct props', () => {
+      const wrapper = mount(<Form />);
+      expect(wrapper.props('updateStateAfterPostReq')).toBeDefined();
+      wrapper.unmount();
+    });
   });
