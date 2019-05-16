@@ -1,10 +1,14 @@
   import React from 'react';
   import { shallow, mount, render } from 'enzyme';
   import Form from '../components/Form';
+  import mockData from '../../db/mockData.js';
 
   describe('<Form />', () => {
-    it('does something', () => {
-      console.log('does something');
+    it('renders without error with correct props', () => {
+      const props = {
+        updateStateAfterPostReq: () => { console.log('rendered')}
+      }
+      shallow(<Form {...props}/>);
     });
   });
 

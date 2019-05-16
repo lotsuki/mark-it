@@ -12,18 +12,6 @@ describe('updateQuicklinks', () => {
   // });
   it('invoked in App component at GET request', () => {
     const spy = jest.spyOn(utils, 'updateQuicklinks');
-    // const originalFunc = utils.updateQuicklinks;
-    // utils.updateQuicklinks = jest.fn(data => {
-    //   return data.filter(bookmark => {
-    //     if(bookmark.quicklink) {
-    //       return {
-    //         category: bookmark.category,
-    //         sites: bookmark.sites
-    //       };
-    //     }
-    //   })
-    // });
-    // const wrapper = shallow(<App />);
   });
 });
 
