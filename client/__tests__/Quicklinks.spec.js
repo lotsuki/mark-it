@@ -30,6 +30,16 @@ describe('<Quicklinks />', () => {
     expect(wrapper.props('quicklinks')).toBeDefined();
     wrapper.unmount();
   });
+  it('sets sidebarHeader property on SidebarHeader component', () => {
+    const wrapper = mount(<Quicklinks />);
+    expect(wrapper.children().find(SidebarHeader).props('sidebarHeader')).toBeDefined();
+    wrapper.unmount();
+  });
+  it('sets data property on Dropdown component', () => {
+    const wrapper = mount(<Quicklinks />);
+    expect(wrapper.children().find(Dropdown).props('data')).toBeDefined();
+    wrapper.unmount();
+  });
 });
 
 

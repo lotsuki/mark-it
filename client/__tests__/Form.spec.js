@@ -5,6 +5,8 @@
   import mockData from '../../db/mockData.js';
   import mockUtils from '../__mocks__/utils.js';
 
+  //passes props to FormInputs
+
   describe('<Form />', () => {
     const event = { target: { value: 'Value' } };
     it('renders without error with correct props', () => {
@@ -64,6 +66,26 @@
     it('contains correct props', () => {
       const wrapper = mount(<Form />);
       expect(wrapper.props('updateStateAfterPostReq')).toBeDefined();
+      wrapper.unmount();
+    });
+    it('sets setCategory property on FormInput component', () => {
+      const wrapper = mount(<Form />);
+      expect(wrapper.children().find(FormInputs).props('setCategory')).toBeDefined();
+      wrapper.unmount();
+    });
+    it('sets titleChange property on FormInput component', () => {
+      const wrapper = mount(<Form />);
+      expect(wrapper.children().find(FormInputs).props('titleChange')).toBeDefined();
+      wrapper.unmount();
+    });
+    it('sets urlChange property on FormInput component', () => {
+      const wrapper = mount(<Form />);
+      expect(wrapper.children().find(FormInputs).props('urlChange')).toBeDefined();
+      wrapper.unmount();
+    });
+    it('sets subjectChange property on FormInput component', () => {
+      const wrapper = mount(<Form />);
+      expect(wrapper.children().find(FormInputs).props('subjectChange')).toBeDefined();
       wrapper.unmount();
     });
   });

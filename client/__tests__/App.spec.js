@@ -3,7 +3,7 @@ import { shallow, mount, render } from 'enzyme';
 import App from '../components/App';
 import Enzyme from '../../enzyme.config.js';
 import Bookmarks from '../components/Bookmarks';
-
+import Quicklinks from '../components/Quicklinks';
 
 describe('<App />', () => {
   it('renders without error', () => {
@@ -35,14 +35,15 @@ describe('<App />', () => {
     const wrapper = shallow(<App />);
     expect(wrapper.find('div.appContainer')).toBeDefined();
   });
-
-// it('sets the bookmarks prop as the `value` prop on the Bookmarks component', () => {
-//     const props = {
-//       bookmarks: []
-//     }
-//     const wrapper = mount(<App {...props} />);
-//     const BookmarkComp = wrapper.find(Bookmarks);
-//     expect(BookmarkComp.props().value).toEqual(props.bookmarks)
-//   });
+  it('sets the bookmarks prop on Bookmarks component', () => {
+    const wrapper = mount(<App />);
+    expect(wrapper.children().find(Bookmarks).props('bookmarks')).toBeDefined();
+    wrapper.unmount();
+  });
+  it('sets the quicklinks prop on Quicklinks component', () => {
+    const wrapper = mount(<App />);
+    expect(wrapper.children().find(Quicklinks).props('quicklinks')).toBeDefined();
+    wrapper.unmount();
+  });
 });
 
