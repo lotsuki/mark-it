@@ -11,15 +11,11 @@ describe('<App />', () => {
   });
   it('contains all necessary state properties with correct values', () => {
     const wrapper = shallow(<App />);
-    expect(wrapper.state('data')).toEqual([])
-    expect(wrapper.state('quicklinks')).toEqual([])
-    expect(wrapper.state('bookmarks')).toEqual([])
-    expect(wrapper.state('isLoading')).toEqual(true)
-  //   expect(Array.isArray(wrapper.state('data'))).toEqual(true)
-  //   expect(Array.isArray(wrapper.state('quicklinks'))).toEqual(true)
-  //   expect(Array.isArray(wrapper.state('bookmarks'))).toEqual(true)
-  //   expect(typeof wrapper.state('isLoading')).toEqual('boolean')
-   });
+    expect(wrapper.state('data')).toEqual([]);
+    expect(wrapper.state('quicklinks')).toEqual([]);
+    expect(wrapper.state('bookmarks')).toEqual([]);
+    expect(wrapper.state('isLoading')).toEqual(true);
+  });
   it('invokes componentDidMount when loading', () => {
     const spy = jest.spyOn(App.prototype, 'componentDidMount');
     const wrapper = shallow(<App />);
@@ -30,6 +26,14 @@ describe('<App />', () => {
   it('sets state: data', () => {
     const wrapper = shallow(<App />);
     expect(wrapper.state().data).toBeDefined();
+  });
+  it('renders a div with class container', () => {
+    const wrapper = shallow(<App />);
+    expect(wrapper.find('div.container')).toBeDefined();
+  });
+  it('renders a div with class appContainer', () => {
+    const wrapper = shallow(<App />);
+    expect(wrapper.find('div.appContainer')).toBeDefined();
   });
 
 // it('sets the bookmarks prop as the `value` prop on the Bookmarks component', () => {

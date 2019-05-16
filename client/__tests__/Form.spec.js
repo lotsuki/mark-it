@@ -7,8 +7,17 @@
     it('renders without error with correct props', () => {
       const props = {
         updateStateAfterPostReq: () => { console.log('rendered')}
-      }
+      };
       shallow(<Form {...props}/>);
+    });
+    it('contains all necessary state properties with correct values', () => {
+      const wrapper = shallow(<Form />);
+      expect(wrapper.state('data')).toEqual([]);
+      expect(wrapper.state('subject')).toEqual('');
+      expect(wrapper.state('title')).toEqual('');
+      expect(wrapper.state('url')).toEqual('');
+      expect(wrapper.state('starred')).toEqual(false);
+      expect(wrapper.state('favorites')).toEqual(false);
     });
   });
 
