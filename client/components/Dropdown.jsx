@@ -2,6 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import utils from '../lib/utils.js';
 
+//TESTS
+  //test logic iwth this.showmenu ternary operator
+  //check if this.props.data is an array and has a length > 1
+  //check if this.props.data.category === strings
+  //div.dropbtn has click event that invokes this.showmenu
+  //when click event, dom changes, renders new elements
+  //this.showmenu invokes displaycontent
+
+
 
 class Dropdown extends React.Component {
   constructor(props) {

@@ -1,3 +1,4 @@
+import mockAxios from 'axios';
 
 module.exports = {
   updateQuicklinks: jest.fn(data =>  {

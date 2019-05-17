@@ -6,5 +6,21 @@ module.exports = {
   )),
   post: jest.fn(form => Promise.resolve(
     { data: form }
-  ))
+  )),
+  handleSubmit: jest.fn(() => {
+    var data = {
+      category: 'Category',
+      subject: 'Subject',
+      title: 'Title',
+      url: 'URL',
+      date: '3-12-2019',
+      starred: false,
+      favorites: false
+    };
+
+    mockAxios.post(data);
+  }),
+  handleClick: jest.fn(() => {
+    console.log('hi')
+  })
 };

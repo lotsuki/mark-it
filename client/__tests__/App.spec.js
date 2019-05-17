@@ -23,6 +23,7 @@ describe('<App />', () => {
   });
   it('invokes componentDidMount when loading', () => {
     const spy = jest.spyOn(App.prototype, 'componentDidMount');
+    spy.mockImplementation(() => {data: mockData})
     const wrapper = shallow(<App />);
     wrapper.instance().componentDidMount();
     expect(spy).toHaveBeenCalled();

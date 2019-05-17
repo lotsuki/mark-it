@@ -5,7 +5,7 @@
   import mockData from '../../db/mockData.js';
   import mockUtils from '../__mocks__/utils.js';
 
-  //passes props to FormInputs
+  //clears form after submit
 
   describe('<Form />', () => {
     const event = { target: { value: 'Value' } };

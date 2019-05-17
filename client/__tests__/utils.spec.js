@@ -6,10 +6,6 @@ import mockData from '../../db/mockData.js';
 import Dropdown from '../components/Dropdown';
 
 describe('updateQuicklinks', () => {
-  // let mockModule;
-  // beforeEach(() => {
-  //   mockModule = jest.mock('../__mocks__/utils.js')
-  // });
   it('invoked in App component at GET request', () => {
     const spy = jest.spyOn(utils, 'updateQuicklinks');
   });

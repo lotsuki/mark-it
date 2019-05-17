@@ -42,6 +42,7 @@ class Form extends React.Component {
   }
 
   handleSubmit(e) {
+    e.preventDefault();
     this._isMounted = true;
     var data = {
       category: this.state.category,
@@ -53,6 +54,7 @@ class Form extends React.Component {
       favorites: this.state.favorites
     };
 
+  console.log(data, 'DATAAAAAAA')
     axios
       .post('/', data)
       .then(result => {
