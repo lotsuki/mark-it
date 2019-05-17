@@ -8,7 +8,7 @@ const FormInputs = ({ setCategory, subjectChange, titleChange, urlChange, handle
     <input type="text" className="formInputs" data-testid="subject" placeholder="Subject" onChange={subjectChange}/>
     <input type="text" className="formInputs" data-testid="title" placeholder="Title" onChange={titleChange}/>
     <input type="text" className="formInputs" data-testid="url" placeholder="URL" onChange={urlChange}/>
-    <input type="submit" className="formInputs" value="Add" onClick={handleSubmit}/>
+    <input type="submit" className="formInputs" data-testid="submit" value="Submit" onClick={handleSubmit}/>
   </div>
 );
 

@@ -29,7 +29,6 @@ describe('<FormInputs />', () => {
     wrapper.unmount();
   });
   it('div.formContainer first child is a text input with placeholder Category', async () => {
-
     const { container, getByTestId  } = render(<FormInputs />);
     const formContainer = container.firstChild;
     const categoryInput = getByTestId('category');
@@ -38,7 +37,6 @@ describe('<FormInputs />', () => {
 
   });
   it('div.formContainer second child is a text input with placeholder Subject', async () => {
-
     const { container, getByTestId  } = render(<FormInputs />);
     const formContainer = container.firstChild;
     const subjectInput = getByTestId('subject');
@@ -46,7 +44,6 @@ describe('<FormInputs />', () => {
     expect(subjectInput.placeholder).toEqual('Subject');
   });
   it('div.formContainer third child is a text input with placeholder Title', async () => {
-
     const { container, getByTestId  } = render(<FormInputs />);
     const formContainer = container.firstChild;
     const titleInput = getByTestId('title');
@@ -54,12 +51,18 @@ describe('<FormInputs />', () => {
     expect(titleInput.placeholder).toEqual('Title');
   });
   it('div.formContainer forth child is a text input with placeholder URL', async () => {
-
     const { container, getByTestId  } = render(<FormInputs />);
     const formContainer = container.firstChild;
     const urlInput = getByTestId('url');
     expect(formContainer.children[3]).toEqual(urlInput);
     expect(urlInput.placeholder).toEqual('URL');
+  });
+  it('div.formContainer fifth child is a submit input with value Submit', async () => {
+    const { container, getByTestId  } = render(<FormInputs />);
+    const formContainer = container.firstChild;
+    const submit = getByTestId('submit');
+    expect(formContainer.children[4]).toEqual(submit);
+    expect(submit.value).toEqual('Submit');
   });
 
 });
