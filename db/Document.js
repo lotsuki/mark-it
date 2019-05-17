@@ -6,7 +6,7 @@ const Schema = mongoose.Schema;
 //test different schemas
 
 const documentSchema = new Schema ({
-  quicklink: Boolean,
+  isQuicklink: Boolean,
   category: String,
   subjects: [{
     subject: String,

@@ -23,7 +23,18 @@
   "homepage": "https://github.com/lotsuki/mvp#readme",
   "babel": {
     "presets": [
-      "@babel/preset-env",
+      [
+        "@babel/preset-env",
+        {
+          "targets": {
+            "browsers": [
+              "last 2 chrome versions"
+            ]
+          },
+          "useBuiltIns": "entry",
+          "corejs": 2
+        }
+      ],
       "@babel/preset-react"
     ]
   },
@@ -47,6 +58,8 @@
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.12.1",
     "jest": "^24.7.1",
+    "jest-dom": "^3.2.2",
+    "react-testing-library": "^7.0.0",
     "webpack": "^4.26.1",
     "webpack-cli": "^3.1.2"
   }

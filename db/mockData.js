@@ -1,6 +1,6 @@
 module.exports = [
   {
-    quicklink: true,
+    isQuicklink: true,
     category: 'Starred',
     sites: [{
       title: 'Parsing data',
@@ -9,12 +9,12 @@ module.exports = [
     }]
   },
   {
-    quicklink: true,
+    isQuicklink: true,
     category: 'Favorites',
     sites: []
   },
   {
-    quicklink: true,
+    isQuicklink: true,
     category: 'Read',
     sites: []
   },

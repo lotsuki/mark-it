@@ -21,12 +21,6 @@ describe('updateBookmarks', () => {
   });
 });
 
-describe('updateStateAfterPostReq', () => {
-  it('invoked in Form component after POST request response', () => {
-    const wrapper = shallow(<App />);
-  });
-});
-
 describe('displayContent', () => {
   it('invoked in Dropdown component when state property showMenu is true', () => {
     const spy = jest.spyOn(utils, 'displayContent');
@@ -48,7 +42,7 @@ describe('displayContent', () => {
     const wrapper = shallow(<Dropdown {...props}/>);
     expect(spy).not.toHaveBeenCalled();
     wrapper.setState({ showMenu: true })
-    wrapper.update();
+    //wrapper.update();
     expect(spy).toHaveBeenCalled();
     jest.restoreAllMocks();
   });

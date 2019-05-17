@@ -42,6 +42,7 @@ class Form extends React.Component {
   }
 
   handleSubmit(e) {
+    this._isMounted = true;
     var data = {
       category: this.state.category,
       subject: this.state.subject,
@@ -52,14 +53,15 @@ class Form extends React.Component {
       favorites: this.state.favorites
     };
 
-    axios.post('/', data)
-    .then(result => {
-      this.setState({
-        data: result.data
-      });
-      this.props.updateStateAfterPostReq(result.data);
-    })
-    .catch(err => { console.log('Could not post document', err); });
+    axios
+      .post('/', data)
+      .then(result => {
+        this.setState({
+          data: result.data
+        })
+        this.props.updateStateAfterPostReq(result.data);
+      })
+      .catch(err => { console.log('Could not post document', err); });
   }
 
 
