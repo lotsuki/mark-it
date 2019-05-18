@@ -45,16 +45,39 @@ class App extends React.Component {
            }
          })
         .catch(err => { console.log('Error at GET', err); });
-
   }
 
   componentWillUnMount() {
     this._isMounted = false;
   }
 
+//FIX WITH HOOKS
   updateStateAfterPostReq(data) {
-    this.setState({ data })
+    //this.setState({ data })
+    location.reload();
   }
+
+  render() {
+    const { data, quicklinks, bookmarks} = this.state;
+    return (
+      <div className="container">
+        <div className="appContainer" data-testid="appContainer">
+          <Quicklinks quicklinks={quicklinks} />
+          <Bookmarks bookmarks={bookmarks} />
+        </div>
+        <Form updateStateAfterPostReq={this.updateStateAfterPostReq}/>
+      </div>
+    );
+  }
+};
+
+
+export default App;
+
+
+
+
+
 
   // subjectToAddChange(e) {
   //   this.setState({ subjectToAdd: e.target.value })
@@ -113,22 +136,4 @@ class App extends React.Component {
 
   //   location.reload();
   // }
-
-  render() {
-    const { data, quicklinks, bookmarks} = this.state;
-    return (
-      <div className="container">
-        <div className="appContainer" data-testid="appContainer">
-          <Quicklinks quicklinks={quicklinks} />
-          <Bookmarks bookmarks={bookmarks} />
-        </div>
-        <Form updateStateAfterPostReq={this.updateStateAfterPostReq}/>
-      </div>
-    );
-  }
-};
-
-export default App;
-
-
 
