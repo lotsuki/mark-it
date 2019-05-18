@@ -1,16 +1,44 @@
 import React from 'react';
 import { shallow, mount, render } from 'enzyme';
 import Bookmarks from '../components/Bookmarks';
-
-//lists all categories
-//adds categories
-//category gets clicked, show menu is called
-//show menu adds a click event to close menu
-//show menu displays all subjects of category clicked
+import SidebarHeader from '../components/SidebarHeader';
+import Dropdown from '../components/Dropdown';
 
 
 describe('<Bookmarks />', () => {
-  it('renders without error', () => {
-    shallow(<Bookmarks />);
+  it('renders without error with correct props', () => {
+    const props = {
+      bookmarks: []
+    }
+    shallow(<Bookmarks {...props}/>);
+  });
+  it('renders <SidebarHeader /> component', () => {
+    const wrapper = mount(<Bookmarks />);
+    expect(wrapper.children().find(SidebarHeader)).toBeDefined();
+    wrapper.unmount();
+  });
+  it('renders <Dropdown /> component', () => {
+    const wrapper = mount(<Bookmarks />);
+    expect(wrapper.children().find(Dropdown)).toBeDefined();
+    wrapper.unmount();
+  });
+  it('renders a div with class bookmarksContainer', () => {
+    const wrapper = shallow(<Bookmarks />);
+    expect(wrapper.find('div.bookmarksContainer')).toBeDefined();
+  });
+  it('contains correct props', () => {
+    const wrapper = mount(<Bookmarks />);
+    expect(wrapper.props('bookmarks')).toBeDefined();
+    wrapper.unmount();
+  });
+  it('sets sidebarHeader property on SidebarHeader component', () => {
+    const wrapper = mount(<Bookmarks />);
+    expect(wrapper.children().find(SidebarHeader).props('sidebarHeader')).toBeDefined();
+    wrapper.unmount();
+  });
+  it('sets data property on Dropdown component', () => {
+    const wrapper = mount(<Bookmarks />);
+    expect(wrapper.children().find(Dropdown).props('data')).toBeDefined();
+    wrapper.unmount();
   });
 });

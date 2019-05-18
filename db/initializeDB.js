@@ -2,17 +2,17 @@ const Document = require("./Document.js");
 const db = require("./index.js");
 const bookmarks = [
   {
-    quicklink: true,
+    isQuicklink: true,
     category: 'Starred',
     subjects: []
   },
   {
-    quicklink: true,
+    isQuicklink: true,
     category: 'Favorites',
     subjects: []
   },
   {
-    quicklink: true,
+    isQuicklink: true,
     category: 'Read',
     subjects: []
   },

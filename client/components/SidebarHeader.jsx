@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const SidebarHeader = ({sidebarHeader, addCategory}) => (
   <div className="sidebarHeaderWrapper">
-    <div className="sidebarHeader" >{sidebarHeader}</div>
+    <div className="sidebarHeader" data-testid="sidebarHeader">{sidebarHeader}</div>
     <div className="add" onClick={addCategory}>+</div>
   </div>
 );
