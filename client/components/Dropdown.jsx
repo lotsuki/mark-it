@@ -42,7 +42,7 @@ class Dropdown extends React.Component {
   render() {
     const { data } = this.props;
     return (
-      <div className="categoryWrapper" key={this.props.subject}>
+      <div className="categoryWrapper" >
         <div className="dropbtn" onClick={this.showMenu}>
           {this.props.data.map(category => (
             <div className="category" key={category.category}>{category.category}
@@ -52,7 +52,7 @@ class Dropdown extends React.Component {
                     <div className="dropdownContentWrapper" className="menu"
                     >
                     {utils.displayContent(data, category.category).map((subject, i) => (
-                      <a className="dropdownContent" href="#" key={i}> {subject} </a>
+                      <a className="dropdownContent" href="#" key={subject[i]}> {subject} </a>
                       ))}
                     </div>
                   )
