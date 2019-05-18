@@ -31,7 +31,7 @@
     display: flex;
     flex-flow:column nowrap;
     height: inherit;
-    width: 200px;
+    width: 25rem;
     background-color: #f5f5fa;
   }
 
@@ -97,9 +97,13 @@
     margin: 1rem;
   }
 
-  input {
+  .formInputs {
     height: 4rem;
     width: 30rem;
+    box-sizing: border-box;
+    border-radius: .3rem;
+    padding: .8rem;
+    border: 1px solid lightgray;
   }
 
   .menu {

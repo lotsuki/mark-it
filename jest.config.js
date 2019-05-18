@@ -1,15 +1,20 @@
 module.exports = {
 //   // Automatically clear mock calls and instances between every test
-//   clearMocks: true,
+  clearMocks: true,
+
+//Indicates whether the coverage information should be collected while executing the test.
+
+  collectCoverage: true,
 
 //    // An array of glob patterns indicating a set of files for which coverage information should be collected
-//   collectCoverageFrom: ['mvp/**/*.{js, jsx}']
+  collectCoverageFrom: ['**/*.{js, jsx}', '!**/node_modules/**', '!**/db/**', '!**/public/**', '!**/server/**'],
 
 //   // The directory where Jest should output its coverage files
-//   coverageDirectory: 'coverage',
+  coverageDirectory: 'coverage',
 
 //   //An array of file extensions your module uses
-  moduleFileExtensions: ['js', 'jsx'],
+  moduleFileExtensions: ['jsx', 'js', 'json'],
+  unmockedModulePathPatterns: ['<rootDir>/node_modules/react'],
 
 //   //The path to modules that run code to configure/set up test env before each test
   setupFiles: ['<rootDir>/enzyme.config.js'],

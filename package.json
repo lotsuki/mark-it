@@ -7,7 +7,8 @@
     "start": "nodemon server/index.js",
     "build-dev": "webpack --watch",
     "test": "jest --watch --verbose",
-    "test:coverage": "jest --coverage --colors"
+    "test:coverage": "jest --coverage --colors",
+    "open:coverage": "node coverage/Icov-report/index.html"
   },
   "repository": {
     "type": "git",
@@ -22,7 +23,18 @@
   "homepage": "https://github.com/lotsuki/mvp#readme",
   "babel": {
     "presets": [
-      "@babel/preset-env",
+      [
+        "@babel/preset-env",
+        {
+          "targets": {
+            "browsers": [
+              "last 2 chrome versions"
+            ]
+          },
+          "useBuiltIns": "entry",
+          "corejs": 2
+        }
+      ],
       "@babel/preset-react"
     ]
   },
@@ -33,8 +45,8 @@
     "mongodb": "^3.1.10",
     "mongoose": "^5.3.14",
     "prop-types": "^15.7.2",
-    "react": "^16.6.3",
-    "react-dom": "^16.6.3"
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
   },
   "devDependencies": {
     "@babel/core": "^7.1.6",
@@ -46,6 +58,8 @@
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.12.1",
     "jest": "^24.7.1",
+    "jest-dom": "^3.2.2",
+    "react-testing-library": "^7.0.0",
     "webpack": "^4.26.1",
     "webpack-cli": "^3.1.2"
   }

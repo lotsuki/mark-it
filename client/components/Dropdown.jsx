@@ -1,6 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import helpers from '../lib/helpers.js';
+import utils from '../lib/utils.js';
+
+//TESTS
+  //test logic iwth this.showmenu ternary operator
+  //check if this.props.data is an array and has a length > 1
+  //check if this.props.data.category === strings
+  //div.dropbtn has click event that invokes this.showmenu
+  //when click event, dom changes, renders new elements
+  //this.showmenu invokes displaycontent
+
 
 
 class Dropdown extends React.Component {
@@ -33,7 +42,7 @@ class Dropdown extends React.Component {
   render() {
     const { data } = this.props;
     return (
-      <div className="categoryWrapper" key={this.props.subject}>
+      <div className="categoryWrapper" >
         <div className="dropbtn" onClick={this.showMenu}>
           {this.props.data.map(category => (
             <div className="category" key={category.category}>{category.category}
@@ -42,8 +51,8 @@ class Dropdown extends React.Component {
                   ? (
                     <div className="dropdownContentWrapper" className="menu"
                     >
-                    {helpers.displayContent(data, category.category).map((subject, i) => (
-                      <a className="dropdownContent" href="#" key={i}> {subject} </a>
+                    {utils.displayContent(data, category.category).map((subject, i) => (
+                      <a className="dropdownContent" href="#" key={subject[i]}> {subject} </a>
                       ))}
                     </div>
                   )
