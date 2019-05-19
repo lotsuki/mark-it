@@ -15,7 +15,7 @@ class Quicklinks extends React.Component {
     const { quicklinks } = this.props;
     return(
       <div className="quicklinksContainer">
-        <SidebarHeader sidebarHeader="Quick links" />
+        <SidebarHeader sidebarHeader="QUICK LINKS" />
         <Dropdown data={quicklinks}/>
       </div>
     );

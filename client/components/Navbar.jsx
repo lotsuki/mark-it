@@ -2,9 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
  class Navbar extends React.Component {
-  static propTypes = {
-    name: React.PropTypes.string,
-  };
 
   constructor(props) {
     super(props);
@@ -12,7 +9,19 @@ import PropTypes from 'prop-types';
 
   render() {
     return (
-      <div></div>
+      <nav className="navbarContainer">
+        <div className="logoWrapper">
+          <div className="logo">Mark It <span className="check">√</span></div>
+        </div>
+        <div className="navbarWrapper">
+          <ul className="navbarLeft">
+            <li className="nav"><a href="#">Home</a></li>
+            <li className="nav"><a href="#">About</a></li>
+            <li className="nav"><a href="#">Contact</a></li>
+            <li className="nav"><a href="#">Signout</a></li>
+          </ul>
+        </div>
+    </nav>
     );
   }
 }

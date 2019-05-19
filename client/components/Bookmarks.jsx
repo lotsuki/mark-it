@@ -16,7 +16,7 @@ class Bookmarks extends React.Component {
     const { bookmarks } = this.props;
     return(
       <div className="bookmarksContainer">
-        <SidebarHeader sidebarHeader="My Bookmarks"/>
+        <SidebarHeader sidebarHeader="MY BOOKMARKS"/>
         <Dropdown data={bookmarks}/>
       </div>
     );

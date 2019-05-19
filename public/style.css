@@ -7,7 +7,7 @@
 
   #app, .container {
     display: flex;
-    flex-flow: row nowrap;
+    flex-flow: column nowrap;
     width: inherit;
     height: inherit;
     margin: 0;
@@ -29,10 +29,70 @@
 
   .appContainer {
     display: flex;
-    flex-flow:column nowrap;
+    flex-flow:row nowrap;
     height: inherit;
-    width: 25rem;
-    background-color: #f5f5fa;
+    width: inherit;
+    margin-top: 1rem;
+  }
+
+  .navbarContainer {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    width: inherit;
+    height: 3.5rem;
+    background-color: #FFBF84;
+  }
+
+  .logoWrapper {
+    display: flex;
+    flex-flow: row;
+    justify-content: flex-start;
+  }
+
+  .logo {
+    font-family: "Arial";
+    padding: 1rem;
+    letter-spacing: .25rem;
+    font-size: 1rem;
+  }
+
+  .check {
+    color: pink;
+  }
+
+  .navbarWrapper {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-end;
+  }
+
+  .navbarLeft {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    list-style-type: none;
+  }
+
+  .nav a {
+    font-family: Helvetica, sans-serif;
+    letter-spacing: .08rem;
+    text-decoration: none;
+    padding: 1rem;
+  }
+
+/*
+  .navbarBorder {
+    background-color: #BDBCC1;
+    height: .2rem;
+
+  }*/
+
+  .sidebarContainer {
+    display: flex;
+    flex-flow: column nowrap;
+    height: inherit;
+    width: 19rem;
   }
 
   .quicklinksContainer {
@@ -42,34 +102,47 @@
   }
 
   .sidebarHeaderWrapper {
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
     display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-between;
     align-items: center;
-    width: inherit;
-    padding-left: 1.5rem;
-    padding-top: 1.5rem;
+    height: 3rem;
   }
 
   .sidebarHeader {
+    display: flex;
+    justify-content: center;
     font-family: Helvetica, sans-serif;
-    font-size: 1.3rem;
-    width: inherit;
+    font-size: 1rem;
     color: #a6a6a6;
     letter-spacing: .05rem;
+    width: 100%;
+    font-weight: lighter;
+  }
+
+  .sidebarBorder {
+    background-color: #F8F3EF;
+    width: .2rem;
+  }
+
+  .category {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    height: 3.5rem;
+    width: inherit;
+    padding-left: 1.5rem;
+    line-height: 2.5rem;
+    font-weight: lighter;
   }
 
   .category:hover {
-    color: #FD7676;
-    cursor: pointer;
+    background-color: #F8F3EF;
   }
 
   .categoryWrapper {
     display: flex;
     flex-flow: column nowrap;
-    line-height: 2.5rem;
-    padding-left: 3.5rem;
-    padding-top: .7rem;
     font-family: Helvetica, sans-serif;
     letter-spacing: .05rem;
   }
@@ -88,9 +161,12 @@
     font-family: Arial;
     font-weight: bold;
     cursor: pointer;
+    visibility: hidden;
   }
 
+
   .formContainer {
+    visibility: hidden;
     display: flex;
     flex-flow: column nowrap;
     width: 35rem;
@@ -104,7 +180,10 @@
     border-radius: .3rem;
     padding: .8rem;
     border: 1px solid lightgray;
+    font-size: 1.3rem;
+    font-weight: lighter;
   }
+
 
   .menu {
     display: flex;

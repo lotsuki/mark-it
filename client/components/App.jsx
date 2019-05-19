@@ -6,6 +6,7 @@ import Form from './Form.jsx';
 import Quicklinks from './Quicklinks.jsx';
 import Bookmarks from './Bookmarks.jsx';
 import Dropdown from './Dropdown.jsx';
+import Navbar from './Navbar.jsx';
 import utils from '../lib/utils.js';
 
 //TODO:
@@ -56,20 +57,39 @@ class App extends React.Component {
     //this.setState({ data })
     location.reload();
   }
-
   render() {
     const { data, quicklinks, bookmarks} = this.state;
     return (
       <div className="container">
+        <Navbar />
+        <div className="navbarBorder"></div>
         <div className="appContainer" data-testid="appContainer">
-          <Quicklinks quicklinks={quicklinks} />
-          <Bookmarks bookmarks={bookmarks} />
+          <div className="sidebarContainer">
+            <Quicklinks quicklinks={quicklinks} />
+            <Bookmarks bookmarks={bookmarks} />
+          </div>
+          <div className="sidebarBorder"></div>
+          <Form updateStateAfterPostReq={this.updateStateAfterPostReq}/>
         </div>
-        <Form updateStateAfterPostReq={this.updateStateAfterPostReq}/>
       </div>
     );
   }
 };
+
+
+//   render() {
+//     const { data, quicklinks, bookmarks} = this.state;
+//     return (
+//       <div className="container">
+//         <div className="appContainer" data-testid="appContainer">
+//           <Quicklinks quicklinks={quicklinks} />
+//           <Bookmarks bookmarks={bookmarks} />
+//         </div>
+//         <Form updateStateAfterPostReq={this.updateStateAfterPostReq}/>
+//       </div>
+//     );
+//   }
+// };
 
 
 export default App;
