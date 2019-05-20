@@ -11,6 +11,8 @@ import utils from '../lib/utils.js';
   //this.showmenu invokes displaycontent
 
 
+//take in an array of strings, print out dropdown menu of stirngs
+
 
 class Dropdown extends React.Component {
   constructor(props) {
@@ -69,25 +71,22 @@ class Dropdown extends React.Component {
   }
 };
 
-//   render() {
-//     const { data } = this.props;
-//     return (
-//       <div className="dropdownContainer">
-//         {
-//         this.state.showMenu
-//           ? (
-//               <div className="dropdownContentWrapper" >
-//               {utils.displayContent(data, 'Tech').map((subject, i) => (
-//                 <a className="dropdownContent" href="#" key={subject[i]}> {subject} </a>
-//                 ))}
-//               </div>
-//             )
-//           : ( null )
-//         }
-//       </div>
-//     );
-//   }
-// }
+//   return (
+//     <div className="dropdownContainer">
+//       {
+//       this.state.showMenu
+//         ? (
+//             <div className="dropdownContentWrapper" >
+//             {utils.displayContent(data, 'Tech').map((subject, i) => (
+//               <a className="dropdownContent" href="#" key={subject[i]}> {subject} </a>
+//               ))}
+//             </div>
+//           )
+//         : ( null )
+//       }
+//     </div>
+//   );
+// };
 
 
 export default Dropdown;

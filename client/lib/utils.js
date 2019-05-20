@@ -35,14 +35,157 @@ module.exports = {
   titles: function(bookmarks, content) {
     return bookmarks.map(bookmark => ( bookmark[content]));
   }
-  // titles: function(bookmarks, content) {
-  //   var subject = document.createElement('a');
-  //   subject.className = "dropdownContent";
-  //   subject.href = '#';
-  //   return bookmarks.map(bookmark => {
-  //     subject.key = bookmark[content];
-  //     subject.innerText = bookmark[content];
-  //     return subject;
-  //   });
-  // }
 };
+
+
+
+/*
+//one document for each user
+//identifies user
+//lists all categories
+{
+  id: hashed index,
+  username: string,
+  password: hashed key,
+  qlinkCats: [strings],
+  bmarkCats: [strings]
+}
+{
+  id: 123019203,
+  username: 'lotsuki',
+  password: '234jkji92b490vh0fj',
+  qlinkCats: ['Starred', 'Favorites', 'Read'],
+  bmarkCats: ['Tech', 'Travel', 'Food']
+}
+
+//Bookmark schema
+//add on form submit/post req
+{
+  id: hashed index,
+  categoryID: categoryID,
+  subjectID: subjectID,
+  title: string,
+  url: string,
+  date: string
+}
+
+//Quicklink schema
+//add on click event
+{
+  id: hashed index,
+  isQuicklink: boolean,
+  categoryID: category,
+  subjectID: subject, (optional),
+  title: string,
+  url: string,
+  date: string,
+  starred/favorites/read: boolean
+}
+
+//put this in localstorage or option for caching, use when first loading app to decrease query lookup time
+{
+  id: category,
+  subject: [{ id: subject, numOfsites: number}]
+}
+
+//onLoad
+1. store userID, qlinks, bmarks
+2. state/object to return on post req =  //if (bookmark.read) { dont include in bmarks array}
+{
+  userID,
+  qlinks: [{qlink: [titles]}],
+  bmarks: [{bmark: [subjects]}]
+}
+
+//React state
+state = {
+  userID,
+  qlinks,
+  bmarks,
+  currentCategory, --> hooks[not in main App]
+  currentSubject --> hooks[not in main App]
+}
+
+//<--------------QUERIES ---------------->
+
+//onClick-subject
+Document.find({ category: currentCategory, subject: currentSubject}, {document.title, document.url})
+
+//onClick-quicklink
+Document.find({isQuicklink: true, category: currentCategory}, {document.title, document.url})
+
+//onClick-starred/favorites
+Document.findAndUpdate({title: currentTitle}, {isQuicklink: true, starred/read/favorites: true})
+  //return document and update state: qlinks
+
+//onClick-read
+Document.findAndUpdate({title: currentTitle}, {isQuicklink: true, read: true, subjectID: subject/null})
+
+//onClick-delete
+Document.deleteOne({title: currentTitle})
+
+
+
+
+**Add a recently deleted section that should hold articles from last 15 days
+
+
+//main App
+
+import React from 'react';
+import Sidebar from 'Sidebar'
+
+export default class App extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      userID,
+      qlinks,
+      bmarks
+    }
+  }
+
+
+  render() {
+    return (
+      <Sidebar userId, qlinks, bmarks/>
+    );
+  }
+}
+
+//Categories comp (hook) --> Sidebar will contain QL and BM comps which will contain Categories comp
+
+import React, { useState } from 'react';
+import Subjects
+
+const Categories = ({ userID, qlinks, bmarks }) => {
+  const [ category, setCategory ] = useState('');
+  const [ subject, setSubject ] = useState('');
+
+  const handleClick = (e) => {
+    setCategory(e.target.innerText)
+    setSubject(e.target.innerText)
+  }
+
+  return (
+    <div onClick={handleClick}>{category}</div>
+    <Subjects />
+  )
+}
+
+//Subjects comp
+import React, { useState } from 'react';
+
+const Subjects = ({ userID, qlinks, bmarks }) => {
+  const [ subject, setSubject ] = useState('');
+
+  const handleClick = (e) => {
+    setSubject(e.target.innerText)
+  }
+
+  return (
+    <div onClick={handleClick}>{subject}</div>
+  )
+}
+*/
