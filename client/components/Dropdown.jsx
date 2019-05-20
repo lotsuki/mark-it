@@ -17,7 +17,8 @@ class Dropdown extends React.Component {
     super(props);
 
     this.state = {
-      showMenu: false
+      showMenu: false,
+      category: ''
     };
     this.showMenu = this.showMenu.bind(this);
     this.closeMenu = this.closeMenu.bind(this);
@@ -25,7 +26,7 @@ class Dropdown extends React.Component {
   }
 
   showMenu(e) {
-    this.setState({ showMenu: true }, () => { document.addEventListener('click', this.closeMenu);
+    this.setState({ showMenu: true, category: e.target.innerText }, () => { document.addEventListener('click', this.closeMenu);
     });
   }
 
@@ -46,25 +47,47 @@ class Dropdown extends React.Component {
         <div className="dropbtn" onClick={this.showMenu}>
           {this.props.data.map(category => (
             <div className="category" key={category.category}>{category.category}
-              {
-                this.state.showMenu
-                  ? (
-                    <div className="dropdownContentWrapper" className="menu"
-                    >
-                    {utils.displayContent(data, category.category).map((subject, i) => (
-                      <a className="dropdownContent" href="#" key={subject[i]}> {subject} </a>
-                      ))}
-                    </div>
-                  )
-                  : ( null )
-              }
-              </div>
+            {
+            this.state.showMenu && this.state.category === category.category
+              ? (
+                <div className="dropdownContentWrapper" >
+                {utils.displayContent(data, 'Tech').map((subject, i) => (
+                  <a className="dropdownContent" href="#" key={subject[i]}> {subject} </a>
+                  ))}
+                </div>
+              )
+            : ( null )
+           }
+            </div>
+
           ))}
         </div>
+
+
       </div>
     );
   }
-}
+};
+
+//   render() {
+//     const { data } = this.props;
+//     return (
+//       <div className="dropdownContainer">
+//         {
+//         this.state.showMenu
+//           ? (
+//               <div className="dropdownContentWrapper" >
+//               {utils.displayContent(data, 'Tech').map((subject, i) => (
+//                 <a className="dropdownContent" href="#" key={subject[i]}> {subject} </a>
+//                 ))}
+//               </div>
+//             )
+//           : ( null )
+//         }
+//       </div>
+//     );
+//   }
+// }
 
 
 export default Dropdown;

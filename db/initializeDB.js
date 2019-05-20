@@ -37,7 +37,7 @@ function inputInitialDoc() {
 };
 
 function updateSchema() {
-  Document.updateMany({quicklink: true}, {$rename: {subjects: 'sites'}})
+  return Document.updateMany({isQuicklink: true}, {$rename: {subjects: 'sites'}})
     .then(() => db.close())
     .catch(err => console.log('err: ', err));
 };

@@ -21,15 +21,28 @@ module.exports = {
     })
   },
   displayContent: function(data, category) {
-    if (data.length < 1) { return []; }
+    if (data.length < 1) { return; }
     for (var i = 0; i < data.length; i++) {
       if (data[i].category === category) {
         if (data[i].isQuicklink) {
-          return data[i].sites.map(site => ( site.title ))
+          return this.titles(data[i].sites, 'title');
         } else {
-          return data[i].subjects.map(subject => ( subject.subject ))
+          return this.titles(data[i].subjects, 'subject');
         }
       }
     }
+  },
+  titles: function(bookmarks, content) {
+    return bookmarks.map(bookmark => ( bookmark[content]));
   }
+  // titles: function(bookmarks, content) {
+  //   var subject = document.createElement('a');
+  //   subject.className = "dropdownContent";
+  //   subject.href = '#';
+  //   return bookmarks.map(bookmark => {
+  //     subject.key = bookmark[content];
+  //     subject.innerText = bookmark[content];
+  //     return subject;
+  //   });
+  // }
 };

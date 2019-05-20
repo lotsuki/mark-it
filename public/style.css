@@ -127,9 +127,11 @@
 
   .category {
     display: flex;
-    align-items: center;
+    flex-flow: column nowrap;
+    justify-content: center;
     cursor: pointer;
-    height: 3.5rem;
+    min-height: 3.5rem;
+    max-height: auto;
     width: inherit;
     padding-left: 1.5rem;
     line-height: 2.5rem;
@@ -145,6 +147,7 @@
     flex-flow: column nowrap;
     font-family: Helvetica, sans-serif;
     letter-spacing: .05rem;
+    position: relative;
   }
 
   .bookmarksContainer {
@@ -166,7 +169,7 @@
 
 
   .formContainer {
-    visibility: hidden;
+    /*visibility: hidden;*/
     display: flex;
     flex-flow: column nowrap;
     width: 35rem;
@@ -185,12 +188,7 @@
   }
 
 
-  .menu {
-    display: flex;
-    flex-flow:column nowrap;
-    width: inherit;
-    position: relative;
-  }
+
 
   .dropbtn {
     cursor: pointer;
@@ -203,16 +201,17 @@
 
   .dropdownContentWrapper {
     display: flex;
-    flex-flow: column wrap;
+    flex-flow: column nowrap;
     overflow: auto;
+    position: relative;
   }
 
   .dropdownContent {
     color: black;
     outline: none;
-    margin-left: 2rem;
-    width: auto;
     height: 3rem;
+    text-decoration: none;
+
   }
 
 
