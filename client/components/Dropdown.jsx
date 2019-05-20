@@ -1,96 +1,37 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import utils from '../lib/utils.js';
-import Subjects from 'Subjects.jsx';
-
-//TESTS
-  //test logic iwth this.showmenu ternary operator
-  //check if this.props.data is an array and has a length > 1
-  //check if this.props.data.category === strings
-  //div.dropbtn has click event that invokes this.showmenu
-  //when click event, dom changes, renders new elements
-  //this.showmenu invokes displaycontent
+import Subjects from './Subjects.jsx';
 
 
-//take in an array of strings, print out dropdown menu of stirngs
+const Dropdown = ({ sidebarSection, category }) => {
 
-
-class Dropdown extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      showMenu: false,
-      category: ''
-    };
-    this.showMenu = this.showMenu.bind(this);
-    this.closeMenu = this.closeMenu.bind(this);
-    this.openPage = this.openPage.bind(this);
-  }
-
-  showMenu(e) {
-    this.setState({ showMenu: true, category: e.target.innerText }, () => { document.addEventListener('click', this.closeMenu);
-    });
-  }
-
-  closeMenu() {
+  const closeMenu = () => {
     this.setState({ showMenu: false }, () => {
       document.removeEventListener('click', this.closeMenu);
     });
-  }
+  };
 
-  openPage(e, site) {
-    window.open(site.url)
-  }
-
-  render() {
-    const { data } = this.props;
-    return (
-      <div className="categoryWrapper" >
-        <div className="dropbtn" onClick={this.showMenu}>
-          {this.props.data.map(category => (
-            <div className="category" key={category.category}>{category.category}
-            {
-              this.state.showMenu && this.state.category === category.category
-                ? ( <Subjects />)
-                : ( null )
-               }
-            </div>
-
-          ))}
-        </div>
-
-
-      </div>
-    );
-  }
+  return (
+    <div className="dropdownContainer">
+      {
+        category
+          ? ( <Subjects sidebarSection={sidebarSection} category={category} />)
+          : ( null )
+      }
+    </div>
+  );
 };
-
-//   return (
-//     <div className="dropdownContainer">
-//       {
-//       this.state.showMenu
-//         ? (
-//             <div className="dropdownContentWrapper" >
-//             {utils.displayContent(data, 'Tech').map((subject, i) => (
-//               <a className="dropdownContent" href="#" key={subject[i]}> {subject} </a>
-//               ))}
-//             </div>
-//           )
-//         : ( null )
-//       }
-//     </div>
-//   );
-// };
 
 
 export default Dropdown;
 
 Dropdown.propTypes = {
-  data: PropTypes.array
+  sidebarSection: PropTypes.array,
+  category: PropTypes.string
 };
 
 Dropdown.defaultProps = {
-  data: []
+  sidebarSection: [],
+  category: ''
 };
 

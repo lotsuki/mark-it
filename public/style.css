@@ -81,13 +81,6 @@
     padding: 1rem;
   }
 
-/*
-  .navbarBorder {
-    background-color: #BDBCC1;
-    height: .2rem;
-
-  }*/
-
   .sidebarContainer {
     display: flex;
     flex-flow: column nowrap;
@@ -142,12 +135,16 @@
     background-color: #F8F3EF;
   }
 
-  .categoryWrapper {
+  .sectionContainer {
     display: flex;
     flex-flow: column nowrap;
     font-family: Helvetica, sans-serif;
     letter-spacing: .05rem;
     position: relative;
+  }
+
+  .section {
+    cursor: pointer;
   }
 
   .bookmarksContainer {
@@ -190,28 +187,25 @@
 
 
 
-  .dropbtn {
-    cursor: pointer;
-  }
+
 
   a:hover {
     cursor: pointer;
     text-decoration: none;
   }
 
-  .dropdownContentWrapper {
+  .subjectContainer {
     display: flex;
     flex-flow: column nowrap;
     overflow: auto;
     position: relative;
   }
 
-  .dropdownContent {
+  .subject {
     color: black;
     outline: none;
     height: 3rem;
     text-decoration: none;
-
   }
 
 

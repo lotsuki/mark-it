@@ -1,17 +1,38 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const Subjects = (props) => {
+const Subjects = ({ sidebarSection, category }) => {
+  // const [ subject, setSubject ] = useState('');
+  // setSubject(e.target.innerText)
+
   return (
-         <div>hi</div>
-  )
-}
+    <div className="subjectContainer">
+      {
+        sidebarSection && category
+        ? (
+          sidebarSection.forEach(bookmark => {
+            if (bookmark[category]) {
+              bookmark[category].map(subject => (
+                <a className="subject" href="#" key={subject}>{subject}</a>
+              ))
+            }
+          })
+        )
+        : ( null )
+      }
+    </div>
+  );
+};
 
 export default Subjects;
 
+Subjects.propTypes = {
+  sidebarSection: PropTypes.array,
+  category: PropTypes.string
+};
 
+Subjects.defaultProps = {
+  sidebarSection: [],
+  category: ''
+};
 
-// <div className="dropdownContentWrapper" >
-//     {utils.displayContent(data, 'Tech').map((subject, i) => (
-//       <a className="dropdownContent" href="#" key={subject[i]}> {subject} </a>
-//       ))}
-//     </div>

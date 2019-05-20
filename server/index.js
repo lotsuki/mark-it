@@ -18,79 +18,78 @@ app.post('/', (req, res) => {
   // mongoose.connect(uri, {
   //   useNewUrlParser: true,
   //   autoIndex: true
-  // });
 
 
-//   Document.findOne({category: req.body.category}, {lean: true}, (err, result) => {
-//     if (err) { console.log('Error at POST', err); }
-//     else if (!result) {
-//       Document.create({
-//         category: req.body.category,
-//         subjects: [{
-//           subject: req.body.subject,
-//           sites: [{
-//             title: req.body.title,
-//             url: req.body.url,
-//             date: req.body.date,
-//             starred: req.body.starred,
-//             favorites: req.body.favorites,
-//             read: req.body.read
-//           }]
-//         }]
-//       }, (err, result) => {
-//         if (err) { console.log('err at new category post', err) }
-//         else {  Document.find().exec((err, result) => {
-//           if (err) { console.log('Cannot send back all data from post api, UPDATE'); }
-//           else { res.send(result); }
-//         });
-//         }
-//       });
-//     } else {
-//       Document.find({'subjects.subject': req.body.subject}, (err, result) => {
-//         if (err) { console.log('Error at repeat subject POST', err); }
-//         else if (result.length === 0) {
-//           Document.findOneAndUpdate({category: req.body.category}, {$push: {subjects: {
-//               subject: req.body.subject,
-//               sites: [{
-//                 title: req.body.title,
-//                 url: req.body.url,
-//                 date: req.body.date,
-//                 starred: req.body.starred,
-//                 favorites: req.body.favorites,
-//                 read: req.body.read
-//               }]
-//             }}}, (err, result) => {
-//             if (err) { console.log('err at new category post', err) }
-//             else {  Document.find().exec((err, result) => {
-//               if (err) { console.log('Cannot send back all data from post api, UPDATE'); }
-//               else { res.send(result); }
-//             });
-//             }
-//           });
-//         } else {
-//           Document.update({category: req.body.category, 'subjects.subject': req.body.subject}, {$push: {'subjects.$.sites':
-//               {
-//                   title: req.body.title,
-//                   url: req.body.url,
-//                   date: req.body.date,
-//                   starred: req.body.starred,
-//                   favorites: req.body.favorites,
-//                   read: req.body.read
-//               }
-//           }},(err, result) => {
-//               if (err) { console.log('Could not update data', err); }
-//               else {
-//                 Document.find().exec((err, result) => {
-//                   if (err) { console.log('Cannot send back all data from post api, UPDATE'); }
-//                   else { res.send(result); }
-//                 });
-//               }
-//           });
-//         }
-//       });
-//     }
-//   });
-// });
+  Document.findOne({category: req.body.category}, {lean: true}, (err, result) => {
+    if (err) { console.log('Error at POST', err); }
+    else if (!result) {
+      Document.create({
+        category: req.body.category,
+        subjects: [{
+          subject: req.body.subject,
+          sites: [{
+            title: req.body.title,
+            url: req.body.url,
+            date: req.body.date,
+            starred: req.body.starred,
+            favorites: req.body.favorites,
+            read: req.body.read
+          }]
+        }]
+      }, (err, result) => {
+        if (err) { console.log('err at new category post', err) }
+        else {  Document.find().exec((err, result) => {
+          if (err) { console.log('Cannot send back all data from post api, UPDATE'); }
+          else { res.send(result); }
+        });
+        }
+      });
+    } else {
+      Document.find({'subjects.subject': req.body.subject}, (err, result) => {
+        if (err) { console.log('Error at repeat subject POST', err); }
+        else if (result.length === 0) {
+          Document.findOneAndUpdate({category: req.body.category}, {$push: {subjects: {
+              subject: req.body.subject,
+              sites: [{
+                title: req.body.title,
+                url: req.body.url,
+                date: req.body.date,
+                starred: req.body.starred,
+                favorites: req.body.favorites,
+                read: req.body.read
+              }]
+            }}}, (err, result) => {
+            if (err) { console.log('err at new category post', err) }
+            else {  Document.find().exec((err, result) => {
+              if (err) { console.log('Cannot send back all data from post api, UPDATE'); }
+              else { res.send(result); }
+            });
+            }
+          });
+        } else {
+          Document.update({category: req.body.category, 'subjects.subject': req.body.subject}, {$push: {'subjects.$.sites':
+              {
+                  title: req.body.title,
+                  url: req.body.url,
+                  date: req.body.date,
+                  starred: req.body.starred,
+                  favorites: req.body.favorites,
+                  read: req.body.read
+              }
+          }},(err, result) => {
+              if (err) { console.log('Could not update data', err); }
+              else {
+                Document.find().exec((err, result) => {
+                  if (err) { console.log('Cannot send back all data from post api, UPDATE'); }
+                  else { res.send(result); }
+                });
+              }
+          });
+        }
+      });
+    }
+  });
+});
 
 
 app.get('/docs', (req, res) => {
@@ -98,23 +97,12 @@ app.get('/docs', (req, res) => {
     if (err) { console.log('Failure to get user obj', err); }
     else { res.send(result); }
   });
-  // Document.find().exec((err, results) => {
-  //   if (err) { res.status(500).send('Could not get document') }
-  //   else { res.send(results); }
-  // });
 });
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 
-app.delete('/subject/:subject', (req, res) => {
-  var subject = req.params.subject;
-  Document.deleteOne({subject: subject}, (err) => {
-    if (err) { console.log('Could not delete subject: ', err); }
-    else { res.send(res.data) }
-  });
-});
 
 
 

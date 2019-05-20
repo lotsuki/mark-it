@@ -30,6 +30,6 @@ export default Navbar;
 
 
 
-Navbar.propTypes = {
+// Navbar.propTypes = {
 
-};
+// };

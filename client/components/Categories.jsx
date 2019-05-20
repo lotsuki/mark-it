@@ -1,46 +1,41 @@
 import React, { useState } from 'react';
-import Dropdown from 'Dropdown.jsx';
-import Subjects
+import PropTypes from 'prop-types';
+import Dropdown from './Dropdown.jsx';
 
-const Categories = ({ userID, qlinks, bmarks }) => {
+const Categories = ({ sidebarSection }) => {
   const [ category, setCategory ] = useState('');
-  const [ subject, setSubject ] = useState('');
+
 
   const handleClick = (e) => {
-    setCategory(e.target.innerText)
-    setSubject(e.target.innerText)
-  }
+    setCategory(e.target.innerText);
+  };
 
   return (
-    <div onClick={handleClick}>{category}</div>
-    <Subjects />
-  )
-}
+    <div className="sectionContainer" >
+       <div className="section" onClick={handleClick}>
+         {sidebarSection.map((category, i) => {
+           for (var key in category[i]) {
+             return
+               <div className="categoryWrapper">
+                 <div className="category" key={key}>{key}</div>
+                 <Dropdown sidebarSection={sidebarSection} category={category}/>
+               </div>
+            }
+          })}
+      </div>
+    </div>
 
+  );
+};
 
-// import React, { useState } from 'react';
-// import Dropdown from './Dropdown.jsx';
-
-// const Categories = ({ data }) => {
-//   const [ isOpen, setIsOpen ] = useState(false);
-
-//   const handleClick = () => {
-
-//   };
-
-//   return (
-//     <div className="categoryWrapper" >
-//       <div className="dropbtn" onClick={handleClick}>
-//         {data.map(category => (
-//           <div className="category" key={category.category}>{category.category}
-//           </div>
-//           ))}
-//       </div>
-//     </div>
-//   );
-// };
 
 export default Categories;
 
+Categories.propTypes = {
+  sidebarSection: PropTypes.array
+};
 
+Categories.defaultProps = {
+  sidebarSection: []
+};
 
