@@ -4,17 +4,16 @@ import Subjects from './Subjects.jsx';
 
 
 const Dropdown = ({ sidebarSection, category }) => {
-
   const closeMenu = () => {
     this.setState({ showMenu: false }, () => {
       document.removeEventListener('click', this.closeMenu);
     });
   };
-
+  console.log(category)
   return (
     <div className="dropdownContainer">
       {
-        category
+        sidebarSection && category
           ? ( <Subjects sidebarSection={sidebarSection} category={category} />)
           : ( null )
       }
