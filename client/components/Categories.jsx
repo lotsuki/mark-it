@@ -1,3 +1,23 @@
+import React, { useState } from 'react';
+import Dropdown from 'Dropdown.jsx';
+import Subjects
+
+const Categories = ({ userID, qlinks, bmarks }) => {
+  const [ category, setCategory ] = useState('');
+  const [ subject, setSubject ] = useState('');
+
+  const handleClick = (e) => {
+    setCategory(e.target.innerText)
+    setSubject(e.target.innerText)
+  }
+
+  return (
+    <div onClick={handleClick}>{category}</div>
+    <Subjects />
+  )
+}
+
+
 // import React, { useState } from 'react';
 // import Dropdown from './Dropdown.jsx';
 
@@ -20,4 +40,7 @@
 //   );
 // };
 
-// export default Categories;
+export default Categories;
+
+
+

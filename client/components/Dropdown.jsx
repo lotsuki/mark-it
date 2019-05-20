@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import utils from '../lib/utils.js';
+import Subjects from 'Subjects.jsx';
 
 //TESTS
   //test logic iwth this.showmenu ternary operator
@@ -50,16 +51,10 @@ class Dropdown extends React.Component {
           {this.props.data.map(category => (
             <div className="category" key={category.category}>{category.category}
             {
-            this.state.showMenu && this.state.category === category.category
-              ? (
-                <div className="dropdownContentWrapper" >
-                {utils.displayContent(data, 'Tech').map((subject, i) => (
-                  <a className="dropdownContent" href="#" key={subject[i]}> {subject} </a>
-                  ))}
-                </div>
-              )
-            : ( null )
-           }
+              this.state.showMenu && this.state.category === category.category
+                ? ( <Subjects />)
+                : ( null )
+               }
             </div>
 
           ))}

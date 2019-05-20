@@ -1,98 +1,49 @@
-import axios from 'axios';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Form from './Form.jsx';
-//import Header from './Header.jsx';
-import Quicklinks from './Quicklinks.jsx';
-import Bookmarks from './Bookmarks.jsx';
-import Dropdown from './Dropdown.jsx';
-import Navbar from './Navbar.jsx';
-import utils from '../lib/utils.js';
+import Sidebar from 'Sidebar.jsx';
 
-//TODO:
-  //unit tests for react
-  //search bar at top
-  //add bookmarks event
-  //site preview for bookmarks with embed tag
-  //css
 
-class App extends React.Component {
-    constructor(props, context) {
-    super(props, context);
+export default class App extends React.Component {
+  constructor(props) {
+    super(props);
 
     this.state = {
-      data: [],
-      quicklinks: [],
-      bookmarks: []
-    };
-    // this.subjectToAddChange = this.subjectToAddChange.bind(this);
-    // this.addSubject = this.addSubject.bind(this);
-    // this.deleteSubject = this.deleteSubject.bind(this);
-    this.updateStateAfterPostReq = this.updateStateAfterPostReq.bind(this);
+      userID: null,
+      qlinks: [],
+      bmarks: []
+    }
   }
 
   componentDidMount() {
     this._isMounted = true;
-      axios
-        .get('/docs')
-        .then(result => {
-          if (this._isMounted) {
-            this.setState({
-              data: result.data,
-              isLoading: true,
-              quicklinks: utils.updateQuicklinks(result.data),
-              bookmarks: utils.updateBookmarks(result.data)
-            })
-           }
-         })
-        .catch(err => { console.log('Error at GET', err); });
+    axios
+      .get('/docs')
+      .then(result => {
+        console.log(result, 'RESULT')
+        if (this._isMounted) {
+          this.setState({
+            userID: result.data.userID,
+            qlinks: result.data.qlinks,
+            bmarks: result.data.bmarks
+          })
+         }
+       })
+      .catch(err => { console.log('Error at GET', err); });
   }
 
   componentWillUnMount() {
     this._isMounted = false;
   }
 
-//FIX WITH HOOKS
-  updateStateAfterPostReq(data) {
-    //this.setState({ data })
-    location.reload();
-  }
   render() {
-    const { data, quicklinks, bookmarks} = this.state;
+    const [ userID, qlinks, bmarks ] = this.state;
     return (
-      <div className="container">
-        <Navbar />
-        <div className="navbarBorder"></div>
-        <div className="appContainer" data-testid="appContainer">
-          <div className="sidebarContainer">
-            <Quicklinks quicklinks={quicklinks} />
-            <Bookmarks bookmarks={bookmarks} />
-          </div>
-          <div className="sidebarBorder"></div>
-          <Form updateStateAfterPostReq={this.updateStateAfterPostReq}/>
-        </div>
-      </div>
+      <Sidebar userID={userID}, qlinks={qlinks}, bmarks={bmarks}/>
     );
   }
-};
+}
 
 
-//   render() {
-//     const { data, quicklinks, bookmarks} = this.state;
-//     return (
-//       <div className="container">
-//         <div className="appContainer" data-testid="appContainer">
-//           <Quicklinks quicklinks={quicklinks} />
-//           <Bookmarks bookmarks={bookmarks} />
-//         </div>
-//         <Form updateStateAfterPostReq={this.updateStateAfterPostReq}/>
-//       </div>
-//     );
-//   }
-// };
-
-
-export default App;
 
 
 
