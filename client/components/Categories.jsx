@@ -4,8 +4,7 @@ import Dropdown from './Dropdown.jsx';
 
 const Categories = ({ sidebarSection }) => {
   const [ category, setCategory ] = useState('');
-
-
+  //console.log(sidebarSection)
   const handleClick = (e) => {
     setCategory(e.target.innerText);
   };
@@ -13,14 +12,12 @@ const Categories = ({ sidebarSection }) => {
   return (
     <div className="sectionContainer" >
        <div className="section" onClick={handleClick}>
-         {sidebarSection.map((category, i) => {
-           for (var key in category[i]) {
-             return
-               <div className="categoryWrapper">
-                 <div className="category" key={key}>{key}</div>
-                 <Dropdown sidebarSection={sidebarSection} category={category}/>
-               </div>
-            }
+         {sidebarSection.map(obj => {
+           let cat = Object.keys(obj)[0];
+           return <div className="categoryWrapper" key={cat}>
+                    <div className="category" key={cat}>{cat}</div>
+                    <Dropdown sidebarSection={sidebarSection} category={category}/>
+                  </div>
           })}
       </div>
     </div>

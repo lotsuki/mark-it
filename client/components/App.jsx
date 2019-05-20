@@ -21,10 +21,11 @@ class App extends React.Component {
       .get('/docs')
       .then(result => {
         if (this._isMounted) {
+          let data = result.data[0];
           this.setState({
-            userID: result.data.username,
-            qlinks: result.data.qlinks,
-            bmarks: result.data.bmarks
+            userID: data.username,
+            qlinks: data.qlinks,
+            bmarks: data.bmarks
           })
          }
        })
