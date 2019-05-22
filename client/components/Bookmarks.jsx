@@ -7,7 +7,7 @@ const Bookmarks = ({ bmarks }) => {
   return (
     <div className="bookmarksContainer">
       <SidebarHeader sidebarHeader="MY BOOKMARKS" />
-      <Categories sidebarSection={bmarks}/>
+      <Categories sidebarSection={bmarks} height={'3.5rem'}/>
     </div>
   );
 };

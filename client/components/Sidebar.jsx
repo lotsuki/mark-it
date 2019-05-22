@@ -4,19 +4,21 @@ import Navbar from './Navbar.jsx';
 import Quicklinks from './Quicklinks.jsx';
 import Bookmarks from './Bookmarks.jsx';
 import Form from './Form.jsx';
+import TestGrid from './TestGrid.jsx';
 
 
 const Sidebar = ({ qlinks, bmarks }) => {
   return (
-    <div className="container">
+    <div id="container">
       <Navbar />
       <div className="appContainer" data-testid="appContainer">
         <div className="sidebarContainer">
           <Quicklinks qlinks={qlinks}/>
           <Bookmarks bmarks={bmarks}/>
         </div>
-        <div className="sidebarBorder"></div>
-        <Form />
+        <div className="previewContainer">
+          <Form />
+        </div>
       </div>
     </div>
   );
@@ -33,3 +35,5 @@ Sidebar.defaultProps = {
   qlinks: [],
   bmarks: []
 };
+
+// <div className="sidebarBorder"></div>
