@@ -18,7 +18,6 @@ app.post('/', (req, res) => {
   // mongoose.connect(uri, {
   //   useNewUrlParser: true,
   //   autoIndex: true
-  // });
 
 
   Document.findOne({category: req.body.category}, {lean: true}, (err, result) => {
@@ -94,9 +93,10 @@ app.post('/', (req, res) => {
 
 
 app.get('/docs', (req, res) => {
-  Document.find().exec((err, results) => {
-    if (err) { res.status(500).send('Could not get document') }
-    else { res.send(results); }
+  console.log('hi')
+  Document.find({ username: { $exists: true } }, (err, result) => {
+    if (err) { console.log('Failure to get user obj', err); }
+    else { res.send(result); }
   });
 });
 
@@ -104,13 +104,6 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 
-app.delete('/subject/:subject', (req, res) => {
-  var subject = req.params.subject;
-  Document.deleteOne({subject: subject}, (err) => {
-    if (err) { console.log('Could not delete subject: ', err); }
-    else { res.send(res.data) }
-  });
-});
 
 
 

@@ -43,13 +43,7 @@ module.exports = {
 //one document for each user
 //identifies user
 //lists all categories
-{
-  id: hashed index,
-  username: string,
-  password: hashed key,
-  qlinkCats: [strings],
-  bmarkCats: [strings]
-}
+
 {
   id: 123019203,
   username: 'lotsuki',
@@ -62,8 +56,8 @@ module.exports = {
 //add on form submit/post req
 {
   id: hashed index,
-  categoryID: categoryID,
-  subjectID: subjectID,
+  category: category,
+  subject: subject,
   title: string,
   url: string,
   date: string
@@ -74,8 +68,8 @@ module.exports = {
 {
   id: hashed index,
   isQuicklink: boolean,
-  categoryID: category,
-  subjectID: subject, (optional),
+  category: category,
+  subject: subject, (optional),
   title: string,
   url: string,
   date: string,
@@ -156,23 +150,6 @@ export default class App extends React.Component {
 
 //Categories comp (hook) --> Sidebar will contain QL and BM comps which will contain Categories comp
 
-import React, { useState } from 'react';
-import Subjects
-
-const Categories = ({ userID, qlinks, bmarks }) => {
-  const [ category, setCategory ] = useState('');
-  const [ subject, setSubject ] = useState('');
-
-  const handleClick = (e) => {
-    setCategory(e.target.innerText)
-    setSubject(e.target.innerText)
-  }
-
-  return (
-    <div onClick={handleClick}>{category}</div>
-    <Subjects />
-  )
-}
 
 //Subjects comp
 import React, { useState } from 'react';

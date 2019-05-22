@@ -1,34 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import SidebarHeader from './SidebarHeader.jsx';
-import Dropdown from './Dropdown.jsx';
+import Categories from './Categories.jsx';
 
-class Quicklinks extends React.Component {
-  constructor(props) {
-    super(props);
 
-    this.state = {
-    }
-  }
-
-  render() {
-    const { quicklinks } = this.props;
-    return(
-      <div className="quicklinksContainer">
-        <SidebarHeader sidebarHeader="QUICK LINKS" />
-        <Dropdown data={quicklinks}/>
-      </div>
-    );
-  }
+const Quicklinks = ({ qlinks }) => {
+  return (
+    <div className="quicklinksContainer">
+      <SidebarHeader sidebarHeader="QUICK LINKS" />
+      <Categories sidebarSection={qlinks} height={'2rem'} size={'.95rem'}/>
+    </div>
+  );
 };
+
 
 export default Quicklinks;
 
 
 Quicklinks.propTypes = {
-  quicklinks: PropTypes.array
+  qlinks: PropTypes.array
 };
 
 Quicklinks.defaultProps = {
-  quicklinks: []
+  qlinks: []
 };

@@ -6,16 +6,11 @@ const Schema = mongoose.Schema;
 //test different schemas
 
 const documentSchema = new Schema ({
-  isQuicklink: Boolean,
-  category: String,
-  subjects: [{
-    subject: String,
-    sites: [{
-      title: String,
-      url: String,
-      date: String
-    }]
-  }]
+  id: Number,
+  username: String,
+  password: String,
+  qlinks: Array,
+  bmarks: Array
 });
 
 

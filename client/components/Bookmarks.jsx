@@ -1,37 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import SidebarHeader from './SidebarHeader.jsx';
-import Dropdown from './Dropdown.jsx';
+import Categories from './Categories.jsx';
 
-
-class Bookmarks extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-    }
-  }
-
-  render() {
-    const { bookmarks } = this.props;
-    return(
-      <div className="bookmarksContainer">
-        <SidebarHeader sidebarHeader="MY BOOKMARKS"/>
-        <Dropdown data={bookmarks}/>
-      </div>
-    );
-  }
+const Bookmarks = ({ bmarks }) => {
+  return (
+    <div className="bookmarksContainer">
+      <SidebarHeader sidebarHeader="MY BOOKMARKS" />
+      <Categories sidebarSection={bmarks} height={'3.5rem'}/>
+    </div>
+  );
 };
-
 
 export default Bookmarks;
 
 
 
 Bookmarks.propTypes = {
-  bookmarks: PropTypes.array
+  bmarks: PropTypes.array
 };
 
 Bookmarks.defaultProps = {
-  bookmarks: []
+  bmarks: []
 };

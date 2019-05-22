@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import App from './App.jsx';
 import FormInputs from './FormInputs.jsx';
 import axios from 'axios';
 import moment from 'moment';
 
 
-const Form = ({ updateStateAfterPostReq }) => {
+const Form = ({ }) => {
   const [ form, setForm ] = useState({});
 
   const submitForm = (category, subject, title, url) => {
@@ -19,11 +18,13 @@ const Form = ({ updateStateAfterPostReq }) => {
       starred: false,
       favorites: false
     };
+
     if (category && subject && title && url) {
       axios
         .post('/', form)
         .then(result => {
-          updateStateAfterPostReq(result.data);
+          //TODO****
+          console.log(result);
         })
         .catch(err => { console.log('Could not post document', err); });
     }
@@ -39,8 +40,8 @@ export default Form;
 
 
 
-Form.propTypes = {
-  updateStateAfterPostReq: PropTypes.func
-};
+// Form.propTypes = {
+//   updateStateAfterPostReq: PropTypes.func
+// };
 
 
