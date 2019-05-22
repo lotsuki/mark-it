@@ -93,6 +93,7 @@ app.post('/', (req, res) => {
 
 
 app.get('/docs', (req, res) => {
+  console.log('hi')
   Document.find({ username: { $exists: true } }, (err, result) => {
     if (err) { console.log('Failure to get user obj', err); }
     else { res.send(result); }

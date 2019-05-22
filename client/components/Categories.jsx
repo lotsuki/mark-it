@@ -1,12 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import Dropdown from './Dropdown.jsx';
+import Subjects from './Subjects.jsx';
 
 const Categories = ({ sidebarSection }) => {
+  const [ isOpen, setIsOpen ] = useState(false);
   const [ category, setCategory ] = useState('');
 
   const handleClick = (e) => {
-    setCategory(e.target.innerText);
+    if (isOpen) {
+      e.target.style.backgroundColor = '#fff';
+      setIsOpen(false);
+      setCategory('');
+    } else {
+      e.target.style.backgroundColor = '#BDC18A';
+      setIsOpen(true);
+      setCategory(e.target.innerText);
+    }
   };
 
   return (
@@ -20,7 +29,13 @@ const Categories = ({ sidebarSection }) => {
                {
                 category === cat
                 ? (
-                  <Dropdown sidebarSection={sidebarSection} category={category}/>
+                  <div id="dropdownContainer">
+                    {
+                      isOpen
+                        ? ( <Subjects sidebarSection={sidebarSection} category={category} />)
+                        : ( null )
+                    }
+                  </div>
                 )
                 : ( null )
                }
