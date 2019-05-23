@@ -23,10 +23,10 @@ const Categories = ({ sidebarSection, height }) => {
   return (
     <div className="sectionContainer" >
      <div className="sectionWrapper">
-       {sidebarSection.map(obj => {
+       {sidebarSection.map((obj, i) => {
          let cat = Object.keys(obj)[0];
          return (
-          <div className="categoryContainer" >
+          <div className="categoryContainer" key={cat}>
            <div
              className="categoryWrapper"
              onClick={handleClick}
@@ -43,11 +43,11 @@ const Categories = ({ sidebarSection, height }) => {
                   key={cat} >{cat}</div>)
              }
            </div>
-           <div className="dropdownContainer">
+           <div className="dropdownContainer" key={`${cat}${i}`}>
              {
               category === cat
               ? (
-                <div className="dropdownWrapper">
+                <div className="dropdownWrapper" >
                   {
                     isOpen
                       ? ( <Subjects sidebarSection={sidebarSection} category={category} target={target}/>)

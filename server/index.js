@@ -102,7 +102,7 @@ app.get('/docs', (req, res) => {
 app.get('/titles/:category/:subject', (req, res) => {
   let subject = req.params.subject
   let category = req.params.category
-
+ console.log(subject, category,'hey')
   Document.find({ category: category, subject: subject }, 'title url', (err, result) => {
     if (err) { console.log('Failure to get titles', err); }
     else { res.send(result); }
