@@ -1,17 +1,23 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 
 const Subjects = ({ sidebarSection, category, target }) => {
-  // const [ subject, setSubject ] = useState('');
-  // setSubject(e.target.innerText)
-  // e.target.parentElement.children[1].style.transition = 'height, 0.3s ease-out';
-  // useEffect(() => {
-  //   target.parentElement.children.style.backgroundColor = 'blue'
-  // })
+  //when subject is clicked, submit get request for titles using e
+  const [ titles, setTitles ] = useState([]);
 
-  const changeStyles = () => {
-    console.log(target.parentElement.children)
-  }
+  const getTitles = (e) => {
+    let subjParam = e.target.innerText;
+
+    axios
+     .get(`/titles/${category}/${subjParam}`)
+     .then(result => {
+       console.log(result, 'result')
+       // setTitles(result.data);
+      })
+     .catch(err => { console.log('Error at GET', err); });
+
+  };
 
   const subjects = () => {
     return sidebarSection.reduce((a, b) => {
@@ -21,7 +27,7 @@ const Subjects = ({ sidebarSection, category, target }) => {
   };
 
   return (
-    <ul className="subjectContainer" style={{
+    <ul className="subjectContainer" onClick={getTitles} style={{
       zIndex: 1
     }}>
       {

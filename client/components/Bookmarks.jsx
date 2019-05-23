@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import SidebarHeader from './SidebarHeader.jsx';
 import Categories from './Categories.jsx';
 
-const Bookmarks = ({ bmarks }) => {
+const Bookmarks = ({ bmarks, height }) => {
   return (
     <div className="bookmarksContainer">
       <SidebarHeader sidebarHeader="MY BOOKMARKS" />

@@ -4,11 +4,11 @@ import SidebarHeader from './SidebarHeader.jsx';
 import Categories from './Categories.jsx';
 
 
-const Quicklinks = ({ qlinks }) => {
+const Quicklinks = ({ qlinks, height }) => {
   return (
     <div className="quicklinksContainer">
       <SidebarHeader sidebarHeader="QUICK LINKS" />
-      <Categories sidebarSection={qlinks} height={'2rem'} size={'.95rem'}/>
+      <Categories sidebarSection={qlinks} height={'2.5rem'}/>
     </div>
   );
 };

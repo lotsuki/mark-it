@@ -57,6 +57,7 @@
     "babel-loader": "^8.0.4",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.12.1",
+    "faker": "^4.1.0",
     "jest": "^24.7.1",
     "jest-dom": "^3.2.2",
     "react-testing-library": "^7.0.0",

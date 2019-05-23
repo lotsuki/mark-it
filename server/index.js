@@ -93,9 +93,18 @@ app.post('/', (req, res) => {
 
 
 app.get('/docs', (req, res) => {
-  console.log('hi')
   Document.find({ username: { $exists: true } }, (err, result) => {
     if (err) { console.log('Failure to get user obj', err); }
+    else { res.send(result); }
+  });
+});
+
+app.get('/titles/:category/:subject', (req, res) => {
+  let subject = req.params.subject
+  let category = req.params.category
+
+  Document.find({ category: category, subject: subject }, 'title url', (err, result) => {
+    if (err) { console.log('Failure to get titles', err); }
     else { res.send(result); }
   });
 });
@@ -103,6 +112,13 @@ app.get('/docs', (req, res) => {
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/index.html'));
 });
+
+// const cursor = db
+//   .collection('inventory')
+//   .find({
+//     status: 'A'
+//   })
+//   .project({ item: 1, status: 1 });
 
 
 

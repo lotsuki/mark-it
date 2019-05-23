@@ -9,6 +9,8 @@
   #app {
     margin: 0;
     padding: 0;
+    height: inherit;
+    width: inherit;
   }
 
   #container {
@@ -21,7 +23,7 @@
   .appContainer {
     display: grid;
     grid-template-columns: 25% 75%;
-    height: 40rem;
+    height: 100%;
     width: 100%;
     margin-top: 1rem;
   }
@@ -62,18 +64,20 @@
 
   .sidebarContainer {
     display: grid;
-    grid-template-rows: 8rem auto;
-    grid-gap: 2rem;
+    grid-template-rows: 10rem auto;
+    grid-gap: 1rem;
   }
 
   .quicklinksContainer {
     display: grid;
-    grid-template-rows: 2rem auto;
+    grid-template-rows: 1.5rem auto;
+    grid-gap: 1rem;
   }
 
   .bookmarksContainer {
     display: grid;
-    grid-template-rows: 2rem auto;
+    grid-template-rows: 1.5rem auto;
+    grid-gap: 1rem;
   }
 
   .sidebarHeaderWrapper {
@@ -94,20 +98,32 @@
     width: .2rem;
   }
 
-  .section {
+  .sectionContainer {
+    margin: 0;
+    padding: 0;
+  }
+
+  .sectionWrapper{
     display: grid;
-    grid-auto-rows: 1fr;
+    grid-template-rows: auto;
     font-family: Helvetica, sans-serif;
     letter-spacing: .05rem;
+
+  }
+
+  .categoryContainer {
+    display: flex;
+    flex-flow: column nowrap;
+
   }
 
   .categoryWrapper {
-    height: auto;
+
+
   }
 
   .category {
-    height: 3.5rem;
-    line-height: 2.5rem;
+    height: inherit;
     padding-left: 1.5rem;
     font-weight: lighter;
     cursor: pointer;
@@ -117,14 +133,18 @@
     background-color: #F8F3EF;
   }
 
-  #dropdownContainer {
-    border: 1px solid lightgray;
+  .dropdownContainer {
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   }
 
+  @media(min-height: 1rem) {
+    .categoryWrapper {
+      background-color:'#BDC18A';
+    }
+  }
+
   .subjectContainer {
-    display: grid;
-    grid-auto-rows: 1fr;
+
   }
 
   .subject {
@@ -133,6 +153,9 @@
     list-style: none;
     letter-spacing: .05rem;
     cursor: pointer;
+  }
+  .subject:hover {
+    font-size: 1.2rem;
   }
 
   .add {
