@@ -8,7 +8,7 @@ const Quicklinks = ({ qlinks, height }) => {
   return (
     <div className="quicklinksContainer">
       <SidebarHeader sidebarHeader="QUICK LINKS" />
-      <Categories sidebarSection={qlinks} height={'2.5rem'}/>
+      <Categories sidebarSection={qlinks} height={'2.5rem'} section={'quicklinks'}/>
     </div>
   );
 };

@@ -64,20 +64,13 @@
 
   .sidebarContainer {
     display: grid;
-    grid-template-rows: 10rem auto;
+    grid-template-rows: 8.5rem auto;
     grid-gap: 1rem;
   }
 
-  .quicklinksContainer {
+  .quicklinksContainer, .bookmarksContainer {
     display: grid;
     grid-template-rows: 1.5rem auto;
-    grid-gap: 1rem;
-  }
-
-  .bookmarksContainer {
-    display: grid;
-    grid-template-rows: 1.5rem auto;
-    grid-gap: 1rem;
   }
 
   .sidebarHeaderWrapper {
@@ -112,8 +105,6 @@
   }
 
   .categoryContainer {
-    display: flex;
-    flex-flow: column nowrap;
 
   }
 
@@ -123,14 +114,58 @@
   }
 
   .category {
-    height: inherit;
-    padding-left: 1.5rem;
+    display: flex;
+    flex: 2;
+  }
+
+  .quicklinks:hover, .bookmarks:hover {
+    background-color: #F8F3EF;
+  }
+
+
+  .quicklinks {
+     display: flex;
+    align-items: center;
+    height: 2rem;
+    padding-left: 0.5rem;
+    cursor: pointer;
     font-weight: lighter;
+    font-size: .9rem;
+  }
+
+  .bookmarks {
+    display: flex;
+    align-items: center;
+    height: 3rem;
+    padding-left: 1.5rem;
     cursor: pointer;
   }
 
-  .category:hover {
-    background-color: #F8F3EF;
+
+
+  .markIcon {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+  }
+
+  i {
+    padding: 2px;
+  }
+
+
+
+
+  .fa-heart {
+    color: red;
+  }
+
+  .fa-star {
+    color: #bd5b0d;
+  }
+
+  .icon {
+    padding: 5px;
   }
 
   .dropdownContainer {
