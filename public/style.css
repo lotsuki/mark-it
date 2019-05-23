@@ -22,7 +22,7 @@
 
   .appContainer {
     display: grid;
-    grid-template-columns: 16rem auto;
+    grid-template-columns: 16rem .2rem auto;
     height: 100%;
     width: 100%;
     margin-top: 1rem;
@@ -65,7 +65,8 @@
   .sidebarContainer {
     display: grid;
     grid-template-rows: 8.5rem auto;
-    grid-gap: 1rem;
+    grid-gap: .5rem;
+    margin-top: .5rem;
   }
 
   .quicklinksContainer, .bookmarksContainer {
@@ -74,8 +75,9 @@
   }
 
   .sidebarHeaderWrapper {
-    margin-left: 1.5rem;
-    margin-right: 1.5rem;
+    /*margin-left: 1.5rem;
+    margin-right: 1.5rem;*/
+    text-align: center;
   }
 
   .sidebarHeader {
@@ -106,25 +108,37 @@
 
   .categoryContainer {
 
+
   }
 
   .categoryWrapper {
 
-
   }
 
-  .category {
-    display: flex;
-    flex: 2;
+  .fa-chevron-down {
+    color: lightgray;
+    margin-right: 4px;
+    visibility: hidden;
+    pointer-events: none;
   }
 
   .quicklinks:hover, .bookmarks:hover {
     background-color: #F8F3EF;
   }
 
+ .bookmarks:hover > .fa-chevron-down {
+    visibility: visible;
+  }
+
+  .quicklinks:hover > .fa-chevron-down {
+    visibility: visible;
+  }
+
 
   .quicklinks {
-     display: flex;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
     align-items: center;
     height: 2rem;
     padding-left: 0.5rem;
@@ -135,6 +149,8 @@
 
   .bookmarks {
     display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
     align-items: center;
     height: 3rem;
     padding-left: 1.5rem;
@@ -149,12 +165,10 @@
     width: 100%;
   }
 
-  i {
-    padding: 2px;
+  .linkIcon {
+    font-size: .7rem;
+    padding: .5rem;
   }
-
-
-
 
   .fa-heart {
     color: red;
@@ -168,18 +182,17 @@
     padding: 5px;
   }
 
+
   .dropdownContainer {
+    width: auto;
     padding: 0;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   }
 
-  @media(min-height: 1rem) {
-    .categoryWrapper {
-      background-color:'#BDC18A';
-    }
-  }
+
 
   .subjectContainer {
+    margin: 0;
     height: auto;
     width: auto;
   }
@@ -225,7 +238,7 @@
   }
 
   .formContainer {
-    /*visibility: hidden;*/
+    visibility: hidden;
     width: 35rem;
     margin: 1rem;
   }

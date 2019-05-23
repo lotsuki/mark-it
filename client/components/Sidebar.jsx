@@ -15,6 +15,7 @@ const Sidebar = ({ qlinks, bmarks }) => {
           <Quicklinks qlinks={qlinks}/>
           <Bookmarks bmarks={bmarks}/>
         </div>
+        <div className="sidebarBorder"></div>
         <div className="previewContainer">
           <Form />
         </div>
@@ -35,4 +36,3 @@ Sidebar.defaultProps = {
   bmarks: []
 };
 
-// <div className="sidebarBorder"></div>

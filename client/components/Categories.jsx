@@ -21,27 +21,20 @@ const Categories = ({ sidebarSection, section }) => {
     }
   };
 
-  const findLinkIcons = (category) => {
-    if (category === 'Favorites') {
-      return <i class="fas fa-heart"></i>;
-    } else if (category === 'Starred') {
-      return <i class="fas fa-star"></i>;
-    } else if (category === 'Read') {
-      return <i class="fas fa-check"></i>;
+  const displayLinkIcons = (sec, category) => {
+    if (sec === 'quicklinks') {
+      if (category === 'Favorites') {
+        return <span className="linkIcon"><i className="fas fa-heart"></i></span>;
+      } else if (category === 'Starred') {
+        return <span className="linkIcon"><i className="fas fa-star"></i></span>;
+      } else if (category === 'Read') {
+        return <span className="linkIcon"><i className="fas fa-check"></i></span>;
+      }
     }
   };
 
-  const findMarkIcons = (category) => {
-     if (category !== 'Favorites' &&
-        category !== 'Starred' &&
-        category !== 'Read') {
-      return <span class="bookmarkIcons">
-               <i class="fas fa-heart"></i>
-               <i class="fas fa-star"></i>
-               <i class="fas fa-check"></i>
-             </span>
-    }
-  };
+
+
 
   return (
     <div className="sectionContainer" >
@@ -62,16 +55,14 @@ const Categories = ({ sidebarSection, section }) => {
                      className={section}
                      key={cat}
                      style={{backgroundColor: '#BDC18A'}}>
-                     <span className="linkIcon">{findLinkIcons(cat)}</span>
-                     {cat}
-                     <span className="markIcon">{findMarkIcons(cat)}</span>
+                  <span className="leftSide">{displayLinkIcons(section, cat)}{cat}</span>
+                  <i className="fas fa-chevron-down"></i>
                 </div>
                  )
               : (
                   <div className="category" className={section} key={cat}>
-                    <span className="linkIcon">{findLinkIcons(cat)}</span>
-                    {cat}
-                   <span className="markIcon">{findMarkIcons(cat)}</span>
+                    <span className="leftSide">{displayLinkIcons(section, cat)}{cat}</span>
+                    <i className="fas fa-chevron-down"></i>
                   </div>
                 )
              }
