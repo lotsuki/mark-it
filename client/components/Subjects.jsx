@@ -6,18 +6,26 @@ import {useTrail, animated} from 'react-spring';
 
 const Subjects = ({ sidebarSection, category }) => {
   //when subject is clicked, submit get request for titles using e
+  const [ isOpen, setIsOpen ] = useState(false);
   const [ titles, setTitles ] = useState([]);
   const [ subj, setSubj ] = useState('');
 
-  const getTitles = (e) => {
-    setSubj(e.target.innerText)
+  const handleClick = (e) => {
+    if (isOpen) {
+      setIsOpen(false);
+      setTitles('');
+    } else {
+      setSubj(e.target.innerText)
 
-    axios.get(`/titles/${category}/${e.target.innerText}`)
-     .then(result => {
-       setTitles(result.data);
-      })
-     .catch(err => { console.log('Error at GET', err); });
+      axios.get(`/titles/${category}/${e.target.innerText}`)
+       .then(result => {
+         setTitles(result.data);
+         setIsOpen(true);
+        })
+       .catch(err => { console.log('Error at GET', err); });
+    }
   };
+
 
   const subjects = (() => {
     return sidebarSection.reduce((a, b) => {
@@ -39,12 +47,12 @@ const Subjects = ({ sidebarSection, category }) => {
         <div className="subjectWrapper" key={subjects[index]}>
                <animated.div
                  className="subject"
-                 onClick={getTitles}
+                 onClick={handleClick}
                  style={{height, opacity}}
                  key={subjects[index]}>{subjects[index]}</animated.div>
                  <div className="titlesDropdown" key={`${subjects[index]}${index}`}>
                {
-                titles && subj === subjects[index]
+                isOpen && subj === subjects[index]
                 ? (
                     <Titles titles={titles}/>
                   )

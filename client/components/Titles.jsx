@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useTrail, animated } from 'react-spring';
 
 const Titles = ({ titles }) => {
   // const [toggle, setToggle] = useState(false);
@@ -32,23 +31,19 @@ const Titles = ({ titles }) => {
   };
 
   return (
-    <ul className="titlesContainer">
+    <div className="titlesContainer">
       {
         titles.map(obj => (
-          <li className="title" key={obj.title}>{obj.title}
-            <span className="markIcon" onClick={addToQuicklinks}>{displayTitleIcons()}</span>
-          </li>
-
+          <div className="titleWrapper">
+            <div className="title" key={obj.title}>{obj.title}
+              <span className="markIcon" onClick={addToQuicklinks}>{displayTitleIcons()}</span>
+            </div>
+          </div>
         ))
       }
-    </ul>
+    </div>
 
   );
 };
 
 export default Titles;
-//<i className="fas fa-heart"></i>
-   // <i className="fas fa-star"></i>
-   //             <i className="fas fa-check"></i>
-   //             <i class="far fa-edit"></i>
-   //             <i class="far fa-trash-alt"></i>
