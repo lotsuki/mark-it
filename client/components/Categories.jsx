@@ -1,39 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Subjects from './Subjects.jsx';
+import Category from './Category.jsx';
+
 
 const Categories = ({ sidebarSection, section }) => {
   const [ isOpen, setIsOpen ] = useState(false);
   const [ category, setCategory ] = useState('');
-  const [ target, setTarget ] = useState('');
 
   const handleClick = (e) => {
     if (isOpen) {
-      //e.target.style.backgroundColor = '#fff';
       setIsOpen(false);
       setCategory('');
-      setTarget('');
     } else {
-      //e.target.style.backgroundColor = '#BDC18A';
       setIsOpen(true);
       setCategory(e.target.innerText);
-      setTarget(e.target)
     }
   };
-
-  const displayLinkIcons = (sec, category) => {
-    if (sec === 'quicklinks') {
-      if (category === 'Favorites') {
-        return <span className="linkIcon"><i className="fas fa-heart"></i></span>;
-      } else if (category === 'Starred') {
-        return <span className="linkIcon"><i className="fas fa-star"></i></span>;
-      } else if (category === 'Read') {
-        return <span className="linkIcon"><i className="fas fa-check"></i></span>;
-      }
-    }
-  };
-
-
 
 
   return (
@@ -47,25 +30,7 @@ const Categories = ({ sidebarSection, section }) => {
              className="categoryWrapper"
              onClick={handleClick}
              key={cat}>
-             {
-
-              category === cat
-              ? (
-                <div className="category"
-                     className={section}
-                     key={cat}
-                     style={{backgroundColor: '#BDC18A'}}>
-                  <span className="leftSide">{displayLinkIcons(section, cat)}{cat}</span>
-                  <i className="fas fa-chevron-down"></i>
-                </div>
-                 )
-              : (
-                  <div className="category" className={section} key={cat}>
-                    <span className="leftSide">{displayLinkIcons(section, cat)}{cat}</span>
-                    <i className="fas fa-chevron-down"></i>
-                  </div>
-                )
-             }
+              <Category section={section} category={category} cat={cat}/>
            </div>
            <div className="dropdownContainer" key={`${cat}${i}`}>
              {
@@ -74,7 +39,7 @@ const Categories = ({ sidebarSection, section }) => {
                 <div className="dropdownWrapper" >
                   {
                     isOpen
-                      ? ( <Subjects sidebarSection={sidebarSection} category={category} target={target}/>)
+                      ? ( <Subjects sidebarSection={sidebarSection} category={category} />)
                       : ( null )
                   }
                 </div>

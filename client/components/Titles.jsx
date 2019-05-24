@@ -1,6 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useTrail, animated } from 'react-spring';
 
 const Titles = ({ titles }) => {
+  // const [toggle, setToggle] = useState(false);
+  // const trail = useTrail(titles.length, {
+  //   opacity: toggle ? 1 : 0,
+  //   height: toggle ? 50 : 0,
+  //   from: { opacity: 0, height: 0}
+  // })
   const displayTitleIcons = () => {
     // return <span className="bookmarkIcons">
     //          <select name="icone" id="icone" style={{fontFamily: "'FontAwesome', Arial"}}>
@@ -31,9 +38,11 @@ const Titles = ({ titles }) => {
           <li className="title" key={obj.title}>{obj.title}
             <span className="markIcon" onClick={addToQuicklinks}>{displayTitleIcons()}</span>
           </li>
+
         ))
       }
     </ul>
+
   );
 };
 

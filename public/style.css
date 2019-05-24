@@ -184,6 +184,7 @@
 
 
   .dropdownContainer {
+    margin: 0 auto;
     width: auto;
     padding: 0;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
@@ -192,39 +193,42 @@
 
 
   .subjectContainer {
-    margin: 0;
+    display: flex;
+    flex-flow: column nowrap;
     height: auto;
-    width: auto;
+    margin: 0;
   }
 
   .subjectWrapper {
-    width: inherit;
+
   }
 
   .subject {
+    display: flex;
+    align-items: center;
     font-family: Helvetica, sans-serif;
-    min-height: 3.5rem;
+    height: 3rem;
     list-style: none;
     letter-spacing: .05rem;
     cursor: pointer;
     width: inherit;
+    padding-left: 1rem;
   }
   .subject:hover {
     font-size: 1.2rem;
   }
 
   .titlesContainer {
-    flex-flow: column nowrap;
-    align-items: flex-start;
-    margin-left: -3.7rem;
+
   }
 
   .title {
     font-family: Helvetica, sans-serif;
-    min-height: 3rem;
+    height: 3rem;
     list-style: none;
     cursor: pointer;
     font-size: 0.9rem;
+
   }
 
   .add {

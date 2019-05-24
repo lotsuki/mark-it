@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Titles from './Titles.jsx';
 import axios from 'axios';
+import {useTrail, animated} from 'react-spring';
 
-const Subjects = ({ sidebarSection, category, target }) => {
+const Subjects = ({ sidebarSection, category }) => {
   //when subject is clicked, submit get request for titles using e
   const [ titles, setTitles ] = useState([]);
   const [ subj, setSubj ] = useState('');
@@ -13,56 +14,50 @@ const Subjects = ({ sidebarSection, category, target }) => {
 
     axios.get(`/titles/${category}/${e.target.innerText}`)
      .then(result => {
-       console.log(result, 'result')
        setTitles(result.data);
       })
      .catch(err => { console.log('Error at GET', err); });
-
-    // await axios
-    //  .get(`/titles/${category}/${subj}`)
-    //  .then(result => {
-    //    console.log(result, 'result')
-    //    setTitles(result.data);
-    //   })
-    //  .catch(err => { console.log('Error at GET', err); });
-
   };
 
-  const subjects = () => {
+  const subjects = (() => {
     return sidebarSection.reduce((a, b) => {
       if(b[category]) { return b[category]; }
       return a;
     }, {});
-  };
+  })();
+
+  const trail = useTrail(subjects.length, {
+    opacity: 1,
+    height: 50,
+    from: {opacity: 0, height: 0}}
+  );
+
 
   return (
-    <ul className="subjectContainer" >
-      {
-        subjects().map((subject, i) => (
-          <div className="subjectWrapper" key={subject}>
-             <li
-               className="subject"
-               onClick={getTitles}
-               key={subject}
-               style={{
-                transitionDelay:`${i * 0.5 / subjects().length}s`
-             }}>{subject}</li>
-
-             <div className="titlesDropdown" key={`${subject}${i}`}>
+    <div className="subjectContainer">
+      {trail.map(({height, opacity}, index) => (
+        <div className="subjectWrapper" key={subjects[index]}>
+               <animated.div
+                 className="subject"
+                 onClick={getTitles}
+                 style={{height, opacity}}
+                 key={subjects[index]}>{subjects[index]}</animated.div>
+                 <div className="titlesDropdown" key={`${subjects[index]}${index}`}>
                {
-                titles && subj === subject
+                titles && subj === subjects[index]
                 ? (
                     <Titles titles={titles}/>
                   )
                 : (null)
                }
              </div>
-           </div>
-        ))
-      }
-    </ul>
-  );
+          </div>
+      ))}
+    </div>
+  )
 };
+
+
 
 export default Subjects;
 
@@ -75,4 +70,6 @@ Subjects.defaultProps = {
   sidebarSection: [],
   category: ''
 };
+
+
 
