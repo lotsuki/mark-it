@@ -33,7 +33,7 @@ const Form = ({ }) => {
           //TODO****
           console.log(result);
         })
-        .catch(err => { console.log('Could not post document', err); });
+        .catch(err => { console.log('Could not post document: ', err); });
     }
     clearForm();
   };

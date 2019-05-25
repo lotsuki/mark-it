@@ -28,7 +28,7 @@ class App extends React.Component {
           })
          }
        })
-      .catch(err => { console.log('Error at GET', err); });
+      .catch(err => { console.log('Error at GET: ', err); });
   }
 
   componentWillUnMount() {

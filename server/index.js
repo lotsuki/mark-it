@@ -28,12 +28,12 @@ app.post('/', (req, res) => {
         url: req.body.url,
         date: req.body.date
       }, (err, result) => {
-    if (err) { console.log('Error at POST', err); }
+    if (err) { console.log('Error at POST: ', err); }
     else {
       let cat = `bmarks.$.${category}`;
       Document.updateOne({bmarks: {$elemMatch: {[category]: {$exists: true}}}},
         {$addToSet:{[cat]: subject}}, {upsert: false},(err, result) => {
-          if (err) { console.log('Cannot send back all data from post api, UPDATE'); }
+          if (err) { console.log('Cannot send back all data from post api, UPDATE: ', err); }
           else { console.log(result); res.send(result); }
       });
     }
@@ -102,7 +102,7 @@ app.post('/', (req, res) => {
 
 app.get('/docs', (req, res) => {
   Document.find({ username: { $exists: true } }, (err, result) => {
-    if (err) { console.log('Failure to get user obj', err); }
+    if (err) { console.log('Failure to get user obj: ', err); }
     else { res.send(result); }
   });
 });
@@ -111,7 +111,7 @@ app.get('/titles/:category/:subject', (req, res) => {
   let subject = req.params.subject
   let category = req.params.category
   Document.find({ category: category, subject: subject }, 'title url', (err, result) => {
-    if (err) { console.log('Failure to get titles', err); }
+    if (err) { console.log('Failure to get titles: ', err); }
     else { res.send(result); }
   });
 });
@@ -119,6 +119,15 @@ app.get('/titles/:category/:subject', (req, res) => {
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/index.html'));
 });
+
+app.delete('/bookmarks/:title', (req, res) => {
+  let title = req.params.title;
+  console.log(title);
+  Document.deleteOne({ title }, (err) => {
+    if (err) { console.log('Error at DELETE request: ', err); }
+  })
+});
+
 
 // const cursor = db
 //   .collection('inventory')
