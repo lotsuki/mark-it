@@ -1,17 +1,6 @@
 import React from 'react';
 
-const Category = ({ section, category, cat}) => {
-  const displayLinkIcons = (sec, category) => {
-    if (sec === 'quicklinks') {
-      if (category === 'Favorites') {
-        return <span className="linkIcon"><i className="fas fa-heart"></i></span>;
-      } else if (category === 'Starred') {
-        return <span className="linkIcon"><i className="fas fa-star"></i></span>;
-      } else if (category === 'Read') {
-        return <span className="linkIcon"><i className="fas fa-check"></i></span>;
-      }
-    }
-  };
+const Category = ({ category, cat}) => {
 
   return (
     <div>
@@ -19,16 +8,15 @@ const Category = ({ section, category, cat}) => {
       category === cat
       ? (
         <div className="category"
-             className={section}
              key={cat}
-             style={{backgroundColor: '#BDC18A'}}>
-          <span className="leftSide">{displayLinkIcons(section, cat)}{cat}</span>
+             style={{backgroundColor: '#923192', color: '#fff'}}>
+          <span className="leftSide">{cat}</span>
           <i className="fas fa-chevron-down"></i>
         </div>
          )
       : (
-          <div className="category" className={section} key={cat}>
-            <span className="leftSide">{displayLinkIcons(section, cat)}{cat}</span>
+          <div className="category" key={cat}>
+            <span className="leftSide">{cat}</span>
             <i className="fas fa-chevron-down"></i>
           </div>
         )

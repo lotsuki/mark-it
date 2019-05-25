@@ -4,7 +4,7 @@ import Subjects from './Subjects.jsx';
 import Category from './Category.jsx';
 
 
-const Categories = ({ sidebarSection, section }) => {
+const Categories = ({ sidebarSection, getUrl }) => {
   const [ isOpen, setIsOpen ] = useState(false);
   const [ category, setCategory ] = useState('');
 
@@ -30,7 +30,7 @@ const Categories = ({ sidebarSection, section }) => {
              className="categoryWrapper"
              onClick={handleClick}
              key={cat}>
-              <Category section={section} category={category} cat={cat}/>
+             <Category category={category} cat={cat}/>
            </div>
            <div className="dropdownContainer" key={`${cat}${i}`}>
              {
@@ -39,7 +39,7 @@ const Categories = ({ sidebarSection, section }) => {
                 <div className="dropdownWrapper" >
                   {
                     isOpen
-                      ? ( <Subjects sidebarSection={sidebarSection} category={category} />)
+                      ? ( <Subjects sidebarSection={sidebarSection} category={category} getUrl={getUrl}/>)
                       : ( null )
                   }
                 </div>

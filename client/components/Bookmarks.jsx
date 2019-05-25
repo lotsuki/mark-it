@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import SidebarHeader from './SidebarHeader.jsx';
 import Categories from './Categories.jsx';
 
-const Bookmarks = ({ bmarks }) => {
+const Bookmarks = ({ bmarks, getUrl }) => {
   return (
     <div className="bookmarksContainer">
       <SidebarHeader sidebarHeader="MY BOOKMARKS" />
-      <Categories sidebarSection={bmarks} height={'3.5rem'} section={"bookmarks"}/>
+      <Categories sidebarSection={bmarks} height={'3.5rem'} getUrl={getUrl}/>
     </div>
   );
 };

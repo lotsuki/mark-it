@@ -4,7 +4,7 @@ import Titles from './Titles.jsx';
 import axios from 'axios';
 import {useTrail, animated} from 'react-spring';
 
-const Subjects = ({ sidebarSection, category }) => {
+const Subjects = ({ sidebarSection, category, getUrl }) => {
   //when subject is clicked, submit get request for titles using e
   const [ isOpen, setIsOpen ] = useState(false);
   const [ titles, setTitles ] = useState([]);
@@ -40,25 +40,29 @@ const Subjects = ({ sidebarSection, category }) => {
     from: {opacity: 0, height: 0}}
   );
 
-
   return (
     <div className="subjectContainer">
       {trail.map(({height, opacity}, index) => (
-        <div className="subjectWrapper" key={subjects[index]}>
-               <animated.div
-                 className="subject"
-                 onClick={handleClick}
-                 style={{height, opacity}}
-                 key={subjects[index]}>{subjects[index]}</animated.div>
-                 <div className="titlesDropdown" key={`${subjects[index]}${index}`}>
-               {
-                isOpen && subj === subjects[index]
-                ? (
-                    <Titles titles={titles}/>
-                  )
-                : (null)
-               }
-             </div>
+         <div className="subjectWrapper" key={subjects[index]}>
+           <div>
+             <animated.div
+               className="subject"
+               onClick={handleClick}
+               style={{height, opacity}}
+               key={subjects[index]}>
+               <span className="leftSide">{subjects[index]}</span>
+               <i className="fas fa-chevron-down"></i>
+             </animated.div>
+            </div>
+           <div>
+            {
+              isOpen && subj === subjects[index]
+              ? (
+                  <Titles titles={titles} getUrl={getUrl}/>
+                )
+              : (null)
+             }
+            </div>
           </div>
       ))}
     </div>
@@ -78,6 +82,6 @@ Subjects.defaultProps = {
   sidebarSection: [],
   category: ''
 };
-
-
+// <div className="titlesDropdown" key={`${subjects[index]}${index}`}>
+//  </div>
 

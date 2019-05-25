@@ -11,7 +11,6 @@ class App extends React.Component {
 
     this.state = {
       userID: null,
-      qlinks: [],
       bmarks: []
     }
   }
@@ -25,7 +24,6 @@ class App extends React.Component {
           let data = result.data[0];
           this.setState({
             userID: data.username,
-            qlinks: data.qlinks,
             bmarks: data.bmarks
           })
          }
@@ -41,7 +39,7 @@ class App extends React.Component {
     const { userID, qlinks, bmarks } = this.state;
     return (
       <ErrorBoundary>
-        <Sidebar userID={userID} qlinks={qlinks} bmarks={bmarks} />
+        <Sidebar userID={userID} bmarks={bmarks} />
       </ErrorBoundary>
     );
   }

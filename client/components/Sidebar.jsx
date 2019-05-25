@@ -1,25 +1,40 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Navbar from './Navbar.jsx';
-import Quicklinks from './Quicklinks.jsx';
 import Bookmarks from './Bookmarks.jsx';
 import Form from './Form.jsx';
-import {useSpring, animated} from 'react-spring';
+import { useSpring, animated } from 'react-spring';
 
 
-const Sidebar = ({ qlinks, bmarks }) => {
+const Sidebar = ({ bmarks }) => {
+  const [url, setUrl] = useState('');
+  const [ isForm, setIsForm, ] = useState(false);
+  const getUrl = (url) => {
+    setUrl(url);
+  };
+
+  const displayForm = () => {
+    if(isForm) {
+      setIsForm(false);
+    } else {
+      setIsForm(true);
+    }
+
+  };
 
   return (
     <div id="container">
-      <Navbar />
+      <Navbar displayForm={displayForm}/>
       <div className="appContainer" data-testid="appContainer">
         <div className="sidebarContainer">
-          <Quicklinks qlinks={qlinks}/>
-          <Bookmarks bmarks={bmarks}/>
+          <Bookmarks bmarks={bmarks} getUrl={getUrl}/>
         </div>
-        <div className="sidebarBorder"></div>
-        <div className="previewContainer">
-          <Form />
+        <div className="rightContainer">
+          {
+            isForm
+            ? (<Form/>)
+            : (null)
+          }
         </div>
       </div>
     </div>
