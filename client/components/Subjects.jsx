@@ -11,6 +11,9 @@ const Subjects = ({ sidebarSection, category, getUrl }) => {
   const [ subj, setSubj ] = useState('');
 
   const handleClick = (e) => {
+    console.log(sidebarSection)
+    console.log(isOpen)
+    console.log(e.target.innerText)
     if (isOpen) {
       setIsOpen(false);
       setTitles('');
@@ -25,7 +28,6 @@ const Subjects = ({ sidebarSection, category, getUrl }) => {
        .catch(err => { console.log('Error at GET', err); });
     }
   };
-
 
   const subjects = (() => {
     return sidebarSection.reduce((a, b) => {

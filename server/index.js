@@ -32,7 +32,7 @@ app.post('/', (req, res) => {
     else {
       let cat = `bmarks.$.${category}`;
       Document.updateOne({bmarks: {$elemMatch: {[category]: {$exists: true}}}},
-        {$addToSet:{[cat]: [subject]}}, {upsert: false},(err, result) => {
+        {$addToSet:{[cat]: subject}}, {upsert: false},(err, result) => {
           if (err) { console.log('Cannot send back all data from post api, UPDATE'); }
           else { console.log(result); res.send(result); }
       });
