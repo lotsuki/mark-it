@@ -20,8 +20,9 @@ const documentSchema = new Schema ({
   date: String,
   username: String,
   password: String,
-  qlinks: Array,
   bmarks: Array
+}, {
+  strict: false
 });
 
 //Quicklink schema

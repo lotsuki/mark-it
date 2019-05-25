@@ -39,16 +39,16 @@
     display: block;
     position: relative;
     float: right;
-    width: 30rem;
+    width: 22rem;
     margin: 1rem;
     z-index: 2;
-    margin-top: -11.45rem;
-    margin-right: 4rem;
+    margin-top: -9.95rem;
+    margin-right: 5rem;
   }
 
   .formInputs {
-    height: 4rem;
-    width: 30rem;
+    height: 3rem;
+    width: 22rem;
     box-sizing: border-box;
     border-radius: 1px;
     padding: .8rem;
@@ -56,6 +56,10 @@
     font-size: 1.3rem;
     font-weight: lighter;
     background-color: #fff;
+  }
+
+  .formInputs:focus {
+    outline: none;
   }
 
   .navbar {

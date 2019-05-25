@@ -15,20 +15,31 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(`${__dirname}/../public`));
 
 app.post('/', (req, res) => {
+  console.log(db)
   // mongoose.connect(uri, {
   //   useNewUrlParser: true,
   //   autoIndex: true
-  Document.insertOne({
-        category: req.body.category,
-        subject: req.body.subject,
+  let category = req.body.category;
+  let subject = req.body.subject;
+  Document.create({
+        category: category,
+        subject: subject,
         title: req.body.title,
         url: req.body.url,
         date: req.body.date
       }, (err, result) => {
     if (err) { console.log('Error at POST', err); }
-    else { res.send(result); }
+    else {
+      let cat = `bmarks.$.${category}`;
+      Document.updateOne({bmarks: {$elemMatch: {[category]: {$exists: true}}}},
+        {$addToSet:{[cat]: [subject]}}, {upsert: false},(err, result) => {
+          if (err) { console.log('Cannot send back all data from post api, UPDATE'); }
+          else { console.log(result); res.send(result); }
+      });
+    }
   });
 });
+
 
 //   Document.findOne({category: req.body.category}, {lean: true}, (err, result) => {
 //     if (err) { console.log('Error at POST', err); }
