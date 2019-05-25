@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import utils from '../lib/utils.js';
 import axios from 'axios';
 
-const Titles = ({ titles, updateTitles }) => {
+const Titles = ({ titles, setTitles }) => {
   // const [ updateTitles, setUpdateTitles ] = useState('');
 
   const deleteBookmark = (e) => {
@@ -12,7 +12,7 @@ const Titles = ({ titles, updateTitles }) => {
     axios
       .delete(`bookmarks/${title}/${subject}`)
       .then(result => {
-        updateTitles(result.data);
+        setTitles(result.data);
       })
       .catch(err => { console.log('Could not delete document: ', err); });
   };

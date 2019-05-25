@@ -96,11 +96,14 @@
   }
 
   .searchbar {
+    display: flex;
+    align-items: center;
     background-color: #fff;
     width: 15rem;
-    height: 2.3rem;
-    border: 1px solid gray;
-    margin-left: -5rem;
+    height: 2.5rem;
+    border: 1px solid lightgray;
+    /*box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.1);*/
+    border-radius: 20px;
   }
 
   .searchbar > form {
@@ -117,6 +120,20 @@
     padding: 2px;
     color: #DFC668;
 
+  }
+
+  .searchbarContent {
+    display: flex;
+    flex-flow: column nowrap;
+    height: auto;
+  }
+
+  .resultsWrapper {
+
+  }
+
+  .searchResult {
+    height: 2rem;
   }
 
   .plusIcon {

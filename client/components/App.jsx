@@ -11,15 +11,15 @@ class App extends React.Component {
 
     this.state = {
       userID: null,
-      bmarks: []
+      bmarks: [],
+      titles: []
     }
-    this.updateBookmarks = this.updateBookmarks.bind(this);
   }
 
   componentDidMount() {
     this._isMounted = true;
     axios
-      .get('/docs')
+      .get('/user')
       .then(result => {
         if (this._isMounted) {
           let data = result.data[0];
@@ -30,25 +30,30 @@ class App extends React.Component {
          }
        })
       .catch(err => { console.log('Error at GET: ', err); });
+
+      axios
+      .get('/titles')
+      .then(result => {
+        if (this._isMounted) {
+          this.setState({
+            titles: result.data
+          })
+         }
+       })
+      .catch(err => { console.log('Error at GET: ', err); });
   }
 
   componentWillUnMount() {
     this._isMounted = false;
   }
 
-  updateBookmarks(data) {
-    console.log(data)
-    this.setState({
-      bmarks: data.bmarks
-    })
-  };
+
 
   render() {
-    const { userID, bmarks } = this.state;
-    console.log(bmarks)
+    const { userID, bmarks, titles } = this.state;
     return (
       <ErrorBoundary>
-        <Sidebar userID={userID} bmarks={bmarks} updateBookmarks={this.updateBookmarks}/>
+        <Sidebar userID={userID} bmarks={bmarks} titles={titles}/>
       </ErrorBoundary>
     );
   }

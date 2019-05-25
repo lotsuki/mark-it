@@ -6,7 +6,7 @@ import Form from './Form.jsx';
 import { useSpring, animated } from 'react-spring';
 
 
-const Sidebar = ({ bmarks, updateBookmarks }) => {
+const Sidebar = ({ bmarks, titles }) => {
   const [ isForm, setIsForm, ] = useState(false);
 
   const displayForm = () => {
@@ -19,10 +19,10 @@ const Sidebar = ({ bmarks, updateBookmarks }) => {
 
   return (
     <div id="container">
-      <Navbar displayForm={displayForm}/>
+      <Navbar displayForm={displayForm} titles={titles}/>
       <div className="appContainer" data-testid="appContainer">
         <div className="sidebarContainer">
-          <Bookmarks bmarks={bmarks} updateBookmarks={updateBookmarks}/>
+          <Bookmarks bmarks={bmarks} />
         </div>
         <div className="rightContainer">
           {

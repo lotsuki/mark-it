@@ -100,8 +100,15 @@ app.post('/', (req, res) => {
 // });
 
 
-app.get('/docs', (req, res) => {
+app.get('/user', (req, res) => {
   Document.find({ username: { $exists: true } }, (err, result) => {
+    if (err) { console.log('Failure to get user obj: ', err); }
+    else { res.send(result); }
+  });
+});
+
+app.get('/titles', (req, res) => {
+  Document.find({}, 'title url', (err, result) => {
     if (err) { console.log('Failure to get user obj: ', err); }
     else { res.send(result); }
   });
