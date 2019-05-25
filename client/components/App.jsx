@@ -13,6 +13,7 @@ class App extends React.Component {
       userID: null,
       bmarks: []
     }
+    this.updateBookmarks = this.updateBookmarks.bind(this);
   }
 
   componentDidMount() {
@@ -35,11 +36,19 @@ class App extends React.Component {
     this._isMounted = false;
   }
 
+  updateBookmarks(data) {
+    console.log(data)
+    this.setState({
+      bmarks: data.bmarks
+    })
+  };
+
   render() {
-    const { userID, qlinks, bmarks } = this.state;
+    const { userID, bmarks } = this.state;
+    console.log(bmarks)
     return (
       <ErrorBoundary>
-        <Sidebar userID={userID} bmarks={bmarks} />
+        <Sidebar userID={userID} bmarks={bmarks} updateBookmarks={this.updateBookmarks}/>
       </ErrorBoundary>
     );
   }

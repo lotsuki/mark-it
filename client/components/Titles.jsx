@@ -2,15 +2,17 @@ import React, { useState } from 'react';
 import utils from '../lib/utils.js';
 import axios from 'axios';
 
-const Titles = ({ titles }) => {
-  const [ hasDeleted, setHasDeleted ] = useState(false);
+const Titles = ({ titles, updateTitles }) => {
+  // const [ updateTitles, setUpdateTitles ] = useState('');
+
   const deleteBookmark = (e) => {
     let title = e.target.parentElement.firstChild.innerText;
+    let subject = e.target.parentElement.parentElement.parentElement.parentElement.firstChild.firstChild.innerText;
+
     axios
-      .delete(`bookmarks/${title}`)
+      .delete(`bookmarks/${title}/${subject}`)
       .then(result => {
-         setHasDeleted(true);
-         location.reload();
+        updateTitles(result.data);
       })
       .catch(err => { console.log('Could not delete document: ', err); });
   };

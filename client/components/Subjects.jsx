@@ -26,6 +26,10 @@ const Subjects = ({ sidebarSection, category }) => {
     }
   };
 
+  const updateTitles = (data) => {
+    setTitles(data);
+  };
+
   const subjects = (() => {
     return sidebarSection.reduce((a, b) => {
       if(b[category]) { return b[category]; }
@@ -57,7 +61,7 @@ const Subjects = ({ sidebarSection, category }) => {
             {
               isOpen && subj === subjects[index]
               ? (
-                  <Titles titles={titles} />
+                  <Titles titles={titles} updateTitles={updateTitles}/>
                 )
               : (null)
              }

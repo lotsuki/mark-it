@@ -120,12 +120,20 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 
-app.delete('/bookmarks/:title', (req, res) => {
+app.delete('/bookmarks/:title/:subject', (req, res) => {
   let title = req.params.title;
-  console.log(title);
-  Document.deleteOne({ title }, (err) => {
+  let subject = req.params.subject;
+
+  Document.deleteOne({ title: title }, (err) => {
     if (err) { console.log('Error at DELETE request: ', err); }
-  })
+    else {
+      Document.find({ subject: subject }, (err, result) => {
+        if (err) { console.log('Failure to get user obj: ', err); }
+        else { console.log(result); res.send(result); }
+      });
+    }
+  });
+
 });
 
 
