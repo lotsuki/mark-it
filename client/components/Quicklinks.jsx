@@ -24,3 +24,26 @@ Quicklinks.propTypes = {
 Quicklinks.defaultProps = {
   qlinks: []
 };
+
+ // const displayTitleIcons = () => {
+ //    // return <span className="bookmarkIcons">
+ //    //          <select name="icone" id="icone" style={{fontFamily: "'FontAwesome', Arial"}}>
+ //    //          <option>&#xf044;</option>
+
+
+ //    //          </select>
+ //    //        </span>
+
+ //  };
+
+ //  const addToQuicklinks = (e) => {
+ //    // if(e.target.className.contains('heart')) {
+ //    //   //axios.patch(update)
+ //    //   //add to favorites
+ //    // } else if (e.target.className.contains('star')) {
+ //    //   //add to starred
+ //    // } else if (e.target.className.contains('check')) {
+ //    //   //delete from bookmarks
+ //    //   //add to read
+ //    // }
+ //  };

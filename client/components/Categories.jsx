@@ -4,7 +4,7 @@ import Subjects from './Subjects.jsx';
 import Category from './Category.jsx';
 
 
-const Categories = ({ sidebarSection, getUrl }) => {
+const Categories = ({ sidebarSection }) => {
   const [ isOpen, setIsOpen ] = useState(false);
   const [ category, setCategory ] = useState('');
 
@@ -39,7 +39,7 @@ const Categories = ({ sidebarSection, getUrl }) => {
                 <div className="dropdownWrapper" >
                   {
                     isOpen
-                      ? ( <Subjects sidebarSection={sidebarSection} category={category} getUrl={getUrl}/>)
+                      ? ( <Subjects sidebarSection={sidebarSection} category={category} />)
                       : ( null )
                   }
                 </div>

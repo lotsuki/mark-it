@@ -4,16 +4,13 @@ import Titles from './Titles.jsx';
 import axios from 'axios';
 import {useTrail, animated} from 'react-spring';
 
-const Subjects = ({ sidebarSection, category, getUrl }) => {
+const Subjects = ({ sidebarSection, category }) => {
   //when subject is clicked, submit get request for titles using e
   const [ isOpen, setIsOpen ] = useState(false);
   const [ titles, setTitles ] = useState([]);
   const [ subj, setSubj ] = useState('');
 
   const handleClick = (e) => {
-    console.log(sidebarSection)
-    console.log(isOpen)
-    console.log(e.target.innerText)
     if (isOpen) {
       setIsOpen(false);
       setTitles('');
@@ -60,7 +57,7 @@ const Subjects = ({ sidebarSection, category, getUrl }) => {
             {
               isOpen && subj === subjects[index]
               ? (
-                  <Titles titles={titles} getUrl={getUrl}/>
+                  <Titles titles={titles} />
                 )
               : (null)
              }
