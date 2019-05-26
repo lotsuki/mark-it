@@ -4,8 +4,7 @@ import Titles from './Titles.jsx';
 import axios from 'axios';
 import {useTrail, animated} from 'react-spring';
 
-const Subjects = ({ sidebarSection, category }) => {
-  //when subject is clicked, submit get request for titles using e
+const Subjects = ({ bmarks, category }) => {
   const [ isOpen, setIsOpen ] = useState(false);
   const [ titles, setTitles ] = useState([]);
   const [ subj, setSubj ] = useState('');
@@ -27,7 +26,7 @@ const Subjects = ({ sidebarSection, category }) => {
   };
 
   const subjects = (() => {
-    return sidebarSection.reduce((a, b) => {
+    return bmarks.reduce((a, b) => {
       if(b[category]) { return b[category]; }
       return a;
     }, {});
@@ -81,6 +80,4 @@ Subjects.defaultProps = {
   sidebarSection: [],
   category: ''
 };
-// <div className="titlesDropdown" key={`${subjects[index]}${index}`}>
-//  </div>
 

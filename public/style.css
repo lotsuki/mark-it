@@ -22,12 +22,10 @@
     background-color: #DFC668;
   }
 
-  .appContainer {
+  #appContainer {
     padding: 15px;
     height: 100%;
     width: auto;
-
-
   }
 
   .navbarContainer {
@@ -114,7 +112,7 @@
     align-items: center;
     padding-left: .5rem;
     border-radius: 5px;
-    width: 13rem;
+    width: 15rem;
     height: 2rem;
 
   }
@@ -137,8 +135,8 @@
     margin-top: 1rem;
     min-height: 2rem;
     padding: 0;
-    background-color: #fff;
-    box-shadow: 0px 8px 16px 1px rgba(0,0,0,0.2);
+
+
   }
 
   .searchResult {
@@ -148,6 +146,7 @@
     height: 2rem;
     border-bottom: 1px dotted lightgray;
     padding-left: .8rem;
+    background-color: #fff;
   }
 
   .plusIcon {
@@ -168,6 +167,7 @@
   .searchbar >form > input {
     border: none;
     font-size: .95rem;
+    width: 13rem;
   }
 
   .searchbar >form > input:focus {

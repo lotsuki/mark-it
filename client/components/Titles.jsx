@@ -3,8 +3,6 @@ import utils from '../lib/utils.js';
 import axios from 'axios';
 
 const Titles = ({ titles, setTitles }) => {
-  // const [ updateTitles, setUpdateTitles ] = useState('');
-
   const deleteBookmark = (e) => {
     let title = e.target.parentElement.firstChild.innerText;
     let subject = e.target.parentElement.parentElement.parentElement.parentElement.firstChild.firstChild.innerText;
@@ -33,7 +31,5 @@ const Titles = ({ titles, setTitles }) => {
   );
 };
 
-//access element when hover
-//<div className="invokeGetUrl">{getUrl(obj.url)}</div>
 
 export default Titles;

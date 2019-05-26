@@ -4,7 +4,7 @@ import Subjects from './Subjects.jsx';
 import Category from './Category.jsx';
 
 
-const Categories = ({ sidebarSection }) => {
+const Categories = ({ bmarks }) => {
   const [ isOpen, setIsOpen ] = useState(false);
   const [ category, setCategory ] = useState('');
 
@@ -18,11 +18,10 @@ const Categories = ({ sidebarSection }) => {
     }
   };
 
-
   return (
     <div className="sectionContainer" >
      <div className="sectionWrapper">
-       {sidebarSection.map((obj, i) => {
+       {bmarks.map((obj, i) => {
          let cat = Object.keys(obj)[0];
          return (
           <div className="categoryContainer" key={cat}>
@@ -39,7 +38,7 @@ const Categories = ({ sidebarSection }) => {
                 <div className="dropdownWrapper" >
                   {
                     isOpen
-                      ? ( <Subjects sidebarSection={sidebarSection} category={category} />)
+                      ? ( <Subjects bmarks={bmarks} category={category} />)
                       : ( null )
                   }
                 </div>
@@ -59,10 +58,10 @@ const Categories = ({ sidebarSection }) => {
 export default Categories;
 
 Categories.propTypes = {
-  sidebarSection: PropTypes.array
+  bmarks: PropTypes.array
 };
 
 Categories.defaultProps = {
-  sidebarSection: []
+  bmarks: []
 };
 

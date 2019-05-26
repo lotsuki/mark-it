@@ -2,16 +2,13 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Searchbar from './Searchbar.jsx';
 
-const Navbar = ({ displayForm, titles }) => {
-  // const [ addClicked, setAddClicked ] = useState(false);
-  const [ editClicked, setEditClicked ] = useState(false);
-
+const Navbar = ({ displayForm, displayEdit, titles }) => {
   const addBookmark = () => {
     displayForm();
   };
 
   const editBookmark = () => {
-
+    displayEdit()
   };
 
   return (

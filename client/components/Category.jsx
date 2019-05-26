@@ -1,7 +1,6 @@
 import React from 'react';
 
 const Category = ({ category, cat}) => {
-
   return (
     <div>
     {
@@ -22,7 +21,7 @@ const Category = ({ category, cat}) => {
         )
      }
      </div>
-  )
-}
+  );
+};
 
 export default Category;

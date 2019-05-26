@@ -47,8 +47,6 @@ class App extends React.Component {
     this._isMounted = false;
   }
 
-
-
   render() {
     const { userID, bmarks, titles } = this.state;
     return (
