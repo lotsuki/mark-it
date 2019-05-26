@@ -4,6 +4,7 @@ import Navbar from './Navbar.jsx';
 import Bookmarks from './Bookmarks.jsx';
 import Form from './Form.jsx';
 import Edit from './Edit.jsx';
+import Confirm from './Confirm.jsx';
 import { useSpring, animated } from 'react-spring';
 
 
@@ -61,6 +62,7 @@ const Sidebar = ({ bmarks, titles }) => {
           : (null)
         }
       </div>
+      <Confirm />
     </div>
   );
 };

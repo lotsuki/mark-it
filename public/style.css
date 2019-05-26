@@ -15,7 +15,7 @@
 
   #container {
     display: grid;
-    grid-template-rows: 4rem auto auto;
+    grid-template-rows: 4rem auto auto auto;
     grid-template-columns: 100%;
     grid-row-gap: 0px;
     height: 100%;
@@ -405,6 +405,65 @@
     visibility: hidden;
   }
 
+  .confirm-container {
+    display: flex;
+    flex-flow: column nowrap;
+    position: absolute;
+    height: 9rem;
+    width: 19rem;
+    top: 7rem;
+    left: 25rem;
+    background-color: #fff;
+    border-radius: 5px;
+  }
+
+  .confirm-header {
+    border-bottom: 1px dotted lightgray;
+  }
+
+  .confirm-header-text {
+    font-family: Roboto, sans-serif;
+    font-size: 18px;
+    color: gray;
+    font-weight: lighter;
+    padding: .8rem .8rem .5rem .8rem;
+  }
+
+  .confirm-text-wrapper {
+    margin: 0;
+    line-height: 1rem;
+     padding: 1.4rem 1.4rem 0rem 1.4rem;
+  }
+
+  .confirm-text {
+    font-family: Roboto, sans-serif;
+    color: gray;
+    letter-spacing: .5px;
+    font-size: 14px;
+    font-weight: lighter;
+  }
+
+  .confirm-buttons-wrapper {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-end;
+    align-items: center;
+    flex:1;
+
+  }
+
+  .confirm-button {
+    border: none;
+    font-size: 16px;
+    width: 3.6rem;
+    cursor: pointer;
+    height: 2.2rem;
+    margin: .3rem;
+  }
+
+  .confirm-button:hover {
+    background-color: #D4D6C6;
+  }
 
 
 
