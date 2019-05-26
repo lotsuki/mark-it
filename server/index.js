@@ -10,6 +10,7 @@ mongoose.Promise = global.Promise;
 
 const PORT = 3000;
 
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(`${__dirname}/../public`));
@@ -122,6 +123,39 @@ app.get('/titles/:category/:subject', (req, res) => {
     else { res.send(result); }
   });
 });
+
+// app.get('/update/subj/:defaultVal/:newVal', (req, res) => {
+//   let defaultVal = req.params.defaultVal;
+//   let newVal = req.params.newVal;
+//   Document.updateOne({username: {$exists:true}}, {bmarks.$.: }, (err, result) => {
+//     if (err) { console.log('Failure to get user obj: ', err); }
+//     else { res.send(result);
+//       //Document.updateMany
+//     }
+//   });
+// });
+
+// app.get('/update/cat/:defaultVal/:newVal', (req, res) => {
+//   let defaultVal = req.params.defaultVal;
+//   let newVal = req.params.newVal;
+//   let key = `bmarks.$.${defaultVal}`
+//   Document.updateOne({username: {$exists:true}}, {bmarks: }, (err, result) => {
+//     if (err) { console.log('Failure to get user obj: ', err); }
+//     else { res.send(result);
+//       //Document.updateMany
+//     }
+//   });
+// });
+
+// app.get('/update/title/:defaultVal/:newVal', (req, res) => {
+//   let defaultVal = req.params.defaultVal;
+//   let newVal = req.params.newVal;
+
+//   Document.updateOne({title: defaultVal}, {$set:{title: newVal}}, (err, result) => {
+//     if (err) { console.log('Failure to get user obj: ', err); }
+//     else { res.send(result); }
+//   });
+// });
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/index.html'));

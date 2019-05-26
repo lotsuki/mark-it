@@ -35,6 +35,10 @@ const Sidebar = ({ bmarks, titles }) => {
     }
   };
 
+  const editUpdate = (target) => {
+   console.log(target)
+  };
+
   return (
     <div id="container">
       <Navbar displayForm={displayForm} displayEdit={displayEdit} titles={titles}/>
@@ -53,7 +57,7 @@ const Sidebar = ({ bmarks, titles }) => {
       <div id="editContainer">
         {
           showEdit
-          ? (<Edit bmarks={bmarks} titles={titles} displayEdit={displayEdit}/>)
+          ? (<Edit bmarks={bmarks} titles={titles} displayEdit={displayEdit} editUpdate={editUpdate}/>)
           : (null)
         }
       </div>
