@@ -8,8 +8,7 @@ const Schema = mongoose.Schema;
 // const documentSchema = new Schema ({
 //   username: String,
 //   password: String,
-//   qlinks: Array,
-//   bmarks: Array
+//   categories: Array
 // });
 
 const documentSchema = new Schema ({

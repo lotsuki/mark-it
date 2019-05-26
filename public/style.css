@@ -25,19 +25,19 @@
     padding:0;
   }
 
-  #appContainer {
+  #app-container {
     padding: 15px;
     height: 100%;
     width: auto;
     margin:0;
   }
 
-  .navbarContainer {
+  .navbar-container {
     height: 500px;
     width: 100%;
   }
 
-  .formContainer {
+  .form-container {
     display: block;
     position: relative;
     float: right;
@@ -48,7 +48,7 @@
     margin-right: 5rem;
   }
 
-  .formInputs {
+  .form-inputs {
     height: 3rem;
     width: 22rem;
     box-sizing: border-box;
@@ -60,7 +60,7 @@
     background-color: #fff;
   }
 
-  .formInputs:focus {
+  .form-inputs:focus {
     outline: none;
   }
 
@@ -77,7 +77,7 @@
     background-color: #fff;
   }
 
-  .logoWrapper {
+  .logo-wrapper {
     display: flex;
     width: 10rem;
     align-items: center;
@@ -97,7 +97,7 @@
     height: 25px;
   }
 
-  .searchbarContainer {
+  .searchbar-container {
     position: relative;
   }
 
@@ -120,14 +120,14 @@
     height: 2rem;
 
   }
-  .searchIcon {
+  .search-icon {
     /*color: #C0C0A4;*/
     padding: 2px;
     color: #DFC668;
 
   }
 
-  .searchbarContent {
+  .searchbar-content {
     display: flex;
     flex-flow: column nowrap;
     height: auto;
@@ -135,7 +135,7 @@
     width: 15rem;
   }
 
-  .resultsWrapper {
+  .results-wrapper {
     margin-top: 1rem;
     min-height: 2rem;
     padding: 0;
@@ -143,7 +143,7 @@
 
   }
 
-  .searchResult {
+  .search-result {
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
@@ -153,7 +153,7 @@
     background-color: #fff;
   }
 
-  .plusIcon {
+  .plus-icon {
     margin-right: .7rem;
     cursor: pointer;
     font-size: 1.5rem;
@@ -161,7 +161,7 @@
      color: #DFC668;
   }
 
-  .editIcon {
+  .edit-icon {
     cursor: pointer;
     font-size: 1.5rem;
   /*  color: #923192;*/
@@ -178,14 +178,14 @@
     outline: none;
   }
 
-  .iconsWrapper {
+  .icons-wrapper {
     display: flex;
     justify-content: flex-end;
     align-items: center;
     padding: 2rem;
   }
 
-  .sidebarContainer {
+  .sidebar-container {
     display: grid;
     grid-template-rows: 8.5rem auto;
     grid-gap: .5rem;
@@ -196,26 +196,27 @@
     border-radius: 4px;
   }
 
-  .rightContainer {
+  .right-container {
     display: block;
     float: right;
     top: 0;
   }
 
-  .bookmarksContainer {
+  .bookmarks-container {
     display: grid;
     grid-template-rows: 2rem auto;
 
   }
 
-  .sidebarHeaderWrapper {
+  .sidebar-header-wrapper {
     text-align: center;
     background-color: #fff;
     max-width: 17rem;
     padding-top: 10px;
+    box-shadow: 0 10px 10px #777;
   }
 
-  .sidebarHeader {
+  .sidebar-header {
     font-family: Helvetica, sans-serif;
     font-size: 1rem;
     color: #a6a6a6;
@@ -223,37 +224,39 @@
     font-weight: lighter;
   }
 
-  .sidebarBorder {
+  .sidebar-border {
     background-color: #F8F3EF;
     width: .2rem;
   }
 
-  .sectionContainer {
+  .section-container {
     margin: 0;
     padding: 0;
-    height: 30rem;
     width: 17rem;
     max-width: 40rem;
-
+    background-color: #fff;
+    box-shadow: 0 10px 10px #777;
+    max-height: 31rem;
   }
 
-  .sectionWrapper{
+  .section-wrapper{
     display: grid;
     grid-template-rows: auto;
     font-family: Helvetica, sans-serif;
     letter-spacing: .05rem;
     width: 17rem;
     max-width: 40rem;
+    /*max-height: 31rem;*/
+    /*box-shadow: 0 10px 10px #777;*/
   }
 
-  .categoryContainer {
+  .category-container {
     position: relative;
     min-width: 17rem;
 
   }
 
-  .categoryWrapper {
-     max-width: 17rem;
+  .category-wrapper {
   }
 
   .leftSide {
@@ -289,33 +292,32 @@
     font-size: 1rem;
   }
 
-  .dropdownContainer {
+  .dropdown-container {
     margin: 0 auto;
     width: auto;
     padding: 0;
 
   }
 
-  .subjectContainer {
+  .subject-container {
     display: flex;
     flex-flow: column nowrap;
     height: auto;
     margin: 0;
     padding: 0;
-
     width: auto;
 
   }
 
-  .subjectContainer > ul {
+  .subject-container > ul {
     position: relative;
   }
 
-  .subjectWrapper {
-     position: relative;
+  .subject-wrapper {
+    position: relative;
     list-style: none;
     width: auto;
-
+    padding-left: 1rem;
   }
 
   .subject {
@@ -328,59 +330,42 @@
     letter-spacing: .05rem;
     cursor: pointer;
     max-width: 16rem;
-    padding-left: 1rem;
     border-bottom: 1px dotted lightgray;
     background-color: #fff;
-    margin-left: 1rem;
-    border-radius: 2px;
   }
 
-  .titlesContainer {
+  .titles-container {
     display: flex;
     flex-flow: column nowrap;
-    margin: 0px 35px;
     height: auto;
     width: 20rem;
     background-color: #fff;
+    margin: 0;
+    padding: 0;
   }
 
-  .titleWrapper {
+  .title-wrapper {
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
     align-items: center;
-  }
-
-  .fa-trash-alt {
-    color: gray;
-    margin-right: .8rem;
-    opacity: 0;
-  }
-
-  .titleWrapper:hover > .fa-trash-alt {
-    opacity: 1;
-    transition: opacity .3s ease-in;
-  }
-
-  li {
-    list-style: none;
-  }
-  a {
-    text-decoration: none;
-    color: #000;
-  }
-
-  .titleWrapper {
-    display: flex;
-    flex-flow: row nowrap;
-    align-items: center;
+    width: 20rem;
     height: 2.5rem;
     font-family: Helvetica, sans-serif;
     cursor: pointer;
     font-size: 0.8rem;
-    width: 20rem;
-    margin: 2px;
+    padding: .5rem;
+  }
 
+  .fa-trash-alt {
+    color: gray;
+    margin-right: 1rem;
+    opacity: 0;
+  }
+
+  .title-wrapper:hover > .fa-trash-alt {
+    opacity: 1;
+    transition: opacity .3s ease-in;
   }
 
   .title {
@@ -395,14 +380,19 @@
     visibility: visible;
   }
 
-  .iconsMenu {
+
+  li {
+    list-style: none;
+  }
+  a {
+    text-decoration: none;
+    color: #000;
+  }
+
+  .icons-menu {
     display: flex;
     flex: 1
     visibility: hidden;
-  }
-
-  .titleWrapper:hover > .iframe {
-    visibility: visible;
   }
 
   .add {
@@ -560,14 +550,14 @@ li {
   border: none !important;
 }
 
-#editContainer {
+#edit-container {
   display: flex;
   justify-content: flex-end;
   height: 100%;
   width: 100%;
 }
 
-.editMain {
+.edit-main {
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-around;
@@ -580,31 +570,31 @@ li {
   padding-right: 5rem;
 }
 
-.editWrapper {
+.edit-wrapper {
   height: 18rem;
   width: 13rem;
   background-color: #fff;
   border-radius: 5px;
   overflow-y: scroll;
 }
-.editWrapper ul {
+.edit-wrapper ul {
   font-family: Helvetica, sans-serif;
   margin: 0;
   padding: 0;
 }
 
-.editWrapper > ul > li {
+.edit-wrapper > ul > li {
   font-family: Helvetica, sans-serif;
   padding: .8rem;
   font-size: .9rem;
   font-weight: lighter;
 }
-.editWrapper > ul > li > a{
+.edit-wrapper > ul > li > a{
   font-size: .9rem;
   font-weight: lighter;
 }
 
-.editHeader {
+.edit-header {
   border-bottom: 1px dotted lightgray;
   padding: .5rem;
   text-align: center;
@@ -612,7 +602,7 @@ li {
   font-weight: lighter;
 }
 
-.deleteIcon {
+.delete-icon {
   height: .8rem;
   margin-right: .4rem;
 }

@@ -39,38 +39,38 @@ const Form = ({ }) => {
   };
 
   return(
-    <form className="formContainer" data-testid="form" onSubmit={submitForm}>
+    <form className="form-container" data-testid="form" onSubmit={submitForm}>
       <input
         type="text"
         value={category}
-        className="formInputs"
+        className="form-inputs"
         data-testid="category"
         placeholder="Category"
         onChange={e => setCategory(e.target.value)}/>
       <input
         type="text"
         value={subject}
-        className="formInputs"
+        className="form-inputs"
         data-testid="subject"
         placeholder="Subject"
         onChange={e => setSubject(e.target.value)}/>
       <input
         type="text"
         value={title}
-        className="formInputs"
+        className="form-inputs"
         data-testid="title"
         placeholder="Title"
         onChange={e=> setTitle(e.target.value)}/>
       <input
         type="text"
         value={url}
-        className="formInputs"
+        className="form-inputs"
         data-testid="url"
         placeholder="URL"
         onChange={e => setUrl(e.target.value)}/>
       <input
         type="submit"
-        className="formInputs"
+        className="form-inputs"
         data-testid="submit"
         value="Submit"/>
     </form>

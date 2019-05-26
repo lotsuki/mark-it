@@ -19,23 +19,23 @@ const Categories = ({ bmarks }) => {
   };
 
   return (
-    <div className="sectionContainer" >
-     <div className="sectionWrapper">
+    <div className="section-container" >
+     <div className="section-wrapper">
        {bmarks.map((obj, i) => {
          let cat = Object.keys(obj)[0];
          return (
-          <div className="categoryContainer" key={cat}>
+          <div className="category-container" key={cat}>
            <div
-             className="categoryWrapper"
+             className="category-wrapper"
              onClick={handleClick}
              key={cat}>
              <Category category={category} cat={cat}/>
            </div>
-           <div className="dropdownContainer" key={`${cat}${i}`}>
+           <div className="dropdown-container" key={`${cat}${i}`}>
              {
               category === cat
               ? (
-                <div className="dropdownWrapper" >
+                <div className="dropdown-wrapper" >
                   {
                     isOpen
                       ? ( <Subjects bmarks={bmarks} category={category} />)

@@ -20,8 +20,8 @@ const Sidebar = ({ bmarks, titles }) => {
   };
 
   const displayEdit = () => {
-    let appContainer = document.getElementById('appContainer');
-    let editContainer = document.getElementById('editContainer');
+    let appContainer = document.getElementById('app-container');
+    let editContainer = document.getElementById('edit-container');
     if (!showEdit) {
       appContainer.style.height = '0';
       appContainer.style.visibility = 'hidden';
@@ -42,11 +42,11 @@ const Sidebar = ({ bmarks, titles }) => {
   return (
     <div id="container">
       <Navbar displayForm={displayForm} displayEdit={displayEdit} titles={titles}/>
-      <div id="appContainer" data-testid="appContainer">
-        <div className="sidebarContainer">
+      <div id="app-container" data-testid="app-container">
+        <div className="sidebar-container">
           <Bookmarks bmarks={bmarks} />
         </div>
-        <div className="rightContainer">
+        <div className="right-container">
           {
             showForm
             ? (<Form/>)
@@ -54,7 +54,7 @@ const Sidebar = ({ bmarks, titles }) => {
           }
         </div>
       </div>
-      <div id="editContainer">
+      <div id="edit-container">
         {
           showEdit
           ? (<Edit bmarks={bmarks} titles={titles} displayEdit={displayEdit} editUpdate={editUpdate}/>)

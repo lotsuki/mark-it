@@ -39,9 +39,9 @@ const Subjects = ({ bmarks, category }) => {
   );
 
   return (
-    <div className="subjectContainer">
+    <div className="subject-container">
       {trail.map(({height, opacity}, index) => (
-         <div className="subjectWrapper" key={subjects[index]}>
+         <div className="subject-wrapper" key={subjects[index]}>
            <div>
              <animated.div
                className="subject"

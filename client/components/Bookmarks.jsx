@@ -5,7 +5,7 @@ import Categories from './Categories.jsx';
 
 const Bookmarks = ({ bmarks }) => {
   return (
-    <div className="bookmarksContainer">
+    <div className="bookmarks-container">
       <SidebarHeader sidebarHeader="MY BOOKMARKS" />
       <Categories bmarks={bmarks} height={'3.5rem'} />
     </div>

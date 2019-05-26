@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const SidebarHeader = ({ sidebarHeader }) => (
-  <div className="sidebarHeaderWrapper">
-    <div className="sidebarHeader" data-testid="sidebarHeader">{sidebarHeader}</div>
+  <div className="sidebar-header-wrapper">
+    <div className="sidebar-header" data-testid="sidebar-header">{sidebarHeader}</div>
   </div>
 );
 

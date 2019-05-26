@@ -26,21 +26,21 @@ const Searchbar = ({ titles }) => {
   // })
 
   return (
-    <div className="searchbarContainer">
+    <div className="searchbar-container">
       <div className="searchbar">
         <form action="Submit">
-          <div className="searchIcon"><i className="fa fa-search"></i></div>
+          <div className="search-icon"><i className="fa fa-search"></i></div>
           <input type="text" placeholder="Search bookmarks..." name="search" onChange={handleSearch}/>
         </form>
       </div>
-      <div className="searchbarContent">
+      <div className="searchbar-content">
         {
           isSearching
-          ? (<ul className="resultsWrapper">
+          ? (<ul className="results-wrapper">
               {
                 titles.reduce((a, b) => {
                   if (b.title && b.url && b.title.toLowerCase().indexOf(input) !== -1) {
-                    return a.concat([<li className="searchResult" key={b.title}><a href={b.url} key={b.url}>{b.title}</a></li>]);
+                    return a.concat([<li className="search-result" key={b.title}><a href={b.url} key={b.url}>{b.title}</a></li>]);
                   } else {
                     return a;
                   }
