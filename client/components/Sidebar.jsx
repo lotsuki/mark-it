@@ -21,11 +21,16 @@ const Sidebar = ({ bmarks, titles }) => {
 
   const displayEdit = () => {
     let appContainer = document.getElementById('appContainer');
+    let editContainer = document.getElementById('editContainer');
     if (!showEdit) {
+      appContainer.style.height = '0';
       appContainer.style.visibility = 'hidden';
+      editContainer.style.gridRow ='2/3';
       setShowEdit(true);
     } else {
+      appContainer.style.height = '100%';
       appContainer.style.visibility = 'visible';
+      editContainer.style.gridRow ='';
       setShowEdit(false);
     }
   };
@@ -45,7 +50,7 @@ const Sidebar = ({ bmarks, titles }) => {
           }
         </div>
       </div>
-      <div className="editContainer">
+      <div id="editContainer">
         {
           showEdit
           ? (<Edit bmarks={bmarks} titles={titles} displayEdit={displayEdit}/>)
