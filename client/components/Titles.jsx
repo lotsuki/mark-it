@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import utils from '../lib/utils.js';
 import axios from 'axios';
 
@@ -28,3 +29,13 @@ const Titles = ({ titles, setTitles, displayConfirm }) => {
 
 
 export default Titles;
+
+Titles.propTypes = {
+  titles: PropTypes.array,
+  setTitles: PropTypes.func,
+  displayConfirm: PropTypes.func
+};
+
+Titles.defaultProps = {
+  titles: []
+};

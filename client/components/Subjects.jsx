@@ -79,12 +79,14 @@ const Subjects = ({ bmarks, category, displayConfirm, titlesUpdate }) => {
 export default Subjects;
 
 Subjects.propTypes = {
-  sidebarSection: PropTypes.array,
-  category: PropTypes.string
+  bmarks: PropTypes.object,
+  category: PropTypes.string,
+  titlesUpdate: PropTypes.func,
+  displayConfirm: PropTypes.func
 };
 
 Subjects.defaultProps = {
-  sidebarSection: [],
+  bmarks: {},
   category: ''
 };
 

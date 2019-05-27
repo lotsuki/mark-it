@@ -11,7 +11,7 @@ class App extends React.Component {
 
     this.state = {
       userID: null,
-      bmarks: [],
+      bmarks: null,
       titles: []
     }
   }

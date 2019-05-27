@@ -5,7 +5,11 @@ const user = new Document({
   date: '5-22-19',
   username: 'lotsuki',
   password: 'thisisahash123',
-  bmarks: [{Tech: ['React', 'Python']}, {Travel: ['Munich', 'London']}, {Food: ['Vegan', 'Desserts']}]
+  bmarks: {
+    Tech: ['React', 'Python'],
+    Travel: ['Munich', 'London'],
+    Food: ['Vegan', 'Desserts']
+  }
 });
 
 
@@ -17,7 +21,7 @@ function inputInitialDoc() {
 
 inputInitialDoc();
 
-
+ // bmarks: [{Tech: ['React', 'Python']}, {Travel: ['Munich', 'London']}, {Food: ['Vegan', 'Desserts']}]
 
 
 

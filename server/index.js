@@ -135,17 +135,20 @@ app.get('/titles/:category/:subject', (req, res) => {
 //   });
 // });
 
-// app.get('/update/cat/:defaultVal/:newVal', (req, res) => {
-//   let defaultVal = req.params.defaultVal;
-//   let newVal = req.params.newVal;
-//   let key = `bmarks.$.${defaultVal}`
-//   Document.updateOne({username: {$exists:true}}, {bmarks: }, (err, result) => {
-//     if (err) { console.log('Failure to get user obj: ', err); }
-//     else { res.send(result);
-//       //Document.updateMany
-//     }
-//   });
-// });
+app.get('/update/cat/:defaultVal/:newVal', (req, res) => {
+  let defaultVal = req.params.defaultVal;
+  let newVal = req.params.newVal;
+  console.log(defaultVal, newVal)
+  let key = `bmarks.${defaultVal}`;
+
+  Document.updateOne({username: {$exists:true}}, {$rename:{[key]: newVal}}, (err, result) => {
+    if (err) { console.log('Failure to get user obj: ', err); }
+    else { console.log(result); res.send(result);
+      //Document.updateMany
+    }
+  });
+});
+
 
 // app.get('/update/title/:defaultVal/:newVal', (req, res) => {
 //   let defaultVal = req.params.defaultVal;
@@ -176,16 +179,6 @@ app.delete('/bookmarks/:title/:subject', (req, res) => {
   });
 
 });
-
-
-// const cursor = db
-//   .collection('inventory')
-//   .find({
-//     status: 'A'
-//   })
-//   .project({ item: 1, status: 1 });
-
-
 
 
 app.listen(PORT, () => {

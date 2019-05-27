@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 
 const Confirm = ({ setShowConfirm, titleToDelete, subjectOfTitle, showTitlesUpdate }) => {
@@ -33,3 +34,16 @@ const Confirm = ({ setShowConfirm, titleToDelete, subjectOfTitle, showTitlesUpda
 };
 
 export default Confirm;
+
+
+Confirm.propTypes = {
+  titleToDelete: PropTypes.string,
+  subjectOfTitle: PropTypes.string,
+  setShowConfirm: PropTypes.func,
+  showTitlesUpdate:PropTypes.func
+};
+
+Confirm.defaultProps = {
+  titleToDelete: '',
+  subjectOfTitle: ''
+};

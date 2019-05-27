@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 
 const Searchbar = ({ titles }) => {
   const [ isSearching, setIsSearching ] = useState(false);
@@ -57,4 +58,10 @@ const Searchbar = ({ titles }) => {
 
 export default Searchbar;
 
+Searchbar.propTypes = {
+  titles: PropTypes.array
+};
 
+Searchbar.defaultProps = {
+  titles: []
+};

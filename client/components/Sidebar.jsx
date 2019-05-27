@@ -56,6 +56,10 @@ const Sidebar = ({ bmarks, titles }) => {
     }
   };
 
+  const editUpdate = () => {
+    console.log('hi')
+  };
+
   return (
     <div id="container">
       <Navbar displayForm={displayForm} displayEdit={displayEdit} titles={titles}/>
@@ -91,12 +95,12 @@ const Sidebar = ({ bmarks, titles }) => {
 export default Sidebar;
 
 Sidebar.propTypes = {
-  qlinks: PropTypes.array,
-  bmarks: PropTypes.array
+  bmarks: PropTypes.object,
+  titles: PropTypes.array
 };
 
 Sidebar.defaultProps = {
-  qlinks: [],
-  bmarks: []
+  bmarks: {},
+  titles: []
 };
 

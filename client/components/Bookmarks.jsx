@@ -17,9 +17,12 @@ export default Bookmarks;
 
 
 Bookmarks.propTypes = {
-  bmarks: PropTypes.array
+  bmarks: PropTypes.object,
+  displayConfirm: PropTypes.func,
+  titlesUpdate: PropTypes.array
 };
 
 Bookmarks.defaultProps = {
-  bmarks: []
+  bmarks: {},
+  titlesUpdate: []
 };

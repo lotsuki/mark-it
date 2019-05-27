@@ -4,7 +4,7 @@ import axios from 'axios';
 import moment from 'moment';
 
 
-const Form = ({ }) => {
+const Form = () => {
   const [ category, setCategory ] = useState('');
   const [ subject, setSubject ] = useState('');
   const [ title, setTitle ] = useState('');
@@ -80,10 +80,5 @@ const Form = ({ }) => {
 
 export default Form;
 
-
-
-// Form.propTypes = {
-//   updateStateAfterPostReq: PropTypes.func
-// };
 
 

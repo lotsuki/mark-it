@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import _ from 'underscore';
 import PropTypes from 'prop-types';
 import Subjects from './Subjects.jsx';
 import Category from './Category.jsx';
@@ -21,19 +22,18 @@ const Categories = ({ bmarks, displayConfirm, titlesUpdate }) => {
   return (
     <div className="section-container" >
      <div className="section-wrapper">
-       {bmarks.map((obj, i) => {
-         let cat = Object.keys(obj)[0];
+       {_.map(bmarks, (cat, key) => {
          return (
-          <div className="category-container" key={cat}>
+          <div className="category-container" key={key}>
            <div
              className="category-wrapper"
              onClick={handleClick}
-             key={cat}>
-             <Category category={category} cat={cat}/>
+             key={key}>
+             <Category category={category} cat={key}/>
            </div>
-           <div className="dropdown-container" key={`${cat}${i}`}>
+           <div className="dropdown-container" key={cat[0]}>
              {
-              category === cat
+              category === key
               ? (
                 <div className="dropdown-wrapper" >
                   {
@@ -58,10 +58,13 @@ const Categories = ({ bmarks, displayConfirm, titlesUpdate }) => {
 export default Categories;
 
 Categories.propTypes = {
-  bmarks: PropTypes.array
+  bmarks: PropTypes.object,
+  displayConfirm: PropTypes.func,
+  titlesUpdate: PropTypes.array
 };
 
 Categories.defaultProps = {
-  bmarks: []
+  bmarks: {},
+  titlesUpdate: []
 };
 

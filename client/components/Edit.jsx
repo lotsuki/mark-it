@@ -1,19 +1,34 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import axios from 'axios';
+import _ from 'underscore';
 //TODO:
 //if didn't press enter in input, return to default value
 
 const Edit = ({ bmarks, titles, displayEdit, editUpdate }) => {
-  var subjects = [];
-  let categories = bmarks.map(obj => {
-    for (var key in obj) {
-      subjects = subjects.concat(obj[key]);
-      return key;
-    }
+  let subjects = [];
+  let categories = _.map(bmarks, (cat, key) => {
+    subjects = subjects.concat(cat);
+    return key;
   });
 
   const editBookmark = (e) => {
-    let defaultValue = e.target.defaultValue;
-    let newValue = e.target.value;
+    if (e.keyCode === 13) {
+      let defaultVal = e.target.defaultValue;
+      let newVal = e.target.value;
+      console.log(defaultVal, newVal);
+      axios
+        .get(`/update/cat/${defaultVal}/${newVal}`, {
+          method: 'PATCH'
+        })
+        .then(result => {
+          console.log('PATCH request successful')
+          console.log(result)
+          // editUpdate(result);
+        })
+        .catch(err => { console.log('Error at PATCH request: ', err); });
+    }
+
 
     // if (categories.indexOf(defaultValue) !== -1) {
     //   axios
@@ -45,7 +60,7 @@ const Edit = ({ bmarks, titles, displayEdit, editUpdate }) => {
     //       editUpdate(result);
     //     })
     //     .catch(err => { console.log('Error at PATCH request: ', err); });
-    //}
+     //}
   };
 
   return (
@@ -56,7 +71,7 @@ const Edit = ({ bmarks, titles, displayEdit, editUpdate }) => {
           {categories.map(category => (
             <li key={category}>
               <img className="delete-icon" src="https://img.icons8.com/ios/50/000000/delete-sign.png"/>
-              <input type="text" defaultValue={category} onKeyPress={editBookmark}/>
+              <input type="text" defaultValue={category} onKeyUp={editBookmark}/>
             </li>
           ))}
         </ul>
@@ -87,7 +102,19 @@ const Edit = ({ bmarks, titles, displayEdit, editUpdate }) => {
         </ul>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Edit;
+
+Edit.propTypes = {
+  bmarks: PropTypes.object,
+  titles: PropTypes.array,
+  displayEdit: PropTypes.func,
+  editUpdate:PropTypes.func
+};
+
+Edit.defaultProps = {
+  bmarks: {},
+  titles: []
+};

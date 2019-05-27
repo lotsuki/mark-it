@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Category = ({ category, cat}) => {
   return (
@@ -25,3 +26,13 @@ const Category = ({ category, cat}) => {
 };
 
 export default Category;
+
+Category.propTypes = {
+  category: PropTypes.string,
+  cat: PropTypes.string
+};
+
+Category.defaultProps = {
+  category: '',
+  cat: ''
+};

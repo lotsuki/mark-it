@@ -31,8 +31,12 @@ const Navbar = ({ displayForm, displayEdit, titles }) => {
 export default Navbar;
 
 
+Navbar.propTypes = {
+  titles: PropTypes.array,
+  displayEdit: PropTypes.func,
+  displayForm:PropTypes.func
+};
 
-
-// Navbar.propTypes = {
-
-// };
+Navbar.defaultProps = {
+  titles: []
+};
