@@ -34,9 +34,10 @@ class App extends React.Component {
       axios
       .get('/titles')
       .then(result => {
+        let data = result.data.slice(1);
         if (this._isMounted) {
           this.setState({
-            titles: result.data
+            titles: data
           })
          }
        })

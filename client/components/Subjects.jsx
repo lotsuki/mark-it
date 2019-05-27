@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import _ from 'underscore';
 import Titles from './Titles.jsx';
 import axios from 'axios';
 import {useTrail, animated} from 'react-spring';
@@ -26,12 +27,12 @@ const Subjects = ({ bmarks, category, displayConfirm, titlesUpdate }) => {
     }
   };
 
-  const subjects = (() => {
-    return bmarks.reduce((a, b) => {
-      if(b[category]) { return b[category]; }
-      return a;
-    }, {});
-  })();
+  let subjects = [];
+  _.forEach(bmarks, (cat, key) => {
+    if( category === key) {
+      subjects = subjects.concat(cat);
+    }
+  });
 
   const trail = useTrail(subjects.length, {
     opacity: 1,

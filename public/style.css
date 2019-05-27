@@ -643,11 +643,24 @@ li {
 }
 
 .edit-wrapper > ul > li {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.edit-wrapper > ul > li input {
   font-family: Helvetica, sans-serif;
   padding: .8rem;
   font-size: .9rem;
   font-weight: lighter;
+  border: none;
 }
+
+.edit-wrapper > ul > li input:focus{
+  outline: none;
+}
+
 .edit-wrapper > ul > li > a{
   font-size: .9rem;
   font-weight: lighter;
@@ -663,7 +676,8 @@ li {
 
 .delete-icon {
   height: .8rem;
-  margin-right: .4rem;
+  margin-right: .6rem;
+  cursor: pointer;
 }
 
 

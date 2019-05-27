@@ -25,14 +25,16 @@ const Sidebar = ({ bmarks, titles }) => {
   };
 
   const displayEdit = () => {
-    let appContainer = document.getElementById('app-container');
-    let editContainer = document.getElementById('edit-container');
+    var appContainer = document.getElementById('app-container');
+    var editContainer = document.getElementById('edit-container');
     if (!showEdit) {
+      console.log('hi')
       appContainer.style.height = '0';
       appContainer.style.visibility = 'hidden';
       editContainer.style.gridRow ='2/3';
       setShowEdit(true);
     } else {
+      console.log('bye')
       appContainer.style.height = '100%';
       appContainer.style.visibility = 'visible';
       editContainer.style.gridRow ='';
@@ -57,7 +59,10 @@ const Sidebar = ({ bmarks, titles }) => {
   };
 
   const editUpdate = () => {
-    console.log('hi')
+    (async () => {
+      await displayEdit();
+      await waitForPromise()
+    })()
   };
 
   return (

@@ -16,7 +16,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(`${__dirname}/../public`));
 
 app.post('/', (req, res) => {
-  console.log(db)
   // mongoose.connect(uri, {
   //   useNewUrlParser: true,
   //   autoIndex: true
@@ -124,28 +123,28 @@ app.get('/titles/:category/:subject', (req, res) => {
   });
 });
 
-// app.get('/update/subj/:defaultVal/:newVal', (req, res) => {
-//   let defaultVal = req.params.defaultVal;
-//   let newVal = req.params.newVal;
-//   Document.updateOne({username: {$exists:true}}, {bmarks.$.: }, (err, result) => {
-//     if (err) { console.log('Failure to get user obj: ', err); }
-//     else { res.send(result);
-//       //Document.updateMany
-//     }
-//   });
-// });
+app.get('/update/subj/:defaultVal/:newVal/:category', (req, res) => {
+  let defaultVal = req.params.defaultVal;
+  let newVal = req.params.newVal;
+  let cat = req.params.category;
+  let key = `bmarks.${cat}`;
+  let key2 = `bmarks.${cat}.$`;
+
+  Document.updateOne({[key]: defaultVal}, {$set: {[key2]: newVal}}, (err, result) => {
+    if (err) { console.log('Failure to get user obj: ', err); }
+    else { console.log(result); res.send(result); }
+  });
+});
 
 app.get('/update/cat/:defaultVal/:newVal', (req, res) => {
   let defaultVal = req.params.defaultVal;
   let newVal = req.params.newVal;
-  console.log(defaultVal, newVal)
   let key = `bmarks.${defaultVal}`;
+  let value = `bmarks.${newVal}`;
 
-  Document.updateOne({username: {$exists:true}}, {$rename:{[key]: newVal}}, (err, result) => {
+  Document.updateOne({username: {$exists:true}}, {$rename:{[key]: value}}, (err, result) => {
     if (err) { console.log('Failure to get user obj: ', err); }
-    else { console.log(result); res.send(result);
-      //Document.updateMany
-    }
+    else { console.log(result); res.send(result); }
   });
 });
 
@@ -164,6 +163,32 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 
+//Have confirmation for this and show how many bookmarks this folder contains
+
+// app.delete('/delete/cat/:cat', (req, res) => {
+//   let cat = req.params.cat;
+//   Document.deleteMany({ category: cat }, (err) => {
+//     if (err) { console.log('Error at DELETE request: ', err); }
+//     else { console.log('Document successfully deleted'); }
+//   });
+// });
+
+// app.delete('/delete/subj/:subj', (req, res) => {
+//   let subj = req.params.subj;
+//   Document.deleteMany({ subject: subj }, (err) => {
+//     if (err) { console.log('Error at DELETE request: ', err); }
+//     else { console.log('Document successfully deleted'); }
+//   });
+// });
+
+app.delete('/delete/title/:title', (req, res) => {
+  let title = req.params.title;
+  Document.deleteOne({ title: title }, (err) => {
+    if (err) { console.log('Error at DELETE request: ', err); }
+    else { console.log('Document successfully deleted'); }
+  });
+});
+
 app.delete('/bookmarks/:title/:subject', (req, res) => {
   let title = req.params.title;
   let subject = req.params.subject;
@@ -177,7 +202,6 @@ app.delete('/bookmarks/:title/:subject', (req, res) => {
       });
     }
   });
-
 });
 
 

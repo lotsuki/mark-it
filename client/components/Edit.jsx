@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import _ from 'underscore';
@@ -6,61 +6,116 @@ import _ from 'underscore';
 //if didn't press enter in input, return to default value
 
 const Edit = ({ bmarks, titles, displayEdit, editUpdate }) => {
-  let subjects = [];
-  let categories = _.map(bmarks, (cat, key) => {
+  var titlesArr = _.pluck(titles, 'title');
+  var subjects = [];
+  var categories = _.map(bmarks, (cat, key) => {
     subjects = subjects.concat(cat);
     return key;
   });
+  console.log(titles)
+  const [ updatedTitles, setUpdatedTitles ] = useState(titles);
+  const [ updatedSubjs, setUpdatedSubjs ] = useState(subjects);
+  const [ updatedCats, setUpdatedCats ] = useState(categories);
+
+
+
+  const resetInput = (e) => {
+    let defaultVal = e.target.defaultValue;
+    e.target.value = defaultVal;
+  };
+
+  const filterItems = (array, item) => {
+    return array.filter(str => {
+      return str !== item;
+    })
+  };
+
+  const deleteBookmark = (e) => {
+    let value = e.target.parentElement.firstChild.value;
+    if (categories.indexOf(value) !== -1) {
+    console.log(value);
+      axios
+       .delete(`delete/cat/${value}`)
+       .then(result => {
+        console.log(result);
+         // showTitlesUpdate(result.data);
+       })
+       .catch(err => { console.log('Could not delete document: ', err); });
+      categories = filterItems(categories, value);
+      // setUpdate(true);
+
+    } else if (subjects.indexOf(value) !== -1) {
+       axios
+       .delete(`delete/subj/${value}`)
+       .then(result => {
+        console.log(result);
+         // showTitlesUpdate(result.data);
+       })
+       .catch(err => { console.log('Could not delete document: ', err); });
+
+       subjects = filterItems(subjects, value);
+       // setUpdate(true);
+
+    } else {
+
+      //TODO: NEED TO UPDATE LIST ON DELETE
+        axios
+         .delete(`delete/title/${value}`)
+         .then(result => {
+          titlesArr.concat(filterItems(titlesArr, value));
+           // showTitlesUpdate(result.data);
+         })
+         .catch(err => { console.log('Could not delete document: ', err); });
+
+        //setUpdatedTitles(filterItems(titlesArr, value));
+
+    }
+  };
 
   const editBookmark = (e) => {
+    let defaultVal = e.target.defaultValue;
+    let newVal = e.target.value;
     if (e.keyCode === 13) {
-      let defaultVal = e.target.defaultValue;
-      let newVal = e.target.value;
-      console.log(defaultVal, newVal);
-      axios
-        .get(`/update/cat/${defaultVal}/${newVal}`, {
-          method: 'PATCH'
-        })
-        .then(result => {
-          console.log('PATCH request successful')
-          console.log(result)
-          // editUpdate(result);
-        })
-        .catch(err => { console.log('Error at PATCH request: ', err); });
+      if (categories.indexOf(defaultVal) !== -1) {
+        axios
+          .get(`/update/cat/${defaultVal}/${newVal}`, {
+            method: 'PATCH'
+          })
+          .then(result => {
+            console.log('PATCH request successful')
+            // editUpdate(result);
+          })
+          .catch(err => { console.log('Error at PATCH request: ', err); });
+       } else if (subjects.indexOf(defaultVal) !== -1) {
+          let category;
+            (async () => {
+              await _.forEach(bmarks, (cat, key) => {
+                if (cat.indexOf(defaultVal) !== -1) {
+                  category = key;
+                }
+              });
+              await axios
+                .get(`/update/subj/${defaultVal}/${newVal}/${category}`, {
+                  method: 'PATCH'
+                })
+                .then(result => {
+                  console.log('PATCH request successful')
+                  // editUpdate(result);
+                })
+                .catch(err => { console.log('Error at PATCH request: ', err); });
+            })();
+       } else {
+          axios
+            .get(`/update/title/${defaultVal}/${newVal}`, {
+              method: 'PATCH'
+            })
+            .then(result => {
+              console.log('PATCH request successful')
+              // editUpdate(result);
+            })
+            .catch(err => { console.log('Error at PATCH request: ', err); });
+       }
     }
-
-
-    // if (categories.indexOf(defaultValue) !== -1) {
-    //   axios
-    //     .get(`/update/cat/${defaultValue}/${newValue}`, {
-    //       method: 'PATCH'
-    //     })
-    //     .then(result => {
-    //       console.log('PATCH request successful')
-    //       editUpdate(result);
-    //     })
-    //     .catch(err => { console.log('Error at PATCH request: ', err); });
-    // } else if (subjects.indexOf(defaultValue) !== -1) {
-    //   axios
-    //     .get(`/update/subj/${defaultValue}/${newValue}`, {
-    //       method: 'PATCH'
-    //     })
-    //     .then(result => {
-    //       console.log('PATCH request successful')
-    //       editUpdate(result);
-    //     })
-    //     .catch(err => { console.log('Error at PATCH request: ', err); });
-    // } else {
-    //   axios
-    //     .get(`/update/title/${defaultValue}/${newValue}`, {
-    //       method: 'PATCH'
-    //     })
-    //     .then(result => {
-    //       console.log('PATCH request successful')
-    //       editUpdate(result);
-    //     })
-    //     .catch(err => { console.log('Error at PATCH request: ', err); });
-     //}
   };
 
   return (
@@ -70,8 +125,9 @@ const Edit = ({ bmarks, titles, displayEdit, editUpdate }) => {
         <ul>
           {categories.map(category => (
             <li key={category}>
-              <img className="delete-icon" src="https://img.icons8.com/ios/50/000000/delete-sign.png"/>
-              <input type="text" defaultValue={category} onKeyUp={editBookmark}/>
+              <input type="text" defaultValue={category} onBlur={resetInput} onKeyUp={editBookmark}/>
+              <img className="delete-icon" src="https://img.icons8.com/ios/50/000000/delete-sign.png" onClick={deleteBookmark}/>
+
             </li>
           ))}
         </ul>
@@ -81,8 +137,9 @@ const Edit = ({ bmarks, titles, displayEdit, editUpdate }) => {
         <ul>
           {subjects.map(subject => (
             <li key={subject}>
-              <img className="delete-icon" src="https://img.icons8.com/ios/50/000000/delete-sign.png"/>
-              <input type="text" defaultValue={subject} onKeyPress={editBookmark}/>
+              <input type="text" defaultValue={subject} onKeyUp={editBookmark}/>
+              <img className="delete-icon" src="https://img.icons8.com/ios/50/000000/delete-sign.png" onClick={deleteBookmark}/>
+
             </li>
           ))}
         </ul>
@@ -91,13 +148,12 @@ const Edit = ({ bmarks, titles, displayEdit, editUpdate }) => {
         <div className="edit-header">Title</div>
         <ul>
           {
-            titles.reduce((a, b) => {
-              if (b.title && b.url) {
-                return a.concat([<li key={b.title}><a href={b.url} key={b.url}><img className="delete-icon" src="https://img.icons8.com/ios/50/000000/delete-sign.png"/><input type="text" defaultValue={b.title} onKeyPress={editBookmark}/></a></li>]);
-              } else {
-                return a;
-              }
-            }, [])
+            titlesArr.map(title => (
+              <li key={title}>
+                <input type="text" defaultValue={title} onKeyUp={editBookmark}/>
+                <img className="delete-icon" src="https://img.icons8.com/ios/50/000000/delete-sign.png" onClick={deleteBookmark}/>
+              </li>
+            ))
           }
         </ul>
       </div>
@@ -118,3 +174,12 @@ Edit.defaultProps = {
   bmarks: {},
   titles: []
 };
+
+
+// titlesArr.reduce((a, b) => {
+//               if (b.title && b.url) {
+//                 return a.concat([<li key={b.title}><input type="text" defaultValue={b.title} onKeyUp={editBookmark}/><img className="delete-icon" src="https://img.icons8.com/ios/50/000000/delete-sign.png" onClick={deleteBookmark}/></li>]);
+//               } else {
+//                 return a;
+//               }
+//             }, [])

@@ -1,6 +1,5 @@
 const Document = require("./Document.js");
 const db = require("./index.js");
-const mockData = require("./mockData.js");
 const faker = require('faker');
 
 //db.dropCollection("documents", () => {});
@@ -8,7 +7,6 @@ const faker = require('faker');
 
 const categories = ['Tech', 'Travel', 'Food'];
 const subjects = ['React', 'Munich', 'Desserts'];
-const quicklinks = ['Starred', 'Favorites', 'Read'];
 
 const createBookmarks = () => {
   let bookmarks = [];
