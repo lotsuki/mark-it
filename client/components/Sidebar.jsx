@@ -11,6 +11,10 @@ import { useSpring, animated } from 'react-spring';
 const Sidebar = ({ bmarks, titles }) => {
   const [ showForm, setShowForm, ] = useState(false);
   const [ showEdit, setShowEdit ] = useState(false);
+  const [ showConfirm, setShowConfirm ] = useState(false);
+  const [ titleToDelete, setTitleToDelete ] = useState('');
+  const [ subjectOfTitle, setSubjectOfTitle ] = useState('');
+  const [ titlesUpdate, setTitlesUpdate ] = useState(null);
 
   const displayForm = () => {
     if (!showForm) {
@@ -36,8 +40,20 @@ const Sidebar = ({ bmarks, titles }) => {
     }
   };
 
-  const editUpdate = (target) => {
-   console.log(target)
+  const showTitlesUpdate = (data) => {
+    setTitlesUpdate(data)
+  };
+
+  const displayConfirm = (subject, title) => {
+    if (!showConfirm) {
+      setShowConfirm(true);
+      setTitleToDelete(title);
+      setSubjectOfTitle(subject);
+    } else {
+      setShowConfirm(false);
+      setTitleToDelete('');
+      setSubjectOfTitle('');
+    }
   };
 
   return (
@@ -45,7 +61,7 @@ const Sidebar = ({ bmarks, titles }) => {
       <Navbar displayForm={displayForm} displayEdit={displayEdit} titles={titles}/>
       <div id="app-container" data-testid="app-container">
         <div className="sidebar-container">
-          <Bookmarks bmarks={bmarks} />
+          <Bookmarks bmarks={bmarks} displayConfirm={displayConfirm} titlesUpdate={titlesUpdate} />
         </div>
         <div className="right-container">
           {
@@ -62,7 +78,12 @@ const Sidebar = ({ bmarks, titles }) => {
           : (null)
         }
       </div>
-      <Confirm />
+      {
+        showConfirm
+        ? (<Confirm setShowConfirm={setShowConfirm} titleToDelete={titleToDelete} subjectOfTitle={subjectOfTitle} showTitlesUpdate={showTitlesUpdate}/>)
+        : (null)
+      }
+
     </div>
   );
 };

@@ -4,7 +4,7 @@ import Subjects from './Subjects.jsx';
 import Category from './Category.jsx';
 
 
-const Categories = ({ bmarks }) => {
+const Categories = ({ bmarks, displayConfirm, titlesUpdate }) => {
   const [ isOpen, setIsOpen ] = useState(false);
   const [ category, setCategory ] = useState('');
 
@@ -38,7 +38,7 @@ const Categories = ({ bmarks }) => {
                 <div className="dropdown-wrapper" >
                   {
                     isOpen
-                      ? ( <Subjects bmarks={bmarks} category={category} />)
+                      ? ( <Subjects bmarks={bmarks} category={category} displayConfirm={displayConfirm} titlesUpdate={titlesUpdate}/>)
                       : ( null )
                   }
                 </div>

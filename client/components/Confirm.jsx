@@ -1,13 +1,19 @@
 import React from 'react';
+import axios from 'axios';
 
-const Confirm = ({ }) => {
-
-  const confirmYes = (e) => {
-    console.log(e.target)
-  };
-
-  const confirmNo = () => {
-
+const Confirm = ({ setShowConfirm, titleToDelete, subjectOfTitle, showTitlesUpdate }) => {
+  const handleConfirmClick = (e) => {
+    if (e.target.innerText === 'Yes') {
+      setShowConfirm(false);
+      axios
+       .delete(`bookmarks/${titleToDelete}/${subjectOfTitle}`)
+       .then(result => {
+         showTitlesUpdate(result.data);
+       })
+       .catch(err => { console.log('Could not delete document: ', err); });
+    } else {
+      setShowConfirm(false);
+    }
   };
 
   return (
@@ -19,8 +25,8 @@ const Confirm = ({ }) => {
         <div className="confirm-text">Are you sure you want to delete this bookmark?</div>
       </div>
       <div className="confirm-buttons-wrapper">
-        <button type="button" className="confirm-button yes-button" onClick={confirmYes}>Yes</button>
-        <button type="button" className="confirm-button no-button" onClick={confirmYes}>No</button>
+        <button type="button" className="confirm-button yes-button" onClick={handleConfirmClick}>Yes</button>
+        <button type="button" className="confirm-button no-button" onClick={handleConfirmClick}>No</button>
       </div>
     </div>
   );
