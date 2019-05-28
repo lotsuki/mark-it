@@ -1,25 +1,25 @@
-const Document = require("./Document.js");
-const db = require("./index.js");
+// const Document = require("./Document.js");
+// const db = require("./index.js");
 
-const user = new Document({
-  date: '5-22-19',
-  username: 'lotsuki',
-  password: 'thisisahash123',
-  bmarks: {
-    Tech: ['React', 'Python'],
-    Travel: ['Munich', 'London'],
-    Food: ['Vegan', 'Desserts']
-  }
-});
+// const user = new Document({
+//   date: '5-22-19',
+//   username: 'lotsuki',
+//   password: 'thisisahash123',
+//   bmarks: {
+//     Tech: ['React', 'Python'],
+//     Travel: ['Munich', 'London'],
+//     Food: ['Vegan', 'Desserts']
+//   }
+// });
 
 
-function inputInitialDoc() {
-  return user.save()
-    .then(() => db.close())
-    .catch(err => console.log('err: ', err));
-};
+// function inputInitialDoc() {
+//   return user.save()
+//     .then(() => db.close())
+//     .catch(err => console.log('err: ', err));
+// };
 
-inputInitialDoc();
+// inputInitialDoc();
 
  // bmarks: [{Tech: ['React', 'Python']}, {Travel: ['Munich', 'London']}, {Food: ['Vegan', 'Desserts']}]
 

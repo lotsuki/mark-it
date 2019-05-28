@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'underscore';
 import Titles from './Titles.jsx';
 import axios from 'axios';
 import {useTrail, animated} from 'react-spring';
+
+//if subject is clicked, titles comp gets rendered
 
 const Subjects = ({ bmarks, category, displayConfirm, titlesUpdate }) => {
   const [ isOpen, setIsOpen ] = useState(false);
@@ -41,13 +43,13 @@ const Subjects = ({ bmarks, category, displayConfirm, titlesUpdate }) => {
   );
 
   const showTitles = (subject) => {
-    if (titlesUpdate && subj === subject) {
-      return <Titles titles={titlesUpdate} setTitles={setTitles} displayConfirm={displayConfirm} />
-    } else if (isOpen && subj === subject) {
-      return <Titles titles={titles} setTitles={setTitles} displayConfirm={displayConfirm} />
-    } else {
-      return null
-    }
+      if (titlesUpdate && subj === subject) {
+        return <Titles titles={titlesUpdate} setTitles={setTitles} displayConfirm={displayConfirm} />
+      } else if (isOpen && subj === subject) {
+        return <Titles titles={titles} setTitles={setTitles} displayConfirm={displayConfirm} />
+      } else {
+        return null
+      }
   };
 
   return (
@@ -82,12 +84,14 @@ export default Subjects;
 Subjects.propTypes = {
   bmarks: PropTypes.object,
   category: PropTypes.string,
-  titlesUpdate: PropTypes.func,
+  titlesUpdate: PropTypes.array,
   displayConfirm: PropTypes.func
 };
 
 Subjects.defaultProps = {
   bmarks: {},
-  category: ''
+  category: '',
+  titlesUpdate: [],
+  displayConfirm: () => {}
 };
 

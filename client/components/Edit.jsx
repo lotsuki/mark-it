@@ -12,7 +12,7 @@ const Edit = ({ bmarks, titles, displayEdit, editUpdate }) => {
     subjects = subjects.concat(cat);
     return key;
   });
-  console.log(titles)
+
   const [ updatedTitles, setUpdatedTitles ] = useState(titles);
   const [ updatedSubjs, setUpdatedSubjs ] = useState(subjects);
   const [ updatedCats, setUpdatedCats ] = useState(categories);
@@ -66,9 +66,7 @@ const Edit = ({ bmarks, titles, displayEdit, editUpdate }) => {
            // showTitlesUpdate(result.data);
          })
          .catch(err => { console.log('Could not delete document: ', err); });
-
         //setUpdatedTitles(filterItems(titlesArr, value));
-
     }
   };
 
@@ -88,22 +86,21 @@ const Edit = ({ bmarks, titles, displayEdit, editUpdate }) => {
           .catch(err => { console.log('Error at PATCH request: ', err); });
        } else if (subjects.indexOf(defaultVal) !== -1) {
           let category;
-            (async () => {
-              await _.forEach(bmarks, (cat, key) => {
-                if (cat.indexOf(defaultVal) !== -1) {
-                  category = key;
-                }
-              });
-              await axios
-                .get(`/update/subj/${defaultVal}/${newVal}/${category}`, {
-                  method: 'PATCH'
-                })
-                .then(result => {
-                  console.log('PATCH request successful')
-                  // editUpdate(result);
-                })
-                .catch(err => { console.log('Error at PATCH request: ', err); });
-            })();
+          let assignCategory = _.forEach(bmarks, (cat, key) => {
+            if (cat.indexOf(defaultVal) !== -1) {
+              category = key;
+            }
+          });
+          let patchAPI = axios.get(`/update/subj/${defaultVal}/${newVal}/${category}`,
+            {
+              method: 'PATCH'
+            })
+            .then(result => {
+              console.log('PATCH request successful')
+              // editUpdate(result);
+            })
+            .catch(err => { console.log('Error at PATCH request: ', err); });
+          Promise.all([assignCategory, patchAPI])
        } else {
           axios
             .get(`/update/title/${defaultVal}/${newVal}`, {
@@ -172,7 +169,9 @@ Edit.propTypes = {
 
 Edit.defaultProps = {
   bmarks: {},
-  titles: []
+  titles: [],
+  displayEdit: () => {},
+  editUpdate: () => {}
 };
 
 

@@ -6,7 +6,8 @@
   "scripts": {
     "start": "nodemon server/index.js",
     "build-dev": "webpack --watch",
-    "test": "jest --watch --verbose",
+    "test": "jest --watch --verbose --runInBand --detectOpenHandles" ,
+    "debug": "NODE_ENV=debug npm test",
     "test:coverage": "jest --coverage --colors",
     "open:coverage": "node coverage/Icov-report/index.html"
   },
@@ -62,6 +63,8 @@
     "faker": "^4.1.0",
     "jest": "^24.7.1",
     "jest-dom": "^3.2.2",
+    "puppeteer": "^1.17.0",
+    "react-hooks-testing-library": "^0.5.0",
     "react-testing-library": "^7.0.0",
     "webpack": "^4.26.1",
     "webpack-cli": "^3.1.2"

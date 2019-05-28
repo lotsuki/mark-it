@@ -2,14 +2,13 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const Document = require('../db/Document.js');
-const db = require('../db/index.js');
+//const db = require('../db/index.js');
 const app = express();
-const mongoose = require('mongoose');
-const uri = 'mongodb://localhost:27017/mydocapp';
-mongoose.Promise = global.Promise;
+// const mongoose = require('mongoose');
+// const uri = 'mongodb://localhost:27017/mydocapp';
+// mongoose.Promise = global.Promise;
 
 const PORT = 3000;
-
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

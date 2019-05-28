@@ -1,44 +1,29 @@
+/**
+ * @jest-environment jsdom
+*/
+
 import React from 'react';
-import { shallow, mount, render } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import Bookmarks from '../components/Bookmarks';
 import SidebarHeader from '../components/SidebarHeader';
-import Dropdown from '../components/Dropdown';
+import Categories from '../components/Categories';
 
 
 describe('<Bookmarks />', () => {
-  it('renders without error with correct props', () => {
-    const props = {
-      bookmarks: []
-    }
-    shallow(<Bookmarks {...props}/>);
+  it('renders without error', () => {
+    shallow(<Bookmarks />);
   });
   it('renders <SidebarHeader /> component', () => {
-    const wrapper = mount(<Bookmarks />);
-    expect(wrapper.children().find(SidebarHeader)).toBeDefined();
-    wrapper.unmount();
-  });
-  it('renders <Dropdown /> component', () => {
-    const wrapper = mount(<Bookmarks />);
-    expect(wrapper.children().find(Dropdown)).toBeDefined();
-    wrapper.unmount();
-  });
-  it('renders a div with class bookmarksContainer', () => {
     const wrapper = shallow(<Bookmarks />);
-    expect(wrapper.find('div.bookmarksContainer')).toBeDefined();
+    expect(wrapper.children().find(SidebarHeader)).toBeDefined();
+    expect(wrapper.children(SidebarHeader).props('sidebarHeader').toBeDefined();
   });
-  it('contains correct props', () => {
-    const wrapper = mount(<Bookmarks />);
-    expect(wrapper.props('bookmarks')).toBeDefined();
-    wrapper.unmount();
-  });
-  it('sets sidebarHeader property on SidebarHeader component', () => {
-    const wrapper = mount(<Bookmarks />);
-    expect(wrapper.children().find(SidebarHeader).props('sidebarHeader')).toBeDefined();
-    wrapper.unmount();
-  });
-  it('sets data property on Dropdown component', () => {
-    const wrapper = mount(<Bookmarks />);
-    expect(wrapper.children().find(Dropdown).props('data')).toBeDefined();
-    wrapper.unmount();
+  it('renders <Categories /> component with 4 props: bmarks, height, displayConfirm, titlesUpdate', () => {
+    const wrapper = shallow(<Bookmarks />);
+    expect(wrapper.children().find(Categories)).toBeDefined();
+    expect(wrapper.children(Categories).props().height).toBe('3.5rem');
+    expect(wrapper.children(Categories).props().bmarks).toEqual({});
+    expect(wrapper.children(Categories).props().displayConfirm).toBeDefined();
+     expect(wrapper.children(Categories).props().titlesUpdate).toEqual([]);
   });
 });

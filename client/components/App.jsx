@@ -10,8 +10,8 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      userID: null,
-      bmarks: null,
+      userID: '',
+      bmarks: {},
       titles: []
     }
   }
@@ -23,6 +23,7 @@ class App extends React.Component {
       .then(result => {
         if (this._isMounted) {
           let data = result.data[0];
+
           this.setState({
             userID: data.username,
             bmarks: data.bmarks

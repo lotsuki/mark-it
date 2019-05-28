@@ -24,5 +24,6 @@ Bookmarks.propTypes = {
 
 Bookmarks.defaultProps = {
   bmarks: {},
-  titlesUpdate: []
+  titlesUpdate: [],
+  displayConfirm: () => {}
 };

@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
 import _ from 'underscore';
 import PropTypes from 'prop-types';
 import Subjects from './Subjects.jsx';
 import Category from './Category.jsx';
+
 
 
 const Categories = ({ bmarks, displayConfirm, titlesUpdate }) => {
@@ -65,6 +66,7 @@ Categories.propTypes = {
 
 Categories.defaultProps = {
   bmarks: {},
-  titlesUpdate: []
+  titlesUpdate: [],
+  displayConfirm: () => {}
 };
 

@@ -45,5 +45,7 @@ Confirm.propTypes = {
 
 Confirm.defaultProps = {
   titleToDelete: '',
-  subjectOfTitle: ''
+  subjectOfTitle: '',
+  setShowConfirm: () => {},
+  showTitlesUpdate: () => {}
 };

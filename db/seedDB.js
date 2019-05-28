@@ -1,28 +1,28 @@
-const Document = require("./Document.js");
-const db = require("./index.js");
-const faker = require('faker');
+// const Document = require('./Document.js');
+// const db = require('./index.js');
+// const mockData = require('./mockData.js');
 
-//db.dropCollection("documents", () => {});
+// function inputMockBookmarks() {
+//   return Document.create(mockData)
+//     .then(() => db.close())
+//     .catch(err => console.log("err", err));
+// }
+
+// inputMockBookmarks();
 
 
-const categories = ['Tech', 'Travel', 'Food'];
-const subjects = ['React', 'Munich', 'Desserts'];
 
-const createBookmarks = () => {
-  let bookmarks = [];
 
-  for (let i = 1; i <= 30; i++) {
-    let index = Math.floor(Math.random() * 3);
-    bookmarks.push({
-      category: categories[index],
-      subject: subjects[index],
-      title: faker.name.title(),
-      url: faker.internet.url(),
-      date: '5-22-19'
-    });
-  }
-  return bookmarks;
-};
+
+
+
+
+
+
+
+
+
+
 
 // const createQuicklinks = () => {
 //   let quicklinks = [];
@@ -49,14 +49,6 @@ const createBookmarks = () => {
 //     .catch(err => console.log("err", err));
 // }
 
-const bookmarks = createBookmarks();
-
-function inputMockBookmarks() {
-  return Document.create(bookmarks)
-    .then(() => db.close())
-    .catch(err => console.log("err", err));
-}
 
 //inputMockQuicklinks();
-inputMockBookmarks();
 

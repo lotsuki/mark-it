@@ -1,91 +1,131 @@
-  import React from 'react';
-  import { shallow, mount, render } from 'enzyme';
-  import Form from '../components/Form';
-  import FormInputs from '../components/FormInputs';
-  import mockData from '../../db/mockData.js';
-  import mockUtils from '../__mocks__/utils.js';
+  /**
+ * @jest-environment jsdom
+*/
 
+  import React from 'react';
+  import { shallow, mount } from 'enzyme';
+  import Form from '../components/Form';
+  // import mockData from '../../db/mockData.js';
+
+
+  //renders form with 4 inputs and submit button
+  //onChange invokes X function
   //clears form after submit
 
   describe('<Form />', () => {
-    const event = { target: { value: 'Value' } };
-    it('renders without error with correct props', () => {
-      const props = {
-        updateStateAfterPostReq: () => { console.log('rendered')}
-      };
-      shallow(<Form {...props}/>);
-    });
-    it('contains all necessary state properties with correct values', () => {
-      const wrapper = shallow(<Form />);
-      expect(wrapper.state('data')).toEqual([]);
-      expect(wrapper.state('subject')).toEqual('');
-      expect(wrapper.state('title')).toEqual('');
-      expect(wrapper.state('url')).toEqual('');
-      expect(wrapper.state('starred')).toEqual(false);
-      expect(wrapper.state('favorites')).toEqual(false);
-    });
-    it('titleChange sets state: title', () => {
-      const wrapper = shallow(<Form />);
-      expect(wrapper.state('title')).toBe('');
-      wrapper.instance().titleChange(event);
-      expect(wrapper.state('title')).toBe('Value');
+    // const event = { target: { value: 'Value' } };
+     it('renders without error with correct props', () => {
+       //shallow(<Form />);
+     });
+  //   it('titleChange sets state: title', () => {
+  //     const {container, getByTestId } = render(<Form />);
+  //     const input = getByTestId('title');
 
-    });
-    it('urlChange sets state: url', () => {
-      const wrapper = shallow(<Form />);
-      expect(wrapper.state('url')).toBe('');
-      wrapper.instance().urlChange(event);
-      expect(wrapper.state('url')).toBe('Value');
-    });
-    it('subjectChange sets state: subject', () => {
-      const wrapper = shallow(<Form />);
-      expect(wrapper.state('subject')).toBe('');
-      wrapper.instance().subjectChange(event);
-      expect(wrapper.state('subject')).toBe('Value');
-    });
-    it('setCategory sets state: category', () => {
-      const wrapper = shallow(<Form />);
-      expect(wrapper.state('category')).toBe('');
-      wrapper.instance().setCategory(event);
-      expect(wrapper.state('category')).toBe('Value');
-    });
-    it('handleSubmit sends POST req with correct data', () => {
+  //     //TODO: ONCHANGE EVENT
 
-    });
-    it('handleSubmit sets state: data', () => {
+  //   });
+  //   it('urlChange sets state: url', () => {
+  //     const {container } = render(<Form />);
 
-    });
-    it('handleSubmit invokes updateStateAfterPostReq with correct arg', () => {
 
-    });
-    it('returns FormInput component', () => {
-      const wrapper = mount(<Form />);
-      expect(wrapper.children().find(FormInputs)).toBeDefined();
-      wrapper.unmount();
-    });
-    it('contains correct props', () => {
-      const wrapper = mount(<Form />);
-      expect(wrapper.props('updateStateAfterPostReq')).toBeDefined();
-      wrapper.unmount();
-    });
-    it('sets setCategory property on FormInput component', () => {
-      const wrapper = mount(<Form />);
-      expect(wrapper.children().find(FormInputs).props('setCategory')).toBeDefined();
-      wrapper.unmount();
-    });
-    it('sets titleChange property on FormInput component', () => {
-      const wrapper = mount(<Form />);
-      expect(wrapper.children().find(FormInputs).props('titleChange')).toBeDefined();
-      wrapper.unmount();
-    });
-    it('sets urlChange property on FormInput component', () => {
-      const wrapper = mount(<Form />);
-      expect(wrapper.children().find(FormInputs).props('urlChange')).toBeDefined();
-      wrapper.unmount();
-    });
-    it('sets subjectChange property on FormInput component', () => {
-      const wrapper = mount(<Form />);
-      expect(wrapper.children().find(FormInputs).props('subjectChange')).toBeDefined();
-      wrapper.unmount();
-    });
+  //   });
+  //   it('subjectChange sets state: subject', () => {
+  //     const {container, getByTestId } = render(<Form />);
+  //     const input = getByTestId('subject');
+  //   });
+  //   it('setCategory sets state: category', () => {
+  //     const {container, getByTestId } = render(<Form />);
+  //     const input = getByTestId('category');
+  //   });
+  //   it('handleSubmit sends POST req with correct data', () => {
+
+  //   });
+  //   it('handleSubmit sets state: data', () => {
+
+  //   });
+  //   it('handleSubmit invokes updateStateAfterPostReq with correct arg', () => {
+
+  //   });
   });
+
+//   import React from 'react';
+// import { shallow, mount } from 'enzyme';
+// import FormInputs from '../components/FormInputs';
+// import Form from '../components/Form';
+// import mockAxios from 'axios';
+// import {render, fireEvent, cleanup, waitForElement, waitForDomChange} from 'react-testing-library';
+// import 'jest-dom/extend-expect';
+
+//   describe('<FormInputs />', () => {
+//    afterEach(cleanup)
+//   it('renders without error', () => {
+//     shallow(<FormInputs />);
+//   });
+//   it('contains correct props', () => {
+//     const wrapper = mount(<FormInputs />);
+//     expect(wrapper.props('setCategory')).toBeDefined();
+//     expect(wrapper.props('subjectChange')).toBeDefined();
+//     expect(wrapper.props('titleChange')).toBeDefined();
+//     expect(wrapper.props('urlChange')).toBeDefined();
+//     expect(wrapper.props('handleSubmit')).toBeDefined();
+//     wrapper.unmount();
+//   });
+//   it('renders a div with class formContainer', () => {
+//     const wrapper = shallow(<FormInputs />);
+//     expect(wrapper.find('form.formContainer')).toBeDefined();
+//   });
+//   it('form.formContainer contains 5 children with class formInputs', () => {
+//     const wrapper = mount(<FormInputs />);
+//     expect(wrapper.find('form.formContainer').children().length).toEqual(5);
+//     expect(wrapper.find('form.formContainer').children().filter('input.formInputs').length).toEqual(5);
+//     wrapper.unmount();
+//   });
+//   it('form.formContainer first child is a text input with placeholder Category', async () => {
+//     const { container, getByTestId  } = render(<FormInputs />);
+//     const formContainer = container.firstChild;
+//     const categoryInput = getByTestId('category');
+//     expect(formContainer.children[0]).toEqual(categoryInput);
+//     expect(categoryInput.placeholder).toEqual('Category');
+
+//   });
+//   it('form.formContainer second child is a text input with placeholder Subject', async () => {
+//     const { container, getByTestId  } = render(<FormInputs />);
+//     const formContainer = container.firstChild;
+//     const subjectInput = getByTestId('subject');
+//     expect(formContainer.children[1]).toEqual(subjectInput);
+//     expect(subjectInput.placeholder).toEqual('Subject');
+//   });
+//   it('form.formContainer third child is a text input with placeholder Title', async () => {
+//     const { container, getByTestId  } = render(<FormInputs />);
+//     const formContainer = container.firstChild;
+//     const titleInput = getByTestId('title');
+//     expect(formContainer.children[2]).toEqual(titleInput);
+//     expect(titleInput.placeholder).toEqual('Title');
+//   });
+//   it('form.formContainer forth child is a text input with placeholder URL', async () => {
+//     const { container, getByTestId  } = render(<FormInputs />);
+//     const formContainer = container.firstChild;
+//     const urlInput = getByTestId('url');
+//     expect(formContainer.children[3]).toEqual(urlInput);
+//     expect(urlInput.placeholder).toEqual('URL');
+//   });
+//   it('form.formContainer fifth child is a submit input with value Submit', async () => {
+//     const { container, getByTestId  } = render(<FormInputs />);
+//     const formContainer = container.firstChild;
+//     const submit = getByTestId('submit');
+//     expect(formContainer.children[4]).toEqual(submit);
+//     expect(submit.value).toEqual('Submit');
+//   });
+//   // it('onClick invokes handleSubmit function in Form component', async () => {
+//   //    const spy = jest.spyOn(Form.prototype, 'handleSubmit')
+//   //    spy.mockImplementation(() => 'called')
+//   //    const wrapper = shallow(<FormInputs />);
+//   //    const submit = wrapper.find('form.formContainer');
+//   //    console.log(submit.debug())
+//   //    submit.simulate('click');
+//   //    wrapper.update();
+//   //    expect(spy).toHaveBeenCalledTimes(1);
+//   //    spy.mockRestore();
+//   // });
+
+// });
