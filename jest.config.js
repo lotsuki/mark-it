@@ -15,7 +15,7 @@ module.exports = {
   coveragePathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/db/'],
 
 //   //An array of file extensions your module uses
-  moduleFileExtensions: ['jsx'],
+  moduleFileExtensions: ['jsx', 'js'],
 
   modulePathIgnorePatterns: ["<rootDir>/node_modules/", "<rootDir>/db/"],
 

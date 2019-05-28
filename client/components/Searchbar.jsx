@@ -26,6 +26,7 @@ const Searchbar = ({ titles }) => {
   //   }
   // })
 
+
   return (
     <div className="searchbar-container">
       <div className="searchbar">

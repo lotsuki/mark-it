@@ -1,14 +1,14 @@
-// const Document = require('./Document.js');
-// const db = require('./index.js');
-// const mockData = require('./mockData.js');
+const Document = require('./Document.js');
+const db = require('./index.js');
+const data = require('./mockData.js');
 
-// function inputMockBookmarks() {
-//   return Document.create(mockData)
-//     .then(() => db.close())
-//     .catch(err => console.log("err", err));
-// }
+function inputMockBookmarks() {
+  return Document.create(data.mockData)
+    .then(() => db.close())
+    .catch(err => console.log("err", err));
+}
 
-// inputMockBookmarks();
+inputMockBookmarks();
 
 
 
