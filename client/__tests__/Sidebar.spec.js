@@ -4,15 +4,21 @@
 
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-// import { renderHook, act } from 'react-hooks-testing-library'
 import Sidebar from '../components/Sidebar';
-import Form from '../components/Form';
+import Navbar from '../components/Navbar';
+import Bookmarks from '../components/Bookmarks';
 
-//displays Navbar and bookmarks on render
 
 describe('Sidebar', () => {
   it('renders without error', () => {
     shallow(<Sidebar />)
   });
-
+  it('renders <Navbar />', () => {
+    const wrapper = shallow(<Sidebar/>);
+    expect(wrapper.children().find(Navbar)).toBeDefined();
+  });
+  it('renders <Bookmarks />', () => {
+    const wrapper = shallow(<Sidebar />);
+    expect(wrapper.children().find(Bookmarks)).toBeDefined();
+  });
 });

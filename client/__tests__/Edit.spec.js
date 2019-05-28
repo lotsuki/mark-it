@@ -1,6 +1,3 @@
-//renders 3 ul elements that parent Element with text
-//every li should have an input and an img elem
-
 /**
  * @jest-environment jsdom
 */
@@ -24,10 +21,4 @@ describe('<Edit/>', () => {
      const headers = wrapper.find('.edit-header').map(div => div.text());
      expect(headers.length).toBe(3);
   });
-  it('every li should have an input and img', () => {
-     const wrapper = shallow(<Edit />);
-     const headers = wrapper.find('li');
-     console.log(headers.length)
-  });
 });
-
