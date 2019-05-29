@@ -2,7 +2,26 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Searchbar from './Searchbar.jsx';
 
-const Navbar = ({ displayForm, displayEdit, titles }) => {
+const Navbar = ({ showForm, setShowForm, showEdit, setShowEdit, titles }) => {
+  const displayForm = () => {
+    setShowForm(!showForm)
+  }
+
+  const displayEdit = () => {
+    var appContainer = document.getElementById('app-container');
+    var editContainer = document.getElementById('edit-container');
+    if (!showEdit) {
+      appContainer.style.height = '0';
+      appContainer.style.visibility = 'hidden';
+      editContainer.style.gridRow ='2/3';
+      setShowEdit(true)
+    } else {
+      appContainer.style.height = '100%';
+      appContainer.style.visibility = 'visible';
+      editContainer.style.gridRow ='';
+      setShowEdit(false)
+    }
+  }
 
   return (
     <nav className="navbar">

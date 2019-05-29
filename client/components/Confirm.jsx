@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 
 const Confirm = ({ setShowConfirm, titleToDelete, subjectOfTitle, showTitlesUpdate }) => {
+
   const handleConfirmClick = (e) => {
     if (e.target.innerText === 'Yes') {
       setShowConfirm(false);
@@ -33,25 +34,7 @@ const Confirm = ({ setShowConfirm, titleToDelete, subjectOfTitle, showTitlesUpda
   );
 };
 
-const handleDelete = (item, location, e) => {
-  if (location === 'sidebar') {
-    if (e.target.innerText === 'Yes') {
-      setShowConfirm(false);
-      axios
-       .delete(`bookmarks/${titleToDelete}/${subjectOfTitle}`)
-       .then(result => {
-         showTitlesUpdate(result.data);
-       })
-       .catch(err => { console.log('Could not delete document: ', err); });
-    } else {
-      setShowConfirm(false);
-    }
-  } else if (location === 'edit') {
 
-  } else {
-    return null;
-  }
-};
 
 export default Confirm;
 

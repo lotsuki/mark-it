@@ -22,6 +22,5 @@ describe('<Edit/>', () => {
      expect(headers.length).toBe(3);
   });
   it('renders 3 divs with text', () => {
-     console.log(Edit.resetInput)
   });
 });

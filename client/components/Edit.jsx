@@ -5,7 +5,7 @@ import _ from 'underscore';
 //TODO:
 //if didn't press enter in input, return to default value
 
-const Edit = ({ bmarks, titles, displayEdit, editUpdate }) => {
+const Edit = ({ bmarks, titles, editUpdate }) => {
   var titlesArr = _.pluck(titles, 'title');
   var subjects = [];
   var categories = _.map(bmarks, (cat, key) => {
@@ -32,8 +32,8 @@ const Edit = ({ bmarks, titles, displayEdit, editUpdate }) => {
 
   const deleteBookmark = (e) => {
     let value = e.target.parentElement.firstChild.value;
+
     if (categories.indexOf(value) !== -1) {
-    console.log(value);
       axios
        .delete(`delete/cat/${value}`)
        .then(result => {

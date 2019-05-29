@@ -1,14 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
 
-const Titles = ({ titles, setTitles, displayConfirm }) => {
+const Titles = ({ titles, setTitles, showConfirm, setShowConfirm }) => {
 
   const confirmDelete = (e) => {
-    let subject = e.target.parentElement.parentElement.parentElement.parentElement.firstChild.firstChild.innerText;
-    let title = e.target.parentElement.firstChild.innerText;
-    displayConfirm(subject, title);
+    if (!showConfirm) {
+      let subject = e.target.parentElement.parentElement.parentElement.parentElement.firstChild.firstChild.innerText;
+      let title = e.target.parentElement.firstChild.innerText;
+      setShowConfirm([subject, title]);
+    } else {
+      setShowConfirm(false)
+    }
   };
 
   return (

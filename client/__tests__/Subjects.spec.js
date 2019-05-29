@@ -13,14 +13,12 @@ describe('<Subjects />', () => {
     displayConfirm: () => {},
     titlesUpdate: []
   };
-  console.log(props)
   it('renders without error', () => {
      shallow(<Subjects {...props}/>);
   });
   it('container has same number of children as bmarks length', () => {
      const wrapper = shallow(<Subjects {...props}/>)
      const container = wrapper.find('.subject-container').children().length
-     console.log(wrapper.debug())
   });
 
 

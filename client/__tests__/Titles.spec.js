@@ -6,8 +6,6 @@ import Titles from '../components/Titles.jsx';
 import data from '../../db/mockData.js'
 
 
-//confirmDelete invokes displayConfirm with correct args
-
 describe('<Titles />', () => {
   const event = {target:{parentElement:{firstChild:{innerText:'title'},parentElement:{parentElement:{parentElement:{firstChild:{firstChild:{innerText:'subject'}}}}}}}};
   const subject = 'subject';
@@ -15,18 +13,23 @@ describe('<Titles />', () => {
   const props = {
     titles: data.titles,
     setTitles: jest.fn(),
-    displayConfirm: jest.fn()
+    showConfirm: ['Subject', 'Docs'],
+    setShowConfirm: jest.fn()
   };
 
-   it('when delete icon is clicked, displayConfirm is invoked with correct props', () => {
+   it('when delete icon is clicked, setShowConfirm is invoked with correct props', () => {
     const wrapper = mount(<Titles {...props}/>)
     const buttons = wrapper.find('i')
+    console.log(buttons.length)
     buttons.map(button => button.simulate('click', event))
-    expect(props.displayConfirm).toHaveBeenCalledTimes(buttons.length)
-    expect(props.displayConfirm).toHaveBeenCalledWith(subject, title)
+    expect(props.setShowConfirm).toHaveBeenCalledTimes(buttons.length)
+    if (!props.showConfirm) {
+      expect(props.setShowConfirm).toHaveBeenCalledWith([subject, title])
+    } else {
+      expect(props.setShowConfirm).toHaveBeenCalledWith(false)
+    }
     wrapper.unmount()
   });
 });
-
 
 

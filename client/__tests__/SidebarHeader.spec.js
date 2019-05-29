@@ -1,16 +1,18 @@
-/**
- * @jest-environment jsdom
-*/
 
 import React from 'react';
-import Bookmarks from '../components/Bookmarks.jsx';
+import { shallow, mount } from 'enzyme';
+import SidebarHeader from '../components/SidebarHeader.jsx';
 
 
 describe('<SidebarHeader />', () => {
-  //afterEach(cleanup)
-  it('displays text Bookmarks in Bookmarks component', () => {
-    // const { getByText } = render(<Bookmarks />);
-    // const sidebarHeaderElem = getByText('MY BOOKMARKS');
-    // expect(sidebarHeaderElem).toBeDefined();
+  it('renders without error', () => {
+    shallow(<SidebarHeader />)
+  });
+  it('renders a div with text passed down from props sidebarHeader', () => {
+    const props = {
+      sidebarHeader: 'header'
+    }
+    const wrapper = shallow(<SidebarHeader {...props}/>)
+    expect(wrapper.childAt(0).text()).toEqual(props.sidebarHeader)
   });
 });

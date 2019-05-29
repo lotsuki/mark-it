@@ -10,6 +10,7 @@
   //renders form with 4 inputs and submit button
   //onChange invokes X function
   //clears form after submit
+  //if one field is without a value, form will not submit
 
   describe('<Form />', () => {
     // const event = { target: { value: 'Value' } };

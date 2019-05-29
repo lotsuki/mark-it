@@ -3,6 +3,9 @@ import data from '../../db/mockData.js';
  module.exports = {
   get: jest.fn(() => Promise.resolve(
     {data: [data.mockUser] }
+  )),
+  delete: jest.fn(() => Promise.resolve(
+    {data: data.mockData }
   ))
 //   post: jest.fn(form => Promise.resolve(
 //     { data: form }
@@ -22,3 +25,5 @@ import data from '../../db/mockData.js';
 //     console.log('hi')
 //   })
  };
+
+

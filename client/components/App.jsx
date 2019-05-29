@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Sidebar from './Sidebar.jsx';
+import Main from './Main.jsx';
 import ErrorBoundary from './ErrorBoundary.jsx';
 import axios from 'axios';
 
@@ -57,7 +57,7 @@ class App extends React.Component {
     const { userID, bmarks, titles } = this.state;
     return (
       <ErrorBoundary>
-        <Sidebar userID={userID} bmarks={bmarks} titles={titles}/>
+        <Main userID={userID} bmarks={bmarks} titles={titles}/>
       </ErrorBoundary>
     );
   }
