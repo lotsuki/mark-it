@@ -2,6 +2,7 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 import Category from '../components/Category';
 
+
 //if category === cat, then style should be...
 describe('<Category />', () => {
   const props = {

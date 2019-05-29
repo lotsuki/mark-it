@@ -7,6 +7,7 @@
     "start": "nodemon server/index.js",
     "build-dev": "webpack --watch",
     "test": "jest --watch --verbose --runInBand",
+    "test:db": "jest db/__tests__/",
     "debug": "NODE_ENV=debug npm test",
     "test:coverage": "jest --coverage --colors",
     "open:coverage": "node coverage/Icov-report/index.html"
@@ -40,6 +41,7 @@
     "@babel/polyfill": "^7.4.4",
     "@babel/preset-env": "^7.1.6",
     "@babel/preset-react": "^7.0.0",
+    "@shelf/jest-mongodb": "^1.0.1",
     "babel-jest": "^24.8.0",
     "babel-loader": "^8.0.4",
     "enzyme": "^3.9.0",
@@ -47,9 +49,11 @@
     "faker": "^4.1.0",
     "jest": "^24.7.1",
     "jest-dom": "^3.2.2",
+    "mongodb-memory-server": "^5.1.2",
     "puppeteer": "^1.17.0",
     "react-hooks-testing-library": "^0.5.0",
     "react-testing-library": "^7.0.0",
+    "supertest": "^4.0.2",
     "webpack": "^4.26.1",
     "webpack-cli": "^3.1.2"
   }

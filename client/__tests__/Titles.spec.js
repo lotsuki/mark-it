@@ -20,7 +20,6 @@ describe('<Titles />', () => {
    it('when delete icon is clicked, setShowConfirm is invoked with correct props', () => {
     const wrapper = mount(<Titles {...props}/>)
     const buttons = wrapper.find('i')
-    console.log(buttons.length)
     buttons.map(button => button.simulate('click', event))
     expect(props.setShowConfirm).toHaveBeenCalledTimes(buttons.length)
     if (!props.showConfirm) {

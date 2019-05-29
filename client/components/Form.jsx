@@ -44,28 +44,28 @@ const Form = () => {
         type="text"
         value={category}
         className="form-inputs"
-        data-testid="category"
+        data-testid="category-input"
         placeholder="Category"
         onChange={e => setCategory(e.target.value)}/>
       <input
         type="text"
         value={subject}
         className="form-inputs"
-        data-testid="subject"
+        data-testid="subject-input"
         placeholder="Subject"
         onChange={e => setSubject(e.target.value)}/>
       <input
         type="text"
         value={title}
         className="form-inputs"
-        data-testid="title"
+        data-testid="title-input"
         placeholder="Title"
         onChange={e=> setTitle(e.target.value)}/>
       <input
         type="text"
         value={url}
         className="form-inputs"
-        data-testid="url"
+        data-testid="url-input"
         placeholder="URL"
         onChange={e => setUrl(e.target.value)}/>
       <input

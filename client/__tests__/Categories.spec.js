@@ -29,29 +29,14 @@ describe('<Categories />', () => {
     expect(wrapper.find('.section-wrapper').children().length).toEqual(Object.keys(props.bmarks).length)
   });
   it('when category div is clicked, handleClick is invoked', () => {
-    // const wrapper = mount(<Categories {...props}/>);
-    // const span = wrapper.find('.category-wrapper').filterWhere(elem => elem.getElement().key === 'Tech')
-    // const beforeClick = wrapper.find('.dropdown-container').length
-    // span.simulate('click')
-    // expect(wrapper.find('.dropdown-container').length).toBeGreaterThan(beforeClick)
-  });
+  //   const mockHandleClick = jest.fn()
+  //   const wrapper = mount(<Categories {...props}/>);
+  //   const span = wrapper.find('.category-wrapper').filterWhere(elem => elem.getElement().key === 'Tech')
+  //   span.simulate('click', {target:{innerText: 'Category'}})
+  //   expect(mockHandleClick).toHaveBeenCalled()
+  // });
 });
 
-
-
-
-
- // const handleClick = (e) => {
- //    if (isOpen) {
- //      setIsOpen(false);
- //      setCategory('');
- //    } else {
- //      setIsOpen(true);
- //      setCategory(e.target.innerText);
- //    }
- //  };
-
- //  { bmarks, displayConfirm, titlesUpdate }
 
 
 

@@ -33,7 +33,7 @@ app.post('/', (req, res) => {
       Document.updateOne({bmarks: {$elemMatch: {[category]: {$exists: true}}}},
         {$addToSet:{[cat]: subject}}, {upsert: false},(err, result) => {
           if (err) { console.log('Cannot send back all data from post api, UPDATE: ', err); }
-          else { console.log(result); res.send(result); }
+          else { res.send(result); }
       });
     }
   });
@@ -131,7 +131,7 @@ app.get('/update/subj/:defaultVal/:newVal/:category', (req, res) => {
 
   Document.updateOne({[key]: defaultVal}, {$set: {[key2]: newVal}}, (err, result) => {
     if (err) { console.log('Failure to get user obj: ', err); }
-    else { console.log(result); res.send(result); }
+    else { res.send(result); }
   });
 });
 
@@ -143,7 +143,7 @@ app.get('/update/cat/:defaultVal/:newVal', (req, res) => {
 
   Document.updateOne({username: {$exists:true}}, {$rename:{[key]: value}}, (err, result) => {
     if (err) { console.log('Failure to get user obj: ', err); }
-    else { console.log(result); res.send(result); }
+    else { res.send(result); }
   });
 });
 
