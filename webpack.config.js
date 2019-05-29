@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = {
   mode: 'development',
-  entry: ['./client/index.jsx', '@babel/polyfill'],
+  entry: ['./client/index.jsx'],
   output: {
     path: path.join(__dirname, "public"),
     filename: 'bundle.js'
@@ -11,7 +11,7 @@ module.exports = {
     rules: [
       {
         test: /\.(js|jsx)$/,
-        exclude: [/node_modules/, /coverage/],
+        exclude: [/node_modules/],
         use: {
           loader: 'babel-loader'
         }

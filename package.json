@@ -6,7 +6,9 @@
   "scripts": {
     "start": "nodemon server/index.js",
     "build-dev": "webpack --watch",
-    "test": "jest --watch --verbose",
+    "test": "jest --watch --verbose --runInBand",
+    "test:db": "jest db/__tests__/",
+    "debug": "NODE_ENV=debug npm test",
     "test:coverage": "jest --coverage --colors",
     "open:coverage": "node coverage/Icov-report/index.html"
   },
@@ -21,23 +23,6 @@
     "url": "https://github.com/lotsuki/mvp/issues"
   },
   "homepage": "https://github.com/lotsuki/mvp#readme",
-  "babel": {
-    "presets": [
-      [
-        "@babel/preset-env",
-        {
-          "targets": {
-            "browsers": [
-              "last 2 chrome versions"
-            ]
-          },
-          "useBuiltIns": "entry",
-          "corejs": 2
-        }
-      ],
-      "@babel/preset-react"
-    ]
-  },
   "dependencies": {
     "axios": "^0.18.0",
     "express": "^4.16.4",
@@ -46,20 +31,29 @@
     "mongoose": "^5.3.14",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.8.6",
+    "react-spring": "^8.0.20",
+    "underscore": "^1.9.1"
   },
   "devDependencies": {
     "@babel/core": "^7.1.6",
+    "@babel/plugin-proposal-class-properties": "^7.4.4",
     "@babel/polyfill": "^7.4.4",
     "@babel/preset-env": "^7.1.6",
     "@babel/preset-react": "^7.0.0",
+    "@shelf/jest-mongodb": "^1.0.1",
     "babel-jest": "^24.8.0",
     "babel-loader": "^8.0.4",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.12.1",
+    "faker": "^4.1.0",
     "jest": "^24.7.1",
     "jest-dom": "^3.2.2",
+    "mongodb-memory-server": "^5.1.2",
+    "puppeteer": "^1.17.0",
+    "react-hooks-testing-library": "^0.5.0",
     "react-testing-library": "^7.0.0",
+    "supertest": "^4.0.2",
     "webpack": "^4.26.1",
     "webpack-cli": "^3.1.2"
   }
