@@ -21,15 +21,16 @@ module.exports = {
 
   unmockedModulePathPatterns: ['<rootDir>/node_modules/react'],
 
+
 //   //The path to modules that run code to configure/set up test env before each test
   setupFiles: ['<rootDir>/enzyme.config.js'],
 
 
 //   //The test environment that will be used for testing
-  testEnvironment: 'node',
+  testEnvironment: 'jsdom',
 
   //The global patterns JEst uses to detect test files
-  testMatch: ['**/__tests__/**'],
+  testMatch: ['**/__tests__/**', '**/__integration__/**'],
 
 //   //Which files to ignore
   testPathIgnorePatterns: ['<rootDir>/node_modules', '<rootDir>/db/', '<rootDir>/server/'],

@@ -12,6 +12,7 @@ const Bookmarks = ({ bmarks, displayConfirm, titlesUpdate }) => {
   );
 };
 
+
 export default Bookmarks;
 
 

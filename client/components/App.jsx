@@ -6,6 +6,7 @@ import axios from 'axios';
 
 
 class App extends React.Component {
+
   constructor(props) {
     super(props);
 
@@ -14,36 +15,39 @@ class App extends React.Component {
       bmarks: {},
       titles: []
     }
+    this._isMounted = false;
   }
 
+  //TODO: Fix state being called after unmount, then fix integration test
   componentDidMount() {
     this._isMounted = true;
-    axios
+
+      axios
       .get('/user')
       .then(result => {
         if (this._isMounted) {
           let data = result.data[0];
-
           this.setState({
             userID: data.username,
             bmarks: data.bmarks
           })
-         }
+        }
        })
       .catch(err => { console.log('Error at GET: ', err); });
 
       axios
       .get('/titles')
       .then(result => {
-        let data = result.data.slice(1);
         if (this._isMounted) {
+        let data = result.data.slice(1);
           this.setState({
             titles: data
           })
-         }
+        }
        })
       .catch(err => { console.log('Error at GET: ', err); });
   }
+
 
   componentWillUnMount() {
     this._isMounted = false;
@@ -58,6 +62,7 @@ class App extends React.Component {
     );
   }
 };
+
 
 
 export default App;

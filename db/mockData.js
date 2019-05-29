@@ -3,6 +3,26 @@ const faker = require('faker');
 const categories = ['Tech', 'Travel', 'Food'];
 const subjects = ['React', 'Munich', 'Desserts'];
 
+const bmarks = {
+
+}
+
+const titles = [
+  {
+    title: faker.hacker.noun(),
+    url: faker.hacker.noun()
+  },
+  {
+    title: faker.hacker.noun(),
+    url: faker.hacker.noun()
+  },
+  {
+    title: faker.hacker.noun(),
+    url: faker.hacker.noun()
+  }
+];
+
+
 const mockUser = {
   category: faker.random.arrayElement(categories),
   subject: faker.random.arrayElement(subjects),
@@ -36,4 +56,4 @@ const createBookmarks = () => {
 
 let mockData = createBookmarks();
 
-module.exports = { mockData, mockUser };
+module.exports = { mockData, mockUser, titles };

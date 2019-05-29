@@ -15,8 +15,9 @@ describe('<App />',  () => {
      shallow(<App />);
   });
   it('renders <Sidebar /> component', () => {
-    const wrapper = shallow(<App />);
+    const wrapper = mount(<App />);
     expect(wrapper.children().find(Sidebar)).toBeDefined();
+    wrapper.unmount();
   });
   it('sets the userID prop on Sidebar component', () => {
     const wrapper = shallow(<App />);
@@ -29,6 +30,14 @@ describe('<App />',  () => {
   it('sets the titles prop on Sidebar component', () => {
     const wrapper = shallow(<App />);
     expect(wrapper.children().find(Sidebar).props('titles')).toBeTruthy();
+  });
+  it('invokes componentDidMount when loading', () => {
+    const spy = jest.spyOn(App.prototype, 'componentDidMount');
+    spy.mockImplementation(() => {data: {}})
+    const wrapper = shallow(<App />);
+    wrapper.instance().componentDidMount();
+    expect(spy).toHaveBeenCalled();
+    spy.mockRestore();
   });
 });
 

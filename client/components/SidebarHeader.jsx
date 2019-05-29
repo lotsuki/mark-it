@@ -10,7 +10,6 @@ const SidebarHeader = ({ sidebarHeader }) => (
 
 export default SidebarHeader;
 
-
 SidebarHeader.propTypes = {
   sidebarHeader: PropTypes.string
 };

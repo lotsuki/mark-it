@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
-//if delete icon is clicked, displayOCnfirm is invoked
 
 const Titles = ({ titles, setTitles, displayConfirm }) => {
 
