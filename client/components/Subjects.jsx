@@ -1,51 +1,97 @@
-import React, { useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
+import _ from 'underscore';
+import Titles from './Titles.jsx';
+import axios from 'axios';
+import {useTrail, animated} from 'react-spring';
 
-const Subjects = ({ sidebarSection, category, target }) => {
-  // const [ subject, setSubject ] = useState('');
-  // setSubject(e.target.innerText)
-  // e.target.parentElement.children[1].style.transition = 'height, 0.3s ease-out';
-  // useEffect(() => {
-  //   target.parentElement.children.style.backgroundColor = 'blue'
-  // })
+//if subject is clicked, titles comp gets rendered
 
-  const changeStyles = () => {
-    console.log(target.parentElement.children)
-  }
+const Subjects = ({ bmarks, category, showConfirm, setShowConfirm, titlesUpdate }) => {
+  const [ isOpen, setIsOpen ] = useState(false);
+  const [ titles, setTitles ] = useState([]);
+  const [ subj, setSubj ] = useState('');
+  const [ update, setUpdate ] = useState(false);
 
-  const subjects = () => {
-    return sidebarSection.reduce((a, b) => {
-      if(b[category]) { return b[category]; }
-      return a;
-    }, {});
+  const handleClick = (e) => {
+    if (isOpen) {
+      setIsOpen(false);
+      setTitles('');
+    } else {
+      setSubj(e.target.innerText)
+
+      axios.get(`/titles/${category}/${e.target.innerText}`)
+       .then(result => {
+         setTitles(result.data);
+         setIsOpen(true);
+        })
+       .catch(err => { console.log('Error at GET', err); });
+    }
+  };
+
+  let subjects = [];
+  _.forEach(bmarks, (cat, key) => {
+    if( category === key) {
+      subjects = subjects.concat(cat);
+    }
+  });
+
+  const trail = useTrail(subjects.length, {
+    opacity: 1,
+    height: 50,
+    from: {opacity: 0, height: 0}}
+  );
+
+  const showTitles = (subject) => {
+      if (titlesUpdate && subj === subject) {
+        return <Titles titles={titlesUpdate} setTitles={setTitles} showConfirm={showConfirm} setShowConfirm={setShowConfirm} />
+      } else if (isOpen && subj === subject) {
+        return <Titles titles={titles} setTitles={setTitles} showConfirm={showConfirm} setShowConfirm={setShowConfirm} />
+      } else {
+        return null
+      }
   };
 
   return (
-    <ul className="subjectContainer" style={{
-      zIndex: 1
-    }}>
-      {
-        subjects().map((subject, i) => (
-           <li className="subject"
-              key={subject}
-             style={{
-              transitionDelay:`${i * 0.5 / subjects().length}s`
-           }}>{subject}</li>
-        ))
-      }
-    </ul>
-  );
+    <div className="subject-container">
+      {trail.map(({height, opacity}, index) => (
+         <div className="subject-wrapper" key={subjects[index]}>
+           <div>
+             <animated.div
+               className="subject"
+               onClick={handleClick}
+               style={{height, opacity}}
+               key={subjects[index]}>
+               <span className="leftSide">{subjects[index]}</span>
+               <i className="fas fa-chevron-down"></i>
+             </animated.div>
+           </div>
+           <div>
+             {
+               (showTitles(subjects[index]))
+             }
+           </div>
+         </div>
+      ))}
+    </div>
+  )
 };
+
+
 
 export default Subjects;
 
 Subjects.propTypes = {
-  sidebarSection: PropTypes.array,
-  category: PropTypes.string
+  bmarks: PropTypes.object,
+  category: PropTypes.string,
+  titlesUpdate: PropTypes.array,
+  displayConfirm: PropTypes.func
 };
 
 Subjects.defaultProps = {
-  sidebarSection: [],
-  category: ''
+  bmarks: {},
+  category: '',
+  titlesUpdate: [],
+  displayConfirm: () => {}
 };
 

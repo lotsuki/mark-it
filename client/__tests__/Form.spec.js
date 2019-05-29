@@ -1,91 +1,51 @@
   import React from 'react';
-  import { shallow, mount, render } from 'enzyme';
+  import { shallow, mount } from 'enzyme';
   import Form from '../components/Form';
-  import FormInputs from '../components/FormInputs';
-  import mockData from '../../db/mockData.js';
-  import mockUtils from '../__mocks__/utils.js';
+  import mockAxios from 'axios';
 
+
+  //renders form with 4 inputs and submit button
+  //onChange invokes X function
   //clears form after submit
+  //if one field is without a value, form will not submit
+
+  const updateInput = (wrapper, instance, newVal) => {
+    const input = wrapper.find(instance)
+    input.simulate('change', {
+      target: {value: newVal}
+    })
+    return wrapper.find(instance)
+  };
 
   describe('<Form />', () => {
-    const event = { target: { value: 'Value' } };
-    it('renders without error with correct props', () => {
-      const props = {
-        updateStateAfterPostReq: () => { console.log('rendered')}
-      };
-      shallow(<Form {...props}/>);
-    });
-    it('contains all necessary state properties with correct values', () => {
-      const wrapper = shallow(<Form />);
-      expect(wrapper.state('data')).toEqual([]);
-      expect(wrapper.state('subject')).toEqual('');
-      expect(wrapper.state('title')).toEqual('');
-      expect(wrapper.state('url')).toEqual('');
-      expect(wrapper.state('starred')).toEqual(false);
-      expect(wrapper.state('favorites')).toEqual(false);
-    });
-    it('titleChange sets state: title', () => {
-      const wrapper = shallow(<Form />);
-      expect(wrapper.state('title')).toBe('');
-      wrapper.instance().titleChange(event);
-      expect(wrapper.state('title')).toBe('Value');
 
-    });
-    it('urlChange sets state: url', () => {
-      const wrapper = shallow(<Form />);
-      expect(wrapper.state('url')).toBe('');
-      wrapper.instance().urlChange(event);
-      expect(wrapper.state('url')).toBe('Value');
-    });
-    it('subjectChange sets state: subject', () => {
-      const wrapper = shallow(<Form />);
-      expect(wrapper.state('subject')).toBe('');
-      wrapper.instance().subjectChange(event);
-      expect(wrapper.state('subject')).toBe('Value');
-    });
-    it('setCategory sets state: category', () => {
-      const wrapper = shallow(<Form />);
-      expect(wrapper.state('category')).toBe('');
-      wrapper.instance().setCategory(event);
-      expect(wrapper.state('category')).toBe('Value');
-    });
-    it('handleSubmit sends POST req with correct data', () => {
+    // const event = { target: { value: 'Value' } };
+     it('renders without error with correct props', () => {
+       shallow(<Form />);
+     });
+     it('form contains 5 children that are inputs', () => {
+       const wrapper = shallow(<Form />);
+       expect(wrapper.find('form.form-container').children().length).toEqual(5);
+       expect(wrapper.find('input').length).toEqual(5);
+     });
+     it('form contains 1 submit input', () => {
+       const wrapper = mount(<Form />)
+       const hasSubmit = wrapper.find('.form-inputs').findWhere(input => input.prop('type') === 'submit')
+       expect(hasSubmit.length).toBe(1);
+       wrapper.unmount()
+     });
+     it('form submit invokes submitForm', () => {
 
-    });
-    it('handleSubmit sets state: data', () => {
-
-    });
-    it('handleSubmit invokes updateStateAfterPostReq with correct arg', () => {
-
-    });
-    it('returns FormInput component', () => {
-      const wrapper = mount(<Form />);
-      expect(wrapper.children().find(FormInputs)).toBeDefined();
-      wrapper.unmount();
-    });
-    it('contains correct props', () => {
-      const wrapper = mount(<Form />);
-      expect(wrapper.props('updateStateAfterPostReq')).toBeDefined();
-      wrapper.unmount();
-    });
-    it('sets setCategory property on FormInput component', () => {
-      const wrapper = mount(<Form />);
-      expect(wrapper.children().find(FormInputs).props('setCategory')).toBeDefined();
-      wrapper.unmount();
-    });
-    it('sets titleChange property on FormInput component', () => {
-      const wrapper = mount(<Form />);
-      expect(wrapper.children().find(FormInputs).props('titleChange')).toBeDefined();
-      wrapper.unmount();
-    });
-    it('sets urlChange property on FormInput component', () => {
-      const wrapper = mount(<Form />);
-      expect(wrapper.children().find(FormInputs).props('urlChange')).toBeDefined();
-      wrapper.unmount();
-    });
-    it('sets subjectChange property on FormInput component', () => {
-      const wrapper = mount(<Form />);
-      expect(wrapper.children().find(FormInputs).props('subjectChange')).toBeDefined();
-      wrapper.unmount();
-    });
+     });
+     it('allows users to fill out form', () => {
+       const wrapper = shallow(<Form />)
+       // const categoryInput = updateInput(wrapper, 'category-input', 'Category')
+       // const subjectInput = updateInput(wrapper, '[data-testid="subject-input"]', 'Subject')
+       // const titleInput = updateInput(wrapper, '[data-testid="title-input"]', 'Title')
+       // const urlInput = updateInput(wrapper, '[data-testid="url-input"]', 'url')
+       // expect(categoryInput.props().value).toBe('Category')
+       // expect(subjectInput.props().value).toBe('Subject')
+       // expect(titleInput.props().value).toBe('Title')
+       // expect(urlInput.props().value).toBe('url')
+     });
   });

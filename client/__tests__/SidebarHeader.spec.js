@@ -1,20 +1,18 @@
+
 import React from 'react';
-import PropTypes from 'prop-types';
-import Bookmarks from '../components/Bookmarks';
-import Quicklinks from '../components/Quicklinks';
-import {render, fireEvent, cleanup, waitForElement, waitForDomChange} from 'react-testing-library';
-import 'jest-dom/extend-expect';
+import { shallow, mount } from 'enzyme';
+import SidebarHeader from '../components/SidebarHeader.jsx';
+
 
 describe('<SidebarHeader />', () => {
-  afterEach(cleanup)
-  it('displays text Quick links in Quicklinks component', () => {
-    const { getByText } = render(<Quicklinks />);
-    const sidebarHeaderElem = getByText('Quick links');
-    expect(sidebarHeaderElem).toBeDefined();
+  it('renders without error', () => {
+    shallow(<SidebarHeader />)
   });
-  it('displays text Bookmarks in Bookmarks component', () => {
-    const { getByText } = render(<Bookmarks />);
-    const sidebarHeaderElem = getByText('My Bookmarks');
-    expect(sidebarHeaderElem).toBeDefined();
+  it('renders a div with text passed down from props sidebarHeader', () => {
+    const props = {
+      sidebarHeader: 'header'
+    }
+    const wrapper = shallow(<SidebarHeader {...props}/>)
+    expect(wrapper.childAt(0).text()).toEqual(props.sidebarHeader)
   });
 });

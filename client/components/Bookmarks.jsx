@@ -3,23 +3,28 @@ import PropTypes from 'prop-types';
 import SidebarHeader from './SidebarHeader.jsx';
 import Categories from './Categories.jsx';
 
-const Bookmarks = ({ bmarks }) => {
+const Bookmarks = ({ bmarks, showConfirm, setShowConfirm, titlesUpdate }) => {
   return (
-    <div className="bookmarksContainer">
+    <div className="bookmarks-container">
       <SidebarHeader sidebarHeader="MY BOOKMARKS" />
-      <Categories sidebarSection={bmarks} height={'3.5rem'}/>
+      <Categories bmarks={bmarks} height={'3.5rem'} showConfirm={showConfirm} setShowConfirm={setShowConfirm} titlesUpdate={titlesUpdate}/>
     </div>
   );
 };
+
 
 export default Bookmarks;
 
 
 
 Bookmarks.propTypes = {
-  bmarks: PropTypes.array
+  bmarks: PropTypes.object,
+  displayConfirm: PropTypes.func,
+  titlesUpdate: PropTypes.array
 };
 
 Bookmarks.defaultProps = {
-  bmarks: []
+  bmarks: {},
+  titlesUpdate: [],
+  displayConfirm: () => {}
 };

@@ -5,14 +5,19 @@ const Schema = mongoose.Schema;
 
 //test different schemas
 
+
 const documentSchema = new Schema ({
-  id: Number,
+  category: String,
+  subject: String,
+  title: String,
+  url: String,
+  date: String,
   username: String,
   password: String,
-  qlinks: Array,
-  bmarks: Array
+  bmarks: Object
+}, {
+  strict: false
 });
-
 
 
 const Document = mongoose.model('Document', documentSchema);

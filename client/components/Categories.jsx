@@ -1,52 +1,56 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
+import _ from 'underscore';
 import PropTypes from 'prop-types';
 import Subjects from './Subjects.jsx';
+import Category from './Category.jsx';
 
-const Categories = ({ sidebarSection, height, size }) => {
+
+
+const Categories = ({ bmarks, showConfirm, setShowConfirm, titlesUpdate }) => {
   const [ isOpen, setIsOpen ] = useState(false);
   const [ category, setCategory ] = useState('');
-  const [ target, setTarget ] = useState('');
 
   const handleClick = (e) => {
     if (isOpen) {
-      e.target.style.backgroundColor = '#fff';
       setIsOpen(false);
       setCategory('');
-      setTarget('');
     } else {
-      e.target.style.backgroundColor = '#BDC18A';
       setIsOpen(true);
       setCategory(e.target.innerText);
-      setTarget(e.target)
     }
   };
 
   return (
-    <div className="sectionContainer">
-       <div className="section" onClick={handleClick}>
-         {sidebarSection.map(obj => {
-           let cat = Object.keys(obj)[0];
-           return (
-             <div className="categoryWrapper" key={cat}>
-               <div className="category" key={cat} style={{height:height, fontSize: size}}>{cat}</div>
-
-               {
-                category === cat
-                ? (
-                  <div id="dropdownContainer">
-                    {
-                      isOpen
-                        ? ( <Subjects sidebarSection={sidebarSection} category={category} target={target}/>)
-                        : ( null )
-                    }
-                  </div>
-                )
-                : ( null )
-               }
+    <div className="section-container" >
+     <div className="section-wrapper">
+       {_.map(bmarks, (cat, key) => {
+         return (
+          <div className="category-container" key={key}>
+           <div
+             className="category-wrapper"
+             onClick={handleClick}
+             key={key}>
+             <Category category={category} cat={key}/>
+           </div>
+           <div className="dropdown-container" key={cat[0]}>
+             {
+              category === key
+              ? (
+                <div className="dropdown-wrapper" >
+                  {
+                    isOpen
+                      ? ( <Subjects bmarks={bmarks} category={category} showConfirm={showConfirm} setShowConfirm={setShowConfirm} titlesUpdate={titlesUpdate}/>)
+                      : ( null )
+                  }
+                </div>
+              )
+              : ( null )
+             }
             </div>
-           );
-          })}
-      </div>
+          </div>
+         );
+        })}
+       </div>
     </div>
   );
 };
@@ -55,10 +59,14 @@ const Categories = ({ sidebarSection, height, size }) => {
 export default Categories;
 
 Categories.propTypes = {
-  sidebarSection: PropTypes.array
+  bmarks: PropTypes.object,
+  displayConfirm: PropTypes.func,
+  titlesUpdate: PropTypes.array
 };
 
 Categories.defaultProps = {
-  sidebarSection: []
+  bmarks: {},
+  titlesUpdate: [],
+  displayConfirm: () => {}
 };
 
