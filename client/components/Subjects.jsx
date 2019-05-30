@@ -2,6 +2,7 @@ import React, { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'underscore';
 import Titles from './Titles.jsx';
+import Subject from './Subject.jsx';
 import axios from 'axios';
 import {useTrail, animated} from 'react-spring';
 
@@ -62,8 +63,7 @@ const Subjects = ({ bmarks, category, showConfirm, setShowConfirm, titlesUpdate 
                onClick={handleClick}
                style={{height, opacity}}
                key={subjects[index]}>
-               <span className="leftSide">{subjects[index]}</span>
-               <i className="fas fa-chevron-down"></i>
+               <Subject clickedSubj={subj} subject={subjects[index]}/>
              </animated.div>
            </div>
            <div>
