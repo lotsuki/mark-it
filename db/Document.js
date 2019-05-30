@@ -23,3 +23,7 @@ const documentSchema = new Schema ({
 const Document = mongoose.model('Document', documentSchema);
 
 module.exports = Document;
+
+
+// \copy listings from './text.csv' with (format csv);
+// mongoimport --db users --type csv --headerline --file /opt/backups/contacts.csv

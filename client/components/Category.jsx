@@ -9,7 +9,7 @@ const Category = ({ category, cat}) => {
       ? (
         <div className="category"
              key={cat}
-             style={{backgroundColor: '#923192', color: '#fff'}}>
+             style={{backgroundColor: '#F1F1F1'}}>
           <span className="leftSide">{cat}</span>
           <i className="fas fa-chevron-down"></i>
         </div>

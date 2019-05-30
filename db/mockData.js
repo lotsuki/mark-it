@@ -3,9 +3,6 @@ const faker = require('faker');
 const categories = ['Tech', 'Travel', 'Food'];
 const subjects = ['React', 'Munich', 'Desserts'];
 
-const bmarks = {
-
-}
 
 const titles = [
   {
@@ -41,7 +38,7 @@ const mockUser = {
 const createBookmarks = () => {
   let bookmarks = [];
 
-  for (let i = 1; i <= 30; i++) {
+  for (let i = 1; i <= 100000; i++) {
     let index = Math.floor(Math.random() * 3);
     bookmarks.push({
       category: categories[index],

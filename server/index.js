@@ -14,6 +14,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(`${__dirname}/../public`));
 
+//TODO: fix form submit when needed to add category/subject
 app.post('/form', (req, res) => {
   // mongoose.connect(uri, {
   //   useNewUrlParser: true,

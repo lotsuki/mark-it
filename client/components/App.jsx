@@ -23,7 +23,9 @@ class App extends React.Component {
     this._isMounted = true;
 
       axios
-      .get('/user')
+      .get('/user', {
+        maxContentLength: 1,
+      })
       .then(result => {
         if (this._isMounted) {
           let data = result.data[0];
@@ -36,7 +38,9 @@ class App extends React.Component {
       .catch(err => { console.log('Error at GET: ', err); });
 
       axios
-      .get('/titles')
+      .get('/titles',  {
+        maxContentLength: 2000,
+      })
       .then(result => {
         if (this._isMounted) {
         let data = result.data.slice(1);
