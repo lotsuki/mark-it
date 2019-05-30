@@ -110,6 +110,19 @@ describe('GET requests', () => {
     });
 
   });
+  describe('/update/subj/:defaultVal/:newVal/:category', () => {
+    it('should respond to GET request', async (done) => {
+      request(app)
+        .get('/update/subj/:defaultVal/:newVal/:category')
+        .expect(200, done)
+    });
+    it('should respond with json', async (done) => {
+      request(app)
+        .get('/update/subj/:defaultVal/:newVal/:category')
+        .expect('Content-Type', /json/)
+        .expect(200, done)
+    });
+  });
 });
 
 
