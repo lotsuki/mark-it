@@ -6,10 +6,11 @@
   "scripts": {
     "start": "nodemon server/index.js",
     "build-dev": "webpack --watch",
-    "test": "jest --watch --verbose --runInBand",
-    "test:db": "jest db/__tests__/",
+    "test": "NODE_ENV=test jest --watch --verbose --runInBand",
+    "test:db": "NODE_ENV=test jest db/__tests__/ --runInBand",
+    "test:server": "NODE_ENV=test jest server/__tests__ --runInBand ",
     "debug": "NODE_ENV=debug npm test",
-    "test:coverage": "jest --coverage --colors",
+    "test:coverage": "NODE_ENV=test jest --coverage --colors",
     "open:coverage": "node coverage/Icov-report/index.html"
   },
   "repository": {

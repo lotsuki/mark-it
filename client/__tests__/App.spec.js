@@ -8,9 +8,16 @@ import App from '../components/App';
 import Main from '../components/Main';
 import {render, fireEvent, cleanup, waitForElement, waitForDomChange} from 'react-testing-library';
 import 'jest-dom/extend-expect';
+const db = require('../../db/index.js');
 
 
 describe('<App />',  () => {
+  afterAll(async done => {
+  // Closing the DB connection allows Jest to exit successfully.
+    await db.close();
+    done();
+  });
+
   it('renders without error', () => {
      shallow(<App />);
   });
@@ -39,7 +46,10 @@ describe('<App />',  () => {
     expect(spy).toHaveBeenCalled();
     spy.mockRestore();
   });
+
 });
+
+
 
 
 

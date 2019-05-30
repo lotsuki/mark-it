@@ -2,15 +2,22 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 import Confirm from '../components/Confirm';
 import mockAxios from 'axios';
-
+const db = require('../../db/index.js');
 
 describe('<Confirm />', () => {
+  afterAll(async done => {
+   //Closing the DB connection allows Jest to exit successfully.
+    await db.close();
+    done();
+  });
+
   const props = {
     setShowConfirm: jest.fn(),
     titleToDelete: 'title',
     subjectOfTitle: 'subject',
     showTitlesUpdate: jest.fn()
-  }
+  };
+
   it('renders without error', () => {
     shallow(<Confirm {...props}/>);
   });
@@ -44,6 +51,7 @@ describe('<Confirm />', () => {
     expect(wrapper.containsAnyMatchingElements([<div>Are you sure you want to delete this bookmark?</div>])).toBe(true);
   });
 });
+
 
 
 

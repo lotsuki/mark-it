@@ -8,7 +8,7 @@ const app = express();
 // const uri = 'mongodb://localhost:27017/mydocapp';
 // mongoose.Promise = global.Promise;
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -204,6 +204,11 @@ app.delete('/bookmarks/:title/:subject', (req, res) => {
 });
 
 
-app.listen(PORT, () => {
-  console.log(`Listening on port ${PORT}`)
-});
+if (process.env.NODE_ENV !== 'test') {
+  app.listen(PORT, () => {
+    console.log(`Listening on port ${PORT}`)
+  });
+}
+
+
+module.exports = app;

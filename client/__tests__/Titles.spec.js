@@ -4,9 +4,19 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 import Titles from '../components/Titles.jsx';
 import data from '../../db/mockData.js'
-
+afterAll(async done => {
+   //Closing the DB connection allows Jest to exit successfully.
+    await db.close();
+    done();
+  });
 
 describe('<Titles />', () => {
+  afterAll(async done => {
+    // Closing the DB connection allows Jest to exit successfully.
+      await db.close();
+      done();
+  });
+
   const event = {target:{parentElement:{firstChild:{innerText:'title'},parentElement:{parentElement:{parentElement:{firstChild:{firstChild:{innerText:'subject'}}}}}}}};
   const subject = 'subject';
   const title = 'title';
