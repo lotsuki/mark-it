@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(`${__dirname}/../public`));
 
-app.post('/', (req, res) => {
+app.post('/form', (req, res) => {
   // mongoose.connect(uri, {
   //   useNewUrlParser: true,
   //   autoIndex: true
@@ -27,89 +27,35 @@ app.post('/', (req, res) => {
         url: req.body.url,
         date: req.body.date
       }, (err, result) => {
-    if (err) { console.log('Error at POST: ', err); }
+    if (err) {
+      //console.log('Error at POST: ', err);
+      res.status(400).send('Error at POST: ', err);
+    }
     else {
       let cat = `bmarks.$.${category}`;
       Document.updateOne({bmarks: {$elemMatch: {[category]: {$exists: true}}}},
         {$addToSet:{[cat]: subject}}, {upsert: false},(err, result) => {
-          if (err) { console.log('Cannot send back all data from post api, UPDATE: ', err); }
-          else { res.send(result); }
+          if (err) {
+            console.log('Cannot send back all data from post api, UPDATE: ', err);
+            res.status(400);
+          }
+          else { res.status(201).send(result); }
       });
     }
   });
 });
 
-
-//   Document.findOne({category: req.body.category}, {lean: true}, (err, result) => {
-//     if (err) { console.log('Error at POST', err); }
-//     else if (!result) {
-//       Document.create({
-//         category: req.body.category,
-//         subject: req.body.subject,
-//         title: req.body.title,
-//         url: req.body.url,
-//         date. req.body.date
-//       }, (err, result) => {
-//         if (err) { console.log('err at new category post', err) }
-//         else {  Document.find().exec((err, result) => {
-//           if (err) { console.log('Cannot send back all data from post api, UPDATE'); }
-//           else { res.send(result); }
-//         });
-//         }
-//       });
-//     } else {
-//       Document.find({'subjects.subject': req.body.subject}, (err, result) => {
-//         if (err) { console.log('Error at repeat subject POST', err); }
-//         else if (result.length === 0) {
-//           Document.findOneAndUpdate({category: req.body.category}, {$push: {subjects: {
-//               subject: req.body.subject,
-//               sites: [{
-//                 title: req.body.title,
-//                 url: req.body.url,
-//                 date: req.body.date
-//               }]
-//             }}}, (err, result) => {
-//             if (err) { console.log('err at new category post', err) }
-//             else {  Document.find().exec((err, result) => {
-//               if (err) { console.log('Cannot send back all data from post api, UPDATE'); }
-//               else { res.send(result); }
-//             });
-//             }
-//           });
-//         } else {
-//           Document.update({category: req.body.category, 'subjects.subject': req.body.subject}, {$push: {'subjects.$.sites':
-//               {
-//                   title: req.body.title,
-//                   url: req.body.url,
-//                   date: req.body.date
-//               }
-//           }},(err, result) => {
-//               if (err) { console.log('Could not update data', err); }
-//               else {
-//                 Document.find().exec((err, result) => {
-//                   if (err) { console.log('Cannot send back all data from post api, UPDATE'); }
-//                   else { res.send(result); }
-//                 });
-//               }
-//           });
-//         }
-//       });
-//     }
-//   });
-// });
-
-
 app.get('/user', (req, res) => {
   Document.find({ username: { $exists: true } }, (err, result) => {
     if (err) { console.log('Failure to get user obj: ', err); }
-    else { res.send(result); }
+    else { res.status(200).send(result); }
   });
 });
 
 app.get('/titles', (req, res) => {
   Document.find({}, 'title url', (err, result) => {
     if (err) { console.log('Failure to get user obj: ', err); }
-    else { res.send(result); }
+    else { res.status(200).send(result); }
   });
 });
 
@@ -118,7 +64,7 @@ app.get('/titles/:category/:subject', (req, res) => {
   let category = req.params.category
   Document.find({ category: category, subject: subject }, 'title url', (err, result) => {
     if (err) { console.log('Failure to get titles: ', err); }
-    else { res.send(result); }
+    else { res.status(200).send(result); }
   });
 });
 
@@ -131,7 +77,7 @@ app.get('/update/subj/:defaultVal/:newVal/:category', (req, res) => {
 
   Document.updateOne({[key]: defaultVal}, {$set: {[key2]: newVal}}, (err, result) => {
     if (err) { console.log('Failure to get user obj: ', err); }
-    else { res.send(result); }
+    else { res.status(200).send(result); }
   });
 });
 
@@ -143,10 +89,9 @@ app.get('/update/cat/:defaultVal/:newVal', (req, res) => {
 
   Document.updateOne({username: {$exists:true}}, {$rename:{[key]: value}}, (err, result) => {
     if (err) { console.log('Failure to get user obj: ', err); }
-    else { res.send(result); }
+    else { res.status(200).send(result); }
   });
 });
-
 
 // app.get('/update/title/:defaultVal/:newVal', (req, res) => {
 //   let defaultVal = req.params.defaultVal;
@@ -159,6 +104,7 @@ app.get('/update/cat/:defaultVal/:newVal', (req, res) => {
 // });
 
 app.get('/', (req, res) => {
+  console.log(res)
   res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 

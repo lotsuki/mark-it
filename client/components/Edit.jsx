@@ -30,11 +30,9 @@ const Edit = ({ bmarks, titles, editUpdate }) => {
     })
   };
 
-  const deleteBookmark = (e) => {
+  const deleteCategory = (e) => {
     let value = e.target.parentElement.firstChild.value;
-
-    if (categories.indexOf(value) !== -1) {
-      axios
+    axios
        .delete(`delete/cat/${value}`)
        .then(result => {
         console.log(result);
@@ -42,10 +40,11 @@ const Edit = ({ bmarks, titles, editUpdate }) => {
        })
        .catch(err => { console.log('Could not delete document: ', err); });
       categories = filterItems(categories, value);
-      // setUpdate(true);
 
-    } else if (subjects.indexOf(value) !== -1) {
-       axios
+  };
+  const deleteSubject = (e) => {
+    let value = e.target.parentElement.firstChild.value;
+    axios
        .delete(`delete/subj/${value}`)
        .then(result => {
         console.log(result);
@@ -54,21 +53,59 @@ const Edit = ({ bmarks, titles, editUpdate }) => {
        .catch(err => { console.log('Could not delete document: ', err); });
 
        subjects = filterItems(subjects, value);
-       // setUpdate(true);
 
-    } else {
-
-      //TODO: NEED TO UPDATE LIST ON DELETE
-        axios
+  };
+  const deleteTitle = (e) => {
+    let value = e.target.parentElement.firstChild.value;
+    axios
          .delete(`delete/title/${value}`)
          .then(result => {
           titlesArr.concat(filterItems(titlesArr, value));
            // showTitlesUpdate(result.data);
          })
          .catch(err => { console.log('Could not delete document: ', err); });
-        //setUpdatedTitles(filterItems(titlesArr, value));
-    }
+
   };
+
+  // const deleteBookmark = (e) => {
+  //   let value = e.target.parentElement.firstChild.value;
+
+  //   if (categories.indexOf(value) !== -1) {
+  //     axios
+  //      .delete(`delete/cat/${value}`)
+  //      .then(result => {
+  //       console.log(result);
+  //        // showTitlesUpdate(result.data);
+  //      })
+  //      .catch(err => { console.log('Could not delete document: ', err); });
+  //     categories = filterItems(categories, value);
+  //     // setUpdate(true);
+
+  //   } else if (subjects.indexOf(value) !== -1) {
+  //      axios
+  //      .delete(`delete/subj/${value}`)
+  //      .then(result => {
+  //       console.log(result);
+  //        // showTitlesUpdate(result.data);
+  //      })
+  //      .catch(err => { console.log('Could not delete document: ', err); });
+
+  //      subjects = filterItems(subjects, value);
+  //      // setUpdate(true);
+
+  //   } else {
+
+  //     //TODO: NEED TO UPDATE LIST ON DELETE
+  //       axios
+  //        .delete(`delete/title/${value}`)
+  //        .then(result => {
+  //         titlesArr.concat(filterItems(titlesArr, value));
+  //          // showTitlesUpdate(result.data);
+  //        })
+  //        .catch(err => { console.log('Could not delete document: ', err); });
+  //       //setUpdatedTitles(filterItems(titlesArr, value));
+  //   }
+  // };
 
   const editBookmark = (e) => {
     let defaultVal = e.target.defaultValue;
@@ -123,7 +160,7 @@ const Edit = ({ bmarks, titles, editUpdate }) => {
           {categories.map(category => (
             <li key={category}>
               <input type="text" defaultValue={category} onBlur={resetInput} onKeyUp={editBookmark}/>
-              <img className="delete-icon" src="https://img.icons8.com/ios/50/000000/delete-sign.png" onClick={deleteBookmark}/>
+              <img className="delete-icon" src="https://img.icons8.com/ios/50/000000/delete-sign.png" onClick={deleteCategory}/>
 
             </li>
           ))}
@@ -135,7 +172,7 @@ const Edit = ({ bmarks, titles, editUpdate }) => {
           {subjects.map(subject => (
             <li key={subject}>
               <input type="text" defaultValue={subject} onKeyUp={editBookmark}/>
-              <img className="delete-icon" src="https://img.icons8.com/ios/50/000000/delete-sign.png" onClick={deleteBookmark}/>
+              <img className="delete-icon" src="https://img.icons8.com/ios/50/000000/delete-sign.png" onClick={deleteSubject}/>
 
             </li>
           ))}
@@ -148,7 +185,7 @@ const Edit = ({ bmarks, titles, editUpdate }) => {
             titlesArr.map(title => (
               <li key={title}>
                 <input type="text" defaultValue={title} onKeyUp={editBookmark}/>
-                <img className="delete-icon" src="https://img.icons8.com/ios/50/000000/delete-sign.png" onClick={deleteBookmark}/>
+                <img className="delete-icon" src="https://img.icons8.com/ios/50/000000/delete-sign.png" onClick={deleteTitle}/>
               </li>
             ))
           }

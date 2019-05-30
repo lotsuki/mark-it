@@ -28,7 +28,7 @@ const Form = () => {
 
     if (category && subject && title && url) {
       axios
-        .post('/', form)
+        .post('/form', form)
         .then(result => {
           //TODO****
           console.log(result);
