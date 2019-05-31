@@ -154,15 +154,15 @@
     padding: 2rem;
   }
 
-  .form-container {
+  #form-container {
     display: block;
     position: relative;
-    float: right;
     width: 22rem;
     margin: 1rem;
     z-index: 2;
-    margin-top: -9.95rem;
-    margin-right: 5rem;
+    top: -14.5rem;
+    right: 3.1rem;
+    float: right;
   }
 
   .form-inputs {
@@ -190,7 +190,6 @@
   .right-container {
     display: block;
     float: right;
-    top: 0;
   }
 
   .bookmarks-container {
@@ -624,35 +623,43 @@ li {
 
 #edit-container {
   display: flex;
-  justify-content: flex-end;
-  height: 100%;
-  width: 100%;
+  justify-content: center;
+  margin-top: 2.5rem;
 }
 
 .edit-main {
   display: flex;
   flex-flow: row nowrap;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
-  background-color: #fff
-  margin: 2.5rem;
   border-radius: 5px;
-  width: 650px;
-  height: 400px;
-  padding-right: 5rem;
+  width: 45rem;
+  height: 24rem;
+  background-color: #fff;
+  border-radius: 5px;
+}
+
+.edit-main .edit-wrapper:last-child {
+  border: none;
 }
 
 .edit-wrapper {
-  height: 18rem;
-  width: 13rem;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  height: 100%;
   background-color: #fff;
-  border-radius: 5px;
-  overflow-y: scroll;
+  border-right: 1px dotted lightgray;
+  width: 100%;
+  padding: 1.5rem 0rem;
 }
+
 .edit-wrapper ul {
   font-family: Helvetica, sans-serif;
+  width: 100%;
   margin: 0;
   padding: 0;
+  overflow-y: scroll;
 }
 
 .edit-wrapper > ul > li {
@@ -660,19 +667,32 @@ li {
   flex-flow: row nowrap;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
+}
+.edit-wrapper > ul > li:hover {
+  background-color: #F3F3F3;
+}
+.edit-wrapper > ul > li:hover > input {
+  background-color: #F3F3F3;
 }
 
-.edit-wrapper > ul > li input {
+
+.edit-wrapper > ul > li > input {
   font-family: Helvetica, sans-serif;
-  padding: .8rem;
+  /*padding: .8rem;*/
   font-size: .9rem;
   font-weight: lighter;
   border: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: .8rem 1.3rem;
 }
 
 .edit-wrapper > ul > li input:focus{
   outline: none;
 }
+
 
 .edit-wrapper > ul > li > a{
   font-size: .9rem;
@@ -681,16 +701,17 @@ li {
 
 .edit-header {
   border-bottom: 1px dotted lightgray;
-  padding: .5rem;
   text-align: center;
   font-family: Helvetica, sans-serif;
   font-weight: lighter;
+  padding-bottom: .3rem;
+  width: 70%;
 }
 
 .delete-icon {
   height: .8rem;
-  margin-right: .6rem;
   cursor: pointer;
+    padding: .5rem .9rem;
 }
 
 

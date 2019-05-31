@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import moment from 'moment';
+import { Spring } from 'react-spring/renderprops';
 
 
 const Form = () => {
@@ -38,42 +39,55 @@ const Form = () => {
     clearForm();
   };
 
+// 'translate3d(0,0px,0)'
+// transform: 'translate3d(0,-40px,0)'
+
   return(
-    <form className="form-container" data-testid="form" onSubmit={submitForm}>
-      <input
-        type="text"
-        value={category}
-        className="form-inputs"
-        data-testid="category-input"
-        placeholder="Category"
-        onChange={e => setCategory(e.target.value)}/>
-      <input
-        type="text"
-        value={subject}
-        className="form-inputs"
-        data-testid="subject-input"
-        placeholder="Subject"
-        onChange={e => setSubject(e.target.value)}/>
-      <input
-        type="text"
-        value={title}
-        className="form-inputs"
-        data-testid="title-input"
-        placeholder="Title"
-        onChange={e=> setTitle(e.target.value)}/>
-      <input
-        type="text"
-        value={url}
-        className="form-inputs"
-        data-testid="url-input"
-        placeholder="URL"
-        onChange={e => setUrl(e.target.value)}/>
-      <input
-        type="submit"
-        className="form-inputs"
-        data-testid="submit"
-        value="Submit"/>
-    </form>
+  <Spring
+    config={{duration: 2000}}
+    from={{ height: 0 }}
+    to={{ height: 240}}>
+    {props =>
+      <div id="form-container">
+        <form className="form"
+            data-testid="form"
+            onSubmit={submitForm}>
+        <input
+          type="text"
+          value={category}
+          className="form-inputs"
+          data-testid="category-input"
+          placeholder="Category"
+          onChange={e => setCategory(e.target.value)}/>
+        <input
+          type="text"
+          value={subject}
+          className="form-inputs"
+          data-testid="subject-input"
+          placeholder="Subject"
+          onChange={e => setSubject(e.target.value)}/>
+        <input
+          type="text"
+          value={title}
+          className="form-inputs"
+          data-testid="title-input"
+          placeholder="Title"
+          onChange={e=> setTitle(e.target.value)}/>
+        <input
+          type="text"
+          value={url}
+          className="form-inputs"
+          data-testid="url-input"
+          placeholder="URL"
+          onChange={e => setUrl(e.target.value)}/>
+        <input
+          type="submit"
+          className="form-inputs"
+          data-testid="submit"
+          value="Submit"/>
+      </form>
+      </div>}
+  </Spring>
   );
 };
 

@@ -5,7 +5,7 @@ import Searchbar from './Searchbar.jsx';
 const Navbar = ({ showForm, setShowForm, showEdit, setShowEdit, titles }) => {
   const displayForm = () => {
     setShowForm(!showForm)
-  }
+  };
 
   const displayEdit = () => {
     var appContainer = document.getElementById('app-container');
@@ -21,7 +21,7 @@ const Navbar = ({ showForm, setShowForm, showEdit, setShowEdit, titles }) => {
       editContainer.style.gridRow ='';
       setShowEdit(false)
     }
-  }
+  };
 
   return (
     <nav className="navbar">
