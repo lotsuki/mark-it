@@ -359,7 +359,7 @@
   }
 
   .fa-trash-alt {
-    margin-bottom: 1.1rem;
+    margin-bottom: 1.3rem;
     color: black;
     opacity: 0;
     padding: .6rem;
@@ -375,8 +375,8 @@
     /*display: block;*/
     vertical-align: middle;
     white-space: nowrap;
-    height: 2rem;
-    width: 200px;
+    height: inherit;
+    width: 300px;
     overflow: hidden;
     text-overflow: ellipsis;
     font-weight: lighter;

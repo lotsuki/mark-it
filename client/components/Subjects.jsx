@@ -14,10 +14,18 @@ const Subjects = ({ bmarks, category, showConfirm, setShowConfirm, titlesUpdate 
   const [ subj, setSubj ] = useState('');
   const [ update, setUpdate ] = useState(false);
 
+  let subjects = [];
+  _.forEach(bmarks, (cat, key) => {
+    if( category === key) {
+      subjects = subjects.concat(cat);
+    }
+  });
+
   const handleClick = (e) => {
     if (isOpen) {
       setIsOpen(false);
       setTitles('');
+      setSubj('')
     } else {
       setSubj(e.target.innerText)
 
@@ -30,13 +38,6 @@ const Subjects = ({ bmarks, category, showConfirm, setShowConfirm, titlesUpdate 
     }
   };
 
-  let subjects = [];
-  _.forEach(bmarks, (cat, key) => {
-    if( category === key) {
-      subjects = subjects.concat(cat);
-    }
-  });
-
   const trail = useTrail(subjects.length, {
     opacity: 1,
     height: 50,
@@ -44,13 +45,13 @@ const Subjects = ({ bmarks, category, showConfirm, setShowConfirm, titlesUpdate 
   );
 
   const showTitles = (subject) => {
-      if (titlesUpdate && subj === subject) {
-        return <Titles titles={titlesUpdate} setTitles={setTitles} showConfirm={showConfirm} setShowConfirm={setShowConfirm} />
-      } else if (isOpen && subj === subject) {
-        return <Titles titles={titles} setTitles={setTitles} showConfirm={showConfirm} setShowConfirm={setShowConfirm} />
-      } else {
-        return null
-      }
+    if (titlesUpdate && subj === subject) {
+      return <Titles titles={titlesUpdate} setTitles={setTitles} showConfirm={showConfirm} setShowConfirm={setShowConfirm} />
+    } else if (isOpen && subj === subject) {
+      return <Titles titles={titles} setTitles={setTitles} showConfirm={showConfirm} setShowConfirm={setShowConfirm} />
+    } else {
+      return null
+    }
   };
 
   return (

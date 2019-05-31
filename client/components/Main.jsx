@@ -27,6 +27,7 @@ const Main = ({ bmarks, titles }) => {
     // })()
   };
 
+
   return (
     <div id="container">
       <Navbar showForm={showForm} setShowForm={setShowForm} showEdit={showEdit} setShowEdit={setShowEdit} titles={titles}/>
@@ -37,7 +38,7 @@ const Main = ({ bmarks, titles }) => {
         <div className="right-container">
           {
             showForm
-            ? (<Form />)
+            ? (<Form showForm={showForm}/>)
             : (null)
           }
         </div>

@@ -5,7 +5,7 @@ import moment from 'moment';
 import { Spring } from 'react-spring/renderprops';
 
 
-const Form = () => {
+const Form = ({ showForm }) => {
   const [ category, setCategory ] = useState('');
   const [ subject, setSubject ] = useState('');
   const [ title, setTitle ] = useState('');

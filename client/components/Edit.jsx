@@ -33,38 +33,37 @@ const Edit = ({ bmarks, titles, editUpdate }) => {
   const deleteCategory = (e) => {
     let value = e.target.parentElement.firstChild.value;
     axios
-       .delete(`delete/cat/${value}`)
-       .then(result => {
-        console.log(result);
-         // showTitlesUpdate(result.data);
-       })
-       .catch(err => { console.log('Could not delete document: ', err); });
+      .delete(`delete/cat/${value}`)
+      .then(result => {
+       console.log(result);
+       // showTitlesUpdate(result.data);
+      })
+      .catch(err => { console.log('Could not delete document: ', err); });
       categories = filterItems(categories, value);
-
   };
+
   const deleteSubject = (e) => {
     let value = e.target.parentElement.firstChild.value;
     axios
-       .delete(`delete/subj/${value}`)
-       .then(result => {
-        console.log(result);
-         // showTitlesUpdate(result.data);
-       })
-       .catch(err => { console.log('Could not delete document: ', err); });
+      .delete(`delete/subj/${value}`)
+      .then(result => {
+       console.log(result);
+       // showTitlesUpdate(result.data);
+      })
+      .catch(err => { console.log('Could not delete document: ', err); });
 
-       subjects = filterItems(subjects, value);
-
+      subjects = filterItems(subjects, value);
   };
+
   const deleteTitle = (e) => {
     let value = e.target.parentElement.firstChild.value;
     axios
-         .delete(`delete/title/${value}`)
-         .then(result => {
-          titlesArr.concat(filterItems(titlesArr, value));
-           // showTitlesUpdate(result.data);
-         })
-         .catch(err => { console.log('Could not delete document: ', err); });
-
+      .delete(`delete/title/${value}`)
+      .then(result => {
+       titlesArr.concat(filterItems(titlesArr, value));
+       // showTitlesUpdate(result.data);
+      })
+      .catch(err => { console.log('Could not delete document: ', err); });
   };
 
   // const deleteBookmark = (e) => {
@@ -106,6 +105,10 @@ const Edit = ({ bmarks, titles, editUpdate }) => {
   //       //setUpdatedTitles(filterItems(titlesArr, value));
   //   }
   // };
+
+  const hideIcon = (e) => {
+    e.target.parentElement
+  };
 
   const editBookmark = (e) => {
     let defaultVal = e.target.defaultValue;
@@ -159,7 +162,7 @@ const Edit = ({ bmarks, titles, editUpdate }) => {
         <ul>
           {categories.map(category => (
             <li key={category}>
-              <input type="text" defaultValue={category} onBlur={resetInput} onKeyUp={editBookmark}/>
+              <input type="text" defaultValue={category} onBlur={resetInput} onKeyUp={editBookmark} onFocus={hideIcon}/>
               <img className="delete-icon" src="https://img.icons8.com/ios/50/000000/delete-sign.png" onClick={deleteCategory}/>
 
             </li>

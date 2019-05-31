@@ -1,22 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import helpers from '../lib/utils.js';
 import axios from 'axios';
 import {useTrail, animated} from 'react-spring';
 
 
 const Titles = ({ titles, setTitles, showConfirm, setShowConfirm }) => {
 
-  const confirmDelete = (e) => {
+  const confirmDelete = async (e) => {
+    let target = e.target
     if (!showConfirm) {
-      let subject = e.target.parentElement.parentElement.parentElement.parentElement.firstChild.firstChild.innerText;
-      let title = e.target.parentElement.firstChild.innerText;
+      let subject = await helpers.findText(target, 'subject-wrapper', 'leftSide');
+      let title = await helpers.findText(target, 'title-wrapper', 'title');
       setShowConfirm([subject, title]);
     } else {
       setShowConfirm(false)
     }
   };
-  const container = ['titles-container']
 
+
+  const container = ['titles-container']
   const titlesArr = titles.map(obj => obj.title);
   const urlsArr = titles.map(obj => obj.url);
   const config = {duration: 400};
@@ -35,12 +38,12 @@ const Titles = ({ titles, setTitles, showConfirm, setShowConfirm }) => {
           <animated.div
             className="titles-container"
             style={{height, opacity}}
-            key={urlsArr[index]}>
+            key={'animation'}>
             {
               titlesArr.map((title, i) => (
-                <div className="title-wrapper">
-                  <a href={urlsArr[i]} className="title" key={title}>{title}</a>
-                  <i className="far fa-trash-alt" data-testid="delete-title" onClick={confirmDelete}></i>
+                <div className="title-wrapper" key={`${urlsArr[i]}${i}`}>
+                  <a href={urlsArr[i]} className="title" key={`${titlesArr[i]}${i}`}>{title}</a>
+                  <i className="far fa-trash-alt"  data-testid="delete-title" onClick={confirmDelete}></i>
                 </div>
               ))
             }
@@ -68,19 +71,3 @@ Titles.defaultProps = {
   setTitles: () => {},
   displayConfirm: () => {}
 };
-
-
-// return (
-//     <ul className="titles-container">
-//       {
-//         titles.map(obj => (
-//           <li key={obj.title} className="title-wrapper">
-//             <a href={obj.url} className="title" key={obj.title}>{obj.title}
-//             </a>
-//             <i className="far fa-trash-alt" data-testid="delete-title" onClick={confirmDelete}></i>
-//           </li>
-//         ))
-//       }
-//     </ul>
-
-//   );

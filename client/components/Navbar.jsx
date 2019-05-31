@@ -3,9 +3,29 @@ import PropTypes from 'prop-types';
 import Searchbar from './Searchbar.jsx';
 
 const Navbar = ({ showForm, setShowForm, showEdit, setShowEdit, titles }) => {
-  const displayForm = () => {
-    setShowForm(!showForm)
+  const hideDisplay = (e) => {
+    if (e.target.className === 'form-inputs') {
+      return;
+    }
+    setShowForm(false)
+    document.removeEventListener('click', hideDisplay)
   };
+
+  const displayForm = (e) => {
+    console.log(e.target)
+    if (!showForm) {
+      setShowForm(true)
+      document.addEventListener('click', hideDisplay)
+    } else {
+      setShowForm(false)
+    }
+  };
+
+
+  // useEffect(() => {
+  //   document.addEventListener('click', hideDisplay)
+  // })
+
 
   const displayEdit = () => {
     var appContainer = document.getElementById('app-container');
