@@ -21,17 +21,12 @@ const titles = [
 
 
 const mockUser = {
-  category: faker.random.arrayElement(categories),
-  subject: faker.random.arrayElement(subjects),
-  title: faker.name.title(),
-  url: faker.internet.url(),
-  date: faker.date.past(5),
   username: faker.hacker.noun(),
   password: faker.hacker.noun(),
   bmarks: {
-    Tech: ['React', 'Python'],
-    Travel: ['Munich', 'London'],
-    Food: ['Vegan', 'Desserts']
+    Tech: [],
+    Travel: [],
+    Food: []
   }
 };
 

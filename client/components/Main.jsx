@@ -38,7 +38,7 @@ const Main = ({ bmarks, titles }) => {
         <div className="right-container">
           {
             showForm
-            ? (<Form showForm={showForm}/>)
+            ? (<Form showForm={showForm} bmarks={bmarks}/>)
             : (null)
           }
         </div>

@@ -14,11 +14,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(`${__dirname}/../public`));
 
-//TODO: fix form submit when needed to add category/subject
 app.post('/form', (req, res) => {
-  // mongoose.connect(uri, {
-  //   useNewUrlParser: true,
-  //   autoIndex: true
   let category = req.body.category;
   let subject = req.body.subject;
   Document.create({
@@ -33,15 +29,20 @@ app.post('/form', (req, res) => {
       res.status(400).send('Error at POST: ', err);
     }
     else {
-      let cat = `bmarks.$.${category}`;
-      Document.updateOne({bmarks: {$elemMatch: {[category]: {$exists: true}}}},
-        {$addToSet:{[cat]: subject}}, {upsert: false},(err, result) => {
-          if (err) {
-            console.log('Cannot send back all data from post api, UPDATE: ', err);
-            res.status(400);
-          }
-          else { res.status(201).send(result); }
-      });
+      console.log(req.body.hasCategory, 'cat')
+      console.log(req.body.hasSubject, 'sub')
+      let key = `bmarks.${category}`;
+      if (!req.body.hasCategory && !req.body.hasSubject) {
+        Document.updateOne({[key]: subject}, (err, result) => {
+          if (err) { console.log('Failed to update user object: ', err); }
+          else { res.status(200).send(result); }
+        })
+      } else if(!req.body.hasSubject) {
+        Document.updateOne({username: {$exists:true}}, {$addToSet: {[key]: subject}}, (err, result) => {
+          if (err) { console.log('Failed to update subjects at POST: ', err); }
+          else { res.status(200).send(result); }
+        })
+      }
     }
   });
 });

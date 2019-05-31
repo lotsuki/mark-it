@@ -4,27 +4,20 @@ import Searchbar from './Searchbar.jsx';
 
 const Navbar = ({ showForm, setShowForm, showEdit, setShowEdit, titles }) => {
   const hideDisplay = (e) => {
-    if (e.target.className === 'form-inputs') {
-      return;
+    if (e.target.className !== 'form-inputs') {
+      setShowForm(false);
+      document.removeEventListener('click', hideDisplay);
     }
-    setShowForm(false)
-    document.removeEventListener('click', hideDisplay)
   };
 
   const displayForm = (e) => {
-    console.log(e.target)
     if (!showForm) {
-      setShowForm(true)
-      document.addEventListener('click', hideDisplay)
+      setShowForm(true);
+      document.addEventListener('click', hideDisplay);
     } else {
-      setShowForm(false)
+      setShowForm(false);
     }
   };
-
-
-  // useEffect(() => {
-  //   document.addEventListener('click', hideDisplay)
-  // })
 
 
   const displayEdit = () => {

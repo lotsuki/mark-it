@@ -14,7 +14,7 @@ const createBookmarks = () => {
   let bookmarks = [];
 
   for (let i = 1; i <= 200; i++) {
-    let index = Math.floor(Math.random() * 5);
+    let index = Math.floor(Math.random() * 6);
     bookmarks.push({
       category: categories[index],
       subject: subjects[index],

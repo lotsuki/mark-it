@@ -18,26 +18,24 @@ const Titles = ({ titles, setTitles, showConfirm, setShowConfirm }) => {
     }
   };
 
-
   const container = ['titles-container']
   const titlesArr = titles.map(obj => obj.title);
   const urlsArr = titles.map(obj => obj.url);
-  const config = {duration: 400};
+  const config = {duration: 100};
 
   const trail = useTrail(container.length, {
     config,
-    opacity: 1,
-    height: 400,
-    from: {opacity: 0, height: 0}}
+    height: 'auto',
+    from: {height: 0}}
   );
 
   return (
     <div className="titles-container">
       {
-        trail.map(( {height, opacity}, index )=> (
+        trail.map(( {height}, index )=> (
           <animated.div
             className="titles-container"
-            style={{height, opacity}}
+            style={{height}}
             key={'animation'}>
             {
               titlesArr.map((title, i) => (

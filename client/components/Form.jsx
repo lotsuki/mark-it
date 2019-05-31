@@ -5,7 +5,7 @@ import moment from 'moment';
 import { Spring } from 'react-spring/renderprops';
 
 
-const Form = ({ showForm }) => {
+const Form = ({ showForm, bmarks }) => {
   const [ category, setCategory ] = useState('');
   const [ subject, setSubject ] = useState('');
   const [ title, setTitle ] = useState('');
@@ -18,13 +18,23 @@ const Form = ({ showForm }) => {
     setUrl('');
   };
 
+  const hasCategory = () => {
+    return bmarks.hasOwnProperty(category)
+  };
+
+  const hasSubject = () => {
+    return bmarks[category].indexOf(subject) !== -1;
+  };
+
   const submitForm = () => {
     const form = {
       category,
       subject,
       title,
       url,
-      date: moment().format('MM-DD-YYYY')
+      date: moment().format('MM-DD-YYYY'),
+      hasCategory: hasCategory(),
+      hasSubject: hasSubject()
     };
 
     if (category && subject && title && url) {

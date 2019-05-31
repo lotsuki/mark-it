@@ -15,7 +15,8 @@ const documentSchema = new Schema ({
   username: String,
   password: String,
   bmarks: Object
-}, {
+},
+{
   strict: false
 });
 
