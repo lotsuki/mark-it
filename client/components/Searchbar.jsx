@@ -41,7 +41,7 @@ const Searchbar = ({ titles }) => {
           ? (<ul className="results-wrapper">
               {
                 titles.reduce((a, b) => {
-                  if (b.title && b.url && b.title.toLowerCase().indexOf(input) !== -1) {
+                  if (b.title && b.url && b.title.toLowerCase().indexOf(input.toLowerCase()) !== -1) {
                     return a.concat([<li className="search-result" key={b.title}><a href={b.url} key={b.url}>{b.title}</a></li>]);
                   } else {
                     return a;
