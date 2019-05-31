@@ -5,16 +5,29 @@ const Searchbar = ({ titles }) => {
   const [ isSearching, setIsSearching ] = useState(false);
   const [ input, setInput ] = useState('');
 
+  const hideSearchbar = (e) => {
+    if (e.target.className !== 'searchbar-container' ||
+        e.target.className !== 'searchbar-content') {
+      setInput('');
+      setIsSearching(false);
+      document.removeEventListener('click', hideSearchbar);
+      let input = document.getElementsByClassName('search-input')[0]
+      input.value = '';
+    }
+  };
+
   const handleSearch = (e) => {
-    if (e.target.value) {
-      setInput(e.target.value);
+    let target = e.target;
+    if (target.value) {
+      setInput(target.value);
       setIsSearching(true);
+      document.addEventListener('click', hideSearchbar);
     } else {
+
       setInput('');
       setIsSearching(false);
     }
   };
-
   //TODO: SET ATTRIBUTE
   // box-shadow: 0px 8px 16px 1px rgba(0,0,0,0.2);
   // useEffect(() => {
@@ -30,9 +43,9 @@ const Searchbar = ({ titles }) => {
   return (
     <div className="searchbar-container">
       <div className="searchbar">
-        <form action="Submit">
+        <form action="Submit" className="search-form">
           <div className="search-icon"><i className="fa fa-search"></i></div>
-          <input type="text" placeholder="Search bookmarks..." name="search" onChange={handleSearch}/>
+          <input type="text" className="search-input" placeholder="Search bookmarks..." name="search" onChange={handleSearch}/>
         </form>
       </div>
       <div className="searchbar-content">
