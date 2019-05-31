@@ -25,27 +25,28 @@ app.post('/form', (req, res) => {
         date: req.body.date
       }, (err, result) => {
     if (err) {
-      //console.log('Error at POST: ', err);
-      res.status(400).send('Error at POST: ', err);
+      console.log('error at post: ', err)
+      res.send('Error at POST: ', err);
     }
     else {
-      console.log(req.body.hasCategory, 'cat')
-      console.log(req.body.hasSubject, 'sub')
       let key = `bmarks.${category}`;
-      if (!req.body.hasCategory && !req.body.hasSubject) {
-        Document.updateOne({[key]: subject}, (err, result) => {
-          if (err) { console.log('Failed to update user object: ', err); }
-          else { res.status(200).send(result); }
+      let hasCategory = req.body.hasCategory;
+      let hasSubject = req.body.hasSubject;
+      if (!hasCategory && !hasSubject) {
+        Document.updateOne({username: {$exists:true}}, {$set:{[key]: [subject]}}, (err, result) => {
+          if (err) { res.send(err); }
+          else { res.send(result); }
         })
-      } else if(!req.body.hasSubject) {
+      } else if(!hasSubject) {
         Document.updateOne({username: {$exists:true}}, {$addToSet: {[key]: subject}}, (err, result) => {
           if (err) { console.log('Failed to update subjects at POST: ', err); }
-          else { res.status(200).send(result); }
+          else { res.send(result); }
         })
       }
     }
   });
 });
+
 
 app.get('/user', (req, res) => {
   Document.find({ username: { $exists: true } }, (err, result) => {

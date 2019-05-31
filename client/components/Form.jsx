@@ -19,14 +19,18 @@ const Form = ({ showForm, bmarks }) => {
   };
 
   const hasCategory = () => {
-    return bmarks.hasOwnProperty(category)
+    return bmarks.hasOwnProperty(category);
   };
 
   const hasSubject = () => {
-    return bmarks[category].indexOf(subject) !== -1;
+    if (bmarks[category] && subject) {
+      return bmarks[category].indexOf(subject) !== -1;
+    }
+    return false;
   };
 
   const submitForm = () => {
+
     const form = {
       category,
       subject,
@@ -45,12 +49,11 @@ const Form = ({ showForm, bmarks }) => {
           console.log(result);
         })
         .catch(err => { console.log('Could not post document: ', err); });
+    } else {
+      alert('All fields must be filled out')
     }
     clearForm();
   };
-
-// 'translate3d(0,0px,0)'
-// transform: 'translate3d(0,-40px,0)'
 
   return(
   <Spring
