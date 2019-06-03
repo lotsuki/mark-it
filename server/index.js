@@ -5,7 +5,7 @@ const Document = require('../db/Document.js');
 const db = require('../db/index.js');
 const app = express();
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -153,8 +153,10 @@ app.delete('/bookmarks/:title/:subject', (req, res) => {
   });
 //}
 
-
 if (process.env.NODE_ENV !== 'test') {
+  if (PORT === null || PORT === '') {
+    PORT = 3000;
+  }
   app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`)
   });

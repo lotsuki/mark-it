@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Store, organize and search for bookmarks",
   "main": "index.js",
+  "engines": {
+    "node": "12.1.0"
+  },
   "scripts": {
     "start": "nodemon server/index.js",
     "build-dev": "webpack --mode=development --watch",
