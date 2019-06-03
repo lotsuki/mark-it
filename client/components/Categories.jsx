@@ -19,7 +19,7 @@ const Categories = ({ bmarks, showConfirm, setShowConfirm, titlesUpdate }) => {
       setCategory(e.target.innerText);
     }
   };
-
+  console.log(typeof bmarks, 'categories')
   return (
     <div className="section-container" >
      <div className="section-wrapper">

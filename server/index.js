@@ -2,17 +2,14 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const Document = require('../db/Document.js');
-//const db = require('../db/index.js');
+const db = require('../db/index.js');
 const app = express();
-// const mongoose = require('mongoose');
-// const uri = 'mongodb://localhost:27017/mydocapp';
-// mongoose.Promise = global.Promise;
 
 const PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(`${__dirname}/../public`));
+app.use(express.static(`${__dirname}/../public/`));
 
 app.post('/form', (req, res) => {
   let category = req.body.category;
@@ -49,16 +46,16 @@ app.post('/form', (req, res) => {
 
 
 app.get('/user', (req, res) => {
-  Document.find({ username: { $exists: true } }, (err, result) => {
+  Document.findOne({ username: { $exists: true } }, (err, result) => {
     if (err) { console.log('Failure to get user obj: ', err); }
-    else { res.status(200).send(result); }
+    else { console.log(result); res.send(result); }
   });
 });
 
 app.get('/titles', (req, res) => {
-  Document.find({}, 'title url', (err, result) => {
+  Document.find({title: {$exists:true}}, 'title url', (err, result) => {
     if (err) { console.log('Failure to get user obj: ', err); }
-    else { res.status(200).send(result); }
+    else { console.log(result); res.send(result); }
   });
 });
 
@@ -106,10 +103,7 @@ app.get('/update/cat/:defaultVal/:newVal', (req, res) => {
 //   });
 // });
 
-app.get('/', (req, res) => {
-  console.log(res)
-  res.sendFile(path.join(__dirname, '../public/index.html'));
-});
+
 
 //Have confirmation for this and show how many bookmarks this folder contains
 
@@ -151,6 +145,13 @@ app.delete('/bookmarks/:title/:subject', (req, res) => {
     }
   });
 });
+
+//if (process.env.NODE_ENV === 'production') {
+  app.get('/', (req, res) => {
+    console.log(res)
+    res.sendFile(path.join(__dirname, '../public/index.html'));
+  });
+//}
 
 
 if (process.env.NODE_ENV !== 'test') {

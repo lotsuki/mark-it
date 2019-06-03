@@ -1,24 +1,26 @@
 {
   "name": "mvp",
   "version": "1.0.0",
-  "description": "",
+  "description": "Store, organize and search for bookmarks",
   "main": "index.js",
   "scripts": {
     "start": "nodemon server/index.js",
-    "build-dev": "webpack --watch",
+    "build-dev": "webpack --mode=development --watch",
+    "build-prod": "webpack --mode=production --watch",
     "test": "NODE_ENV=test jest --watch --verbose --runInBand",
     "test:db": "NODE_ENV=test jest db/__tests__/ --runInBand",
     "test:server": "NODE_ENV=test jest server/__tests__ --runInBand ",
     "debug": "NODE_ENV=debug npm test",
     "test:coverage": "NODE_ENV=test jest --coverage --colors",
-    "open:coverage": "node coverage/Icov-report/index.html"
+    "open:coverage": "node coverage/Icov-report/index.html",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/lotsuki/mvp.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Lindsey Otsuki",
   "license": "MIT License",
   "bugs": {
     "url": "https://github.com/lotsuki/mvp/issues"

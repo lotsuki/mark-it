@@ -22,34 +22,59 @@ class App extends React.Component {
   componentDidMount() {
     this._isMounted = true;
 
-      axios
-      .get('/user', {
-        maxContentLength: 1,
+    fetch('/user')
+      .then(res => res.json())
+      .then(data =>  {
+        this.setState({
+          userID: data.username,
+          bmarks: data.bmarks
+        })
       })
-      .then(result => {
-        if (this._isMounted) {
-          let data = result.data[0];
-          this.setState({
-            userID: data.username,
-            bmarks: data.bmarks
-          })
-        }
-       })
-      .catch(err => { console.log('Error at GET: ', err); });
+      .catch(err => {
+        console.log('GET request failed at /users: ', err)
+      });
+       // console.log(res.json(), 'RESPONSE')
+        // let data = res.json();
 
-      axios
-      .get('/titles',  {
-        maxContentLength: 2000,
+
+      // axios
+      // .get('/user', {
+      //   maxContentLength: 1,
+      // })
+      // .then(result => {
+      //   if (this._isMounted) {
+      //     let data = result.data
+      //     this.setState({
+      //       userID: data.username,
+      //       bmarks: data.bmarks
+      //     })
+      //   }
+      //  })
+      // .catch(err => { console.log('Error at GET: ', err); });
+
+
+    fetch('/titles')
+      .then(res => res.json())
+      .then(data =>  {
+        this.setState({
+          titles: data
+        })
       })
-      .then(result => {
-        if (this._isMounted) {
-        let data = result.data.slice(1);
-          this.setState({
-            titles: data
-          })
-        }
-       })
-      .catch(err => { console.log('Error at GET: ', err); });
+      .catch(err => {
+        console.log('GET request failed at /users: ', err)
+      });
+
+      // axios
+      // .get('/titles')
+      // .then(result => {
+      //   if (this._isMounted) {
+      //   let data = result.data.slice(1);
+      //     this.setState({
+      //       titles: data
+      //     })
+      //   }
+      //  })
+      // .catch(err => { console.log('Error at GET: ', err); });
   }
 
 
