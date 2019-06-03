@@ -40,7 +40,7 @@ const Titles = ({ titles, setTitles, showConfirm, setShowConfirm }) => {
             {
               titlesArr.map((title, i) => (
                 <div className="title-wrapper" key={`${urlsArr[i]}${i}`}>
-                  <a href={urlsArr[i]} className="title" key={`${titlesArr[i]}${i}`}>{title}</a>
+                  <a target="_blank" href={urlsArr[i]} className="title" key={`${titlesArr[i]}${i}`}>{title}</a>
                   <i className="far fa-trash-alt"  data-testid="delete-title" onClick={confirmDelete}></i>
                 </div>
               ))

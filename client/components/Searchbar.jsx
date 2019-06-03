@@ -55,7 +55,7 @@ const Searchbar = ({ titles }) => {
               {
                 titles.reduce((a, b) => {
                   if (b.title && b.url && b.title.toLowerCase().indexOf(input.toLowerCase()) !== -1) {
-                    return a.concat([<li className="search-result" key={b.title}><a href={b.url} key={b.url}>{b.title}</a></li>]);
+                    return a.concat([<li className="search-result" key={b.title}><a target="_blank" href={b.url} key={b.url}>{b.title}</a></li>]);
                   } else {
                     return a;
                   }

@@ -118,14 +118,21 @@
     align-items: center;
     height: 2rem;
     border-bottom: 1px dotted lightgray;
-    padding-left: .8rem;
     background-color: #fff;
     z-index: 3;
   }
   .search-result a {
+    display: flex;
+    align-items: center;
+    padding: .6rem;
     height: 100%;
     width: 100%;
   }
+
+  .search-result a:hover {
+    background-color: #F1F1F1;
+  }
+
 
   .plus-icon {
     margin-right: .7rem;
