@@ -11,7 +11,7 @@
     padding: 0;
     height: inherit;
     width: inherit;
-    background-color: #DFC668;
+
   }
 
   #container {
@@ -21,9 +21,10 @@
     grid-row-gap: 0px;
     height: 100%;
     /*background-color: #F2F2D2;*/
-    min-width: 1000px;
+    min-width: 800px;
     margin:0;
     padding:0;
+     background-color: #FBFAFC;
   }
 
   #app-container {
@@ -32,7 +33,6 @@
     width: auto;
     margin:0;
     visibility: visible;
-    background-color: #DFC668;
   }
 
   .navbar {
@@ -40,30 +40,34 @@
     flex-flow: row nowrap;
     justify-content: space-between;
     align-items: center;
-    margin-top: 1rem;
     /*background-image: linear-gradient(to left top, #bcd8eb, #add3e8, #9ecfe3, #8dcade, #7cc6d7, #6ebfd0, #60b7c8, #51b0c1, #43a4b9, #3498b0, #258da8, #10819f);*/
     background-color: #fff;
     width: 100%;
+    border-bottom: 1px dotted lightgray;
   }
 
   .logo-wrapper {
     display: flex;
+    flex: 2;
     width: 10rem;
     align-items: center;
   }
 
   .name {
-    font-family: "Arial";
+    font-family: 'Raleway', sans-serif;
     letter-spacing: .25rem;
     font-size: 1rem;
     padding-left: 1rem;
     padding-right: .5rem;
+    font-weight: bold;
    /* color: #923192;*/
   }
 
-  .logo {
+  .fa-bookmark {
+    margin-top: 7px;
     width: 20px;
     height: 25px;
+    color: #92E529;
   }
 
   .searchbar-container {
@@ -76,7 +80,6 @@
     background-color: #fff;
     width: 15rem;
     height: 2.5rem;
-    border: 1px solid lightgray;
     border-radius: 20px;
   }
 
@@ -89,10 +92,16 @@
     height: 2rem;
 
   }
+  .search-form input {
+    padding: 5px;
+    font-weight: lighter;
+  }
+
   .search-icon {
     /*color: #C0C0A4;*/
     padding: 2px;
-    color: #DFC668;
+    /*color: #DFC668;*/
+    color: #E58129;
 
   }
 
@@ -137,15 +146,19 @@
     margin-right: .7rem;
     cursor: pointer;
     font-size: 1.5rem;
-    /*color: #923192;*/
-     color: #DFC668;
+    color: #9356E6;
+     /*color: #DFC668;*/
   }
 
   .edit-icon {
     cursor: pointer;
     font-size: 1.5rem;
-  /*  color: #923192;*/
-     color: #DFC668;
+     /*color: #DFC668;*/
+    color: #75D4E5;
+  }
+
+  .plus-icon:hover, .edit-icon:hover {
+    font-size: 1.7rem;
   }
 
   .searchbar >form > input {
@@ -167,23 +180,22 @@
 
   #form-container {
     display: block;
-    position: relative;
+    position: absolute;
     width: 22rem;
     margin: 1rem;
     z-index: 2;
-    top: -5rem;
+    top: 5rem;
     right: 3.1rem;
     float: right;
   }
   .form {
-    position: absolute;
+    position: relative;
   }
 
   .form-inputs {
     height: 3rem;
     width: 22rem;
     box-sizing: border-box;
-    border-radius: 1px;
     padding: .8rem;
     border: 1px solid lightgray;
     font-size: 1.3rem;
@@ -208,16 +220,21 @@
 
   .bookmarks-container {
     display: grid;
-    grid-template-rows: 2.5rem auto;
-    box-shadow: 0 10px 10px #777;
+    grid-template-rows: 2.7rem auto;
+/*   -moz-box-shadow: 0 0 5px #888;
+-webkit-box-shadow: 0 0 5px#888;*/
+box-shadow: 0 0 10px #E2E2E2  ;
+border-radius: 5px;
 
   }
+
+    /*  box-shadow: 0 1px 6px 0 rgba(32,33,36,0.28);*/
 
   .sidebar-header-wrapper {
     text-align: center;
     background-color: #fff;
-    padding-top: 15px;
-
+    padding: 15px 0px;
+    border-bottom: 1px dotted lightgray;
   }
 
   .sidebar-header {
@@ -237,7 +254,6 @@
     margin: 0;
     padding: 0;
     background-color: #fff;
-    box-shadow: 0 10px 10px #777;
   }
 
   .section-wrapper{
@@ -253,29 +269,43 @@
   }
 
   .category-wrapper:hover {
-    background: #F1F1F1;
+
   }
 
   .leftSide {
-    padding-left: 1.5rem;
+    flex: 2;
+    padding-left: .5rem;
+
   }
 
-  .fa-chevron-down {
+  .fa-chevron-down, .fa-chevron-right, .fa-chevron-up {
     color: lightgray;
     margin-right: 15px;
     visibility: hidden;
     pointer-events: none;
   }
 
- .category:hover > .fa-chevron-down, .subject:hover > .fa-chevron-down {
+ .category:hover > .fa-chevron-down, .category:hover > .fa-chevron-up, .subject:hover > .fa-chevron-right {
     visibility: visible;
-    color: gray;
+    color: #fff;
+  }
+  .subject:hover > .fa-chevron-right {
+    visibility: visible;
+    color: lightgray;
+  }
+
+  .fa-chevron-down, .fa-chevron-up {
+    align-items: flex-end;
+  }
+
+  .fa-folder, .fa-folder-open {
+    padding-left: 12px;
   }
 
   .category:hover {
-    background: #F1F1F1;
+    background:#FA6B6B;
+    color: #fff;
   }
-
 
   .category {
     display: flex;
@@ -324,7 +354,7 @@
   }
 
   .subject:hover {
-    background: #DBDBDA;
+    font-size: 1.2rem;
   }
 
   .subject {

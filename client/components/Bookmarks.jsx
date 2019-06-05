@@ -6,7 +6,7 @@ import Categories from './Categories.jsx';
 const Bookmarks = ({ bmarks, showConfirm, setShowConfirm, titlesUpdate }) => {
   return (
     <div className="bookmarks-container">
-      <SidebarHeader sidebarHeader="MY BOOKMARKS" />
+      <SidebarHeader sidebarHeader="COLLECTIONS" />
       <Categories bmarks={bmarks} height={'3.5rem'} showConfirm={showConfirm} setShowConfirm={setShowConfirm} titlesUpdate={titlesUpdate}/>
     </div>
   );

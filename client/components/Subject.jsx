@@ -9,15 +9,15 @@ const Subject = ({ clickedSubj, subject }) => {
       ? (
         <div
           className="subject"
-          style={{ background:'#DBDBDA' }}>
+          style={{ fontSize:'1.2rem' }}>
           <span className="leftSide">{subject}</span>
-          <i className="fas fa-chevron-down"></i>
+          <i class="fas fa-chevron-right" style={{visibility: 'visible', color: 'lightgray'}}></i>
         </div>
         )
       : (
         <div className="subject">
           <span className="leftSide">{subject}</span>
-          <i className="fas fa-chevron-down"></i>
+          <i class="fas fa-chevron-right"></i>
         </div>
         )
     }
