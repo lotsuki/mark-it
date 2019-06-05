@@ -15,6 +15,7 @@ const Main = ({ bmarks, titles }) => {
   const [ titleToDelete, setTitleToDelete ] = useState('');
   const [ subjectOfTitle, setSubjectOfTitle ] = useState('');
   const [ titlesUpdate, setTitlesUpdate ] = useState(null);
+  const [ showTit, setShowTit ] = useState(false);
 
   const showTitlesUpdate = (data) => {
     setTitlesUpdate(data)
@@ -33,15 +34,22 @@ const Main = ({ bmarks, titles }) => {
       <Navbar showForm={showForm} setShowForm={setShowForm} showEdit={showEdit} setShowEdit={setShowEdit} titles={titles}/>
       <div id="app-container" data-testid="app-container">
         <div className="sidebar-container">
-          <Bookmarks bmarks={bmarks} showConfirm={showConfirm} setShowConfirm={setShowConfirm} titlesUpdate={titlesUpdate} />
+          <Bookmarks bmarks={bmarks} setShowTit={setShowTit} showConfirm={showConfirm} setShowConfirm={setShowConfirm} titlesUpdate={titlesUpdate} />
         </div>
-        <div className="right-container">
+        <div className="titContainer">
+          {
+            showTit
+            ? (<div>HEY</div>)
+            : (null)
+          }
+        </div>
+      </div>
+      <div className="right-container">
           {
             showForm
             ? (<Form showForm={showForm} bmarks={bmarks}/>)
             : (null)
           }
-        </div>
       </div>
       <div id="edit-container">
         {

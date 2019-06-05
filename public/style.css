@@ -28,11 +28,20 @@
   }
 
   #app-container {
+    display: flex;
+    flex-flow: row nowrap;
     padding: 15px;
     height: 100%;
     width: auto;
     margin:0;
     visibility: visible;
+  }
+
+  .titContainer {
+    background: lightgray;
+    height: 500px;
+    width: 600px;
+    margin-left: 50px;
   }
 
   .navbar {

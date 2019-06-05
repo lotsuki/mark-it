@@ -8,7 +8,7 @@ import {useTrail, animated} from 'react-spring';
 
 //if subject is clicked, titles comp gets rendered
 
-const Subjects = ({ bmarks, category, showConfirm, setShowConfirm, titlesUpdate }) => {
+const Subjects = ({ bmarks, category, showConfirm, setShowConfirm, titlesUpdate, setShowTit }) => {
   const [ isOpen, setIsOpen ] = useState(false);
   const [ titles, setTitles ] = useState([]);
   const [ subj, setSubj ] = useState('');
@@ -23,11 +23,13 @@ const Subjects = ({ bmarks, category, showConfirm, setShowConfirm, titlesUpdate 
 
   const handleClick = (e) => {
     if (isOpen) {
+      setShowTit(false)
       setIsOpen(false);
       setTitles('');
       setSubj('')
     } else {
       setSubj(e.target.innerText)
+      setShowTit(true)
 
       axios.get(`/titles/${category}/${e.target.innerText}`)
        .then(result => {

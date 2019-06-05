@@ -11,13 +11,13 @@ const Subject = ({ clickedSubj, subject }) => {
           className="subject"
           style={{ fontSize:'1.2rem' }}>
           <span className="leftSide">{subject}</span>
-          <i class="fas fa-chevron-right" style={{visibility: 'visible', color: 'lightgray'}}></i>
+          <i className="fas fa-chevron-right" style={{visibility: 'visible', color: 'lightgray'}}></i>
         </div>
         )
       : (
         <div className="subject">
           <span className="leftSide">{subject}</span>
-          <i class="fas fa-chevron-right"></i>
+          <i className="fas fa-chevron-right"></i>
         </div>
         )
     }
