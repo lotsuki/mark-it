@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-const Searchbar = ({ titles }) => {
+const Searchbar = ({ links }) => {
   const [ isSearching, setIsSearching ] = useState(false);
   const [ input, setInput ] = useState('');
 
@@ -51,17 +51,21 @@ const Searchbar = ({ titles }) => {
       <div className="searchbar-content">
         {
           isSearching
-          ? (<ul className="results-wrapper">
+          ? (
+            <ul className="results-wrapper">
               {
-                titles.reduce((a, b) => {
+
+                links.reduce((a, b) => {
                   if (b.title && b.url && b.title.toLowerCase().indexOf(input.toLowerCase()) !== -1) {
                     return a.concat([<li className="search-result" key={b.title}><a target="_blank" href={b.url} key={b.url}>{b.title}</a></li>]);
                   } else {
                     return a;
                   }
                 }, [])
+
               }
-            </ul>)
+            </ul>
+            )
           : (null)
 
         }
@@ -73,9 +77,9 @@ const Searchbar = ({ titles }) => {
 export default Searchbar;
 
 Searchbar.propTypes = {
-  titles: PropTypes.array
+  links: PropTypes.array
 };
 
 Searchbar.defaultProps = {
-  titles: []
+  links: []
 };

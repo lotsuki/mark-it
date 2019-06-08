@@ -30,7 +30,7 @@ describe('<Form />', () => {
   });
   it('form contains 5 children that are inputs', () => {
     const wrapper = shallow(<Form />);
-    expect(wrapper.find('form.form-container').children().length).toEqual(5);
+    expect(wrapper.find('form.form-wrapper').children().length).toEqual(5);
     expect(wrapper.find('input').length).toEqual(5);
   });
   it('form contains 1 submit input', () => {

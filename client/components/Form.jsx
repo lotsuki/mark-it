@@ -61,7 +61,7 @@ const Form = ({ showForm, bmarks }) => {
     from={{ height: 0 }}
     to={{ height: 240}}>
     {props =>
-      <div id="form-container">
+      <div id="form-wrapper">
         <form className="form"
             data-testid="form"
             onSubmit={submitForm}>

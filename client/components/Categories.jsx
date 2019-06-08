@@ -6,7 +6,7 @@ import Category from './Category.jsx';
 
 
 
-const Categories = ({ bmarks, showConfirm, setShowConfirm, titlesUpdate, setShowTit }) => {
+const Categories = ({ bmarks, showConfirm, setShowConfirm, titlesUpdate, setShowTitles, showTitles, setTitles }) => {
   const [ isOpen, setIsOpen ] = useState(false);
   const [ category, setCategory ] = useState('');
 
@@ -19,7 +19,6 @@ const Categories = ({ bmarks, showConfirm, setShowConfirm, titlesUpdate, setShow
       setCategory(e.target.innerText);
     }
   };
-
   return (
     <div className="section-container" >
      <div className="section-wrapper">
@@ -39,7 +38,7 @@ const Categories = ({ bmarks, showConfirm, setShowConfirm, titlesUpdate, setShow
                 <div className="dropdown-wrapper" >
                   {
                     isOpen
-                      ? ( <Subjects bmarks={bmarks} category={category} setShowTit={setShowTit} showConfirm={showConfirm} setShowConfirm={setShowConfirm} titlesUpdate={titlesUpdate}/>)
+                      ? ( <Subjects bmarks={bmarks} category={category} setShowTitles={setShowTitles} setTitles={setTitles} showConfirm={showConfirm} showTitles={showTitles} setShowConfirm={setShowConfirm} titlesUpdate={titlesUpdate} />)
                       : ( null )
                   }
                 </div>

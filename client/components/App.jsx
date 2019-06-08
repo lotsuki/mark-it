@@ -13,7 +13,7 @@ class App extends React.Component {
     this.state = {
       userID: '',
       bmarks: {},
-      titles: []
+      links: []
     }
     this._isMounted = false;
   }
@@ -57,7 +57,7 @@ class App extends React.Component {
       .then(res => res.json())
       .then(data =>  {
         this.setState({
-          titles: data
+          links: data
         })
       })
       .catch(err => {
@@ -83,10 +83,10 @@ class App extends React.Component {
   }
 
   render() {
-    const { userID, bmarks, titles } = this.state;
+    const { userID, bmarks, links } = this.state;
     return (
       <ErrorBoundary>
-        <Main userID={userID} bmarks={bmarks} titles={titles}/>
+        <Main userID={userID} bmarks={bmarks} links={links}/>
       </ErrorBoundary>
     );
   }

@@ -5,7 +5,7 @@ import axios from 'axios';
 import {useTrail, animated} from 'react-spring';
 
 
-const Titles = ({ titles, setTitles, showConfirm, setShowConfirm }) => {
+const Titles = ({ titles, links, setTitles, showConfirm, setShowConfirm }) => {
 
   const confirmDelete = async (e) => {
     let target = e.target
@@ -19,8 +19,8 @@ const Titles = ({ titles, setTitles, showConfirm, setShowConfirm }) => {
   };
 
   const container = ['titles-container']
-  const titlesArr = titles.map(obj => obj.title);
-  const urlsArr = titles.map(obj => obj.url);
+  const titlesArr = links.map(obj => obj.title);
+  const urlsArr = links.map(obj => obj.url);
   const config = {duration: 100};
 
   const trail = useTrail(container.length, {
@@ -30,11 +30,11 @@ const Titles = ({ titles, setTitles, showConfirm, setShowConfirm }) => {
   );
 
   return (
-    <div className="titles-container">
+    <div className="titles-sub-container">
       {
         trail.map(( {height}, index )=> (
           <animated.div
-            className="titles-container"
+            className="titles-sub-container"
             style={{height}}
             key={'animation'}>
             {
@@ -59,13 +59,13 @@ const Titles = ({ titles, setTitles, showConfirm, setShowConfirm }) => {
 export default Titles;
 
 Titles.propTypes = {
-  titles: PropTypes.array,
+  links: PropTypes.array,
   setTitles: PropTypes.func,
   displayConfirm: PropTypes.func
 };
 
 Titles.defaultProps = {
-  titles: [],
+  links: [],
   setTitles: () => {},
   displayConfirm: () => {}
 };

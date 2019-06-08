@@ -8,9 +8,7 @@ import {useTrail, animated} from 'react-spring';
 
 //if subject is clicked, titles comp gets rendered
 
-const Subjects = ({ bmarks, category, showConfirm, setShowConfirm, titlesUpdate, setShowTit }) => {
-  const [ isOpen, setIsOpen ] = useState(false);
-  const [ titles, setTitles ] = useState([]);
+const Subjects = ({ bmarks, category, showConfirm, setShowConfirm, titlesUpdate, showTitles, setShowTitles, setTitles }) => {
   const [ subj, setSubj ] = useState('');
   const [ update, setUpdate ] = useState(false);
 
@@ -22,19 +20,17 @@ const Subjects = ({ bmarks, category, showConfirm, setShowConfirm, titlesUpdate,
   });
 
   const handleClick = (e) => {
-    if (isOpen) {
-      setShowTit(false)
-      setIsOpen(false);
-      setTitles('');
+    if (showTitles) {
+      setShowTitles(false)
+      setTitles([]);
       setSubj('')
     } else {
       setSubj(e.target.innerText)
-      setShowTit(true)
 
       axios.get(`/titles/${category}/${e.target.innerText}`)
        .then(result => {
-         setTitles(result.data);
-         setIsOpen(true);
+         setTitles(result.data)
+         setShowTitles(true)
         })
        .catch(err => { console.log('Error at GET', err); });
     }
@@ -46,15 +42,7 @@ const Subjects = ({ bmarks, category, showConfirm, setShowConfirm, titlesUpdate,
     from: {opacity: 0, height: 0}}
   );
 
-  const showTitles = (subject) => {
-    if (titlesUpdate && subj === subject) {
-      return <Titles titles={titlesUpdate} setTitles={setTitles} showConfirm={showConfirm} setShowConfirm={setShowConfirm} />
-    } else if (isOpen && subj === subject) {
-      return <Titles titles={titles} setTitles={setTitles} showConfirm={showConfirm} setShowConfirm={setShowConfirm} />
-    } else {
-      return null
-    }
-  };
+
 
   return (
     <div className="subject-container">
@@ -68,11 +56,6 @@ const Subjects = ({ bmarks, category, showConfirm, setShowConfirm, titlesUpdate,
                key={subjects[index]}>
                <Subject clickedSubj={subj} subject={subjects[index]}/>
              </animated.div>
-           </div>
-           <div>
-             {
-               (showTitles(subjects[index]))
-             }
            </div>
          </div>
       ))}

@@ -5,15 +5,15 @@ import _ from 'underscore';
 //TODO:
 //if didn't press enter in input, return to default value
 
-const Edit = ({ bmarks, titles, editUpdate }) => {
-  var titlesArr = _.pluck(titles, 'title');
+const Edit = ({ bmarks, links, editUpdate }) => {
+  var titlesArr = _.pluck(links, 'title');
   var subjects = [];
   var categories = _.map(bmarks, (cat, key) => {
     subjects = subjects.concat(cat);
     return key;
   });
 
-  const [ updatedTitles, setUpdatedTitles ] = useState(titles);
+  const [ updatedTitles, setUpdatedTitles ] = useState(links);
   const [ updatedSubjs, setUpdatedSubjs ] = useState(subjects);
   const [ updatedCats, setUpdatedCats ] = useState(categories);
 

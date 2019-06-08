@@ -19,7 +19,7 @@ const Confirm = ({ setShowConfirm, titleToDelete, subjectOfTitle, showTitlesUpda
   };
 
   return (
-    <div className="confirm-container">
+    <div className="confirm-sub-container">
     <div className="confirm-header">
       <div className="confirm-header-text">Delete</div>
     </div>

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Searchbar from './Searchbar.jsx';
 
-const Navbar = ({ showForm, setShowForm, showEdit, setShowEdit, titles }) => {
+const Navbar = ({ showForm, setShowForm, showEdit, setShowEdit, links }) => {
   const hideDisplay = (e) => {
     if (e.target.className !== 'form-inputs') {
       setShowForm(false);
@@ -42,7 +42,7 @@ const Navbar = ({ showForm, setShowForm, showEdit, setShowEdit, titles }) => {
         <div className="name">MarkIt</div>
        <i className="fas fa-bookmark"></i>
       </div>
-      <Searchbar titles={titles}/>
+      <Searchbar links={links}/>
       <div className="icons-wrapper">
         <div className="plus-icon" data-testid="plus-icon" onClick={displayForm}><i className="fas fa-plus" ></i></div>
         <div className="edit-icon" data-testid="edit-icon" onClick={displayEdit}><i className="fas fa-edit"></i></div>
