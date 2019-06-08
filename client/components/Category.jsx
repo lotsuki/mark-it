@@ -11,14 +11,14 @@ const Category = ({ category, cat}) => {
              key={cat}
              style={{backgroundColor: '#FA6B6B', color: '#fff'}}>
           <i className="fas fa-folder-open"></i>
-          <span className="leftSide">{cat}</span>
+          <span className="category-text">{cat}</span>
           <i className="fas fa-chevron-up"></i>
         </div>
          )
       : (
           <div className="category" key={cat}>
             <i className="fas fa-folder"></i>
-            <span className="leftSide">{cat}</span>
+            <span className="category-text">{cat}</span>
             <i className="fas fa-chevron-down"></i>
           </div>
         )

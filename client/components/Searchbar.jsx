@@ -23,22 +23,10 @@ const Searchbar = ({ links }) => {
       setIsSearching(true);
       document.addEventListener('click', hideSearchbar);
     } else {
-
       setInput('');
       setIsSearching(false);
     }
   };
-  //TODO: SET ATTRIBUTE
-  // box-shadow: 0px 8px 16px 1px rgba(0,0,0,0.2);
-  // useEffect(() => {
-  //   let hasContent = document.getElementsByClassName('searchResult');
-  //   var contentContainer = document.getElementsByClassName('resultsWrapper')[0];
-  //     console.log(contentContainer)
-  //   if(hasContent) {
-  //     contentContainer.setAttribute("box-shadow", "0px 8px 16px 1px rgba(0,0,0,0.2)")
-  //   }
-  // })
-
 
   return (
     <div className="searchbar-container">

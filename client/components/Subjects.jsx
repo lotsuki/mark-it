@@ -5,10 +5,10 @@ import Titles from './Titles.jsx';
 import Subject from './Subject.jsx';
 import axios from 'axios';
 import {useTrail, animated} from 'react-spring';
+import helpers from '../lib/utils.js';
 
-//if subject is clicked, titles comp gets rendered
 
-const Subjects = ({ bmarks, category, showConfirm, setShowConfirm, titlesUpdate, showTitles, setShowTitles, setTitles }) => {
+const Subjects = ({ bmarks, category, showConfirm, setShowConfirm, titlesUpdate, showTitles, setShowTitles, setTitles, handleCatClick }) => {
   const [ subj, setSubj ] = useState('');
   const [ update, setUpdate ] = useState(false);
 
@@ -19,20 +19,43 @@ const Subjects = ({ bmarks, category, showConfirm, setShowConfirm, titlesUpdate,
     }
   });
 
-  const handleClick = (e) => {
-    if (showTitles) {
-      setShowTitles(false)
-      setTitles([]);
-      setSubj('')
-    } else {
+  const handleSubjClick = (e) => {
+    if (!showTitles) {
       setSubj(e.target.innerText)
-
+      document.addEventListener('click', exitTitles);
       axios.get(`/titles/${category}/${e.target.innerText}`)
        .then(result => {
          setTitles(result.data)
          setShowTitles(true)
         })
        .catch(err => { console.log('Error at GET', err); });
+    } else {
+      setShowTitles(false)
+      setTitles([]);
+      setSubj('')
+    }
+  };
+
+  const exitTitles = (e) => {
+    let titlesContainer = document.getElementById('titles-container');
+
+    if (!helpers.findChild(titlesContainer, e.target.className)) {
+      setShowTitles(false);
+      document.removeEventListener('click', exitTitles);
+    }
+    displayNew(e);
+  };
+
+  const displayNew = (e) => {
+    const subjectClasses = ['subject', 'subject-text'];
+    const categoryClasses = ['category', 'category-text'];
+    const className = e.target.className
+
+    if (_.contains(subjectClasses, className)) {
+      handleSubjClick(e);
+    } else if (_.contains(categoryClasses, className)) {
+      //TODO: double check this func
+      handleCatClick(e);
     }
   };
 
@@ -42,8 +65,6 @@ const Subjects = ({ bmarks, category, showConfirm, setShowConfirm, titlesUpdate,
     from: {opacity: 0, height: 0}}
   );
 
-
-
   return (
     <div className="subject-container">
       {trail.map(({height, opacity}, index) => (
@@ -51,7 +72,7 @@ const Subjects = ({ bmarks, category, showConfirm, setShowConfirm, titlesUpdate,
            <div>
              <animated.div
                className="subject"
-               onClick={handleClick}
+               onClick={handleSubjClick}
                style={{height, opacity}}
                key={subjects[index]}>
                <Subject clickedSubj={subj} subject={subjects[index]}/>

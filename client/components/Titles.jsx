@@ -50,7 +50,6 @@ const Titles = ({ titles, links, setTitles, showConfirm, setShowConfirm }) => {
         ))
       }
     </div>
-
   );
 };
 

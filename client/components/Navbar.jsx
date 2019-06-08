@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Searchbar from './Searchbar.jsx';
 
-const Navbar = ({ showForm, setShowForm, showEdit, setShowEdit, links }) => {
+const Navbar = ({ showForm, setShowForm, showEdit, setShowEdit, links, showContainer, exitContainer }) => {
   const hideDisplay = (e) => {
     if (e.target.className !== 'form-inputs') {
       setShowForm(false);
@@ -18,7 +18,6 @@ const Navbar = ({ showForm, setShowForm, showEdit, setShowEdit, links }) => {
       setShowForm(false);
     }
   };
-
 
   const displayEdit = () => {
     var appContainer = document.getElementById('app-container');

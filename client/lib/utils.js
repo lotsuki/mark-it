@@ -1,3 +1,4 @@
+
 function findChild (elem, className) {
   if (elem.classList && elem.classList.contains(className)) {
     return elem.innerText;
@@ -15,5 +16,4 @@ function findText(elem, parentClassName, elemClassName) {
 };
 
 
-
-module.exports = { findText }
+module.exports = { findChild, findText }

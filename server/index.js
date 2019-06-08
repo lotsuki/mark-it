@@ -60,8 +60,8 @@ app.get('/titles', (req, res) => {
 });
 
 app.get('/titles/:category/:subject', (req, res) => {
-  let subject = req.params.subject
-  let category = req.params.category
+  let subject = req.params.subject;
+  let category = req.params.category;
   Document.find({ category: category, subject: subject }, 'title url', (err, result) => {
     if (err) { console.log('Failure to get titles: ', err); }
     else { res.status(200).send(result); }
@@ -148,7 +148,6 @@ app.delete('/bookmarks/:title/:subject', (req, res) => {
 
 //if (process.env.NODE_ENV === 'production') {
   app.get('/', (req, res) => {
-    console.log(res)
     res.sendFile(path.join(__dirname, '../public/index.html'));
   });
 //}

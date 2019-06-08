@@ -3,6 +3,7 @@ import _ from 'underscore';
 import PropTypes from 'prop-types';
 import Subjects from './Subjects.jsx';
 import Category from './Category.jsx';
+import helpers from '../lib/utils.js';
 
 
 
@@ -10,15 +11,27 @@ const Categories = ({ bmarks, showConfirm, setShowConfirm, titlesUpdate, setShow
   const [ isOpen, setIsOpen ] = useState(false);
   const [ category, setCategory ] = useState('');
 
-  const handleClick = (e) => {
-    if (isOpen) {
+  const exitCategories = (e) => {
+    //FINISH: get cateogry parent elem and check class name with helper func
+    if (!helpers.findChild(, e.target.className)) {
       setIsOpen(false);
-      setCategory('');
-    } else {
+      document.removeEventListner('click', exitCategories);
+    }
+    //If target is another category, display subj from that category
+
+  };
+
+  const handleCatClick = (e) => {
+    if (!isOpen) {
       setIsOpen(true);
       setCategory(e.target.innerText);
+      document.addEventListner('click', exitCategories);
+    } else {
+      setIsOpen(false);
+      setCategory('');
     }
   };
+
   return (
     <div className="section-container" >
      <div className="section-wrapper">
@@ -27,7 +40,7 @@ const Categories = ({ bmarks, showConfirm, setShowConfirm, titlesUpdate, setShow
           <div className="category-container" key={key}>
            <div
              className="category-wrapper"
-             onClick={handleClick}
+             onClick={handleCatClick}
              key={key}>
              <Category category={category} cat={key}/>
            </div>
@@ -38,7 +51,7 @@ const Categories = ({ bmarks, showConfirm, setShowConfirm, titlesUpdate, setShow
                 <div className="dropdown-wrapper" >
                   {
                     isOpen
-                      ? ( <Subjects bmarks={bmarks} category={category} setShowTitles={setShowTitles} setTitles={setTitles} showConfirm={showConfirm} showTitles={showTitles} setShowConfirm={setShowConfirm} titlesUpdate={titlesUpdate} />)
+                      ? ( <Subjects bmarks={bmarks} category={category} setShowTitles={setShowTitles} setTitles={setTitles} showConfirm={showConfirm} showTitles={showTitles} setShowConfirm={setShowConfirm} titlesUpdate={titlesUpdate} handleCatClick={handleCatClick}/>)
                       : ( null )
                   }
                 </div>
