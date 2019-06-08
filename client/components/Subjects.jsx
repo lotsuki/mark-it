@@ -25,14 +25,14 @@ const Subjects = ({ bmarks, category, showConfirm, setShowConfirm, titlesUpdate,
       document.addEventListener('click', exitTitles);
       axios.get(`/titles/${category}/${e.target.innerText}`)
        .then(result => {
-         setTitles(result.data)
-         setShowTitles(true)
+         setTitles(result.data);
+         setShowTitles(true);
         })
        .catch(err => { console.log('Error at GET', err); });
     } else {
-      setShowTitles(false)
+      setShowTitles(false);
       setTitles([]);
-      setSubj('')
+      setSubj('');
     }
   };
 

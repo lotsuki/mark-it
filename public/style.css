@@ -145,13 +145,18 @@
     z-index: 3;
   }
 
-  .serach-result li < .results-wrapper {
-    margin-top: 1rem;
-    min-height: 2rem;
+  .search-result li < .results-wrapper {
+    margin: 0;
     padding: 0;
     border-top: 1px dotted lightgray;
     box-shadow: 0 0 10px #E2E2E2;
   }
+
+  .results-wrapper {
+    margin-top: 1.3rem;
+    padding: 0;
+  }
+
   .search-result a {
     display: flex;
     align-items: center;

@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import _ from 'underscore';
-//TODO:
-//if didn't press enter in input, return to default value
 
 const Edit = ({ bmarks, links, editUpdate }) => {
   var titlesArr = _.pluck(links, 'title');
@@ -17,8 +15,6 @@ const Edit = ({ bmarks, links, editUpdate }) => {
   const [ updatedSubjs, setUpdatedSubjs ] = useState(subjects);
   const [ updatedCats, setUpdatedCats ] = useState(categories);
 
-
-
   const resetInput = (e) => {
     let defaultVal = e.target.defaultValue;
     e.target.value = defaultVal;
@@ -27,7 +23,7 @@ const Edit = ({ bmarks, links, editUpdate }) => {
   const filterItems = (array, item) => {
     return array.filter(str => {
       return str !== item;
-    })
+    });
   };
 
   const deleteCategory = (e) => {
@@ -44,6 +40,7 @@ const Edit = ({ bmarks, links, editUpdate }) => {
 
   const deleteSubject = (e) => {
     let value = e.target.parentElement.firstChild.value;
+
     axios
       .delete(`delete/subj/${value}`)
       .then(result => {
@@ -65,46 +62,6 @@ const Edit = ({ bmarks, links, editUpdate }) => {
       })
       .catch(err => { console.log('Could not delete document: ', err); });
   };
-
-  // const deleteBookmark = (e) => {
-  //   let value = e.target.parentElement.firstChild.value;
-
-  //   if (categories.indexOf(value) !== -1) {
-  //     axios
-  //      .delete(`delete/cat/${value}`)
-  //      .then(result => {
-  //       console.log(result);
-  //        // showTitlesUpdate(result.data);
-  //      })
-  //      .catch(err => { console.log('Could not delete document: ', err); });
-  //     categories = filterItems(categories, value);
-  //     // setUpdate(true);
-
-  //   } else if (subjects.indexOf(value) !== -1) {
-  //      axios
-  //      .delete(`delete/subj/${value}`)
-  //      .then(result => {
-  //       console.log(result);
-  //        // showTitlesUpdate(result.data);
-  //      })
-  //      .catch(err => { console.log('Could not delete document: ', err); });
-
-  //      subjects = filterItems(subjects, value);
-  //      // setUpdate(true);
-
-  //   } else {
-
-  //     //TODO: NEED TO UPDATE LIST ON DELETE
-  //       axios
-  //        .delete(`delete/title/${value}`)
-  //        .then(result => {
-  //         titlesArr.concat(filterItems(titlesArr, value));
-  //          // showTitlesUpdate(result.data);
-  //        })
-  //        .catch(err => { console.log('Could not delete document: ', err); });
-  //       //setUpdatedTitles(filterItems(titlesArr, value));
-  //   }
-  // };
 
   const hideIcon = (e) => {
     e.target.parentElement

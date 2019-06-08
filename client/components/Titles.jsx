@@ -19,7 +19,7 @@ const Titles = ({ titles, links, setTitles, showConfirm, setShowConfirm }) => {
   };
 
   const container = ['titles-container']
-  const titlesArr = links.map(obj => obj.title);
+  const titlesArr = titles.map(obj => obj.title);
   const urlsArr = links.map(obj => obj.url);
   const config = {duration: 100};
 

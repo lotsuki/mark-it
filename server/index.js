@@ -64,7 +64,7 @@ app.get('/titles/:category/:subject', (req, res) => {
   let category = req.params.category;
   Document.find({ category: category, subject: subject }, 'title url', (err, result) => {
     if (err) { console.log('Failure to get titles: ', err); }
-    else { res.status(200).send(result); }
+    else { console.log(result); res.status(200).send(result); }
   });
 });
 
@@ -115,13 +115,13 @@ app.get('/update/cat/:defaultVal/:newVal', (req, res) => {
 //   });
 // });
 
-// app.delete('/delete/subj/:subj', (req, res) => {
-//   let subj = req.params.subj;
-//   Document.deleteMany({ subject: subj }, (err) => {
-//     if (err) { console.log('Error at DELETE request: ', err); }
-//     else { console.log('Document successfully deleted'); }
-//   });
-// });
+app.delete('/delete/subj/:subj', (req, res) => {
+  let subj = req.params.subj;
+  Document.deleteMany({ subject: subj }, (err) => {
+    if (err) { console.log('Error at DELETE request: ', err); }
+    else { console.log('Document successfully deleted'); }
+  });
+});
 
 app.delete('/delete/title/:title', (req, res) => {
   let title = req.params.title;
