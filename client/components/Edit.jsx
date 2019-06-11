@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import axios from 'axios';
 import _ from 'underscore';
 
 const Edit = ({ bmarks, links, editUpdate }) => {
@@ -28,10 +27,12 @@ const Edit = ({ bmarks, links, editUpdate }) => {
 
   const deleteCategory = (e) => {
     let value = e.target.parentElement.firstChild.value;
-    axios
-      .delete(`delete/cat/${value}`)
-      .then(result => {
-       console.log(result);
+    fetch(`delete/cat/${value}`, {
+        method: 'delete'
+      })
+      .then(res => res.json())
+      .then(data => {
+       console.log(data);
        // showTitlesUpdate(result.data);
       })
       .catch(err => { console.log('Could not delete document: ', err); });
@@ -41,10 +42,12 @@ const Edit = ({ bmarks, links, editUpdate }) => {
   const deleteSubject = (e) => {
     let value = e.target.parentElement.firstChild.value;
 
-    axios
-      .delete(`delete/subj/${value}`)
-      .then(result => {
-       console.log(result);
+    fetch(`delete/subj/${value}`, {
+        method: 'delete'
+      })
+      .then(res => res.json())
+      .then(data => {
+       console.log(data);
        // showTitlesUpdate(result.data);
       })
       .catch(err => { console.log('Could not delete document: ', err); });
@@ -54,9 +57,11 @@ const Edit = ({ bmarks, links, editUpdate }) => {
 
   const deleteTitle = (e) => {
     let value = e.target.parentElement.firstChild.value;
-    axios
-      .delete(`delete/title/${value}`)
-      .then(result => {
+    fetch(`delete/title/${value}`, {
+        method: 'delete'
+      })
+      .then(res => res.json())
+      .then(data => {
        titlesArr.concat(filterItems(titlesArr, value));
        // showTitlesUpdate(result.data);
       })
@@ -72,11 +77,11 @@ const Edit = ({ bmarks, links, editUpdate }) => {
     let newVal = e.target.value;
     if (e.keyCode === 13) {
       if (categories.indexOf(defaultVal) !== -1) {
-        axios
-          .get(`/update/cat/${defaultVal}/${newVal}`, {
+        fetch(`/update/cat/${defaultVal}/${newVal}`, {
             method: 'PATCH'
           })
-          .then(result => {
+          .then(res => res.json())
+          .then(data => {
             console.log('PATCH request successful')
             // editUpdate(result);
           })
@@ -88,22 +93,23 @@ const Edit = ({ bmarks, links, editUpdate }) => {
               category = key;
             }
           });
-          let patchAPI = axios.get(`/update/subj/${defaultVal}/${newVal}/${category}`,
+          let patchAPI = fetch.get(`/update/subj/${defaultVal}/${newVal}/${category}`,
             {
               method: 'PATCH'
             })
-            .then(result => {
+            .then(res => res.json())
+            .then(data => {
               console.log('PATCH request successful')
               // editUpdate(result);
             })
             .catch(err => { console.log('Error at PATCH request: ', err); });
           Promise.all([assignCategory, patchAPI])
        } else {
-          axios
-            .get(`/update/title/${defaultVal}/${newVal}`, {
+          fetch(`/update/title/${defaultVal}/${newVal}`, {
               method: 'PATCH'
             })
-            .then(result => {
+            .then(res => res.json())
+            .then(data => {
               console.log('PATCH request successful')
               // editUpdate(result);
             })

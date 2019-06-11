@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import SidebarHeader from './SidebarHeader.jsx';
 import Categories from './Categories.jsx';

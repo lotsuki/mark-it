@@ -2,11 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Main from './Main.jsx';
 import ErrorBoundary from './ErrorBoundary.jsx';
-import axios from 'axios';
 
 
 class App extends React.Component {
-
   constructor(props) {
     super(props);
 
@@ -33,25 +31,6 @@ class App extends React.Component {
       .catch(err => {
         console.log('GET request failed at /users: ', err)
       });
-       // console.log(res.json(), 'RESPONSE')
-        // let data = res.json();
-
-
-      // axios
-      // .get('/user', {
-      //   maxContentLength: 1,
-      // })
-      // .then(result => {
-      //   if (this._isMounted) {
-      //     let data = result.data
-      //     this.setState({
-      //       userID: data.username,
-      //       bmarks: data.bmarks
-      //     })
-      //   }
-      //  })
-      // .catch(err => { console.log('Error at GET: ', err); });
-
 
     fetch('/titles')
       .then(res => res.json())
@@ -63,18 +42,6 @@ class App extends React.Component {
       .catch(err => {
         console.log('GET request failed at /users: ', err)
       });
-
-      // axios
-      // .get('/titles')
-      // .then(result => {
-      //   if (this._isMounted) {
-      //   let data = result.data.slice(1);
-      //     this.setState({
-      //       titles: data
-      //     })
-      //   }
-      //  })
-      // .catch(err => { console.log('Error at GET: ', err); });
   }
 
 

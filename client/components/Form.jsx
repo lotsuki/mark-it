@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import axios from 'axios';
 import moment from 'moment';
 import { Spring } from 'react-spring/renderprops';
 
@@ -42,11 +41,13 @@ const Form = ({ showForm, bmarks }) => {
     };
 
     if (category && subject && title && url) {
-      axios
-        .post('/form', form)
-        .then(result => {
+      fetch('/form', form, {
+          method: 'post'
+        })
+        .then(res => res.json())
+        .then(data => {
           //TODO****
-          console.log(result);
+          console.log(data);
         })
         .catch(err => { console.log('Could not post document: ', err); });
     } else {

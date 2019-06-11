@@ -1,23 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import axios from 'axios';
 
 const Confirm = ({ setShowConfirm, titleToDelete, subjectOfTitle, showTitlesUpdate }) => {
 
   const handleConfirmClick = (e) => {
     if (e.target.innerText === 'Yes') {
       setShowConfirm(false);
-      axios
-       .delete(`bookmarks/${titleToDelete}/${subjectOfTitle}`)
-       .then(result => {
-         showTitlesUpdate(result.data);
+
+      fetch(`bookmarks/${titleToDelete}/${subjectOfTitle}`, {
+        method: 'delete'
+      })
+      .then(res => res.json())
+       .then(data => {
+         showTitlesUpdate(data.data);
        })
        .catch(err => { console.log('Could not delete document: ', err); });
     } else {
       setShowConfirm(false);
     }
   };
-
 
   return (
     <div id="confirm" className="confirm-container is-hidden is-visuallyHid">

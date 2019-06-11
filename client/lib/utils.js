@@ -1,4 +1,6 @@
 
+//FIX: bookmarks is not recursing through categories comp, returning undefined (subject func)
+
 function findChild (elem, className) {
   if (elem.classList && elem.classList.contains(className)) {
     return elem.innerText;
@@ -8,13 +10,20 @@ function findChild (elem, className) {
   }
 };
 
+
+
 function findText(elem, parentClassName, elemClassName) {
-  if (elem.id === 'container') {
+
+  if (elem.className === 'app') {
+    //console.log(elem, elem.className, elem.classList)
+    //console.log(elem.id, 'container')
     return findChild(elem, elemClassName);
   }
   if (elem.classList && elem.classList.contains(parentClassName)) {
+    //console.log(elem, 'contains')
     return findChild(elem, elemClassName);
   }
+   //console.log(elem, 'recurse')
   return findText(elem.parentElement, parentClassName, elemClassName);
 };
 

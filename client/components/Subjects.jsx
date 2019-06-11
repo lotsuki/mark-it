@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import _ from 'underscore';
 import Titles from './Titles.jsx';
 import Subject from './Subject.jsx';
-import axios from 'axios';
 import {useTrail, animated} from 'react-spring';
 import helpers from '../lib/utils.js';
 
@@ -23,9 +22,10 @@ const Subjects = ({ bmarks, category, showConfirm, setShowConfirm, titlesUpdate,
     if (!showTitles) {
       setSubj(e.target.innerText)
       document.addEventListener('click', exitTitles);
-      axios.get(`/titles/${category}/${e.target.innerText}`)
-       .then(result => {
-         setTitles(result.data);
+      fetch(`/titles/${category}/${e.target.innerText}`)
+        .then(res => res.json())
+        .then(data => {
+         setTitles(data.data);
          setShowTitles(true);
         })
        .catch(err => { console.log('Error at GET', err); });

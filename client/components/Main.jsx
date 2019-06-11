@@ -6,6 +6,7 @@ import Form from './Form.jsx';
 import Edit from './Edit.jsx';
 import Confirm from './Confirm.jsx';
 import Titles from './Titles.jsx';
+import helpers from '../lib/utils.js';
 import { useSpring, animated } from 'react-spring';
 
 //TODO: when titles are displayed, and category is clicked, titles and subjects close (pass down boolean state to show if categories is open)
@@ -26,9 +27,13 @@ const Main = ({ bmarks, links }) => {
     setTitlesUpdate(data)
   };
 
-  const deleteTitle = (titl, subj) => {
-    setTitleToDelete(titl);
-    setSubjectOfTitle(subj);
+  const deleteTitle = async (target) => {
+
+    //FIX: not recursing through entire tree
+    let subject = await helpers.findText(target, 'subject-wrapper', 'subject-text');
+    let title = await helpers.findText(target, 'title-wrapper', 'title');
+    setTitleToDelete(title);
+    setSubjectOfTitle(subject);
   };
 
   const displayContainer = () => {
@@ -44,7 +49,7 @@ const Main = ({ bmarks, links }) => {
   return (
     <div id="container">
       <Navbar showForm={showForm} setShowForm={setShowForm} showEdit={showEdit} setShowEdit={setShowEdit} links={links} />
-      <div id="app-container" data-testid="app-container">
+      <div id="app-container" className="app" data-testid="app-container">
         <div className="sidebar-container">
           <Bookmarks bmarks={bmarks} setShowTitles={setShowTitles} setTitles={setTitles} showConfirm={showConfirm} showTitles={showTitles} setShowConfirm={setShowConfirm} titlesUpdate={titlesUpdate}/>
         </div>
@@ -76,24 +81,3 @@ Main.defaultProps = {
 };
 
 
- // <Fragment>
- //          {
- //            showForm
- //            ? (<Form showForm={showForm} bmarks={bmarks}/>)
- //            : (null)
- //          }
- //      </Fragment>
- //      <Fragment>
- //        {
- //          showEdit
- //          ? (<Edit bmarks={bmarks} links={links}  editUpdate={editUpdate}/>)
- //          : (null)
- //        }
- //      </Fragment>
- //      <Fragment>
- //      {
- //        showConfirm
- //        ? (<Confirm showConfirm={showConfirm} setShowConfirm={setShowConfirm} titleToDelete={showConfirm[1]} subjectOfTitle={showConfirm[0]} showTitlesUpdate={showTitlesUpdate}/>)
- //        : (null)
- //      }
- //      </Fragment>

@@ -1,11 +1,10 @@
 import React, { useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import helpers from '../lib/utils.js';
-import axios from 'axios';
 import {useTrail, animated} from 'react-spring';
 
 
-const Titles = ({ titles, links, setTitles, showConfirm, setShowConfirm }) => {
+const Titles = ({ titles, links, setTitles, showConfirm, setShowConfirm, deleteTitle }) => {
 
   const confirmDelete = async (e) => {
     let target = e.target
@@ -14,15 +13,14 @@ const Titles = ({ titles, links, setTitles, showConfirm, setShowConfirm }) => {
 
 
     if (!showConfirm) {
-      setShowConfirm(true);
-      let subject = await helpers.findText(target, 'subject-wrapper', 'subject-text');
-      let title = await helpers.findText(target, 'title-wrapper', 'title');
-      deleteTitle(title, subject);
-      confirmContainer.className = 'confirm-container is-visuallyHid';
-      doc.className = 'MainContainer is-blurred';
-      confirmContainer.className = 'confirm-container';
-      doc.parentElement.className = 'ModalOpen';
-
+      await setShowConfirm(true);
+      await deleteTitle(target);
+      if (confirmContainer) {
+        confirmContainer.className = 'confirm-container is-visuallyHid';
+        doc.className = 'MainContainer is-blurred';
+        confirmContainer.className = 'confirm-container';
+        doc.parentElement.className = 'ModalOpen';
+      }
     } else {
       doc.parentElement.className = '';
       doc.className = '';
