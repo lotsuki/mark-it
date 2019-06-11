@@ -4,13 +4,12 @@ import helpers from '../lib/utils.js';
 import {useTrail, animated} from 'react-spring';
 
 
-const Titles = ({ titles, links, setTitles, showConfirm, setShowConfirm, deleteTitle }) => {
+const Titles = ({ titles, links, setTitles, showConfirm, setShowConfirm, deleteTitle, titlesUpdate }) => {
 
   const confirmDelete = async (e) => {
     let target = e.target
     let doc = document.getElementById('container');
     let confirmContainer = document.getElementById('confirm');
-
 
     if (!showConfirm) {
       await setShowConfirm(true);
@@ -30,7 +29,10 @@ const Titles = ({ titles, links, setTitles, showConfirm, setShowConfirm, deleteT
   };
 
   const container = ['titles-container']
-  const titlesArr = titles.map(obj => obj.title);
+  const titlesArr = () => {
+    if (titlesUpdate) { return titlesUpdate.map(obj => obj.title); }
+    return titles.map(obj => obj.title);
+  };
   const urlsArr = links.map(obj => obj.url);
   const config = {duration: 100};
 
@@ -45,15 +47,15 @@ const Titles = ({ titles, links, setTitles, showConfirm, setShowConfirm, deleteT
       {
         trail.map(( {height}, index )=> (
           <animated.div
-            className="title-wrapper"
+            className="titles-sub-container"
             style={{height}}
             key={'animation'}>
             {
-              titlesArr.map((title, i) => (
-                <Fragment key={`${urlsArr[i]}${i}`}>
+              titlesArr().map((title, i) => (
+                <div className="title-wrapper" key={`${urlsArr[i]}${i}`}>
                   <a target="_blank" href={urlsArr[i]} className="title" key={`${titlesArr[i]}${i}`}>{title}</a>
                   <i className="far fa-trash-alt"  data-testid="delete-title" onClick={confirmDelete}></i>
-                </Fragment>
+                </div>
               ))
             }
 

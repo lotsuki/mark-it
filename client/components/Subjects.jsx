@@ -25,7 +25,7 @@ const Subjects = ({ bmarks, category, showConfirm, setShowConfirm, titlesUpdate,
       fetch(`/titles/${category}/${e.target.innerText}`)
         .then(res => res.json())
         .then(data => {
-         setTitles(data.data);
+         setTitles(data);
          setShowTitles(true);
         })
        .catch(err => { console.log('Error at GET', err); });
@@ -39,10 +39,10 @@ const Subjects = ({ bmarks, category, showConfirm, setShowConfirm, titlesUpdate,
   const exitTitles = (e) => {
     let titlesContainer = document.getElementById('titles-container');
 
-    if (!helpers.findChild(titlesContainer, e.target.className)) {
-      setShowTitles(false);
-      document.removeEventListener('click', exitTitles);
-    }
+    // if (!helpers.findChild(titlesContainer, e.target.className)) {
+    //   setShowTitles(false);
+    //   document.removeEventListener('click', exitTitles);
+    // }
     displayNew(e);
   };
 
@@ -51,12 +51,12 @@ const Subjects = ({ bmarks, category, showConfirm, setShowConfirm, titlesUpdate,
     let categoryClasses = ['category', 'category-text'];
     let className = e.target.className
 
-    if (_.contains(subjectClasses, className)) {
-      handleSubjClick(e);
-    } else if (_.contains(categoryClasses, className)) {
-      //TODO: double check this func
-      handleCatClick(e);
-    }
+    // if (_.contains(subjectClasses, className)) {
+    //   handleSubjClick(e);
+    // } else if (_.contains(categoryClasses, className)) {
+    //   //TODO: double check this func
+    //   handleCatClick(e);
+    // }
   };
 
   const trail = useTrail(subjects.length, {

@@ -4,7 +4,7 @@ import moment from 'moment';
 import { Spring } from 'react-spring/renderprops';
 
 
-const Form = ({ showForm, bmarks }) => {
+const Form = ({ showForm, setShowForm, bmarks }) => {
   const [ category, setCategory ] = useState('');
   const [ subject, setSubject ] = useState('');
   const [ title, setTitle ] = useState('');
@@ -15,6 +15,7 @@ const Form = ({ showForm, bmarks }) => {
     setSubject('');
     setTitle('');
     setUrl('');
+    //setShowForm(false);
   };
 
   const hasCategory = () => {
@@ -30,7 +31,8 @@ const Form = ({ showForm, bmarks }) => {
 
   const submitForm = (e) => {
     e.preventDefault();
-    const form = {
+
+    const data = {
       category,
       subject,
       title,
@@ -41,8 +43,13 @@ const Form = ({ showForm, bmarks }) => {
     };
 
     if (category && subject && title && url) {
-      fetch('/form', form, {
-          method: 'post'
+      fetch('/form', {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
         })
         .then(res => res.json())
         .then(data => {

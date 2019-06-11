@@ -14,6 +14,7 @@ app.use(express.static(`${__dirname}/../public/`));
 app.post('/form', (req, res) => {
   let category = req.body.category;
   let subject = req.body.subject;
+  console.log(req.body)
   Document.create({
         category: category,
         subject: subject,
@@ -48,14 +49,14 @@ app.post('/form', (req, res) => {
 app.get('/user', (req, res) => {
   Document.findOne({ username: { $exists: true } }, (err, result) => {
     if (err) { console.log('Failure to get user obj: ', err); }
-    else { console.log(result); res.send(result); }
+    else { res.send(result); }
   });
 });
 
 app.get('/titles', (req, res) => {
-  Document.find({title: {$exists:true}}, 'title url', (err, result) => {
+  Document.find({title: {$exists:true}}, 'subject title url', (err, result) => {
     if (err) { console.log('Failure to get user obj: ', err); }
-    else { console.log(result); res.send(result); }
+    else { res.send(result); }
   });
 });
 
@@ -64,7 +65,7 @@ app.get('/titles/:category/:subject', (req, res) => {
   let category = req.params.category;
   Document.find({ category: category, subject: subject }, 'title url', (err, result) => {
     if (err) { console.log('Failure to get titles: ', err); }
-    else { console.log(result); res.status(200).send(result); }
+    else { res.status(200).send(result); }
   });
 });
 
@@ -135,12 +136,12 @@ app.delete('/bookmarks/:title/:subject', (req, res) => {
   let title = req.params.title;
   let subject = req.params.subject;
 
-  Document.deleteOne({ title: title }, (err) => {
+  Document.deleteOne({ title }, (err) => {
     if (err) { console.log('Error at DELETE request: ', err); }
     else {
-      Document.find({ subject: subject }, (err, result) => {
+      Document.find({ subject }, (err, result) => {
         if (err) { console.log('Failure to get user obj: ', err); }
-        else { console.log(result); res.send(result); }
+        else { console.log(result, 'find titles after delete'); res.send(result); }
       });
     }
   });

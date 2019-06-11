@@ -29,7 +29,7 @@ class App extends React.Component {
         })
       })
       .catch(err => {
-        console.log('GET request failed at /users: ', err)
+        console.log('GET request failed at /user: ', err)
       });
 
     fetch('/titles')

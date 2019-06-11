@@ -8,11 +8,11 @@ const Confirm = ({ setShowConfirm, titleToDelete, subjectOfTitle, showTitlesUpda
       setShowConfirm(false);
 
       fetch(`bookmarks/${titleToDelete}/${subjectOfTitle}`, {
-        method: 'delete'
-      })
-      .then(res => res.json())
+         method: 'delete'
+       })
+       .then(res => res.json())
        .then(data => {
-         showTitlesUpdate(data.data);
+         showTitlesUpdate(data);
        })
        .catch(err => { console.log('Could not delete document: ', err); });
     } else {

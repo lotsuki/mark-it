@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'underscore';
 
-const Edit = ({ bmarks, links, editUpdate }) => {
+const Edit = ({ bmarks, links }) => {
   var titlesArr = _.pluck(links, 'title');
   var subjects = [];
   var categories = _.map(bmarks, (cat, key) => {

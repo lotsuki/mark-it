@@ -21,26 +21,30 @@ const Main = ({ bmarks, links }) => {
   const [ subjectOfTitle, setSubjectOfTitle ] = useState('');
   const [ titlesUpdate, setTitlesUpdate ] = useState(null);
 
- console.log(showEdit)
-
   const showTitlesUpdate = (data) => {
     setTitlesUpdate(data)
   };
 
-  const deleteTitle = async (target) => {
+  const findSubject = (titl) => {
+    let subj;
+    links.forEach(obj => {
+      if (obj.title === titl) { subj = obj.subject; }
+    });
+    return subj;
+  };
 
-    //FIX: not recursing through entire tree
-    let subject = await helpers.findText(target, 'subject-wrapper', 'subject-text');
-    let title = await helpers.findText(target, 'title-wrapper', 'title');
+  const deleteTitle = (target) => {
+    let title = target.parentElement.firstChild.innerText;
+    let subject = findSubject(title)
     setTitleToDelete(title);
     setSubjectOfTitle(subject);
   };
 
   const displayContainer = () => {
     if (showForm) {
-      return <Form showForm={showForm} bmarks={bmarks}/>
+      return <Form showForm={showForm} setShowForm={setShowForm} bmarks={bmarks}/>
     } else if (showEdit) {
-      return <Edit bmarks={bmarks} links={links}  editUpdate={editUpdate}/>
+      return <Edit bmarks={bmarks} links={links} />
     } else if (showConfirm) {
       return <Confirm showConfirm={showConfirm} setShowConfirm={setShowConfirm} titleToDelete={titleToDelete} subjectOfTitle={subjectOfTitle} showTitlesUpdate={showTitlesUpdate}/>
     }
@@ -56,7 +60,7 @@ const Main = ({ bmarks, links }) => {
         <Fragment>
           {
             showTitles
-            ? (<Titles titles={titles} links={links} setTitles={setTitles} showConfirm={showConfirm} setShowConfirm={setShowConfirm} deleteTitle={deleteTitle}/>)
+            ? (<Titles titles={titles} links={links} setTitles={setTitles} showConfirm={showConfirm} setShowConfirm={setShowConfirm} deleteTitle={deleteTitle} titlesUpdate={titlesUpdate}/>)
             : (null)
           }
         </Fragment>

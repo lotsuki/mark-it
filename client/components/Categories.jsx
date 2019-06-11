@@ -26,7 +26,6 @@ const Categories = ({ bmarks, showConfirm, setShowConfirm, titlesUpdate, setShow
       // }
     //If target is another category, display subj from that category
 
-
   };
 
   const handleCatClick = (e) => {
