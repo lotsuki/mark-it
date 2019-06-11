@@ -11,7 +11,7 @@ import { useSpring, animated } from 'react-spring';
 
 //TODO: when titles are displayed, and category is clicked, titles and subjects close (pass down boolean state to show if categories is open)
 
-const Main = ({ bmarks, links }) => {
+const Main = ({ bmarks, links, colors }) => {
   const [ showForm, setShowForm, ] = useState(false);
   const [ showEdit, setShowEdit ] = useState(false);
   const [ showConfirm, setShowConfirm ] = useState(false);
@@ -20,7 +20,7 @@ const Main = ({ bmarks, links }) => {
   const [ titleToDelete, setTitleToDelete ] = useState('');
   const [ subjectOfTitle, setSubjectOfTitle ] = useState('');
   const [ titlesUpdate, setTitlesUpdate ] = useState(null);
-  const addColors
+
   const showTitlesUpdate = (data) => {
     setTitlesUpdate(data);
     setShowTitles(true);
@@ -56,7 +56,7 @@ const Main = ({ bmarks, links }) => {
       <Navbar showForm={showForm} setShowForm={setShowForm} showEdit={showEdit} setShowEdit={setShowEdit} links={links} />
       <div id="app-container" className="app" data-testid="app-container">
         <div className="sidebar-container">
-          <Bookmarks bmarks={bmarks} setShowTitles={setShowTitles} setTitles={setTitles} showConfirm={showConfirm} showTitles={showTitles} setShowConfirm={setShowConfirm} titlesUpdate={titlesUpdate}/>
+          <Bookmarks bmarks={bmarks} setShowTitles={setShowTitles} setTitles={setTitles} showConfirm={showConfirm} showTitles={showTitles} setShowConfirm={setShowConfirm} titlesUpdate={titlesUpdate} colors={colors}/>
         </div>
         <Fragment>
           {

@@ -21,13 +21,13 @@ const titles = [
 
 
 const mockUser = {
-  username: faker.hacker.noun(),
-  password: faker.hacker.noun(),
-  bmarks: {
-    Tech: [],
-    Travel: [],
-    Food: []
-  }
+  // username: faker.hacker.noun(),
+  // password: faker.hacker.noun(),
+  // bmarks: {
+  //   Tech: [],
+  //   Travel: [],
+  //   Food: []
+  // }
 };
 
 const createBookmarks = () => {

@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import SidebarHeader from './SidebarHeader.jsx';
 import Categories from './Categories.jsx';
 
-const Bookmarks = ({ bmarks, showConfirm, setShowConfirm, titlesUpdate, setShowTitles, showTitles, setTitles }) => {
+const Bookmarks = ({ bmarks, showConfirm, setShowConfirm, titlesUpdate, setShowTitles, showTitles, setTitles, colors }) => {
   return (
     <div className="bookmarks-container">
       <SidebarHeader sidebarHeader={"COLLECTIONS"} />
-      <Categories bmarks={bmarks} setShowTitles={setShowTitles} setTitles={setTitles} height={'3.5rem'} showConfirm={showConfirm} showTitles={showTitles}  setShowConfirm={setShowConfirm} titlesUpdate={titlesUpdate} />
+      <Categories bmarks={bmarks} setShowTitles={setShowTitles} setTitles={setTitles} height={'3.5rem'} showConfirm={showConfirm} showTitles={showTitles}  setShowConfirm={setShowConfirm} titlesUpdate={titlesUpdate} colors={colors}/>
     </div>
   );
 };

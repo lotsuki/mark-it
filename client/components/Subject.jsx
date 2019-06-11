@@ -19,7 +19,7 @@ const Subject = ({ clickedSubj, subject }) => {
         <div
           className="subject"
           style={{ }}>
-          <i className="fas fa-folder"></i>
+           <i className="far fa-folder"></i>
           <span className="subject-text">{subject}</span>
           <i className="fas fa-chevron-right"></i>
         </div>

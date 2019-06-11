@@ -7,7 +7,7 @@ import helpers from '../lib/utils.js';
 
 
 
-const Categories = ({ bmarks, showConfirm, setShowConfirm, titlesUpdate, setShowTitles, showTitles, setTitles }) => {
+const Categories = ({ bmarks, showConfirm, setShowConfirm, titlesUpdate, setShowTitles, showTitles, setTitles, colors }) => {
   const [ isOpen, setIsOpen ] = useState(false);
   const [ category, setCategory ] = useState('');
   const [toggle, setToggle] = useState(true);
@@ -52,7 +52,7 @@ const Categories = ({ bmarks, showConfirm, setShowConfirm, titlesUpdate, setShow
              className="category-wrapper"
              onClick={handleCatClick}
              key={key}>
-             <Category category={category} cat={key} isOpen={isOpen}/>
+             <Category category={category} cat={key} isOpen={isOpen} colors={colors}/>
            </div>
            <div className="dropdown-container" key={cat[0]}>
              {

@@ -28,12 +28,11 @@
     grid-template-columns: 100%;
     grid-row-gap: 0px;
     height: 100%;
-    /*background-color: #F2F2D2;*/
     min-width: 950px;
     margin:0;
     padding:0;
-     background-color: #F9FAFC;
-     overflow: scroll;
+    background: #ECEEEE;
+    overflow: scroll;
   }
 
   #app-container {
@@ -51,9 +50,7 @@
     flex-flow: row nowrap;
     justify-content: space-between;
     align-items: center;
-    background-color: #fff;
-    width: 100%;
-    border-bottom: 1px dotted lightgray;
+    background-color: #282727;
   }
 
   .logo-wrapper {
@@ -63,27 +60,28 @@
     align-items: center;
   }
 
-  @font-face {
+  /*@font-face {
     font-family: 'Just-For-Fun';
     src: url('JustForFun-Regular.ttf');
-    font-weight: normal;
+    font-weight: 100;
     font-style: normal;
-  }
+  }*/
 
   .name {
-    font-family: 'Just-For-Fun';
-    letter-spacing: .25rem;
-    font-size: 1.85rem;
+    /*font-family: 'Just-For-Fun';*/
+    letter-spacing: .1rem;
+    font-size: 1.2rem;
     padding-left: 1rem;
-    padding-right: .5rem;
-    font-weight: 300;
+    padding-right: .7rem;
+    color: #fff;
+    font-family: 'Open Sans', sans-serif;
   }
 
   .fa-bookmark {
-    margin-top: 5px;
+    margin-top: 12px;
     width: 20px;
     height: 25px;
-    color: #92E529;
+    color: #E60B0B;
   }
 
   .searchbar-container {
@@ -113,7 +111,7 @@
     font-weight: lighter;
     border: none;
     font-size: .95rem;
-    width: 13rem;
+    width: 12rem;
   }
 
   .searchbar >form > input:focus {
@@ -122,7 +120,8 @@
 
   .search-icon {
     padding: 2px;
-    color: #E58129;
+   /* color: #E58129;*/
+   color: gray;
   }
 
   .searchbar-content {
@@ -180,18 +179,20 @@
   .plus-icon {
     margin-right: .7rem;
     cursor: pointer;
-    font-size: 1.5rem;
-    color: #9356E6;
+    font-size: 1.2rem;
+   /* color: #9356E6;*/
+    color: #fff;
   }
 
   .edit-icon {
     cursor: pointer;
-    font-size: 1.5rem;
-    color: #75D4E5;
+    font-size: 1.2rem;
+    /*color: #90FF28;*/
+    color: #fff;
   }
 
   .plus-icon:hover, .edit-icon:hover {
-    font-size: 1.7rem;
+    font-size: 1.5rem;
   }
 
   #form-container {
@@ -532,7 +533,12 @@
   }
 
   .title-wrapper:hover {
-    background-color: #ECECEC;
+    background-color: #858585;
+
+  }
+
+  .title-wrapper:hover > .title {
+    color: #fff;
   }
 
   .fa-trash-alt {
@@ -667,8 +673,127 @@
 
 
 
+  .landing-container {
+    width: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+  }
+
+  .landing-header-container {
+    width: 100%;
+    height: 450px;
+   /* margin: 50px 0px;*/
+    background-color: #1F1F1F;
+  }
+
+  .landing-logo-wrapper {
+    display: flex;
+    flex: 2;
+    width: 10rem;
+    align-items: center;
+    height: 50px;
+  }
+
+  .landing-logo-title {
+    letter-spacing: .1rem;
+    font-size: 1.2rem;
+    padding: .7rem;
+    color: #fff;
+    font-family: 'Open Sans', sans-serif;
+  }
+
+  .fa-bookmark .landing-logo {
+    margin-top: 12px;
+    width: 20px;
+    height: 25px;
+    color: #E60B0B;
+  }
+
+  .landing-header-wrapper {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: center;
+    height: 450px;
+    width: 100%;
+  }
+
+  .landing-header {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .landing-main-text-wrapper {
+    display: flex;
+    flex-flow: row nowrap;
+  }
+
+  .landing-main-text {
+    font-family: 'Open Sans', sans-serif;
+    font-family: 'Roboto', sans-serif;
+    font-size: 60px;
+   /* letter-spacing: 5px;*/
+    font-weight: 300;
+    color: #fff;
+  }
+
+  .smart {
+    margin-left: -13px;
+    padding: 0;
+  }
+
+  .landing-text-sub {
+    font-family: 'Open Sans', sans-serif;
+    font-family: 'Roboto', sans-serif;
+    font-weight: lighter;
+    color: #fff;
+  }
+
+  .landing-button {
+    width: 140px;
+    height: 55px;
+    border: none;
+    background: #8AFF1D;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 7px;
+    font-weight: lighter;
+    cursor: pointer;
+  }
 
 
+v.logo-wrapper {
+    display: flex;
+    flex: 2;
+    width: 10rem;
+    align-items: center;
+  }
+
+  /*@font-face {
+    font-family: 'Just-For-Fun';
+    src: url('JustForFun-Regular.ttf');
+    font-weight: 100;
+    font-style: normal;
+  }*/
+
+  .name {
+    /*font-family: 'Just-For-Fun';*/
+    letter-spacing: .1rem;
+    font-size: 1.2rem;
+    padding-left: 1rem;
+    padding-right: .7rem;
+    color: #fff;
+    font-family: 'Open Sans', sans-serif;
+  }
+
+  .fa-bookmark {
+    margin-top: 12px;
+    width: 20px;
+    height: 25px;
+    color: #E60B0B;
+  }
 
 
 

@@ -39,7 +39,7 @@ const Navbar = ({ showForm, setShowForm, showEdit, setShowEdit, links, showConta
   return (
     <nav className="navbar">
       <div className="logo-wrapper">
-        <div className="name">MarkIt</div>
+        <div className="name">Booksmart</div>
        <i className="fas fa-bookmark"></i>
       </div>
       <Searchbar links={links}/>
