@@ -43,7 +43,7 @@ const Titles = ({ titles, links, setTitles, showConfirm, setShowConfirm, deleteT
   );
 
   return (
-    <div className="titles-container">
+    <div id="titles-container">
       {
         trail.map(( {height}, index )=> (
           <animated.div

@@ -3,6 +3,7 @@
 
 function findChild (elem, className) {
   if (elem.classList && elem.classList.contains(className)) {
+    console.log(elem, 'child')
     return elem.innerText;
   }
   for (var i = 0; i < elem.children.length; i++) {

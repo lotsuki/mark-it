@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Confirm = ({ setShowConfirm, titleToDelete, subjectOfTitle, showTitlesUpdate }) => {
+const Confirm = ({ setShowConfirm, titleToDelete, subjectOfTitle, showTitlesUpdate, setTitles, titles }) => {
 
   const handleConfirmClick = (e) => {
     if (e.target.innerText === 'Yes') {

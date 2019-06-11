@@ -18,6 +18,31 @@ const Subjects = ({ bmarks, category, showConfirm, setShowConfirm, titlesUpdate,
     }
   });
 
+  const titleClasses = ['far fa-trash-alt', 'title', 'title-wrapper', 'titles-sub-container', 'titles-container', 'confirm-button yes-button', 'confirm-button no-button'];
+
+  const displayNew = (e) => {
+    let subjectClasses = ['subject', 'subject-text'];
+    let className = e.target.className
+
+    // if (_.contains(subjectClasses, className)) {
+    //   handleSubjClick(e);
+    // } else if (_.contains(categoryClasses, className)) {
+    //   //TODO: double check this func
+    //   handleCatClick(e);
+    // }
+  };
+
+  const exitTitles = (e) => {
+    if (!_.contains(titleClasses, e.target.className)) {
+      setShowTitles(false);
+      document.removeEventListener('click', exitTitles);
+    } else {
+      console.log('hey')
+      //displayNew(e);
+    }
+
+  };
+
   const handleSubjClick = (e) => {
     if (!showTitles) {
       setSubj(e.target.innerText)
@@ -36,28 +61,7 @@ const Subjects = ({ bmarks, category, showConfirm, setShowConfirm, titlesUpdate,
     }
   };
 
-  const exitTitles = (e) => {
-    let titlesContainer = document.getElementById('titles-container');
 
-    // if (!helpers.findChild(titlesContainer, e.target.className)) {
-    //   setShowTitles(false);
-    //   document.removeEventListener('click', exitTitles);
-    // }
-    displayNew(e);
-  };
-
-  const displayNew = (e) => {
-    let subjectClasses = ['subject', 'subject-text'];
-    let categoryClasses = ['category', 'category-text'];
-    let className = e.target.className
-
-    // if (_.contains(subjectClasses, className)) {
-    //   handleSubjClick(e);
-    // } else if (_.contains(categoryClasses, className)) {
-    //   //TODO: double check this func
-    //   handleCatClick(e);
-    // }
-  };
 
   const trail = useTrail(subjects.length, {
     opacity: 1,

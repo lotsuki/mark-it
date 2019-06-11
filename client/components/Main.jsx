@@ -22,7 +22,8 @@ const Main = ({ bmarks, links }) => {
   const [ titlesUpdate, setTitlesUpdate ] = useState(null);
 
   const showTitlesUpdate = (data) => {
-    setTitlesUpdate(data)
+    setTitlesUpdate(data);
+    setShowTitles(true);
   };
 
   const findSubject = (titl) => {
@@ -46,7 +47,7 @@ const Main = ({ bmarks, links }) => {
     } else if (showEdit) {
       return <Edit bmarks={bmarks} links={links} />
     } else if (showConfirm) {
-      return <Confirm showConfirm={showConfirm} setShowConfirm={setShowConfirm} titleToDelete={titleToDelete} subjectOfTitle={subjectOfTitle} showTitlesUpdate={showTitlesUpdate}/>
+      return <Confirm showConfirm={showConfirm} setShowConfirm={setShowConfirm} titleToDelete={titleToDelete} subjectOfTitle={subjectOfTitle} showTitlesUpdate={showTitlesUpdate} setTitles={setTitles} titles={titles}/>
     }
   };
 
