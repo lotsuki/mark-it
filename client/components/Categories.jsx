@@ -10,29 +10,36 @@ import helpers from '../lib/utils.js';
 const Categories = ({ bmarks, showConfirm, setShowConfirm, titlesUpdate, setShowTitles, showTitles, setTitles }) => {
   const [ isOpen, setIsOpen ] = useState(false);
   const [ category, setCategory ] = useState('');
+  const [toggle, setToggle] = useState(true);
+
 
   const exitCategories = (e) => {
     let categoryClasses = ['category', 'category-text'];
-    if (e.target.innerText === category) {
+    if (e.target.className === 'app') {
+      document.removeEventListener('click', exitCategories);
+      setToggle(false);
       setIsOpen(false);
       setCategory('');
-    } else if (_.contains(categoryClasses, e.target.className)) {
+      setShowTitles(false);
+    }
+    if (_.contains(categoryClasses, e.target.className)) {
+      setShowTitles(false);
       setCategory(e.target.innerText);
     }
-    //FINISH: get cateogry parent elem and check class name with helper func
-      // if (!helpers.findChild(findCatparent, e.target.className)) {
-      //   setIsOpen(false);
-      //   document.removeEventListner('click', exitCategories);
-      // }
-    //If target is another category, display subj from that category
-
   };
 
   const handleCatClick = (e) => {
     if (!isOpen) {
       setIsOpen(true);
+      setToggle(true);
       setCategory(e.target.innerText);
       document.addEventListener('click', exitCategories);
+    } else if (e.target.className === 'app' || e.target.innerText === category) {
+      document.removeEventListener('click', exitCategories);
+      setToggle(false);
+      setIsOpen(false);
+      setCategory('');
+      setShowTitles(false);
     }
   };
 
@@ -55,7 +62,7 @@ const Categories = ({ bmarks, showConfirm, setShowConfirm, titlesUpdate, setShow
                 <div className="dropdown-wrapper" >
                   {
                     isOpen
-                      ? ( <Subjects bmarks={bmarks} category={category} setShowTitles={setShowTitles} setTitles={setTitles} showConfirm={showConfirm} showTitles={showTitles} setShowConfirm={setShowConfirm} titlesUpdate={titlesUpdate} handleCatClick={handleCatClick}/>)
+                      ? ( <Subjects bmarks={bmarks} category={category} setShowTitles={setShowTitles} setTitles={setTitles} showConfirm={showConfirm} showTitles={showTitles} setShowConfirm={setShowConfirm} titlesUpdate={titlesUpdate} handleCatClick={handleCatClick} setIsOpen={setIsOpen} setCategory={setCategory} toggle={toggle}/>)
                       : ( null )
                   }
                 </div>

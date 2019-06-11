@@ -66,9 +66,9 @@ const Main = ({ bmarks, links }) => {
           }
         </Fragment>
       </div>
-        <Fragment>
-          { displayContainer() }
-        </Fragment>
+      <Fragment>
+        { displayContainer() }
+      </Fragment>
     </div>
   );
 };

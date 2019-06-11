@@ -7,7 +7,7 @@ import {useTrail, animated} from 'react-spring';
 import helpers from '../lib/utils.js';
 
 
-const Subjects = ({ bmarks, category, showConfirm, setShowConfirm, titlesUpdate, showTitles, setShowTitles, setTitles, handleCatClick }) => {
+const Subjects = ({ bmarks, category, showConfirm, setShowConfirm, titlesUpdate, showTitles, setShowTitles, setTitles, handleCatClick, setIsOpen, setCategory, toggle }) => {
   const [ subj, setSubj ] = useState('');
   const [ update, setUpdate ] = useState(false);
 
@@ -19,33 +19,25 @@ const Subjects = ({ bmarks, category, showConfirm, setShowConfirm, titlesUpdate,
   });
 
   const titleClasses = ['far fa-trash-alt', 'title', 'title-wrapper', 'titles-sub-container', 'titles-container', 'confirm-button yes-button', 'confirm-button no-button'];
-
-  const displayNew = (e) => {
-    let subjectClasses = ['subject', 'subject-text'];
-    let className = e.target.className
-
-    // if (_.contains(subjectClasses, className)) {
-    //   handleSubjClick(e);
-    // } else if (_.contains(categoryClasses, className)) {
-    //   //TODO: double check this func
-    //   handleCatClick(e);
-    // }
-  };
+  const subjectClasses = ['subject', 'subject-text'];
 
   const exitTitles = (e) => {
-    if (!_.contains(titleClasses, e.target.className)) {
-      setShowTitles(false);
-      document.removeEventListener('click', exitTitles);
-    } else {
-      console.log('hey')
-      //displayNew(e);
+    let className = e.target.className;
+    if (!_.contains(titleClasses, className)) {
+     setShowTitles(false);
+     document.removeEventListener('click', exitTitles);
     }
-
+    if (className === 'app'){
+      setIsOpen(false);
+      setCategory('');
+    }
   };
 
   const handleSubjClick = (e) => {
+    let subject;
+    let target = e.target;
     if (!showTitles) {
-      setSubj(e.target.innerText)
+      setSubj(e.target.innerText);
       document.addEventListener('click', exitTitles);
       fetch(`/titles/${category}/${e.target.innerText}`)
         .then(res => res.json())
@@ -54,19 +46,30 @@ const Subjects = ({ bmarks, category, showConfirm, setShowConfirm, titlesUpdate,
          setShowTitles(true);
         })
        .catch(err => { console.log('Error at GET', err); });
-    } else {
+    } else if (e.target.innerText === subj) {
       setShowTitles(false);
       setTitles([]);
       setSubj('');
+    } else if(_.contains(subjectClasses, e.target.className)) {
+      if (e.target.className === 'subject-text') {
+        subject = e.target.innerText;
+      } else if (e.target.className === 'subject') {
+        subject = e.target.children[1].innerText;
+      }
+      setSubj(subject);
+      fetch(`/titles/${category}/${subject}`)
+        .then(res => res.json())
+        .then(data => {
+         setTitles(data);
+         setShowTitles(true);
+        })
     }
   };
 
-
-
   const trail = useTrail(subjects.length, {
-    opacity: 1,
-    height: 50,
-    from: {opacity: 0, height: 0}}
+    opacity: toggle ? 1 : 0,
+    height: toggle ? 50 : 0,
+    from: {opacity: toggle ? 0 : 1, height: toggle ? 0 : 50}},
   );
 
   return (
