@@ -33,6 +33,7 @@
     margin:0;
     padding:0;
      background-color: #F9FAFC;
+     overflow: scroll;
   }
 
   #app-container {
@@ -193,7 +194,7 @@
     font-size: 1.7rem;
   }
 
-  #form-wrapper {
+  #form-container {
     display: block;
     position: absolute;
     width: 22rem;
@@ -223,25 +224,20 @@
     outline: none;
   }
 
-    #edit-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 2.5rem;
-  }
-
-  .edit-main {
+  #edit-container {
     display: flex;
     flex-flow: row nowrap;
     justify-content: center;
     align-items: center;
+    margin: 5% 15%;
     border-radius: 5px;
     width: 45rem;
     height: 24rem;
     background-color: #fff;
-    border-radius: 5px;
+    grid-row: 2/4;
   }
 
-  .edit-main .edit-wrapper:last-child {
+  #edit-container .edit-wrapper:last-child {
     border: none;
   }
 
@@ -472,14 +468,19 @@
     color: #fff
   }
 
-  #titles-container {
+  .titles-container {
     height: 500px;
     width: 500px;
     margin-left: 50px;
     margin-top: 15px;
+    display: flex;
+    flex-flow: column nowrap;
+    height: auto;
+    max-height: 25rem;
+
   }
 
-  .titles-sub-container {
+ /* .titles-sub-container {
     display: flex;
     flex-flow: column nowrap;
     height: auto;
@@ -489,7 +490,7 @@
     padding: 0;
     overflow-y: scroll;
     overflow-x: visible;
-  }
+  }*/
 
   .title-wrapper {
     display: flex;
@@ -502,6 +503,11 @@
     cursor: pointer;
     font-size: 0.8rem;
     border-bottom: 1px dotted lightgray;
+    background-color: #fff;
+    margin: 0;
+    padding: 0;
+    overflow-y: scroll;
+    overflow-x: visible;
   }
 
   .title-wrapper:hover {
@@ -553,19 +559,41 @@
     visibility: hidden;
   }*/
 
-  .confirm-container {
+
+  #confirm {
+    display: block;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 9999;
+    width: 100%;
+    height: 100%;
+    padding-top: 100px;
+    background-color: black;
+    background-color: rgba(0, 0, 0, 0.4);
+    -webkit-transition: 0.5s;
+    overflow: auto;
+    transition: all 0.3s linear;
   }
 
-  .confirm-sub-container {
-    display: flex;
-    flex-flow: column nowrap;
-    position: absolute;
-    height: 9rem;
-    width: 19rem;
-    top: 7rem;
-    left: 35rem;
-    background-color: #fff;
-    border-radius: 5px;
+  .confirm-wrapper {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border-radius: 4px;
+    max-width: 350px;
+    height: 135px;
+  }
+
+  .ModalOpen { overflow: hidden; }
+
+  .is-hidden { display: none; }
+
+  .is-visuallyHidden { opacity: 0; }
+
+  .is-blurred {
+    filter: blur(2px);
+    -webkit-filter: blur(2px);
   }
 
   .confirm-header {
@@ -577,13 +605,13 @@
     font-size: 18px;
     color: gray;
     font-weight: lighter;
-    padding: .8rem .8rem .5rem .8rem;
+    padding: .8rem 0rem .5rem .8rem;
   }
 
   .confirm-text-wrapper {
     margin: 0;
     line-height: 1rem;
-    padding: 1.4rem 1.4rem 0rem 1.4rem;
+    text-align: center;
   }
 
   .confirm-text {
@@ -592,6 +620,7 @@
     letter-spacing: .5px;
     font-size: 14px;
     font-weight: lighter;
+    padding: 1.4rem .5rem .7rem;
   }
 
   .confirm-buttons-wrapper {
@@ -605,9 +634,9 @@
   .confirm-button {
     border: none;
     font-size: 16px;
-    width: 3.6rem;
+    width: 4.2rem;
     cursor: pointer;
-    height: 2.2rem;
+    height: 2.5rem;
     margin: .3rem;
   }
 

@@ -25,7 +25,7 @@ const Navbar = ({ showForm, setShowForm, showEdit, setShowEdit, links, showConta
     if (!showEdit) {
       appContainer.style.height = '0';
       appContainer.style.visibility = 'hidden';
-      editContainer.style.gridRow ='2/3';
+      //editContainer.style.gridRow ='2/3';
       setShowEdit(true)
     } else {
       appContainer.style.height = '100%';

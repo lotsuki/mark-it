@@ -113,7 +113,7 @@ const Edit = ({ bmarks, links, editUpdate }) => {
   };
 
   return (
-    <div className="edit-main">
+    <div id="edit-container">
       <div className="edit-wrapper">
         <div className="edit-header">Category</div>
         <ul>

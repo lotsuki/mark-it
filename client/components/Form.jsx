@@ -29,7 +29,8 @@ const Form = ({ showForm, bmarks }) => {
     return false;
   };
 
-  const submitForm = () => {
+  const submitForm = (e) => {
+    e.preventDefault();
     const form = {
       category,
       subject,
@@ -60,7 +61,7 @@ const Form = ({ showForm, bmarks }) => {
     from={{ height: 0 }}
     to={{ height: 240}}>
     {props =>
-      <div id="form-wrapper">
+      <div id="form-container">
         <form className="form"
             data-testid="form"
             onSubmit={submitForm}>

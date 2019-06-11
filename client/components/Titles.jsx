@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import helpers from '../lib/utils.js';
 import axios from 'axios';
@@ -9,11 +9,24 @@ const Titles = ({ titles, links, setTitles, showConfirm, setShowConfirm }) => {
 
   const confirmDelete = async (e) => {
     let target = e.target
+    let doc = document.getElementById('container');
+    let confirmContainer = document.getElementById('confirm');
+
+
     if (!showConfirm) {
-      let subject = await helpers.findText(target, 'subject-wrapper', 'leftSide');
+      setShowConfirm(true);
+      let subject = await helpers.findText(target, 'subject-wrapper', 'subject-text');
       let title = await helpers.findText(target, 'title-wrapper', 'title');
-      setShowConfirm([subject, title]);
+      deleteTitle(title, subject);
+      confirmContainer.className = 'confirm-container is-visuallyHid';
+      doc.className = 'MainContainer is-blurred';
+      confirmContainer.className = 'confirm-container';
+      doc.parentElement.className = 'ModalOpen';
+
     } else {
+      doc.parentElement.className = '';
+      doc.className = '';
+      confirmContainer.className = 'confirm-container is-hidden is-visuallyHid';
       setShowConfirm(false)
     }
   };
@@ -30,19 +43,19 @@ const Titles = ({ titles, links, setTitles, showConfirm, setShowConfirm }) => {
   );
 
   return (
-    <div className="titles-sub-container">
+    <div className="titles-container">
       {
         trail.map(( {height}, index )=> (
           <animated.div
-            className="titles-sub-container"
+            className="title-wrapper"
             style={{height}}
             key={'animation'}>
             {
               titlesArr.map((title, i) => (
-                <div className="title-wrapper" key={`${urlsArr[i]}${i}`}>
+                <Fragment key={`${urlsArr[i]}${i}`}>
                   <a target="_blank" href={urlsArr[i]} className="title" key={`${titlesArr[i]}${i}`}>{title}</a>
                   <i className="far fa-trash-alt"  data-testid="delete-title" onClick={confirmDelete}></i>
-                </div>
+                </Fragment>
               ))
             }
 

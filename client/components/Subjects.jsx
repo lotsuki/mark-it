@@ -47,9 +47,9 @@ const Subjects = ({ bmarks, category, showConfirm, setShowConfirm, titlesUpdate,
   };
 
   const displayNew = (e) => {
-    const subjectClasses = ['subject', 'subject-text'];
-    const categoryClasses = ['category', 'category-text'];
-    const className = e.target.className
+    let subjectClasses = ['subject', 'subject-text'];
+    let categoryClasses = ['category', 'category-text'];
+    let className = e.target.className
 
     if (_.contains(subjectClasses, className)) {
       handleSubjClick(e);

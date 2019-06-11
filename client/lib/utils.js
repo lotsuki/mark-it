@@ -9,6 +9,9 @@ function findChild (elem, className) {
 };
 
 function findText(elem, parentClassName, elemClassName) {
+  if (elem.id === 'container') {
+    return findChild(elem, elemClassName);
+  }
   if (elem.classList && elem.classList.contains(parentClassName)) {
     return findChild(elem, elemClassName);
   }

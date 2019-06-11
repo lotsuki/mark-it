@@ -12,12 +12,20 @@ const Categories = ({ bmarks, showConfirm, setShowConfirm, titlesUpdate, setShow
   const [ category, setCategory ] = useState('');
 
   const exitCategories = (e) => {
+    let categoryClasses = ['category', 'category-text'];
+    if (e.target.innerText === category) {
+      setIsOpen(false);
+      setCategory('');
+    } else if (_.contains(categoryClasses, e.target.className)) {
+      setCategory(e.target.innerText);
+    }
     //FINISH: get cateogry parent elem and check class name with helper func
       // if (!helpers.findChild(findCatparent, e.target.className)) {
       //   setIsOpen(false);
       //   document.removeEventListner('click', exitCategories);
       // }
     //If target is another category, display subj from that category
+
 
   };
 
@@ -26,9 +34,6 @@ const Categories = ({ bmarks, showConfirm, setShowConfirm, titlesUpdate, setShow
       setIsOpen(true);
       setCategory(e.target.innerText);
       document.addEventListener('click', exitCategories);
-    } else {
-      setIsOpen(false);
-      setCategory('');
     }
   };
 

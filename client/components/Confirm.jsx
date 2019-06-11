@@ -18,17 +18,20 @@ const Confirm = ({ setShowConfirm, titleToDelete, subjectOfTitle, showTitlesUpda
     }
   };
 
+
   return (
-    <div className="confirm-sub-container">
-    <div className="confirm-header">
-      <div className="confirm-header-text">Delete</div>
-    </div>
-      <div className="confirm-text-wrapper">
-        <div className="confirm-text">Are you sure you want to delete this bookmark?</div>
+    <div id="confirm" className="confirm-container is-hidden is-visuallyHid">
+    <div className="confirm-wrapper">
+      <div className="confirm-header">
+        <div className="confirm-header-text">Delete</div>
       </div>
-      <div className="confirm-buttons-wrapper">
-        <button type="button" className="confirm-button yes-button" onClick={handleConfirmClick}>Yes</button>
-        <button type="button" className="confirm-button no-button" onClick={handleConfirmClick}>No</button>
+        <div className="confirm-text-wrapper">
+          <div className="confirm-text">Are you sure you want to delete this bookmark?</div>
+        </div>
+        <div className="confirm-buttons-wrapper">
+          <button type="button" className="confirm-button yes-button" onClick={handleConfirmClick}>Yes</button>
+          <button type="button" className="confirm-button no-button" onClick={handleConfirmClick}>No</button>
+        </div>
       </div>
     </div>
   );

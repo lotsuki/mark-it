@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import Navbar from './Navbar.jsx';
 import Bookmarks from './Bookmarks.jsx';
@@ -20,16 +20,25 @@ const Main = ({ bmarks, links }) => {
   const [ subjectOfTitle, setSubjectOfTitle ] = useState('');
   const [ titlesUpdate, setTitlesUpdate ] = useState(null);
 
+ console.log(showEdit)
 
   const showTitlesUpdate = (data) => {
     setTitlesUpdate(data)
   };
 
-  const editUpdate = () => {
-    // (async () => {
-    //   await displayEdit();
-    //   await waitForPromise()
-    // })()
+  const deleteTitle = (titl, subj) => {
+    setTitleToDelete(titl);
+    setSubjectOfTitle(subj);
+  };
+
+  const displayContainer = () => {
+    if (showForm) {
+      return <Form showForm={showForm} bmarks={bmarks}/>
+    } else if (showEdit) {
+      return <Edit bmarks={bmarks} links={links}  editUpdate={editUpdate}/>
+    } else if (showConfirm) {
+      return <Confirm showConfirm={showConfirm} setShowConfirm={setShowConfirm} titleToDelete={titleToDelete} subjectOfTitle={subjectOfTitle} showTitlesUpdate={showTitlesUpdate}/>
+    }
   };
 
   return (
@@ -39,35 +48,17 @@ const Main = ({ bmarks, links }) => {
         <div className="sidebar-container">
           <Bookmarks bmarks={bmarks} setShowTitles={setShowTitles} setTitles={setTitles} showConfirm={showConfirm} showTitles={showTitles} setShowConfirm={setShowConfirm} titlesUpdate={titlesUpdate}/>
         </div>
-        <div id="titles-container">
+        <Fragment>
           {
             showTitles
-            ? (<Titles titles={titles} links={links} setTitles={setTitles} showConfirm={showConfirm} setShowConfirm={setShowConfirm} />)
+            ? (<Titles titles={titles} links={links} setTitles={setTitles} showConfirm={showConfirm} setShowConfirm={setShowConfirm} deleteTitle={deleteTitle}/>)
             : (null)
           }
-        </div>
+        </Fragment>
       </div>
-      <div className="form-container">
-          {
-            showForm
-            ? (<Form showForm={showForm} bmarks={bmarks}/>)
-            : (null)
-          }
-      </div>
-      <div id="edit-container">
-        {
-          showEdit
-          ? (<Edit bmarks={bmarks} links={links}  editUpdate={editUpdate}/>)
-          : (null)
-        }
-      </div>
-      <div className="confirm-container">
-      {
-        showConfirm
-        ? (<Confirm showConfirm={showConfirm} setShowConfirm={setShowConfirm} titleToDelete={showConfirm[1]} subjectOfTitle={showConfirm[0]} showTitlesUpdate={showTitlesUpdate}/>)
-        : (null)
-      }
-      </div>
+        <Fragment>
+          { displayContainer() }
+        </Fragment>
     </div>
   );
 };
@@ -84,3 +75,25 @@ Main.defaultProps = {
   titles: []
 };
 
+
+ // <Fragment>
+ //          {
+ //            showForm
+ //            ? (<Form showForm={showForm} bmarks={bmarks}/>)
+ //            : (null)
+ //          }
+ //      </Fragment>
+ //      <Fragment>
+ //        {
+ //          showEdit
+ //          ? (<Edit bmarks={bmarks} links={links}  editUpdate={editUpdate}/>)
+ //          : (null)
+ //        }
+ //      </Fragment>
+ //      <Fragment>
+ //      {
+ //        showConfirm
+ //        ? (<Confirm showConfirm={showConfirm} setShowConfirm={setShowConfirm} titleToDelete={showConfirm[1]} subjectOfTitle={showConfirm[0]} showTitlesUpdate={showTitlesUpdate}/>)
+ //        : (null)
+ //      }
+ //      </Fragment>
