@@ -63,6 +63,11 @@ const Form = ({ showForm, setShowForm, bmarks }) => {
     clearForm();
   };
 
+  const displaySelectMenu = (value) => {
+    //check for cat and subj
+  };
+
+
   return(
   <Spring
     config={{duration: 2000}}
@@ -72,22 +77,38 @@ const Form = ({ showForm, setShowForm, bmarks }) => {
       <div id="form-container">
         <form className="form"
             data-testid="form"
+            name="form"
             onSubmit={submitForm}>
+        <div className="cat-input-wrapper">
+          <input
+            name="form"
+            type="text"
+            value={category}
+            className="category-input"
+            data-testid="category-input"
+            placeholder="Category"
+            onChange={e => setCategory(e.target.value)}
+            />
+          <input name="form" type="color" defaultValue="#D00000" className="color"/>
+        </div>
         <input
-          type="text"
-          value={category}
-          className="form-inputs"
-          data-testid="category-input"
-          placeholder="Category"
-          onChange={e => setCategory(e.target.value)}/>
-        <input
+          name="form"
           type="text"
           value={subject}
           className="form-inputs"
           data-testid="subject-input"
           placeholder="Subject"
-          onChange={e => setSubject(e.target.value)}/>
+          list="subjects"
+          onChange={e => {
+            displaySelectMenu(e.target.value);
+            setSubject(e.target.value);
+          }}/>
+        <datalist id="subjects">
+          <option>Volvo</option>
+          <option>Saab</option>
+        </datalist>
         <input
+          name="form"
           type="text"
           value={title}
           className="form-inputs"
@@ -95,6 +116,7 @@ const Form = ({ showForm, setShowForm, bmarks }) => {
           placeholder="Title"
           onChange={e=> setTitle(e.target.value)}/>
         <input
+          name="form"
           type="text"
           value={url}
           className="form-inputs"
@@ -102,6 +124,7 @@ const Form = ({ showForm, setShowForm, bmarks }) => {
           placeholder="URL"
           onChange={e => setUrl(e.target.value)}/>
         <input
+          name="form"
           type="submit"
           className="form-inputs"
           data-testid="submit"

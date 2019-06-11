@@ -4,7 +4,8 @@ import Searchbar from './Searchbar.jsx';
 
 const Navbar = ({ showForm, setShowForm, showEdit, setShowEdit, links, showContainer, exitContainer }) => {
   const hideDisplay = (e) => {
-    if (e.target.className !== 'form-inputs') {
+    console.log(e.target.name)
+    if (e.target.name !== 'form') {
       setShowForm(false);
       document.removeEventListener('click', hideDisplay);
     }

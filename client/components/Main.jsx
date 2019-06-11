@@ -20,7 +20,7 @@ const Main = ({ bmarks, links }) => {
   const [ titleToDelete, setTitleToDelete ] = useState('');
   const [ subjectOfTitle, setSubjectOfTitle ] = useState('');
   const [ titlesUpdate, setTitlesUpdate ] = useState(null);
-
+  const addColors
   const showTitlesUpdate = (data) => {
     setTitlesUpdate(data);
     setShowTitles(true);

@@ -213,11 +213,40 @@
     height: 3rem;
     width: 22rem;
     box-sizing: border-box;
-    padding: .8rem;
     border: 1px solid lightgray;
     font-size: 1.3rem;
     font-weight: lighter;
     background-color: #fff;
+    padding: .8rem;
+  }
+
+  .cat-input-wrapper {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    height: 3rem;
+    width: 21.88rem;
+    background-color: #fff;
+    border: 1px solid lightgray;
+  }
+
+  input.color {
+    margin-right: 8px;
+    height: 25px;
+    width: 25px;
+    cursor: pointer;
+    border: none;
+  }
+
+  input.category-input {
+    font-size: 1.3rem;
+    font-weight: lighter;
+    border: none;
+    padding: .8rem;
+    outline: none;
+    height: 1rem;
+    flex: 2;
   }
 
   .form-inputs:focus {
@@ -367,7 +396,8 @@
     align-items: center;
     height: 3.3rem;
     cursor: pointer;
-    color: #6C7476;
+    /*color: #6C7476;*/
+    color: #646464;
     margin: 0;
     padding: 0;
     background-color: #fff;
@@ -451,7 +481,7 @@
 
   .subject .fa-folder-open, .subject .fa-folder {
     margin-left: 1rem;
-    color: #4E5456;
+    /*color: #4E5456;*/
   }
 
   .subject:hover {

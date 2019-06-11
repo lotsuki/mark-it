@@ -15,14 +15,13 @@ const Categories = ({ bmarks, showConfirm, setShowConfirm, titlesUpdate, setShow
 
   const exitCategories = (e) => {
     let categoryClasses = ['category', 'category-text'];
-    if (e.target.className === 'app') {
+    if (e.target.className === 'app' || e.target.innerText === category) {
       document.removeEventListener('click', exitCategories);
       setToggle(false);
       setIsOpen(false);
       setCategory('');
       setShowTitles(false);
-    }
-    if (_.contains(categoryClasses, e.target.className)) {
+    } else if (_.contains(categoryClasses, e.target.className)) {
       setShowTitles(false);
       setCategory(e.target.innerText);
     }
@@ -53,7 +52,7 @@ const Categories = ({ bmarks, showConfirm, setShowConfirm, titlesUpdate, setShow
              className="category-wrapper"
              onClick={handleCatClick}
              key={key}>
-             <Category category={category} cat={key}/>
+             <Category category={category} cat={key} isOpen={isOpen}/>
            </div>
            <div className="dropdown-container" key={cat[0]}>
              {
