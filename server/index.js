@@ -1,15 +1,27 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
+const compression = require('compression');
 const Document = require('../db/Document.js');
 const db = require('../db/index.js');
 const app = express();
 
 const PORT = process.env.PORT || 3000;
 
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  res.header("Access-Control-Allow-Methods", "GET,PATCH,PUT,POST,DELETE");
+  res.header("Cache-Control", "public, max-age=365d");
+  next();
+});
+app.use(compression());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(`${__dirname}/../public/`));
+app.use(express.static(`${__dirname}/../public/`, {maxAge: '365d'}));
 
 app.post('/form', (req, res) => {
   let category = req.body.category;
@@ -152,6 +164,8 @@ app.delete('/bookmarks/:title/:subject', (req, res) => {
     res.sendFile(path.join(__dirname, '../public/index.html'));
   });
 //}
+
+
 
 if (process.env.NODE_ENV !== 'test') {
   if (PORT === null || PORT === '') {

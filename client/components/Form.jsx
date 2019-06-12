@@ -15,7 +15,6 @@ const Form = ({ showForm, setShowForm, bmarks }) => {
     setSubject('');
     setTitle('');
     setUrl('');
-    //setShowForm(false);
   };
 
   const hasCategory = () => {

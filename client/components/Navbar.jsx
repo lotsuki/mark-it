@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Searchbar from './Searchbar.jsx';
 
+
 const Navbar = ({ showForm, setShowForm, showEdit, setShowEdit, links, showContainer, exitContainer }) => {
   const hideDisplay = (e) => {
-    console.log(e.target.name)
     if (e.target.name !== 'form') {
       setShowForm(false);
       document.removeEventListener('click', hideDisplay);

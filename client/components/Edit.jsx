@@ -126,8 +126,7 @@ const Edit = ({ bmarks, links }) => {
           {categories.map(category => (
             <li key={category}>
               <input type="text" defaultValue={category} onBlur={resetInput} onKeyUp={editBookmark} onFocus={hideIcon}/>
-              <img className="delete-icon" src="https://img.icons8.com/ios/50/000000/delete-sign.png" onClick={deleteCategory}/>
-
+              <div className="delete-icon" onClick={deleteCategory}>X</div>
             </li>
           ))}
         </ul>
@@ -138,7 +137,7 @@ const Edit = ({ bmarks, links }) => {
           {subjects.map(subject => (
             <li key={subject}>
               <input type="text" defaultValue={subject} onKeyUp={editBookmark}/>
-              <img className="delete-icon" src="https://img.icons8.com/ios/50/000000/delete-sign.png" onClick={deleteSubject}/>
+              <div className="delete-icon" onClick={deleteSubject}>X</div>
 
             </li>
           ))}
@@ -151,7 +150,7 @@ const Edit = ({ bmarks, links }) => {
             titlesArr.map(title => (
               <li key={title}>
                 <input type="text" defaultValue={title} onKeyUp={editBookmark}/>
-                <img className="delete-icon" src="https://img.icons8.com/ios/50/000000/delete-sign.png" onClick={deleteTitle}/>
+                <div className="delete-icon" onClick={deleteTitle}>X</div>
               </li>
             ))
           }

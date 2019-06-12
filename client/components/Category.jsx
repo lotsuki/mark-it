@@ -3,9 +3,6 @@ import PropTypes from 'prop-types';
  
 
 const Category = ({ category, cat, isOpen, colors}) => {
-  // const colors = ['#8FFF9C', '#BAFF7E', '#7EE3C8', '#77D0FF', '#5897FF', '#6558FF', '#D758FF', '#FF5858', '#FFC558', '#FF9758', '#EDFF58'];
-  let color = '#'+(Math.random()*0xFFFFFF<<0).toString(16);
-
   return (
     <div>
     {

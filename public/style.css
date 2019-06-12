@@ -1,4 +1,4 @@
-  html, body {
+html, body {
     width: 100%;
     height: 100%;
     margin: 0;
@@ -794,14 +794,5 @@ v.logo-wrapper {
     height: 25px;
     color: #E60B0B;
   }
-
-
-
-
-
-
-
-
-
 
 

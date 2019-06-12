@@ -67,7 +67,6 @@ const Titles = ({ titles, links, setTitles, showConfirm, setShowConfirm, deleteT
 };
 
 
-
 export default Titles;
 
 Titles.propTypes = {

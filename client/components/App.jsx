@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Main from './Main.jsx';
-import Landing from './Landing.jsx';
+//import Landing from './Landing.jsx';
 import ErrorBoundary from './ErrorBoundary.jsx';
 
 
@@ -25,7 +25,6 @@ class App extends React.Component {
     fetch('/user')
       .then(res => res.json())
       .then(data =>  {
-        console.log(data)
         this.setState({
           userID: data.username,
           bmarks: data.bmarks,
@@ -48,7 +47,6 @@ class App extends React.Component {
       });
   }
 
-
   componentWillUnMount() {
     this._isMounted = false;
   }
@@ -58,7 +56,6 @@ class App extends React.Component {
     return (
       <ErrorBoundary>
         <Main userID={userID} bmarks={bmarks} links={links} colors={colors}/>
-         <Landing />
       </ErrorBoundary>
     );
   }
@@ -68,3 +65,4 @@ class App extends React.Component {
 
 export default App;
 
+// <Landing />
