@@ -8,7 +8,11 @@ const Confirm = ({ setShowConfirm, titleToDelete, subjectOfTitle, showTitlesUpda
       setShowConfirm(false);
 
       fetch(`bookmarks/${titleToDelete}/${subjectOfTitle}`, {
-         method: 'delete'
+         method: 'delete',
+         headers: {
+          "Content-Type": "application/json",
+          "Cache-Control": "public, max-age=365d"
+        }
        })
        .then(res => res.json())
        .then(data => {

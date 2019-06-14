@@ -15,13 +15,13 @@ app.use((req, res, next) => {
     "Origin, X-Requested-With, Content-Type, Accept"
   );
   res.header("Access-Control-Allow-Methods", "GET,PATCH,PUT,POST,DELETE");
-  res.header("Cache-Control", "public, max-age=365d");
+  res.header("Cache-Control", "public, no cache");
   next();
 });
 app.use(compression());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(`${__dirname}/../public/`, {maxAge: '365d'}));
+app.use(express.static(`${__dirname}/../public/`));
 
 app.post('/form', (req, res) => {
   let category = req.body.category;

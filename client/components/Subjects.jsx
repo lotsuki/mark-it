@@ -18,7 +18,7 @@ const Subjects = ({ bmarks, category, showConfirm, setShowConfirm, titlesUpdate,
     }
   });
 
-  const titleClasses = ['far fa-trash-alt', 'title', 'title-wrapper', 'titles-sub-container', 'titles-container', 'confirm-button yes-button', 'confirm-button no-button'];
+  const titleClasses = ['far fa-trash-alt', 'title', 'title-wrapper', 'titles-sub-container', 'titles-container', 'confirm-button yes-button', 'confirm-button no-button', 'delete-icon'];
   const subjectClasses = ['subject', 'subject-text'];
 
   const exitTitles = (e) => {

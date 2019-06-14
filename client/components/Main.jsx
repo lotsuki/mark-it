@@ -9,7 +9,6 @@ import Titles from './Titles.jsx';
 import helpers from '../lib/utils.js';
 import { useSpring, animated } from 'react-spring';
 
-//TODO: when titles are displayed, and category is clicked, titles and subjects close (pass down boolean state to show if categories is open)
 
 const Main = ({ bmarks, links, colors }) => {
   const [ showForm, setShowForm, ] = useState(false);

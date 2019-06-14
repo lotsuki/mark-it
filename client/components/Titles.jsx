@@ -54,7 +54,7 @@ const Titles = ({ titles, links, setTitles, showConfirm, setShowConfirm, deleteT
               titlesArr().map((title, i) => (
                 <div className="title-wrapper" key={`${urlsArr[i]}${i}`}>
                   <a target="_blank" href={urlsArr[i]} className="title" key={`${titlesArr[i]}${i}`}>{title}</a>
-                  <i className="far fa-trash-alt"  data-testid="delete-title" onClick={confirmDelete}></i>
+                  <div className="delete-icon" onClick={confirmDelete}>X</div>
                 </div>
               ))
             }
@@ -80,3 +80,5 @@ Titles.defaultProps = {
   setTitles: () => {},
   displayConfirm: () => {}
 };
+
+// <i className="fa fa-trash-alt"  data-testid="delete-title" onClick={confirmDelete}></i>

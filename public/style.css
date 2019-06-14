@@ -1,127 +1,59 @@
-html, body {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  .sidebar-container {
+    width: 23rem;
+    height: auto;
+    margin-top: 1rem;
   }
 
-  li {
-    list-style: none;
-  }
-
-  a {
-    text-decoration: none;
-    color: #000;
-  }
-
-  #app {
-    margin: 0;
-    padding: 0;
-    height: inherit;
-    width: inherit;
-  }
-
-  #container {
+  .bookmarks-container {
     display: grid;
-    grid-template-rows: 5rem 45rem auto;
-    grid-template-columns: 100%;
-    grid-row-gap: 0px;
-    height: 100%;
-    min-width: 950px;
-    margin:0;
-    padding:0;
-    background: #ECEEEE;
-    overflow: scroll;
+    grid-template-rows: 2.7rem auto;
   }
 
-  #app-container {
-    display: flex;
-    flex-flow: row nowrap;
-    padding: 15px;
-    height: 100%;
-    width: auto;
-    margin:0;
-    visibility: visible;
+  .sidebar-header-wrapper {
+    text-align: center;
+    background-color: #fff;
+    padding: 15px 0px;
+    border-bottom: 1px dotted lightgray;
   }
 
-  .navbar {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #282727;
+  .sidebar-header {
+    font-size: 1rem;
+    color: #7F7F7F;
+    letter-spacing: .05rem;
+    font-weight: lighter;
   }
 
-  .logo-wrapper {
-    display: flex;
-    flex: 2;
-    width: 10rem;
-    align-items: center;
+  .section-container {
+    background-color: #fff;
   }
 
-  /*@font-face {
-    font-family: 'Just-For-Fun';
-    src: url('JustForFun-Regular.ttf');
-    font-weight: 100;
-    font-style: normal;
-  }*/
-
-  .name {
-    /*font-family: 'Just-For-Fun';*/
-    letter-spacing: .1rem;
-    font-size: 1.2rem;
-    padding-left: 1rem;
-    padding-right: .7rem;
-    color: #fff;
-    font-family: 'Open Sans', sans-serif;
+  .section-wrapper{
+    display: grid;
+    grid-template-rows: auto;
+    letter-spacing: .05rem;
   }
 
-  .fa-bookmark {
-    margin-top: 12px;
-    width: 20px;
-    height: 25px;
-    color: #E60B0B;
-  }
-
-  .searchbar-container {
+  .category-container {
     position: relative;
   }
 
-  .searchbar {
+  .category {
     display: flex;
     align-items: center;
+    height: 3.3rem;
+    cursor: pointer;
+    color: #646464;
     background-color: #fff;
-    width: 15rem;
-    height: 2.5rem;
-    border-radius: 20px;
+    font-size: 1rem;
   }
 
-  .searchbar > form {
-    display: flex;
-    align-items: center;
-    padding-left: .5rem;
-    border-radius: 5px;
-    width: 15rem;
-    height: 2rem;
+  .category:hover {
+    background:#FA6B6B;
   }
 
-  .search-form input {
-    padding: 5px;
-    font-weight: lighter;
-    border: none;
-    font-size: .95rem;
-    width: 12rem;
-  }
-
-  .searchbar >form > input:focus {
-    outline: none;
-  }
-
-  .search-icon {
-    padding: 2px;
-   /* color: #E58129;*/
-   color: gray;
+  .category-text {
+    flex: 2;
+    padding-left: .3rem;
   }
 
   .searchbar-content {
@@ -167,32 +99,6 @@ html, body {
 
   .search-result a:hover {
     background-color: #F1F1F1;
-  }
-
-  .icons-wrapper {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    padding: 2rem;
-  }
-
-  .plus-icon {
-    margin-right: .7rem;
-    cursor: pointer;
-    font-size: 1.2rem;
-   /* color: #9356E6;*/
-    color: #fff;
-  }
-
-  .edit-icon {
-    cursor: pointer;
-    font-size: 1.2rem;
-    /*color: #90FF28;*/
-    color: #fff;
-  }
-
-  .plus-icon:hover, .edit-icon:hover {
-    font-size: 1.5rem;
   }
 
   #form-container {
@@ -342,94 +248,7 @@ html, body {
     padding: .5rem .9rem;
   }
 
-  .sidebar-container {
-    width: 23rem;
-    height: auto;
-    margin-top: 1rem;
-  }
 
-  .bookmarks-container {
-    display: grid;
-    grid-template-rows: 2.7rem auto;
-    box-shadow: 0 0 10px #E2E2E2  ;
-    border-radius: 5px;
-  }
-
-  .sidebar-header-wrapper {
-    text-align: center;
-    background-color: #fff;
-    padding: 15px 0px;
-    border-bottom: 1px dotted lightgray;
-  }
-
-  .sidebar-header {
-    font-family: Helvetica, sans-serif;
-    font-size: 1rem;
-    color: #a6a6a6;
-    letter-spacing: .05rem;
-    font-weight: lighter;
-  }
-
-  .section-container {
-    margin: 0;
-    padding: 0;
-    background-color: #fff;
-  }
-
-  .section-wrapper{
-    display: grid;
-    grid-template-rows: auto;
-    font-family: Helvetica, sans-serif;
-    letter-spacing: .05rem;
-  }
-
-  .category-container {
-    position: relative;
-  }
-
-  .category-wrapper:hover {
-  }
-
-  .category {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-between;
-    align-items: center;
-    height: 3.3rem;
-    cursor: pointer;
-    /*color: #6C7476;*/
-    color: #646464;
-    margin: 0;
-    padding: 0;
-    background-color: #fff;
-    font-size: 1rem;
-  }
-
-  .category:hover {
-    background:#FA6B6B;
-    color: #fff;
-  }
-
-  .category-text {
-    flex: 2;
-    padding-left: .5rem;
-  }
-
-  .fa-chevron-down, .fa-chevron-right, .fa-chevron-up {
-    color: #fff;
-    margin-right: 15px;
-    visibility: hidden;
-    pointer-events: none;
-  }
-
- .category:hover > .fa-chevron-down, .category:hover > .fa-chevron-up, .subject:hover > .fa-chevron-right {
-    visibility: visible;
-    color: #fff;
-  }
-
-  .fa-folder, .fa-folder-open {
-    padding-left: 12px;
-  }
 
   .dropdown-container {
     margin: 0 auto;
@@ -478,25 +297,11 @@ html, body {
   .subject-text {
     flex: 2;
     padding-left: .5rem;
-  }
-
-  .subject .fa-folder-open, .subject .fa-folder {
-    margin-left: 1rem;
-    /*color: #4E5456;*/
+    color: gray;
   }
 
   .subject:hover {
     background-color: #92ECCA;
-    color: #fff;
-  }
-
-  .subject:hover > .fa-chevron-right {
-    visibility: visible;
-    color: #fff;
-  }
-
-  .subject:hover >.fa-folder {
-    color: #fff
   }
 
   #titles-container {
@@ -541,28 +346,7 @@ html, body {
     color: #fff;
   }
 
-  .fa-trash-alt {
-    color: black;
-    opacity: 0;
-    padding: .6rem;
-    width: 6%;
-  }
-
-  .fa-trash-alt:hover {
-    font-size: 1rem;
-  }
-
-  .title-wrapper:hover > .fa-trash-alt {
-    opacity: 1;
-    transition: opacity .3s ease-in;
-  }
-
   .title {
-    /*display: block;*/
-   /* white-space: nowrap;
-    height: inherit;
-    overflow: hidden;
-    text-overflow: ellipsis;*/
     font-weight: lighter;
     padding: 1rem;
     width: 94%;
@@ -571,20 +355,6 @@ html, body {
   .title:hover {
     overflow: visible;
   }
-
-  .title:hover > .iconsMenu {
-    visibility: visible;
-  }
-
-/*  .add {
-    padding-right: .8rem;
-    font-size: 1.5rem;
-    color: gray;
-    font-family: Arial;
-    font-weight: bold;
-    cursor: pointer;
-    visibility: hidden;
-  }*/
 
 
   #confirm {
@@ -604,6 +374,9 @@ html, body {
   }
 
   .confirm-wrapper {
+    position: absolute;
+    left: 30%;
+    top: 30%;
     background-color: #fefefe;
     margin: auto;
     padding: 20px;
@@ -673,7 +446,7 @@ html, body {
 
 
 
-  .landing-container {
+  /*.landing-container {
     width: 100%;
     display: flex;
     flex-flow: column nowrap;
@@ -682,7 +455,6 @@ html, body {
   .landing-header-container {
     width: 100%;
     height: 450px;
-   /* margin: 50px 0px;*/
     background-color: #1F1F1F;
   }
 
@@ -700,13 +472,6 @@ html, body {
     padding: .7rem;
     color: #fff;
     font-family: 'Open Sans', sans-serif;
-  }
-
-  .fa-bookmark .landing-logo {
-    margin-top: 12px;
-    width: 20px;
-    height: 25px;
-    color: #E60B0B;
   }
 
   .landing-header-wrapper {
@@ -734,7 +499,6 @@ html, body {
     font-family: 'Open Sans', sans-serif;
     font-family: 'Roboto', sans-serif;
     font-size: 60px;
-   /* letter-spacing: 5px;*/
     font-weight: 300;
     color: #fff;
   }
@@ -764,35 +528,9 @@ html, body {
   }
 
 
-v.logo-wrapper {
+  .logo-wrapper {
     display: flex;
     flex: 2;
     width: 10rem;
     align-items: center;
-  }
-
-  /*@font-face {
-    font-family: 'Just-For-Fun';
-    src: url('JustForFun-Regular.ttf');
-    font-weight: 100;
-    font-style: normal;
   }*/
-
-  .name {
-    /*font-family: 'Just-For-Fun';*/
-    letter-spacing: .1rem;
-    font-size: 1.2rem;
-    padding-left: 1rem;
-    padding-right: .7rem;
-    color: #fff;
-    font-family: 'Open Sans', sans-serif;
-  }
-
-  .fa-bookmark {
-    margin-top: 12px;
-    width: 20px;
-    height: 25px;
-    color: #E60B0B;
-  }
-
-

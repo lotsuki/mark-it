@@ -22,7 +22,12 @@ class App extends React.Component {
   componentDidMount() {
     this._isMounted = true;
 
-    fetch('/user')
+    fetch('/user', {
+      headers: {
+        "Content-Type": "application/json",
+        "Cache-Control": "public, no-cache"
+      }
+    })
       .then(res => res.json())
       .then(data =>  {
         this.setState({
@@ -35,7 +40,12 @@ class App extends React.Component {
         console.log('GET request failed at /user: ', err)
       });
 
-    fetch('/titles')
+    fetch('/titles', {
+      headers: {
+        "Content-Type": "application/json",
+        "Cache-Control": "public, no-cache"
+        }
+      })
       .then(res => res.json())
       .then(data =>  {
         this.setState({
@@ -54,9 +64,9 @@ class App extends React.Component {
   render() {
     const { userID, bmarks, links, colors } = this.state;
     return (
-      <ErrorBoundary>
+      // <ErrorBoundary>
         <Main userID={userID} bmarks={bmarks} links={links} colors={colors}/>
-      </ErrorBoundary>
+      // </ErrorBoundary>
     );
   }
 };

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+
 const Subject = ({ clickedSubj, subject }) => {
   return (
     <div className="subject-wrapper">
@@ -9,19 +10,23 @@ const Subject = ({ clickedSubj, subject }) => {
       ? (
         <div
           className="subject"
-          style={{ background:'#92ECCA', color: '#fff' }}>
-          <i className="fas fa-folder-open" style={{ background:'#92ECCA', color: '#fff' }}></i>
-          <span className="subject-text" style={{ background:'#92ECCA', color: '#fff' }}>{subject}</span>
-          <i className="fas fa-chevron-right" style={{visibility: 'visible', color: '#fff'}}></i>
+          style={{ background:'#92ECCA' }}>
+          <svg className="icon-folder-open" xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="-40 -17 75 75" fill="gray">
+              <title>folder-open</title>
+              <path d="M26 30l6-16h-26l-6 16zM4 12l-4 18v-26h9l4 4h13v4z"></path>
+           </svg>
+          <span className="subject-text" style={{ background:'#92ECCA'}}>{subject}</span>
         </div>
         )
       : (
         <div
           className="subject"
           style={{ }}>
-           <i className="far fa-folder"></i>
+          <svg className="icon-folder" xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="-40 -17 75 75" fill="gray">
+              <title>folder</title>
+              <path d="M14 4l4 4h14v22h-32v-26z"></path>
+           </svg>
           <span className="subject-text">{subject}</span>
-          <i className="fas fa-chevron-right"></i>
         </div>
         )
     }
