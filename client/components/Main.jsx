@@ -6,7 +6,6 @@ import Form from './Form.jsx';
 import Edit from './Edit.jsx';
 import Confirm from './Confirm.jsx';
 import Titles from './Titles.jsx';
-import helpers from '../lib/utils.js';
 import { useSpring, animated } from 'react-spring';
 
 

@@ -4,9 +4,16 @@ const path = require('path');
 const compression = require('compression');
 const Document = require('../db/Document.js');
 const db = require('../db/index.js');
-const app = express();
+// const spdy = require('spdy');
+// const fs = require('fs');
 
+const app = express();
 const PORT = process.env.PORT || 3000;
+
+// const options = {
+//     key: fs.readFileSync(__dirname + '/../domain.key'),
+//     cert:  fs.readFileSync(__dirname + '/../domain.crt')
+// }
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
@@ -171,6 +178,17 @@ if (process.env.NODE_ENV !== 'test') {
   if (PORT === null || PORT === '') {
     PORT = 3000;
   }
+  // spdy
+  // .createServer(options, app)
+  // .listen(PORT, (error) => {
+  //   if (error) {
+  //     console.error(error)
+  //     return process.exit(1)
+  //   } else {
+  //     console.log('Listening on port: ' + PORT + '.')
+  //   }
+  // })
+
   app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`)
   });

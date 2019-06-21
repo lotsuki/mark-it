@@ -3,7 +3,6 @@ import _ from 'underscore';
 import PropTypes from 'prop-types';
 import Subjects from './Subjects.jsx';
 import Category from './Category.jsx';
-import helpers from '../lib/utils.js';
 
 const Categories = ({ bmarks, showConfirm, setShowConfirm, titlesUpdate, setShowTitles, showTitles, setTitles, colors }) => {
   const [ isOpen, setIsOpen ] = useState(false);

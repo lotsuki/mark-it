@@ -1,6 +1,5 @@
 import React, { useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import helpers from '../lib/utils.js';
 import {useTrail, animated} from 'react-spring';
 
 

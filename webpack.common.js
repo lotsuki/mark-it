@@ -16,7 +16,7 @@ module.exports = {
     rules: [
       {
         test: /\.(js|jsx|css)$/,
-        exclude: [/node_modules/],
+        exclude: [/node_modules/, /__tests__/, /__mocks__/, /coverage/],
         include: SRC_DIR,
         use: {
           loader: 'babel-loader'
@@ -31,15 +31,13 @@ module.exports = {
     //new BundleAnalyzerPlugin(),
     new CleanWebpackPlugin({
       dry: true,
-      cleanOnceBeforeBuildPatterns: ['**/*', '!static-files*'],
+      cleanStaleWebpackAssets: false
     }),
     new HTMLWebpackPlugin({
-          hash: true,
-          filename: "index.html",
-          template: "public/index-template.html", //where you want the sample template to be
-
-
-        })
+      hash: false,
+      filename: "index.html",
+      template: "public/index-template.html", //where you want the sample template to be
+    })
   ]
   // optimization: {
   //     splitChunks: {
@@ -55,4 +53,4 @@ module.exports = {
   // }
 };
 
-
+/^(?!.*\.spec\.js$).*\.js$/

@@ -4,7 +4,6 @@ import _ from 'underscore';
 import Titles from './Titles.jsx';
 import Subject from './Subject.jsx';
 import {useTrail, animated} from 'react-spring';
-import helpers from '../lib/utils.js';
 
 
 const Subjects = ({ bmarks, category, showConfirm, setShowConfirm, titlesUpdate, showTitles, setShowTitles, setTitles, handleCatClick, setIsOpen, setCategory, toggle }) => {
