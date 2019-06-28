@@ -3,8 +3,6 @@ const db = require('./index.js');
 
 const Schema = mongoose.Schema;
 
-//test different schemas
-
 
 const documentSchema = new Schema ({
   category: String,

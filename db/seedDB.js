@@ -1,41 +1,41 @@
-const Document = require("./Document.js");
-const db = require("./index.js");
-const data = require('./mockData.js');
-const faker = require('faker');
-const fs = require('fs');
+// const Document = require("./Document.js");
+// const db = require("./index.js");
+// const data = require('./mockData.js');
+// const faker = require('faker');
+// const fs = require('fs');
 
 
 
-const categories = ['Tech', 'Travel', 'Food', 'News', 'Music', 'Sports', 'Photography', 'Misc'];
-const subjects = ['React', 'Munich', 'Desserts', 'MongoDB', 'Supertest', 'Folk', 'Vegan', 'Politics'];
-let index = 0;
+// const categories = ['Tech', 'Travel', 'Food', 'News', 'Music', 'Sports', 'Photography', 'Misc'];
+// const subjects = ['React', 'Munich', 'Desserts', 'MongoDB', 'Supertest', 'Folk', 'Vegan', 'Politics'];
+// let index = 0;
 
-const createBookmarks = () => {
-  let bookmarks = [];
+// const createBookmarks = () => {
+//   let bookmarks = [];
 
-  for (let i = 1; i <= 200; i++) {
-    let index = Math.floor(Math.random() * 6);
-    bookmarks.push({
-      category: categories[index],
-      subject: subjects[index],
-      title: faker.name.title(),
-      url: faker.internet.url(),
-      date: faker.date.past(5)
-    });
-  }
-  return bookmarks;
-};
+//   for (let i = 1; i <= 200; i++) {
+//     let index = Math.floor(Math.random() * 6);
+//     bookmarks.push({
+//       category: categories[index],
+//       subject: subjects[index],
+//       title: faker.name.title(),
+//       url: faker.internet.url(),
+//       date: faker.date.past(5)
+//     });
+//   }
+//   return bookmarks;
+// };
 
-let mockData = createBookmarks();
+// let mockData = createBookmarks();
 
-async function inputMockBookmarks() {
-  let data = await createBookmarks()
-  return Document.insertMany(data)
-    .then(() => db.close())
-    .catch(err => console.log("err", err));
-}
+// async function inputMockBookmarks() {
+//   let data = await createBookmarks()
+//   return Document.insertMany(data)
+//     .then(() => db.close())
+//     .catch(err => console.log("err", err));
+// }
 
-inputMockBookmarks();
+// inputMockBookmarks();
 
 
 // let writeStream = fs.createWriteStream('text.csv');

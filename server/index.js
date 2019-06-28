@@ -22,7 +22,7 @@ app.use((req, res, next) => {
     "Origin, X-Requested-With, Content-Type, Accept"
   );
   res.header("Access-Control-Allow-Methods", "GET,PATCH,PUT,POST,DELETE");
-  res.header("Cache-Control", "public, no cache");
+  res.header("Cache-Control", "public, max-age:29030400");
   next();
 });
 app.use(compression());

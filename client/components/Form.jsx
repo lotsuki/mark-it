@@ -16,7 +16,6 @@ const Form = ({ showForm, setShowForm, bmarks }) => {
     subjects = subjects.concat(cat);
     return key;
   });
-  console.log(subjects, 'hi', categories)
 
   const clearForm = () => {
     setCategory('');
@@ -28,7 +27,6 @@ const Form = ({ showForm, setShowForm, bmarks }) => {
   const hasCategory = () => {
     return bmarks.hasOwnProperty(category);
   };
-  console.log('hiiiiii')
 
   const hasSubject = () => {
     if (bmarks[category] && subject) {

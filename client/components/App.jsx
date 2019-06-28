@@ -63,8 +63,6 @@ class App extends React.Component {
   }
 
   render() {
-
- console.log('HIII')
     const { userID, bmarks, links, colors } = this.state;
     return (
       // <ErrorBoundary>
