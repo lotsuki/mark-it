@@ -8,7 +8,6 @@ import Confirm from './Confirm.jsx';
 import Titles from './Titles.jsx';
 import { useSpring, animated } from 'react-spring';
 
-
 const Main = ({ bmarks, links, colors }) => {
   const [ showForm, setShowForm, ] = useState(false);
   const [ showEdit, setShowEdit ] = useState(false);

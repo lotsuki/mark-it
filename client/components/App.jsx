@@ -18,6 +18,7 @@ class App extends React.Component {
     this._isMounted = false;
   }
 
+
   //TODO: Fix state being called after unmount, then fix integration test
   componentDidMount() {
     this._isMounted = true;
@@ -62,6 +63,8 @@ class App extends React.Component {
   }
 
   render() {
+
+ console.log('HIII')
     const { userID, bmarks, links, colors } = this.state;
     return (
       // <ErrorBoundary>

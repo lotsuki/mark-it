@@ -1,7 +1,6 @@
   .sidebar-container {
-    width: 23rem;
+    width: 22rem;
     height: auto;
-    margin-top: 1rem;
   }
 
   .bookmarks-container {
@@ -38,12 +37,14 @@
 
   .category-container {
     position: relative;
+    width: 22rem;
   }
 
   .category {
     display: flex;
     align-items: center;
     height: 3.3rem;
+    width: inherit;
     cursor: pointer;
     color: #646464;
     background-color: #fff;
@@ -62,7 +63,8 @@
 
   .searchbar-content {
     position: absolute;
-    width: 15rem;
+    width: 14.5rem;
+    right: 1px;
   }
 
   .searchbar-content-wrapper {
@@ -99,6 +101,7 @@
     padding: .7rem;
     height: 100%;
     width: 100%;
+    color: #3D3D3D;
   }
 
   .search-result a:hover {
@@ -112,7 +115,7 @@
     margin: 1rem;
     z-index: 2;
     top: 5rem;
-    right: 3.1rem;
+    right: 5.5rem;
     float: right;
   }
 
@@ -308,13 +311,12 @@
   }
 
   #titles-container {
-     display: flex;
+    display: flex;
     flex-flow: column nowrap;
     height: 2.5rem;
     max-height: 500px;
     width: 500px;
     margin-left: 50px;
-    margin-top: 15px;
     overflow-y: scroll;
     overflow-x: visible;
     min-height: 100px;
@@ -322,6 +324,7 @@
 
   .titles-sub-container {
     height: auto;
+    /*box-shadow: 0px 1px 10px 0px rgba(32, 33, 36, 0.10);*/
   }
 
   .title-wrapper {

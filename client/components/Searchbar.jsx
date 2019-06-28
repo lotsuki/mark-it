@@ -16,6 +16,7 @@ const Searchbar = ({ links }) => {
     }
   };
 
+
   const handleSearch = (e) => {
     let target = e.target;
     if (target.value) {

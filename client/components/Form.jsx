@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
+import _ from 'underscore';
 import { Spring } from 'react-spring/renderprops';
 
 
@@ -9,6 +10,13 @@ const Form = ({ showForm, setShowForm, bmarks }) => {
   const [ subject, setSubject ] = useState('');
   const [ title, setTitle ] = useState('');
   const [ url, setUrl ] = useState('');
+
+  let subjects = [];
+  let categories = _.map(bmarks, (cat, key) => {
+    subjects = subjects.concat(cat);
+    return key;
+  });
+  console.log(subjects, 'hi', categories)
 
   const clearForm = () => {
     setCategory('');
@@ -20,6 +28,7 @@ const Form = ({ showForm, setShowForm, bmarks }) => {
   const hasCategory = () => {
     return bmarks.hasOwnProperty(category);
   };
+  console.log('hiiiiii')
 
   const hasSubject = () => {
     if (bmarks[category] && subject) {
