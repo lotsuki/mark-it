@@ -6,7 +6,7 @@ import Subject from './Subject.jsx';
 import {useTrail, animated} from 'react-spring';
 
 
-const Subjects = ({ bmarks, category, showConfirm, setShowConfirm, titlesUpdate, showTitles, setShowTitles, setTitles, handleCatClick, setIsOpen, setCategory, toggle }) => {
+const Subjects = ({ bmarks, category, showConfirm, setShowConfirm, titlesUpdate, showTitles, setShowTitles, setTitles, handleCatClick, setIsOpen, setCategory, toggle, colors }) => {
   const [ subj, setSubj ] = useState('');
   const [ update, setUpdate ] = useState(false);
 
@@ -81,7 +81,7 @@ const Subjects = ({ bmarks, category, showConfirm, setShowConfirm, titlesUpdate,
                onClick={handleSubjClick}
                style={{height, opacity}}
                key={subjects[index]}>
-               <Subject clickedSubj={subj} subject={subjects[index]}/>
+               <Subject clickedSubj={subj} subject={subjects[index]} color={colors[category]}/>
              </animated.div>
            </div>
          </div>

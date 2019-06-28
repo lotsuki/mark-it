@@ -10,7 +10,7 @@ const Category = ({ category, cat, isOpen, colors}) => {
       ? (
         <div className="category"
              key={cat}
-             style={{backgroundColor: '#FA6B6B'}}>
+             style={{backgroundColor: '#ECECEE'}}>
           <svg className="icon-folder-open" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="-20 -9 55 55" fill={colors[cat]}>
               <title>folder-open</title>
               <path d="M26 30l6-16h-26l-6 16zM4 12l-4 18v-26h9l4 4h13v4z"></path>

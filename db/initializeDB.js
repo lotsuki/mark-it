@@ -12,9 +12,9 @@ const user = new Document({
     Food: ['Vegan', 'Desserts']
   },
   colors: {
-    Tech: '#6558FF',
+    Tech: '#E58129',
     Travel: '#7EE3C8',
-    Food: '#5897FF'
+    Food: '#DC6666'
   }
 });
 

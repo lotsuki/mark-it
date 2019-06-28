@@ -29,15 +29,15 @@ module.exports = {
   },
   plugins: [
     //new BundleAnalyzerPlugin(),
-    new CleanWebpackPlugin({
-      dry: true,
-      cleanStaleWebpackAssets: false
-    }),
-    new HTMLWebpackPlugin({
-      hash: false,
-      filename: "index.html",
-      template: "public/index-template.html", //where you want the sample template to be
-    })
+    // new CleanWebpackPlugin({
+    //   dry: true,
+    //   // cleanStaleWebpackAssets: false,
+    //   cleanAfterEveryBuildPatterns: [`!index.template.html`, `!index.html`, `!style.css`, `!symbol-defs.svg`],
+    // }),
+    // new HTMLWebpackPlugin({
+    //   filename: "index.html",
+    //   template: "public/index-template.html",
+    // })
   ]
   // optimization: {
   //     splitChunks: {
@@ -53,4 +53,3 @@ module.exports = {
   // }
 };
 
-/^(?!.*\.spec\.js$).*\.js$/
