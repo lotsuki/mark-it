@@ -41,6 +41,29 @@
     letter-spacing: .05rem;
   }
 
+  .custom-menu {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    position: absolute;
+    background: #fff;
+    margin: 0;
+    padding: 0;
+    width: 120px;
+  }
+
+  .custom-menu > li {
+    border: 1px solid lightgray;
+    padding: 7px;
+    font-size: 13px;
+  }
+
+   .custom-menu > li:hover {
+    background: lightgray;
+    cursor: pointer;
+   }
+
+
   .category-container {
     position: relative;
     width: 22rem;

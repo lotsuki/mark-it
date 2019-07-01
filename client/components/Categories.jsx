@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Subjects from './Subjects';
 import Category from './Category';
 
-const Categories = ({ bmarks, showConfirm, setShowConfirm, titlesUpdate, setShowTitles, showTitles, setTitles, colors }) => {
+const Categories = ({ bmarks, showConfirm, setShowConfirm, titlesUpdate, setShowTitles, showTitles, setTitles, colors, customMenuClick }) => {
   const [ isOpen, setIsOpen ] = useState(false);
   const [ category, setCategory ] = useState('');
   const [ toggle, setToggle ] = useState(true);
@@ -55,9 +55,7 @@ const Categories = ({ bmarks, showConfirm, setShowConfirm, titlesUpdate, setShow
   //   }, false);
   // }
 
-  const customMenuClick = (e) => {
-    console.log(e.target)
-  };
+
 
   return (
     <div className="section-container" >

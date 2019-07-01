@@ -6,6 +6,7 @@ import Form from './Form';
 import Edit from './Edit';
 import Confirm from './Confirm';
 import Titles from './Titles';
+import CustomMenu from './CustomMenu';
 import { useSpring, animated } from 'react-spring';
 
 //try wihtout fragments
@@ -19,6 +20,7 @@ const Main = ({ bmarks, links, colors }) => {
   const [ titleToDelete, setTitleToDelete ] = useState('');
   const [ subjectOfTitle, setSubjectOfTitle ] = useState('');
   const [ titlesUpdate, setTitlesUpdate ] = useState(null);
+  const [ cords, setCords ] = useState([]);
 
   const showTitlesUpdate = (data) => {
     setTitlesUpdate(data);
@@ -50,13 +52,31 @@ const Main = ({ bmarks, links, colors }) => {
     }
   };
 
+  const exitCustomMenu = (e) => {
+    console.log(e.target.parentElement.className )
+    if (e.target.parentElement.className !== 'custom-menu') {
+      setCords([]);
+      document.removeEventListener('click', exitCustomMenu);
+    }
+  };
+
+  const customMenuClick = (e) => {
+    setCords([e.clientX, e.clientY]);
+    document.addEventListener('click', exitCustomMenu);
+  };
+
   return (
     <div id="container">
       <Navbar showForm={showForm} setShowForm={setShowForm} showEdit={showEdit} setShowEdit={setShowEdit} links={links} />
       <div id="app-container" className="app" data-testid="app-container">
         <div className="sidebar-container">
-          <Bookmarks bmarks={bmarks} setShowTitles={setShowTitles} setTitles={setTitles} showConfirm={showConfirm} showTitles={showTitles} setShowConfirm={setShowConfirm} titlesUpdate={titlesUpdate} colors={colors}/>
+          <Bookmarks bmarks={bmarks} setShowTitles={setShowTitles} setTitles={setTitles} showConfirm={showConfirm} showTitles={showTitles} setShowConfirm={setShowConfirm} titlesUpdate={titlesUpdate} colors={colors} customMenuClick={customMenuClick}/>
         </div>
+        {
+          cords.length > 0
+          &&  <CustomMenu left={cords[0]} top={cords[1]}/>
+        }
+
         <Fragment>
           {
             showTitles
