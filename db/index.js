@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-//const uri = 'mongodb://localhost:27017/mydocapp';
-const uri = 'mongodb+srv://lotsuki:Masteroffate@bookmarks-flslu.mongodb.net/mydocapp';
+const uri = 'mongodb://localhost:27017/mydocapp';
+// const uri = 'mongodb+srv://lotsuki:Masteroffate@bookmarks-flslu.mongodb.net/mydocapp';
 
 mongoose.Promise = global.Promise;
 

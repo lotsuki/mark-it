@@ -10,6 +10,8 @@ const Form = ({ showForm, setShowForm, bmarks }) => {
   const [ subject, setSubject ] = useState('');
   const [ title, setTitle ] = useState('');
   const [ url, setUrl ] = useState('');
+  const [ selectCat, setSelectCat ] = useState(false);
+  const [ selectSub, setSelectSub ] = useState(false);
 
   let subjects = [];
   let categories = _.map(bmarks, (cat, key) => {
@@ -69,10 +71,14 @@ const Form = ({ showForm, setShowForm, bmarks }) => {
     clearForm();
   };
 
-  const displaySelectMenu = (value) => {
-    //check for cat and subj
+  const displaySelectMenu = (className) => {
+    console.log(className)
+    if (className === 'category-input') {
+      setSelectCat(true);
+    } else if (className === 'subject-input') {
+      setSelectSub(true);
+    }
   };
-
 
   return(
   <Spring
@@ -84,35 +90,46 @@ const Form = ({ showForm, setShowForm, bmarks }) => {
         <form className="form"
             data-testid="form"
             name="form"
+            autoComplete="off"
             onSubmit={submitForm}>
-        <div className="cat-input-wrapper">
+        <div className="form-category-container">
+          <div className="cat-input-wrapper">
+            <input
+              name="form"
+              type="text"
+              value={category}
+              className="category-input"
+              data-testid="category-input"
+              placeholder="Category"
+              onChange={e => setCategory(e.target.value)}
+              onFocus={e => displaySelectMenu(e.target.className)}
+              />
+
+            <input name="form" type="color" defaultValue="#D00000" className="color"/>
+          </div>
+          <div className="form-dropdown-wrapper">
+          {
+            selectCat &&
+            (<ul>
+              { categories.map(category => (
+                <li>{category}</li>
+              ))}
+            </ul>)
+          }
+          </div>
+        </div>
+        <div className="sub-input-wrapper">
           <input
             name="form"
             type="text"
-            value={category}
-            className="category-input"
-            data-testid="category-input"
-            placeholder="Category"
-            onChange={e => setCategory(e.target.value)}
-            />
-          <input name="form" type="color" defaultValue="#D00000" className="color"/>
+            value={subject}
+            className="subject-input"
+            data-testid="subject-input"
+            placeholder="Subject"
+            onChange={e => {
+              setSubject(e.target.value);
+            }}/>
         </div>
-        <input
-          name="form"
-          type="text"
-          value={subject}
-          className="form-inputs"
-          data-testid="subject-input"
-          placeholder="Subject"
-          list="subjects"
-          onChange={e => {
-            displaySelectMenu(e.target.value);
-            setSubject(e.target.value);
-          }}/>
-        <datalist id="subjects">
-          <option>Volvo</option>
-          <option>Saab</option>
-        </datalist>
         <input
           name="form"
           type="text"

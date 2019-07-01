@@ -1,9 +1,10 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import SidebarHeader from './SidebarHeader.jsx';
-import Categories from './Categories.jsx';
+import SidebarHeader from './SidebarHeader';
+import Categories from './Categories';
 
 const Bookmarks = ({ bmarks, showConfirm, setShowConfirm, titlesUpdate, setShowTitles, showTitles, setTitles, colors }) => {
+
   return (
     <div className="bookmarks-container">
       <SidebarHeader sidebarHeader={"COLLECTIONS"} />

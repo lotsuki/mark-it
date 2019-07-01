@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Main from './Main.jsx';
+import Main from './Main';
 //import Landing from './Landing.jsx';
-import ErrorBoundary from './ErrorBoundary.jsx';
+import ErrorBoundary from './ErrorBoundary';
 
 
 class App extends React.Component {
@@ -65,9 +65,9 @@ class App extends React.Component {
   render() {
     const { userID, bmarks, links, colors } = this.state;
     return (
-      // <ErrorBoundary>
+      <ErrorBoundary>
         <Main userID={userID} bmarks={bmarks} links={links} colors={colors}/>
-      // </ErrorBoundary>
+      </ErrorBoundary>
     );
   }
 };

@@ -22,7 +22,7 @@ app.use((req, res, next) => {
     "Origin, X-Requested-With, Content-Type, Accept"
   );
   res.header("Access-Control-Allow-Methods", "GET,PATCH,PUT,POST,DELETE");
-  res.header("Cache-Control", "public, max-age:29030400");
+  res.header("Cache-Control", "public, no cache");
   next();
 });
 app.use(compression());
@@ -141,11 +141,15 @@ app.delete('/delete/subj/:subj', (req, res) => {
     if (err) { console.log('Error at DELETE request: ', err); }
     else { console.log('Document successfully deleted'); }
   });
+  // Document.deleteOne({}, (err) => {
+  //   if (err) { console.log('Error at DELETE request: ', err); }
+  //   else { console.log('Document successfully deleted'); }
+  // });
 });
 
 app.delete('/delete/title/:title', (req, res) => {
-  let title = req.params.title;
-  Document.deleteOne({ title: title }, (err) => {
+  let titl = req.params.title;
+  Document.deleteOne({ title: titl }, (err) => {
     if (err) { console.log('Error at DELETE request: ', err); }
     else { console.log('Document successfully deleted'); }
   });

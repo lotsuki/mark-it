@@ -1,36 +1,32 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import IconFolder from './IconFolder';
+import IconFolderOpen from './IconFolderOpen';
  
 
 const Category = ({ category, cat, isOpen, colors}) => {
   return (
     <div>
-    {
-      category === cat && isOpen
-      ? (
-        <div className="category"
-             key={cat}
-             style={{backgroundColor: '#ECECEE'}}>
-          <svg className="icon-folder-open" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="-20 -9 55 55" fill={colors[cat]}>
-              <title>folder-open</title>
-              <path d="M26 30l6-16h-26l-6 16zM4 12l-4 18v-26h9l4 4h13v4z"></path>
-           </svg>
-          <span className="category-text">{cat}</span>
-        </div>
-         )
-      : (
-          <div className="category" key={cat}>
-            <svg className="icon-folder" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="-20 -9 55 55" fill={colors[cat]}>
-              <title>folder</title>
-              <path d="M14 4l4 4h14v22h-32v-26z"></path>
-           </svg>
-            <span className="category-text">{cat}</span>
-          </div>
-        )
-     }
-     </div>
+      {
+        category === cat && isOpen
+        ? (
+            <div className="category"
+                 key={cat}
+                 style={{backgroundColor: '#ECECEE'}}>
+              <IconFolderOpen viewBox={"-20 -9 55 55"} color={colors[cat]} width={"30"} height={"30"} />
+              <span className="category-text">{cat}</span>
+            </div>
+           )
+        : (
+            <div className="category" key={cat}>
+              <IconFolder viewBox={"-20 -9 55 55"} color={colors[cat]} width={"30"} height={"30"} />
+              <span className="category-text">{cat}</span>
+            </div>
+          )
+      }
+    </div>
   );
-};
+}
 
 export default Category;
 

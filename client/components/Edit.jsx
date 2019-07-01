@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'underscore';
 
+//CHANGE: when clicked, show edit options in sidebar
+
+
 const Edit = ({ bmarks, links }) => {
   var titlesArr = _.pluck(links, 'title');
   var subjects = [];

@@ -1,3 +1,9 @@
+  select {
+    border: none;
+    background-color: #fff;
+    cursor: pointer;
+  }
+
   .sidebar-container {
     width: 22rem;
     height: auto;
@@ -134,7 +140,13 @@
     padding: .8rem;
   }
 
-  .cat-input-wrapper {
+  .form-category-container {
+    display: flex;
+    flex-flow: row nowrap;
+    width: 30rem;
+  }
+
+  .cat-input-wrapper, .sub-input-wrapper {
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
@@ -145,6 +157,11 @@
     border: 1px solid lightgray;
   }
 
+  .form-dropdown-wrapper {
+    display: flex;
+    flex-flow: column nowrap;
+  }
+
   input.color {
     margin-right: 8px;
     height: 25px;
@@ -153,7 +170,7 @@
     border: none;
   }
 
-  input.category-input {
+  input.category-input, input.subject-input {
     font-size: 1.3rem;
     font-weight: lighter;
     border: none;
@@ -247,12 +264,15 @@
     font-weight: lighter;
     padding-bottom: .3rem;
     width: 70%;
+    color: gray;
   }
 
   .delete-icon {
     height: .8rem;
     cursor: pointer;
     padding: .5rem .9rem;
+    font-weight: lighter;
+    color: gray;
   }
 
   .dropdown-container {

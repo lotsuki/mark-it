@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import IconFolder from './IconFolder';
+import IconFolderOpen from './IconFolderOpen';
 
 
 const Subject = ({ clickedSubj, subject, color }) => {
@@ -11,10 +13,7 @@ const Subject = ({ clickedSubj, subject, color }) => {
         <div
           className="subject"
           style={{ background:'#D1D0D3' }}>
-          <svg className="icon-folder-open" xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="-40 -17 75 75" fill={color}>
-              <title>folder-open</title>
-              <path d="M26 30l6-16h-26l-6 16zM4 12l-4 18v-26h9l4 4h13v4z"></path>
-           </svg>
+          <IconFolderOpen viewBox={"-50 -17 85 72"} color={color} width={"45"} height={"38"}/>
           <span className="subject-text" style={{ background:'#D1D0D3'}}>{subject}</span>
         </div>
         )
@@ -22,10 +21,7 @@ const Subject = ({ clickedSubj, subject, color }) => {
         <div
           className="subject"
           style={{ }}>
-          <svg className="icon-folder" xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="-40 -17 75 75" fill={color}>
-              <title>folder</title>
-              <path d="M14 4l4 4h14v22h-32v-26z"></path>
-           </svg>
+          <IconFolder viewBox={"-50 -15 85 72"} color={color} width={"45"} height={"38"}/>
           <span className="subject-text">{subject}</span>
         </div>
         )

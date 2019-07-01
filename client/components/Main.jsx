@@ -1,12 +1,14 @@
 import React, { useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import Navbar from './Navbar.jsx';
-import Bookmarks from './Bookmarks.jsx';
-import Form from './Form.jsx';
-import Edit from './Edit.jsx';
-import Confirm from './Confirm.jsx';
-import Titles from './Titles.jsx';
+import Navbar from './Navbar';
+import Bookmarks from './Bookmarks';
+import Form from './Form';
+import Edit from './Edit';
+import Confirm from './Confirm';
+import Titles from './Titles';
 import { useSpring, animated } from 'react-spring';
+
+//try wihtout fragments
 
 const Main = ({ bmarks, links, colors }) => {
   const [ showForm, setShowForm, ] = useState(false);

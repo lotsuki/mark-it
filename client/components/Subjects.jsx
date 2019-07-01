@@ -1,8 +1,8 @@
 import React, { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'underscore';
-import Titles from './Titles.jsx';
-import Subject from './Subject.jsx';
+import Titles from './Titles';
+import Subject from './Subject';
 import {useTrail, animated} from 'react-spring';
 
 
