@@ -7,11 +7,12 @@ import Category from './Category';
 const Categories = ({ bmarks, showConfirm, setShowConfirm, titlesUpdate, setShowTitles, showTitles, setTitles, colors }) => {
   const [ isOpen, setIsOpen ] = useState(false);
   const [ category, setCategory ] = useState('');
-  const [toggle, setToggle] = useState(true);
+  const [ toggle, setToggle ] = useState(true);
 
   const exitCategories = (e) => {
     let categoryClasses = ['category', 'category-text'];
-    if (e.target.className === 'app' || e.target.innerText === category) {
+    if (e.target.className === 'app' || e.target.value === category ||
+      (e.target.className === 'category' && e.target.children[1].value === category)) {
       document.removeEventListener('click', exitCategories);
       setToggle(false);
       setIsOpen(false);
@@ -19,17 +20,24 @@ const Categories = ({ bmarks, showConfirm, setShowConfirm, titlesUpdate, setShow
       setShowTitles(false);
     } else if (_.contains(categoryClasses, e.target.className)) {
       setShowTitles(false);
-      setCategory(e.target.innerText);
+      if (e.target.className === 'category') {
+      setCategory(e.target.children[1].value);
+    } else { setCategory(e.target.value); }
+
     }
   };
 
-  const handleCatClick = (e) => {
+  const handleCatClick = (e, ev) => {
+    let cat;
+    if (e.target.className === 'category') {
+      cat = e.target.children[1].value;
+    } else { cat = e.target.value; }
     if (!isOpen) {
       setIsOpen(true);
       setToggle(true);
-      setCategory(e.target.innerText);
+      setCategory(cat);
       document.addEventListener('click', exitCategories);
-    } else if (e.target.className === 'app' || e.target.innerText === category) {
+    } else if (e.target.className === 'app' || cat === category) {
       document.removeEventListener('click', exitCategories);
       setToggle(false);
       setIsOpen(false);
@@ -38,9 +46,22 @@ const Categories = ({ bmarks, showConfirm, setShowConfirm, titlesUpdate, setShow
     }
   };
 
+  // let sectionWrapper = document.getElementById('section-wrapper');
+  // if (sectionWrapper) {
+  //   sectionWrapper.addEventListener('contextmenu', function(ev) {
+  //     ev.preventDefault();
+  //     alert('success!');
+  //     return false;
+  //   }, false);
+  // }
+
+  const customMenuClick = (e) => {
+    console.log(e.target)
+  };
+
   return (
     <div className="section-container" >
-     <div className="section-wrapper">
+     <div id="section-wrapper">
        {_.map(bmarks, (cat, key) => {
          return (
           <div className="category-container" key={key}>
@@ -48,7 +69,7 @@ const Categories = ({ bmarks, showConfirm, setShowConfirm, titlesUpdate, setShow
              className="category-wrapper"
              onClick={handleCatClick}
              key={key}>
-             <Category category={category} cat={key} isOpen={isOpen} colors={colors}/>
+             <Category category={category} cat={key} isOpen={isOpen} colors={colors} handleCatClick={handleCatClick} customMenuClick={customMenuClick}/>
            </div>
            <div className="dropdown-container" key={cat[0]}>
              {

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import IconFolder from './IconFolder';
 import IconFolderOpen from './IconFolderOpen';
+import IconCustomMenu from './IconCustomMenu';
 
 
 const Subject = ({ clickedSubj, subject, color }) => {
@@ -15,6 +16,7 @@ const Subject = ({ clickedSubj, subject, color }) => {
           style={{ background:'#D1D0D3' }}>
           <IconFolderOpen viewBox={"-50 -17 85 72"} color={color} width={"45"} height={"38"}/>
           <span className="subject-text" style={{ background:'#D1D0D3'}}>{subject}</span>
+          <IconCustomMenu />
         </div>
         )
       : (
@@ -23,6 +25,7 @@ const Subject = ({ clickedSubj, subject, color }) => {
           style={{ }}>
           <IconFolder viewBox={"-50 -15 85 72"} color={color} width={"45"} height={"38"}/>
           <span className="subject-text">{subject}</span>
+          <IconCustomMenu />
         </div>
         )
     }

@@ -35,7 +35,7 @@
     background-color: #fff;
   }
 
-  .section-wrapper{
+  #section-wrapper{
     display: grid;
     grid-template-rows: auto;
     letter-spacing: .05rem;
@@ -54,17 +54,38 @@
     cursor: pointer;
     color: #646464;
     background-color: #fff;
-    font-size: 1rem;
   }
 
   .category:hover {
     background:#ECECEE;
+  }
+   .category:hover > .category-text {
+    background:#ECECEE;
+  }
+
+  .icon-custom-menu {
+    visibility: hidden;
+  }
+
+  .category:hover > .icon-custom-menu {
+    visibility: visible;
+  }
+  .subject:hover > .icon-custom-menu {
+    visibility: visible;
   }
 
   .category-text {
     flex: 2;
     padding-left: .3rem;
     color: #3D3D3D;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    letter-spacing: .05rem;
+  }
+
+  input.category-text:focus {
+    outline: none;
   }
 
   .searchbar-content {
