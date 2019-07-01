@@ -52,17 +52,17 @@ const Main = ({ bmarks, links, colors }) => {
     }
   };
 
-  const exitCustomMenu = (e) => {
-    console.log(e.target.parentElement.className )
-    if (e.target.parentElement.className !== 'custom-menu') {
-      setCords([]);
-      document.removeEventListener('click', exitCustomMenu);
-    }
-  };
+  // const exitCustomMenu = (e) => {
+  //   console.log(e.target.parentElement.className )
+  //   if (e.target.parentElement.className !== 'custom-menu') {
+  //     setCords([]);
+  //     document.removeEventListener('click', exitCustomMenu);
+  //   }
+  // };
 
   const customMenuClick = (e) => {
     setCords([e.clientX, e.clientY]);
-    document.addEventListener('click', exitCustomMenu);
+    //document.addEventListener('click', exitCustomMenu);
   };
 
   return (
@@ -74,7 +74,7 @@ const Main = ({ bmarks, links, colors }) => {
         </div>
         {
           cords.length > 0
-          &&  <CustomMenu left={cords[0]} top={cords[1]}/>
+          &&  <CustomMenu left={cords[0]} top={cords[1]} setCords={setCords}/>
         }
 
         <Fragment>
