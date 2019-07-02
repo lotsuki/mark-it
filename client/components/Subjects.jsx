@@ -6,7 +6,7 @@ import Subject from './Subject';
 import {useTrail, animated} from 'react-spring';
 
 
-const Subjects = ({ bmarks, category, showConfirm, setShowConfirm, titlesUpdate, showTitles, setShowTitles, setTitles, handleCatClick, setIsOpen, setCategory, toggle, colors }) => {
+const Subjects = ({ bmarks, category, showConfirm, setShowConfirm, titlesUpdate, showTitles, setShowTitles, setTitles, handleCatClick, setIsOpen, setCategory, colors, isOpen }) => {
   const [ subj, setSubj ] = useState('');
   const [ update, setUpdate ] = useState(false);
 
@@ -66,9 +66,9 @@ const Subjects = ({ bmarks, category, showConfirm, setShowConfirm, titlesUpdate,
   };
 
   const trail = useTrail(subjects.length, {
-    opacity: toggle ? 1 : 0,
-    height: toggle ? 50 : 0,
-    from: {opacity: toggle ? 0 : 1, height: toggle ? 0 : 50}},
+    opacity: isOpen ? 1 : 0,
+    height: isOpen ? 50 : 0,
+    from: {opacity: isOpen ? 0 : 1, height: isOpen ? 0 : 50}},
   );
 
   return (

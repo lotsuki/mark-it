@@ -4,12 +4,12 @@ import SidebarHeader from './SidebarHeader';
 import Categories from './Categories';
 
 
-const Bookmarks = ({ bmarks, showConfirm, setShowConfirm, titlesUpdate, setShowTitles, showTitles, setTitles, colors, customMenuClick }) => {
+const Bookmarks = ({ bmarks, showConfirm, setShowConfirm, titlesUpdate, setShowTitles, showTitles, setTitles, colors, openCustomMenu, isEditing }) => {
 
   return (
     <div className="bookmarks-container">
       <SidebarHeader sidebarHeader={"COLLECTIONS"} />
-      <Categories bmarks={bmarks} setShowTitles={setShowTitles} setTitles={setTitles} height={'3.5rem'} showConfirm={showConfirm} showTitles={showTitles}  setShowConfirm={setShowConfirm} titlesUpdate={titlesUpdate} colors={colors} customMenuClick={customMenuClick}/>
+      <Categories bmarks={bmarks} setShowTitles={setShowTitles} setTitles={setTitles} height={'3.5rem'} showConfirm={showConfirm} showTitles={showTitles}  setShowConfirm={setShowConfirm} titlesUpdate={titlesUpdate} colors={colors} openCustomMenu={openCustomMenu} isEditing={isEditing}/>
     </div>
   );
 };

@@ -4,58 +4,45 @@ import PropTypes from 'prop-types';
 import Subjects from './Subjects';
 import Category from './Category';
 
-const Categories = ({ bmarks, showConfirm, setShowConfirm, titlesUpdate, setShowTitles, showTitles, setTitles, colors, customMenuClick }) => {
+const Categories = ({ bmarks, showConfirm, setShowConfirm, titlesUpdate, setShowTitles, showTitles, setTitles, colors, openCustomMenu, isEditing }) => {
   const [ isOpen, setIsOpen ] = useState(false);
   const [ category, setCategory ] = useState('');
-  const [ toggle, setToggle ] = useState(true);
 
   const exitCategories = (e) => {
-    let categoryClasses = ['category', 'category-text'];
-    if (e.target.className === 'app' || e.target.value === category ||
-      (e.target.className === 'category' && e.target.children[1].value === category)) {
+    if (e.target.className === 'app') {
       document.removeEventListener('click', exitCategories);
-      setToggle(false);
       setIsOpen(false);
       setCategory('');
       setShowTitles(false);
-    } else if (_.contains(categoryClasses, e.target.className)) {
-      setShowTitles(false);
-      if (e.target.className === 'category') {
-      setCategory(e.target.children[1].value);
-    } else { setCategory(e.target.value); }
-
     }
+    // else if (_.contains(categoryClasses, e.target.className)) {
+    //   setShowTitles(false);
+    //   if (e.target.className === 'category') {
+    //   setCategory(e.target.children[1].value);
+    // } else { setCategory(e.target.value); }
+
+    // }
   };
 
-  const handleCatClick = (e, ev) => {
+  const handleCatClick = (e) => {
     let cat;
     if (e.target.className === 'category') {
       cat = e.target.children[1].value;
-    } else { cat = e.target.value; }
-    if (!isOpen) {
-      setIsOpen(true);
-      setToggle(true);
-      setCategory(cat);
-      document.addEventListener('click', exitCategories);
-    } else if (e.target.className === 'app' || cat === category) {
+    } else {
+      cat = e.target.value;
+    }
+    if (e.target.className === 'app' || cat === category) {
       document.removeEventListener('click', exitCategories);
-      setToggle(false);
       setIsOpen(false);
       setCategory('');
       setShowTitles(false);
+    } else {
+      setIsOpen(true);
+      setCategory(cat);
+      setShowTitles(false);
+      document.addEventListener('click', exitCategories);
     }
   };
-
-  // let sectionWrapper = document.getElementById('section-wrapper');
-  // if (sectionWrapper) {
-  //   sectionWrapper.addEventListener('contextmenu', function(ev) {
-  //     ev.preventDefault();
-  //     alert('success!');
-  //     return false;
-  //   }, false);
-  // }
-
-
 
   return (
     <div className="section-container" >
@@ -67,7 +54,7 @@ const Categories = ({ bmarks, showConfirm, setShowConfirm, titlesUpdate, setShow
              className="category-wrapper"
              onClick={handleCatClick}
              key={key}>
-             <Category category={category} cat={key} isOpen={isOpen} colors={colors} handleCatClick={handleCatClick} customMenuClick={customMenuClick}/>
+             <Category category={category} cat={key} isOpen={isOpen} colors={colors} handleCatClick={handleCatClick} openCustomMenu={openCustomMenu} isEditing={isEditing}/>
            </div>
            <div className="dropdown-container" key={cat[0]}>
              {
@@ -76,7 +63,7 @@ const Categories = ({ bmarks, showConfirm, setShowConfirm, titlesUpdate, setShow
                 <div className="dropdown-wrapper" >
                   {
                     isOpen
-                      ? ( <Subjects bmarks={bmarks} category={category} setShowTitles={setShowTitles} setTitles={setTitles} showConfirm={showConfirm} showTitles={showTitles} setShowConfirm={setShowConfirm} titlesUpdate={titlesUpdate} handleCatClick={handleCatClick} setIsOpen={setIsOpen} setCategory={setCategory} toggle={toggle} colors={colors}/>)
+                      ? ( <Subjects bmarks={bmarks} category={category} setShowTitles={setShowTitles} setTitles={setTitles} showConfirm={showConfirm} showTitles={showTitles} setShowConfirm={setShowConfirm} titlesUpdate={titlesUpdate} handleCatClick={handleCatClick} setIsOpen={setIsOpen} setCategory={setCategory} colors={colors} isOpen={isOpen}/>)
                       : ( null )
                   }
                 </div>

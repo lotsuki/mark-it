@@ -20,7 +20,9 @@ const Main = ({ bmarks, links, colors }) => {
   const [ titleToDelete, setTitleToDelete ] = useState('');
   const [ subjectOfTitle, setSubjectOfTitle ] = useState('');
   const [ titlesUpdate, setTitlesUpdate ] = useState(null);
-  const [ cords, setCords ] = useState([]);
+  const [ top, setTop ] = useState(0);
+  const [ element, setElement ] = useState('');
+  const [ isEditing, setIsEditing ] = useState(false);
 
   const showTitlesUpdate = (data) => {
     setTitlesUpdate(data);
@@ -52,17 +54,23 @@ const Main = ({ bmarks, links, colors }) => {
     }
   };
 
-  // const exitCustomMenu = (e) => {
-  //   console.log(e.target.parentElement.className )
-  //   if (e.target.parentElement.className !== 'custom-menu') {
-  //     setCords([]);
-  //     document.removeEventListener('click', exitCustomMenu);
-  //   }
-  // };
-
-  const customMenuClick = (e) => {
-    setCords([e.clientX, e.clientY]);
-    //document.addEventListener('click', exitCustomMenu);
+  const openCustomMenu = (e) => {
+    if (element) {
+      element.style.visibility = '';
+    }
+    if (!element || element !== e.target) {
+      let count = 0;
+      for (var key in bmarks) {
+        if (key === e.target.parentElement.children[1].value) {
+          break;
+        }
+        ++count;
+      }
+      let result = 165 + (count*53);
+      setTop(result);
+      setElement(e.target);
+      e.target.style.visibility = 'visible';
+    }
   };
 
   return (
@@ -70,13 +78,12 @@ const Main = ({ bmarks, links, colors }) => {
       <Navbar showForm={showForm} setShowForm={setShowForm} showEdit={showEdit} setShowEdit={setShowEdit} links={links} />
       <div id="app-container" className="app" data-testid="app-container">
         <div className="sidebar-container">
-          <Bookmarks bmarks={bmarks} setShowTitles={setShowTitles} setTitles={setTitles} showConfirm={showConfirm} showTitles={showTitles} setShowConfirm={setShowConfirm} titlesUpdate={titlesUpdate} colors={colors} customMenuClick={customMenuClick}/>
+          <Bookmarks bmarks={bmarks} setShowTitles={setShowTitles} setTitles={setTitles} showConfirm={showConfirm} showTitles={showTitles} setShowConfirm={setShowConfirm} titlesUpdate={titlesUpdate} colors={colors} openCustomMenu={openCustomMenu} isEditing={isEditing}/>
         </div>
         {
-          cords.length > 0
-          &&  <CustomMenu left={cords[0]} top={cords[1]} setCords={setCords}/>
+          element
+          &&  <CustomMenu top={top} element={element} setElement={setElement} isEditing={isEditing} setIsEditing={setIsEditing}/>
         }
-
         <Fragment>
           {
             showTitles

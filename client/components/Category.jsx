@@ -1,18 +1,18 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import IconFolder from './IconFolder';
 import IconFolderOpen from './IconFolderOpen';
 import IconCustomMenu from './IconCustomMenu';
  
 
-const Category = ({ category, cat, isOpen, colors, customMenuClick}) => {
+const Category = ({ category, cat, isOpen, colors, openCustomMenu, isEditing}) => {
   const resetInput = (e) => {
     let defaultVal = e.target.defaultValue;
     e.target.value = defaultVal;
   };
 
   return (
-    <div>
+    <Fragment>
       {
         category === cat && isOpen
         ? (
@@ -20,19 +20,36 @@ const Category = ({ category, cat, isOpen, colors, customMenuClick}) => {
                  key={cat}
                  style={{backgroundColor: '#ECECEE'}}>
               <IconFolderOpen viewBox={"-20 -9 55 55"} color={colors[cat]} width={"30"} height={"30"} />
-              <input  className="category-text" type="text" readOnly value={cat} onBlur={resetInput} style={{backgroundColor: '#ECECEE'}}/>
-              <IconCustomMenu customMenuClick={customMenuClick}/>
+              {
+                isEditing
+                ? (<input className="category-text" type="text" value={cat} onBlur={resetInput} style={{backgroundColor: '#ECECEE'}}/>)
+                : (<input className="category-text" type="text" readOnly value={cat} style={{backgroundColor: '#ECECEE'}}/>)
+              }
+              <IconCustomMenu openCustomMenu={openCustomMenu}/>
             </div>
            )
         : (
             <div className="category" key={cat} >
-              <IconFolder viewBox={"-20 -9 55 55"} color={colors[cat]} width={"30"} height={"30"} />
-              <input  className="category-text" type="text" readOnly value={cat} onBlur={resetInput} />
-              <IconCustomMenu customMenuClick={customMenuClick}/>
+
+               {
+                isEditing
+                ? (
+                  <div>V
+                  <input className="category-text" type="text" defaultValue={cat} onBlur={resetInput} style={{border: '1px solid gray'}}/>
+                  </div>
+                  )
+                : (
+                  <>
+                    <IconFolder viewBox={"-20 -9 55 55"} color={colors[cat]} width={"30"} height={"30"} />
+                    <input className="category-text" type="text" readOnly value={cat} />
+                    </>
+                  )
+              }
+              <IconCustomMenu openCustomMenu={openCustomMenu}/>
             </div>
           )
       }
-    </div>
+    </Fragment>
   );
 }
 
