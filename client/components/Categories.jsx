@@ -4,12 +4,14 @@ import PropTypes from 'prop-types';
 import Subjects from './Subjects';
 import Category from './Category';
 
-const Categories = ({ bmarks, showConfirm, setShowConfirm, titlesUpdate, setShowTitles, showTitles, setTitles, colors, openCustomMenu, isEditing }) => {
+const Categories = ({ bmarks, showConfirm, setShowConfirm, titlesUpdate, setShowTitles, showTitles, setTitles, colors, openCustomMenu, setIsEditing, isEditing, elementToEdit, setElementToEdit, setElementForCustomMenu, elementForCustomMenu }) => {
   const [ isOpen, setIsOpen ] = useState(false);
   const [ category, setCategory ] = useState('');
 
   const exitCategories = (e) => {
+    console.log(e.target.className)
     if (e.target.className === 'app') {
+      console.log('in')
       document.removeEventListener('click', exitCategories);
       setIsOpen(false);
       setCategory('');
@@ -25,23 +27,28 @@ const Categories = ({ bmarks, showConfirm, setShowConfirm, titlesUpdate, setShow
   };
 
   const handleCatClick = (e) => {
-    let cat;
-    if (e.target.className === 'category') {
-      cat = e.target.children[1].value;
-    } else {
-      cat = e.target.value;
+    if (e.target.style.border === '1px solid lightgray') {
+      setElementToEdit(e.target.value);
+    }else {
+      let cat;
+      if (e.target.className === 'category') {
+        cat = e.target.children[1].value;
+      } else {
+        cat = e.target.value;
+      }
+      if (e.target.className === 'app' || cat === category) {
+        document.removeEventListener('click', exitCategories);
+        setIsOpen(false);
+        setCategory('');
+        setShowTitles(false);
+      } else {
+        setIsOpen(true);
+        setCategory(cat);
+        setShowTitles(false);
+        document.addEventListener('click', exitCategories);
+      }
     }
-    if (e.target.className === 'app' || cat === category) {
-      document.removeEventListener('click', exitCategories);
-      setIsOpen(false);
-      setCategory('');
-      setShowTitles(false);
-    } else {
-      setIsOpen(true);
-      setCategory(cat);
-      setShowTitles(false);
-      document.addEventListener('click', exitCategories);
-    }
+
   };
 
   return (
@@ -54,7 +61,7 @@ const Categories = ({ bmarks, showConfirm, setShowConfirm, titlesUpdate, setShow
              className="category-wrapper"
              onClick={handleCatClick}
              key={key}>
-             <Category category={category} cat={key} isOpen={isOpen} colors={colors} handleCatClick={handleCatClick} openCustomMenu={openCustomMenu} isEditing={isEditing}/>
+             <Category setCategory={setCategory} category={category} exitCategories={exitCategories} cat={key} setIsOpen={setIsOpen} isOpen={isOpen} colors={colors} handleCatClick={handleCatClick} openCustomMenu={openCustomMenu} isEditing={isEditing} elementToEdit={elementToEdit} elementForCustomMenu={elementForCustomMenu}/>
            </div>
            <div className="dropdown-container" key={cat[0]}>
              {

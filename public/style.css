@@ -99,6 +99,10 @@
     background:#ECECEE;
   }
 
+  .category:hover > .edit-category {
+    background:#ECECEE;
+  }
+
   .icon-custom-menu {
     visibility: hidden;
   }
@@ -118,6 +122,16 @@
     font-size: 1rem;
     cursor: pointer;
     letter-spacing: .05rem;
+  }
+
+  .edit-category {
+    width: 260px;
+    padding-left: .3rem;
+    color: #3D3D3D;
+    border: none;
+    font-size: 1rem;
+    letter-spacing: .05rem;
+    cursor: text;
   }
 
   input.category-text:focus {

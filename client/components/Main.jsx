@@ -21,8 +21,9 @@ const Main = ({ bmarks, links, colors }) => {
   const [ subjectOfTitle, setSubjectOfTitle ] = useState('');
   const [ titlesUpdate, setTitlesUpdate ] = useState(null);
   const [ top, setTop ] = useState(0);
-  const [ element, setElement ] = useState('');
+  const [ elementForCustomMenu, setElementForCustomMenu ] = useState('');
   const [ isEditing, setIsEditing ] = useState(false);
+  const [ elementToEdit, setElementToEdit ] = useState('');
 
   const showTitlesUpdate = (data) => {
     setTitlesUpdate(data);
@@ -55,10 +56,12 @@ const Main = ({ bmarks, links, colors }) => {
   };
 
   const openCustomMenu = (e) => {
-    if (element) {
-      element.style.visibility = '';
-    }
-    if (!element || element !== e.target) {
+    console.log(e.target)
+    //document.removeEventListener('click', exitCategories);
+    if (elementForCustomMenu) {
+      elementForCustomMenu.style.visibility = '';
+    }elementForCustomMenu
+    if (!elementForCustomMenu || elementForCustomMenu !== e.target) {
       let count = 0;
       for (var key in bmarks) {
         if (key === e.target.parentElement.children[1].value) {
@@ -68,7 +71,7 @@ const Main = ({ bmarks, links, colors }) => {
       }
       let result = 165 + (count*53);
       setTop(result);
-      setElement(e.target);
+      setElementForCustomMenu(e.target);
       e.target.style.visibility = 'visible';
     }
   };
@@ -78,11 +81,11 @@ const Main = ({ bmarks, links, colors }) => {
       <Navbar showForm={showForm} setShowForm={setShowForm} showEdit={showEdit} setShowEdit={setShowEdit} links={links} />
       <div id="app-container" className="app" data-testid="app-container">
         <div className="sidebar-container">
-          <Bookmarks bmarks={bmarks} setShowTitles={setShowTitles} setTitles={setTitles} showConfirm={showConfirm} showTitles={showTitles} setShowConfirm={setShowConfirm} titlesUpdate={titlesUpdate} colors={colors} openCustomMenu={openCustomMenu} isEditing={isEditing}/>
+          <Bookmarks bmarks={bmarks} setShowTitles={setShowTitles} setTitles={setTitles} showConfirm={showConfirm} showTitles={showTitles} setShowConfirm={setShowConfirm} titlesUpdate={titlesUpdate} colors={colors} openCustomMenu={openCustomMenu} setIsEditing={setIsEditing} isEditing={isEditing} setElementToEdit={setElementToEdit} elementToEdit={elementToEdit} setElementForCustomMenu={setElementForCustomMenu} elementForCustomMenu={elementForCustomMenu}/>
         </div>
         {
-          element
-          &&  <CustomMenu top={top} element={element} setElement={setElement} isEditing={isEditing} setIsEditing={setIsEditing}/>
+          elementForCustomMenu
+          &&  <CustomMenu top={top} elementForCustomMenu={elementForCustomMenu} setElementForCustomMenu={setElementForCustomMenu} isEditing={isEditing} setIsEditing={setIsEditing}/>
         }
         <Fragment>
           {
