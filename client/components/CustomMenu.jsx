@@ -1,15 +1,17 @@
 import React, { useEffect } from 'react';
 
 const CustomMenu = ({ top, elementForCustomMenu, setElementForCustomMenu, isEditing, setIsEditing }) => {
-
+  useEffect(() => {
+    document.addEventListener('click', exitCustomMenu);
+  }, [])
   //use useeffect to add event listener and return a clean up func
   //use memo for component caching/memoization
   const exitCustomMenu = (e) => {
-    if (e.target.parentElement.parentElement.className !== 'custom-menu' &&
-        e.target.className.baseVal !== 'icon-custom-menu' ||
+    if (e.target.id !== 'edit-category' && e.target.parentElement.parentElement.className !== 'custom-menu' && e.target.className.baseVal !== 'icon-custom-menu' ||
         e.target === elementForCustomMenu) {
+      setIsEditing(false);
       setElementForCustomMenu('');
-      //document.removeEventListener('click', exitCustomMenu);
+      document.removeEventListener('click', exitCustomMenu);
       elementForCustomMenu.style.visibility = '';
     }
   };

@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, useCallback, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import IconFolder from './IconFolder';
 import IconFolderOpen from './IconFolderOpen';
@@ -6,22 +6,12 @@ import IconCustomMenu from './IconCustomMenu';
 import IconDown from './IconDown';
  
 
-const Category = ({ setCategory, category, exitCategories, cat, isOpen, setIsOpen, colors, openCustomMenu, isEditing, elementToEdit, elementForCustomMenu, handleCatClick}) => {
+const Category = ({ setCategory, category, exitCategories, cat, isOpen, setIsOpen, colors, openCustomMenu, isEditing, setElementToEdit, elementToEdit, elementForCustomMenu}) => {
   const [ catEdited, setCatEdited ] = useState('');
-  const resetInput = (e) => {
+  const reset = (e) => {
     console.log('reset')
-    let defaultVal = e.target.defaultValue;
-    e.target.value = defaultVal;
+    setElementToEdit('');
   };
-
-// if (element) {
-//   console.log(element.parentElement.children[1].value, 'cat')
-// }
-
-const hoverOn = (e) => {
-  e.target.style.background = '#fff';
-  e.target.parentElement.style.background = '#fff';
-};
 
 //const handleCatEdit = (e) => {
 //  setCatEdited(e.target.value);
@@ -32,24 +22,43 @@ const hoverOn = (e) => {
 const displayCatOnEdit = () => {
   let target;
   if (elementForCustomMenu && elementForCustomMenu.className.baseVal === 'icon-custom-menu') {
-    target = elementForCustomMenu.parentElement.children[1].value;
+    target = elementForCustomMenu.parentElement.children[1].innerText;
   } else if (elementForCustomMenu) {
-    target = elementForCustomMenu.value;
+    target = elementForCustomMenu.innerText;
   }
   if (target && cat === target || elementToEdit && cat === elementToEdit) {
     return (
       <Fragment>
         <IconDown setIsOpen={setIsOpen} setCategory={setCategory} exitCategories={exitCategories}/>
-        <input className="edit-category" type="text" value={cat} onBlur={resetInput} onMouseEnter={hoverOn} style={{border: '1px solid lightgray', boxShadow: '0px 1px 10px 0px rgba(32, 33, 36, 0.10)', padding: '7px 12px', marginRight: '8px', color: '#9E9D9D'}}/>
+        <input id="edit-category" type="text" onBlur={reset} defaultValue={cat} style={{border: '1px solid lightgray', boxShadow: '0px 1px 10px 0px rgba(32, 33, 36, 0.10)', padding: '7px 12px', marginRight: '8px', color: '#9E9D9D'}}/>
       </Fragment>)
   }
   return(
     <Fragment>
-      <IconFolder viewBox={"-20 -9 55 55"} color={colors[cat]} width={"30"} height={"30"} handleCatClick={handleCatClick}/>
-      <input className="category-text" type="text" readOnly value={cat}/>
+      <IconFolder viewBox={"-20 -9 55 55"} color={colors[cat]} width={"30"} height={"30"} />
+      <div className="category-text">{cat}</div>
     </Fragment>
     )
 };
+
+   const hoverOn = (e) => {
+  //
+  //   if (isEditing) {
+  //     categoryToEdit
+  //
+  //   }
+   };
+
+   const hoverOff = (e) => {
+  //   if (isEditing) {
+  //   let categoryToEdit = document.getElementById('edit-category');
+  //   console.log(categoryToEdit)
+    //categoryToEdit.parentElement.style.background = '';
+  //}
+  //   console.log(e.target, 'off')
+    // e.target.style.background = '';
+    // e.target.parentElement.style.background = '';
+  };
 
 
   return (
@@ -59,7 +68,8 @@ const displayCatOnEdit = () => {
         ? (
             <div className="category"
                  key={cat}
-                 style={{backgroundColor: '#ECECEE'}}>
+                 style={{backgroundColor: '#ECECEE'}}
+                 >
               {
                 isEditing
                 ? (
@@ -84,8 +94,9 @@ const displayCatOnEdit = () => {
                   )
                 : (
                   <Fragment>
-                    <IconFolder viewBox={"-20 -9 55 55"} color={colors[cat]} width={"30"} height={"30"} handleCatClick={handleCatClick}/>
-                    <input className="category-text" type="text" readOnly value={cat} />
+                    <IconFolder viewBox={"-20 -9 55 55"} color={colors[cat]} width={"30"} height={"30"}/>
+                    <div className="category-text">{cat}</div>
+
                   </Fragment>
                   )
               }

@@ -99,9 +99,9 @@
     background:#ECECEE;
   }
 
-  .category:hover > .edit-category {
-    background:#ECECEE;
-  }
+/*  .category:hover > .edit-category {
+    background:#fff;
+  }*/
 
   .icon-custom-menu {
     visibility: hidden;
@@ -124,7 +124,7 @@
     letter-spacing: .05rem;
   }
 
-  .edit-category {
+  #edit-category {
     width: 260px;
     padding-left: .3rem;
     color: #3D3D3D;

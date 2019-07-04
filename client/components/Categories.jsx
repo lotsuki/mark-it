@@ -9,9 +9,7 @@ const Categories = ({ bmarks, showConfirm, setShowConfirm, titlesUpdate, setShow
   const [ category, setCategory ] = useState('');
 
   const exitCategories = (e) => {
-    console.log(e.target.className)
-    if (e.target.className === 'app') {
-      console.log('in')
+    if (e.target.className === 'app' || e.target.className === 'sidebar-container') {
       document.removeEventListener('click', exitCategories);
       setIsOpen(false);
       setCategory('');
@@ -27,16 +25,26 @@ const Categories = ({ bmarks, showConfirm, setShowConfirm, titlesUpdate, setShow
   };
 
   const handleCatClick = (e) => {
-    if (e.target.style.border === '1px solid lightgray') {
+    console.log(e.target, 'handlecatclick target')
+    console.log(e.currentTarget.firstChild.firstChild, 'handlecatclick svg')
+     console.log(e.currentTarget, 'handlecatclick curr')
+    if (e.target.className.baseVal === 'icon-custom-menu' || e.currentTarget.firstChild.firstChild.className.baseVal === 'icon-custom-menu') {
+      console.log('hi');
+    } else if (e.target.style.border === '1px solid lightgray') {
+      console.log(e.target);
       setElementToEdit(e.target.value);
-    }else {
+    } else {
+      console.log('no')
       let cat;
       if (e.target.className === 'category') {
-        cat = e.target.children[1].value;
+        cat = e.target.children[1].innerText;
+      } else if (e.currentTarget.className === 'category-wrapper') {
+        cat = e.currentTarget.firstChild.children[1].innerText;
       } else {
-        cat = e.target.value;
+        cat = e.target.innerText;
       }
       if (e.target.className === 'app' || cat === category) {
+        console.log('hooo')
         document.removeEventListener('click', exitCategories);
         setIsOpen(false);
         setCategory('');
@@ -51,6 +59,9 @@ const Categories = ({ bmarks, showConfirm, setShowConfirm, titlesUpdate, setShow
 
   };
 
+
+
+
   return (
     <div className="section-container" >
      <div id="section-wrapper">
@@ -61,7 +72,7 @@ const Categories = ({ bmarks, showConfirm, setShowConfirm, titlesUpdate, setShow
              className="category-wrapper"
              onClick={handleCatClick}
              key={key}>
-             <Category setCategory={setCategory} category={category} exitCategories={exitCategories} cat={key} setIsOpen={setIsOpen} isOpen={isOpen} colors={colors} handleCatClick={handleCatClick} openCustomMenu={openCustomMenu} isEditing={isEditing} elementToEdit={elementToEdit} elementForCustomMenu={elementForCustomMenu}/>
+             <Category setCategory={setCategory} category={category} exitCategories={exitCategories} cat={key} setIsOpen={setIsOpen} isOpen={isOpen} colors={colors} openCustomMenu={openCustomMenu} isEditing={isEditing} setElementToEdit={setElementToEdit} elementToEdit={elementToEdit} elementForCustomMenu={elementForCustomMenu}/>
            </div>
            <div className="dropdown-container" key={cat[0]}>
              {

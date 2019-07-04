@@ -56,22 +56,24 @@ const Main = ({ bmarks, links, colors }) => {
   };
 
   const openCustomMenu = (e) => {
-    console.log(e.target)
+    let target;
+    if (e.target.tagName !== 'svg') { target = e.currentTarget }
+    else { target = e.target }
     //document.removeEventListener('click', exitCategories);
     if (elementForCustomMenu) {
       elementForCustomMenu.style.visibility = '';
-    }elementForCustomMenu
-    if (!elementForCustomMenu || elementForCustomMenu !== e.target) {
+    }
+    if (!elementForCustomMenu || elementForCustomMenu !== target) {
       let count = 0;
       for (var key in bmarks) {
-        if (key === e.target.parentElement.children[1].value) {
+        if (key === target.parentElement.children[1].innerText) {
           break;
         }
         ++count;
       }
       let result = 165 + (count*53);
       setTop(result);
-      setElementForCustomMenu(e.target);
+      setElementForCustomMenu(target);
       e.target.style.visibility = 'visible';
     }
   };
