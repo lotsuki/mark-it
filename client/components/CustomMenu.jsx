@@ -4,15 +4,30 @@ const CustomMenu = ({ top, elementForCustomMenu, setElementForCustomMenu, isEdit
   useEffect(() => {
     document.addEventListener('click', exitCustomMenu);
   }, [])
+
+
   //use useeffect to add event listener and return a clean up func
   //use memo for component caching/memoization
   const exitCustomMenu = (e) => {
-    if (e.target.id !== 'edit-category' && e.target.parentElement.parentElement.className !== 'custom-menu' && e.target.className.baseVal !== 'icon-custom-menu' ||
-        e.target === elementForCustomMenu) {
+    let target;
+    if (e.target.id !== 'edit category' && e.target.className === 'app' || e.target.className === 'sidebar-container') {
+      let menuIcons = document.getElementsByClassName('icon-custom-menu');
+      for (var i = 0; i < menuIcons.length; i++) {
+        menuIcons[i].style.visibility = '';
+      }
       setIsEditing(false);
       setElementForCustomMenu('');
       document.removeEventListener('click', exitCustomMenu);
+    }
+    if (e.target.tagName === 'path' && e.target.parentElement.className.baseVal.includes('icon-custom-menu')) {
+      target = e.target.parentElement;
+    } else if (e.target.className.baseVal.includes('icon-custom-menu')) { target = e.target }
+    if (target.parentElement.parentElement.className !== 'custom-menu' && !target.className.baseVal.includes('icon-custom-menu')) {
       elementForCustomMenu.style.visibility = '';
+      setIsEditing(false);
+      setElementForCustomMenu('');
+       document.removeEventListener('click', exitCustomMenu);
+
     }
   };
   //document.addEventListener('click', exitCustomMenu);

@@ -6,11 +6,12 @@ import IconCustomMenu from './IconCustomMenu';
 import IconDown from './IconDown';
  
 
-const Category = ({ setCategory, category, exitCategories, cat, isOpen, setIsOpen, colors, openCustomMenu, isEditing, setElementToEdit, elementToEdit, elementForCustomMenu}) => {
+const Category = ({ setCategory, category, exitCategories, cat, isOpen, setIsOpen, colors, openCustomMenu, setIsEditing, isEditing, setElementToEdit, elementToEdit, elementForCustomMenu}) => {
   const [ catEdited, setCatEdited ] = useState('');
   const reset = (e) => {
     console.log('reset')
     setElementToEdit('');
+    setIsEditing(false);
   };
 
 //const handleCatEdit = (e) => {
@@ -19,9 +20,11 @@ const Category = ({ setCategory, category, exitCategories, cat, isOpen, setIsOpe
   // setIsOpen(false);
 //};
 
+
 const displayCatOnEdit = () => {
   let target;
-  if (elementForCustomMenu && elementForCustomMenu.className.baseVal === 'icon-custom-menu') {
+
+  if (elementForCustomMenu && elementForCustomMenu.className.baseVal.includes('icon-custom-menu')) {
     target = elementForCustomMenu.parentElement.children[1].innerText;
   } else if (elementForCustomMenu) {
     target = elementForCustomMenu.innerText;
@@ -78,7 +81,7 @@ const displayCatOnEdit = () => {
                 : (
                   <Fragment>
                     <IconFolderOpen viewBox={"-20 -9 55 55"} color={colors[cat]} width={"30"} height={"30"} />
-                    <input className="category-text" type="text" readOnly value={cat} />
+                    <div className="category-text">{cat}</div>
                   </Fragment>
                   )
               }
@@ -100,7 +103,7 @@ const displayCatOnEdit = () => {
                   </Fragment>
                   )
               }
-              <IconCustomMenu openCustomMenu={openCustomMenu}/>
+              <IconCustomMenu openCustomMenu={openCustomMenu} cat={cat}/>
             </div>
           )
       }

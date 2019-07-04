@@ -56,14 +56,26 @@ const Main = ({ bmarks, links, colors }) => {
   };
 
   const openCustomMenu = (e) => {
+
+   // console.log(e.target, 'custom e.target');
+   // console.log(e.currentTarget, 'custom curr');
     let target;
-    if (e.target.tagName !== 'svg') { target = e.currentTarget }
-    else { target = e.target }
+    if (e.target.tagName === 'path' && e.target.parentElement.className.baseVal.includes('icon-custom-menu')) {
+      //console.log(e.target.parentElement, 'PARENTELEM')
+      target = e.target.parentElement;
+    } else if (e.target.className.baseVal.includes('icon-custom-menu')) { target = e.target }
+    // console.log(elementForCustomMenu === target, 'openmenuelem');
+    //   console.log(target, 'openmenutarget');
     //document.removeEventListener('click', exitCategories);
     if (elementForCustomMenu) {
       elementForCustomMenu.style.visibility = '';
+      setElementForCustomMenu('');
+      setIsEditing(false);
     }
-    if (!elementForCustomMenu || elementForCustomMenu !== target) {
+
+    if (!elementForCustomMenu || elementForCustomMenu.className.baseVal !== target.className.baseVal) {
+      console.log('hiiiii');
+
       let count = 0;
       for (var key in bmarks) {
         if (key === target.parentElement.children[1].innerText) {
@@ -71,10 +83,12 @@ const Main = ({ bmarks, links, colors }) => {
         }
         ++count;
       }
+      target.style.visibility = 'visible';
       let result = 165 + (count*53);
       setTop(result);
+      console.log(target, 'CHANGE')
       setElementForCustomMenu(target);
-      e.target.style.visibility = 'visible';
+
     }
   };
 
