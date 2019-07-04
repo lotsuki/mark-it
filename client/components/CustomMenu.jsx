@@ -21,12 +21,12 @@ const CustomMenu = ({ top, elementForCustomMenu, setElementForCustomMenu, isEdit
     }
     if (e.target.tagName === 'path' && e.target.parentElement.className.baseVal.includes('icon-custom-menu')) {
       target = e.target.parentElement;
-    } else if (e.target.className.baseVal.includes('icon-custom-menu')) { target = e.target }
-    if (target.parentElement.parentElement.className !== 'custom-menu' && !target.className.baseVal.includes('icon-custom-menu')) {
+    } else if (e.target.className.baseVal && e.target.className.baseVal.includes('icon-custom-menu')) { target = e.target }
+    if (target && target.parentElement.parentElement.className !== 'custom-menu' && e.target.className.baseVal && !target.className.baseVal.includes('icon-custom-menu')) {
       elementForCustomMenu.style.visibility = '';
       setIsEditing(false);
       setElementForCustomMenu('');
-       document.removeEventListener('click', exitCustomMenu);
+      document.removeEventListener('click', exitCustomMenu);
 
     }
   };

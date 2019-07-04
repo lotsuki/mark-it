@@ -25,17 +25,11 @@ const Categories = ({ bmarks, showConfirm, setShowConfirm, titlesUpdate, setShow
   };
 
   const handleCatClick = (e) => {
-    // console.log(e.target, 'handlecatclick target')
-    // console.log(e.currentTarget.firstChild.lastChild, 'handlecatclick svg')
-    //  console.log(e.currentTarget, 'handlecatclick curr')
-    if (e.target.className.baseVal.includes('icon-custom-menu') || e.currentTarget.firstChild.lastChild.className.baseVal.includes('icon-custom-menu')) {
-      //console.log(e.target.style.visibility, 'visible?');
-      // e.target.style.visibility = 'visible';
+    if ((e.target.className.baseVal && e.target.className.baseVal.includes('icon-custom-menu')) || (e.target.tagName === 'path' && e.currentTarget.firstChild.lastChild.className.baseVal.includes('icon-custom-menu'))) {
+      console.log('SVG')
     } else if (e.target.style.border === '1px solid lightgray') {
-      //console.log(e.target, 'handle input');
       setElementToEdit(e.target.value);
     } else {
-      //console.log('no')
       let cat;
       if (e.target.className === 'category') {
         cat = e.target.children[1].innerText;
@@ -45,7 +39,6 @@ const Categories = ({ bmarks, showConfirm, setShowConfirm, titlesUpdate, setShow
         cat = e.target.innerText;
       }
       if (e.target.className === 'app' || cat === category) {
-        console.log('hooo')
         document.removeEventListener('click', exitCategories);
         setIsOpen(false);
         setCategory('');
