@@ -2,14 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
-const Confirm = ({ groups, setShowConfirm, titleToDelete, subjectOfTitle, showTitlesUpdate, setTitles, titles, groupToDelete, categoryID, setCategoryID, elementForCustomMenu, setElementForCustomMenu }) => {
-console.log()
-  const handleConfirmClick = (e) => {
+const Confirm = ({ groups, setShowConfirm, titleToDelete, subjectOfTitle, showTitlesUpdate, setTitles, titles, groupToDelete, categoryID, setCategoryID, elementForCustomMenu, setElementForCustomMenu, setShowTitles, titlesUpdate, setTitlesUpdate }) => {
+  const handleConfirmClick = async (e) => {
     if (e.target.innerText === 'Yes') {
-      let category = elementForCustomMenu.parentElement.children[1].innerText;
-      setShowConfirm(false);
       if (groupToDelete === 'category') {
-        axios.delete(`/delete/${category}/${categoryID}`)
+        let category = elementForCustomMenu.parentElement.children[1].innerText;
+        await axios.delete(`/delete/${category}/${categoryID}`)
           .then(res => {
              for (var i = 0; i < groups.length; i++) {
                 if (groups[i].id === categoryID) {
@@ -25,9 +23,23 @@ console.log()
       } else if (groupToDelete === 'subject') {
           console.log('subject');
       } else if(groupToDelete === 'title') {
-          console.log('title');
+         await axios.delete(`/delete/${titleToDelete}`)
+            .then(res => {
+              for (var i = 0; i < titles.length; i++) {
+                if (titles[i].title === titleToDelete) {
+                  titles.splice(i, 1);
+                   setTitles(titles);
+                   setTitlesUpdate(titles);
+                   //setShowTitles(true);
+                  break;
+                }
+              }
+              console.log(res, 'res');
+              console.log('DELETE request successful');
+            })
+            .catch(err => { console.log('Error at DELETE request', err); });
       }
-
+      setShowConfirm(false);
     } else {
       setShowConfirm(false);
     }

@@ -27,17 +27,21 @@ const Main = ({ groups, links }) => {
   const [ categoryID, setCategoryID ] = useState('');
   const [ groupToDelete, setGroupToDelete ] = useState('');
 
-
-  const showTitlesUpdate = (data) => {
-    setTitlesUpdate(data);
-    setShowTitles(true);
+ console.log(showForm, 'showForm')
+   const showTitlesUpdate = (data) => {
+  //   console.log(data, 'data')
+  //   setTitlesUpdate(data);
+  //   setShowTitles(true);
   };
 
   const findSubject = (titl) => {
     let subj;
-    links.forEach(obj => {
-      if (obj.title === titl) { subj = obj.subject; }
-    });
+    for (var i = 0; i < links.length; i++) {
+      if (links[i].title === titl) {
+        subj = links[i].subject;
+        break;
+      }
+    }
     return subj;
   };
 
@@ -45,7 +49,6 @@ const Main = ({ groups, links }) => {
     let title = target.parentElement.firstChild.innerText;
     let subject = findSubject(title)
     setTitleToDelete(title);
-    setSubjectOfTitle(subject);
   };
 
   const displayContainer = () => {
@@ -54,7 +57,7 @@ const Main = ({ groups, links }) => {
     } else if (showEdit) {
       return <Edit groups={groups} links={links} />
     } else if (showConfirm) {
-      return <Confirm groups={groups} showConfirm={showConfirm} setShowConfirm={setShowConfirm} titleToDelete={titleToDelete} subjectOfTitle={subjectOfTitle} showTitlesUpdate={showTitlesUpdate} setTitles={setTitles} titles={titles} groupToDelete={groupToDelete} categoryID={categoryID} setCategoryID={setCategoryID}  elementForCustomMenu={elementForCustomMenu} setElementForCustomMenu={setElementForCustomMenu}/>
+      return <Confirm groups={groups} showConfirm={showConfirm} setShowConfirm={setShowConfirm} titleToDelete={titleToDelete} subjectOfTitle={subjectOfTitle} setShowTitles={setShowTitles} showTitlesUpdate={showTitlesUpdate} setTitles={setTitles} titles={titles} groupToDelete={groupToDelete} categoryID={categoryID} setCategoryID={setCategoryID}  elementForCustomMenu={elementForCustomMenu} setElementForCustomMenu={setElementForCustomMenu} titlesUpdate={titlesUpdate} setTitlesUpdate={setTitlesUpdate} />
     }
   };
 
@@ -87,7 +90,9 @@ const Main = ({ groups, links }) => {
       setElementForCustomMenu(target);
     }
   };
+  console.log(showTitles, 'SHOW TITLES')
   console.log('MAIN RENDER')
+  console.log(titles, 'TITLES IN MAIN')
   return (
     <div id="container">
       <Navbar showForm={showForm} setShowForm={setShowForm} showEdit={showEdit} setShowEdit={setShowEdit} links={links} />
@@ -102,7 +107,7 @@ const Main = ({ groups, links }) => {
         <Fragment>
           {
             showTitles
-            ? (<Titles titles={titles} links={links} setTitles={setTitles} showConfirm={showConfirm} setShowConfirm={setShowConfirm} deleteTitle={deleteTitle} titlesUpdate={titlesUpdate}/>)
+            ? (<Titles titles={titles} links={links} setTitles={setTitles} showConfirm={showConfirm} setShowConfirm={setShowConfirm} deleteTitle={deleteTitle} titlesUpdate={titlesUpdate} setGroupToDelete={setGroupToDelete} subjectOfTitle={subjectOfTitle}/>)
             : (null)
           }
         </Fragment>

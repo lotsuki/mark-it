@@ -13,6 +13,7 @@ const Form = ({ groups, showForm, setShowForm, setCategoryID, categoryID }) => {
   const [ selectCat, setSelectCat ] = useState(false);
   const [ selectSub, setSelectSub ] = useState(false);
 
+  console.log('whatttt')
   let subjects = [];
   let categories = groups.map((group, i) => {
     group.subjects.forEach(subject => {
@@ -20,8 +21,6 @@ const Form = ({ groups, showForm, setShowForm, setCategoryID, categoryID }) => {
     });
     return group.category;
   });
-  console.log(subjects, 'subjs');
-  console.log(categories, 'cats');
 
   //  _.map(bmarks, (cat, key) => {
   //   subjects = subjects.concat(cat);
@@ -38,7 +37,6 @@ const Form = ({ groups, showForm, setShowForm, setCategoryID, categoryID }) => {
   const hasCategory = () => {
     for (var i = 0; i < groups.length; i++) {
       if (groups[i].category === category) {
-        setCategoryID(groups[i].id);
         return true;
       }
     }
@@ -52,19 +50,34 @@ const Form = ({ groups, showForm, setShowForm, setCategoryID, categoryID }) => {
   };
 
   const submitForm = (e) => {
-
+    console.log(showForm, 'showForm')
     e.preventDefault();
-    console.log(hasCategory(), hasSubject(), 'hascatandsub')
+    let catID;
+    console.log(category, 'cat')
+    for (var i = 0; i < groups.length; i++) {
+      if (groups[i].category === category) {
+        catID = groups[i].id;
+        console.log(groups[i].id, 'ID')
+      }
+    }
+    const hasCat = hasCategory();
+    const hasSubj = hasSubject();
+    let subjectL;
+    if (catID) {
+      subjectL = groups[catID].subjects.length;
+    }
+
     const data = {
       categoryL: groups.length,
-      categoryID,
       category,
       subject,
       title,
       url,
       date: moment().format('MM-DD-YYYY'),
-      hasCategory: hasCategory(),
-      hasSubject: hasSubject()
+      hasCat,
+      hasSubj,
+      catID,
+      subjectL,
     };
 
     if (category && subject && title && url) {
@@ -78,10 +91,11 @@ const Form = ({ groups, showForm, setShowForm, setCategoryID, categoryID }) => {
         })
         .then(res => res.json())
         .then(data => {
-          console.log(hasCategory(), hasSubject(), 'after req')
-          //if (!hasCategory() && !hasSubject()) {
+          if (!hasCat && !hasSubj) {
             groups.push({id: groups.length, category, color: 'blue', subjects: [{id: 0, subject}]})
-         // }
+          } else if (!hasSubj) {
+            groups[catID].subjects.push({id: subjectL, subject})
+          }
          setShowForm(false);
         })
         .catch(err => { console.log('Could not post document: ', err); });

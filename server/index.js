@@ -33,8 +33,10 @@ app.use(express.static(`${__dirname}/../public/`));
 app.post('/form', (req, res) => {
   let category = req.body.category;
   let subject = req.body.subject;
-  let categoryID = req.body.categoryID;
+  let categoryID = req.body.catID;
   let categoryL = req.body.categoryL;
+  let subjectL = req.body.subjectL;
+  let key = `groups.${categoryID}.subjects`;
 
   Document.create({
         category: category,
@@ -48,15 +50,15 @@ app.post('/form', (req, res) => {
       res.send('Error at POST: ', err);
     }
     else {
-      let hasCategory = req.body.hasCategory;
-      let hasSubject = req.body.hasSubject;
+      let hasCategory = req.body.hasCat;
+      let hasSubject = req.body.hasSubj;
       if (!hasCategory && !hasSubject) {
-        Document.updateOne({groups: {$exists: true}}, {$addToSet: {groups:{id: categoryL, category: category, color: 'blue', subjects: [{id: 0, subject: subject}], }}}, (err, result) => {
+        Document.updateOne({groups: {$exists: true}}, {$addToSet: {groups:{id: categoryL, category, color: 'blue', subjects: [{id: 0, subject: subject}], }}}, (err, result) => {
           if (err) { res.send(err); }
           else { res.send(result); }
         })
       } else if(!hasSubject) {
-        Document.updateOne({username: {$exists:true}}, {$addToSet: {[key]: subject}}, (err, result) => {
+        Document.updateOne({'groups.id': categoryID}, {$addToSet:{[key]: {id: subjectL, subject}}}, (err, result) => {
           if (err) { console.log('Failed to update subjects at POST: ', err); }
           else { res.send(result); }
         })
@@ -64,6 +66,7 @@ app.post('/form', (req, res) => {
     }
   });
 });
+
 
 
 app.get('/user', (req, res) => {
@@ -202,9 +205,9 @@ app.delete('/delete/:category/:id', (req, res) => {
 
 app.delete('/delete/subj/:subj', (req, res) => {
   let subj = req.params.subj;
-  Document.deleteMany({ subject: subj }, (err) => {
+  Document.deleteMany({ subject: subj }, (err, result) => {
     if (err) { console.log('Error at DELETE request: ', err); }
-    else { console.log('Document successfully deleted'); }
+    else { res.send(result); }
   });
   // Document.deleteOne({}, (err) => {
   //   if (err) { console.log('Error at DELETE request: ', err); }
@@ -212,11 +215,11 @@ app.delete('/delete/subj/:subj', (req, res) => {
   // });
 });
 
-app.delete('/delete/title/:title', (req, res) => {
-  let titl = req.params.title;
-  Document.deleteOne({ title: titl }, (err) => {
+app.delete('/delete/:titleToDelete', (req, res) => {
+  let title = req.params.titleToDelete;
+  Document.deleteOne({ title }, (err, result) => {
     if (err) { console.log('Error at DELETE request: ', err); }
-    else { console.log('Document successfully deleted'); }
+    else { res.send(result); }
   });
 });
 

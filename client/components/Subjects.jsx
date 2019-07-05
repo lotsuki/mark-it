@@ -32,12 +32,13 @@ const Subjects = ({ groups, category, showConfirm, setShowConfirm, titlesUpdate,
   const subjectClasses = ['subject', 'subject-text'];
 
   const exitTitles = (e) => {
-    let className = e.target.className;
-    if (!_.contains(titleClasses, className)) {
+    console.log(e.target)
+    let target = e.target;
+    if (!_.contains(titleClasses, target.className)) {
      setShowTitles(false);
      document.removeEventListener('click', exitTitles);
     }
-    if (className === 'app'){
+    if (target.className === 'app' || target.id === 'titles-container'){
       setIsOpen(false);
       setCategory('');
     }

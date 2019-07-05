@@ -3,14 +3,15 @@ import PropTypes from 'prop-types';
 import {useTrail, animated} from 'react-spring';
 
 
-const Titles = ({ titles, links, setTitles, showConfirm, setShowConfirm, deleteTitle, titlesUpdate }) => {
+const Titles = ({ titles, links, setTitles, showConfirm, setShowConfirm, deleteTitle, titlesUpdate, setGroupToDelete, subjectOfTitle }) => {
 
   const confirmDelete = async (e) => {
     let target = e.target
     let doc = document.getElementById('container');
     let confirmContainer = document.getElementById('confirm');
-
+    console.log(showConfirm, 'showconfirm')
     if (!showConfirm) {
+      await setGroupToDelete('title');
       await setShowConfirm(true);
       await deleteTitle(target);
       if (confirmContainer) {
@@ -24,42 +25,41 @@ const Titles = ({ titles, links, setTitles, showConfirm, setShowConfirm, deleteT
       doc.className = '';
       confirmContainer.className = 'confirm-container is-hidden is-visuallyHid';
       setShowConfirm(false)
+      setGroupToDelete('');
     }
   };
 
-  const container = ['titles-container']
-  const titlesArr = () => {
-    if (titlesUpdate) { return titlesUpdate.map(obj => obj.title); }
-    return titles.map(obj => obj.title);
-  };
-  const urlsArr = links.map(obj => obj.url);
-  const config = {duration: 100};
+  console.log(titles, 'titles')
 
-  const trail = useTrail(container.length, {
-    config,
-    height: 'auto',
-    from: {height: 0}}
-  );
+  //const container = ['titles-container']
+  // const titlesArr = () => {
+  //   if (titlesUpdate) { return titlesUpdate.map(obj => obj.title); }
+  //   return titles.map(obj => obj.title);
+  // };
+  // const urlsArr = links.map(obj => obj.url);
+  // const config = {duration: 100};
+
+  // const trail = useTrail(container.length, {
+  //   config,
+  //   height: 'auto',
+  //   from: {height: 0}}
+  // );
+   //trail.map(( {height}, index )=> ( ))
+   // { <animated.div  </animated.div>style={{height}}}
 
   return (
     <div id="titles-container">
       {
-        trail.map(( {height}, index )=> (
-          <animated.div
-            className="titles-sub-container"
-            style={{height}}
-            key={'animation'}>
-            {
-              titlesArr().map((title, i) => (
-                <div className="title-wrapper" key={`${urlsArr[i]}${i}`}>
-                  <a target="_blank" href={urlsArr[i]} className="title" key={`${titlesArr[i]}${i}`}>{title}</a>
-                  <div className="delete-icon" onClick={confirmDelete}>X</div>
-                </div>
-              ))
-            }
-
-          </animated.div>
-        ))
+        <div className="titles-sub-container">
+          {
+            titles.map(title => (
+              <div className="title-wrapper" key={title.url}>
+                <a target="_blank" href={title.url} className="title" key={title.title}>{title.title}</a>
+                <div className="delete-icon" onClick={confirmDelete}>X</div>
+              </div>
+            ))
+          }
+        </div>
       }
     </div>
   );
