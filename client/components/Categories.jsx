@@ -4,11 +4,12 @@ import PropTypes from 'prop-types';
 import Subjects from './Subjects';
 import Category from './Category';
 
-const Categories = ({ groups, showConfirm, setShowConfirm, titlesUpdate, setShowTitles, showTitles, setTitles, openCustomMenu, setIsEditing, isEditing, elementToEdit, setElementToEdit, setElementForCustomMenu, elementForCustomMenu }) => {
+const Categories = ({ groups, categoryID, setCategoryID, showConfirm, setShowConfirm, titlesUpdate, setShowTitles, showTitles, setTitles, openCustomMenu, setIsEditing, isEditing, elementToEdit, setElementToEdit, setElementForCustomMenu, elementForCustomMenu }) => {
   const [ isOpen, setIsOpen ] = useState(false);
   const [ category, setCategory ] = useState('');
   const [ categories, setCategories ] = useState([]);
   const [ subjects, setSubjects ] = useState([]);
+
 
   // if (categories)
   // const setCatsAndSubs = () => {
@@ -26,17 +27,18 @@ const Categories = ({ groups, showConfirm, setShowConfirm, titlesUpdate, setShow
   //   setSubjects(tempSubs);
   // };
 
-  // useEffect(async () => {
+  // useEffect(() => {
   //   console.log('categoreis')
-
+  //   let categories = [];
+  //   groups.forEach
   //   setCatsAndSubs();
-    //  _.map(bmarks, (obj, index) => {
-    //   _.map(obj, (value, key) => {
-    //     console.log(key, 'KEY')
-    //   })
-    // })
+  //    _.map(bmarks, (obj, index) => {
+  //     _.map(obj, (value, key) => {
+  //       console.log(key, 'KEY')
+  //     })
+  // }, [])
 
-
+  console.log(groups, 'groups in categories')
     //console.log(categories)
     //return false;
   //}, [])
@@ -46,6 +48,7 @@ const Categories = ({ groups, showConfirm, setShowConfirm, titlesUpdate, setShow
       document.removeEventListener('click', exitCategories);
       setIsOpen(false);
       setCategory('');
+      setCategoryID('');
       setShowTitles(false);
     }
     // else if (_.contains(categoryClasses, e.target.className)) {
@@ -60,7 +63,7 @@ const Categories = ({ groups, showConfirm, setShowConfirm, titlesUpdate, setShow
   // (e.target.className.baseVal && e.target.className.baseVal.includes('icon-custom-menu')) || (e.target.tagName === 'path' && e.currentTarget.firstChild.lastChild.className.baseVal.includes('icon-custom-menu')))
 
   const handleCatClick = (e) => {
-    if (e.target.className && e.target.className.baseVal.includes('icon-custom-menu') || e.target.parentElement.className.baseVal && e.target.parentElement.className.baseVal.includes('icon-custom-menu')) {
+    if (e.target.className.baseVal && e.target.className.baseVal.includes('icon-custom-menu') || e.target.parentElement.className.baseVal && e.target.parentElement.className.baseVal.includes('icon-custom-menu')) {
       console.log('SVG')
     } else if (e.target.style.border === '1px solid lightgray') {
       setElementToEdit(e.target.value);
@@ -79,6 +82,7 @@ const Categories = ({ groups, showConfirm, setShowConfirm, titlesUpdate, setShow
         setCategory('');
         setShowTitles(false);
       } else {
+
         setIsOpen(true);
         setCategory(cat);
         setShowTitles(false);
@@ -118,7 +122,7 @@ const Categories = ({ groups, showConfirm, setShowConfirm, titlesUpdate, setShow
              className="category-wrapper"
              onClick={handleCatClick}
              key={group.category}>
-             <Category setCategory={setCategory} category={category} exitCategories={exitCategories} cat={group.category} color={group.color} setIsOpen={setIsOpen} isOpen={isOpen} openCustomMenu={openCustomMenu} setIsEditing={setIsEditing} isEditing={isEditing} setElementToEdit={setElementToEdit} elementToEdit={elementToEdit} elementForCustomMenu={elementForCustomMenu}/>
+             <Category groups={groups} categoryID={categoryID} setCategoryID={setCategoryID} setCategory={setCategory} category={category} exitCategories={exitCategories} cat={group.category} color={group.color} setIsOpen={setIsOpen} isOpen={isOpen} openCustomMenu={openCustomMenu} setIsEditing={setIsEditing} isEditing={isEditing} setElementToEdit={setElementToEdit} elementToEdit={elementToEdit} elementForCustomMenu={elementForCustomMenu} setElementForCustomMenu={setElementForCustomMenu}/>
            </div>
            <div className="dropdown-container" key={group.color}>
              {

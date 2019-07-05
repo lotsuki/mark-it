@@ -24,6 +24,7 @@ const Main = ({ groups, links }) => {
   const [ elementForCustomMenu, setElementForCustomMenu ] = useState('');
   const [ isEditing, setIsEditing ] = useState(false);
   const [ elementToEdit, setElementToEdit ] = useState('');
+  const [ categoryID, setCategoryID ] = useState('');
 
 
   const showTitlesUpdate = (data) => {
@@ -65,11 +66,14 @@ const Main = ({ groups, links }) => {
       elementForCustomMenu.style.visibility = '';
       setElementForCustomMenu('');
       setIsEditing(false);
+      setCategoryID('');
     }
     if (!elementForCustomMenu || elementForCustomMenu.className.baseVal !== target.className.baseVal) {
       let count = 0;
       for (var i = 0; i < groups.length; i++) {
         if (groups[i].category === target.parentElement.children[1].innerText) {
+          console.log(groups[i]['id'], 'group')
+          setCategoryID(groups[i]['id']);
           break;
         }
         ++count;
@@ -78,16 +82,15 @@ const Main = ({ groups, links }) => {
       let result = 165 + (count*53);
       setTop(result);
       setElementForCustomMenu(target);
-
     }
   };
-
+  console.log('MAIN RENDER')
   return (
     <div id="container">
       <Navbar showForm={showForm} setShowForm={setShowForm} showEdit={showEdit} setShowEdit={setShowEdit} links={links} />
       <div id="app-container" className="app" data-testid="app-container">
         <div className="sidebar-container">
-          <Bookmarks groups={groups} setShowTitles={setShowTitles} setTitles={setTitles} showConfirm={showConfirm} showTitles={showTitles} setShowConfirm={setShowConfirm} titlesUpdate={titlesUpdate} openCustomMenu={openCustomMenu} setIsEditing={setIsEditing} isEditing={isEditing} setElementToEdit={setElementToEdit} elementToEdit={elementToEdit} setElementForCustomMenu={setElementForCustomMenu} elementForCustomMenu={elementForCustomMenu}/>
+          <Bookmarks groups={groups} categoryID={categoryID} setCategoryID={setCategoryID} setShowTitles={setShowTitles} setTitles={setTitles} showConfirm={showConfirm} showTitles={showTitles} setShowConfirm={setShowConfirm} titlesUpdate={titlesUpdate} openCustomMenu={openCustomMenu} setIsEditing={setIsEditing} isEditing={isEditing} setElementToEdit={setElementToEdit} elementToEdit={elementToEdit} setElementForCustomMenu={setElementForCustomMenu} elementForCustomMenu={elementForCustomMenu} setElementForCustomMenu={setElementForCustomMenu}/>
         </div>
         {
           elementForCustomMenu

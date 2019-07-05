@@ -108,22 +108,22 @@ app.get('/titles/:category/:subject', (req, res) => {
 //   });
 // });
 
-app.get('/update/cat/:elementToEdit/:catEdited', (req, res) => {
-  console.log('hi');
+//db.documents.updateOne({'groups.id': id}, {$set:{'groups.id.category': 'News'}})
 
-  let elementToEdit = req.params.elementToEdit;
+app.get('/update/cat/:catEdited/:categoryID', (req, res) => {
+  console.log('hi')
   let catEdited = req.params.catEdited;
-  let key = `bmarks.${elementToEdit}`;
-  let value = `bmarks.${catEdited}`;
-  let key2 = `colors.${elementToEdit}`;
-  let value2 = `colors.${catEdited}`;
-  console.log(elementToEdit, 'elementToEdit')
+  let id = parseInt(req.params.categoryID);
+  let key = `groups.${id}.category`;
+  // let value = `bmarks.${catEdited}`;
+  // let key2 = `colors.${elementToEdit}`;
+  // let value2 = `colors.${catEdited}`;
   console.log(catEdited, 'catEdited')
-  console.log(key, 'key')
-  console.log(value, 'value')
+  console.log(id, 'id')
+  //console.log(value, 'value'
 
-
-  Document.updateOne({username: {$exists:true}}, {$rename:{[key]: value, [key2]: value2}}, (err, result) => {
+//db.documents.updateOne({'groups.id': id}, {$set:{'groups.id.category': 'News'}})
+  Document.updateOne({'groups.id': id}, {$set:{[key]: catEdited}}, (err, result) => {
     console.log(result)
     if (err) { console.log('Failure to get user obj: ', err); }
     else { res.send(result); }

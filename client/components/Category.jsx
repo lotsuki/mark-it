@@ -7,7 +7,7 @@ import IconDown from './IconDown';
 import axios from 'axios';
  
 
-const Category = ({ setCategory, category, exitCategories, cat, isOpen, setIsOpen, color, openCustomMenu, setIsEditing, isEditing, setElementToEdit, elementToEdit, elementForCustomMenu}) => {
+const Category = ({ groups, categoryID, setCategoryID, setCategory, category, exitCategories, cat, isOpen, setIsOpen, color, openCustomMenu, setIsEditing, isEditing, setElementToEdit, elementToEdit, elementForCustomMenu, setElementForCustomMenu}) => {
   const [ catEdited, setCatEdited ] = useState('');
   const reset = (e) => {
     setElementToEdit('');
@@ -18,34 +18,29 @@ const Category = ({ setCategory, category, exitCategories, cat, isOpen, setIsOpe
     setCatEdited(e.target.value);
   };
 
+  const editGroups = () => {
+
+  };
+
   const handleEnter = (e) => {
     if (e.keyCode === 13) {
-      console.log(elementToEdit, 'elemtoedit')
-      console.log(catEdited, 'catEdited')
-
-      axios.get(`/update/cat/${elementToEdit}/${catEdited}`, {
+      axios.get(`/update/cat/${catEdited}/${categoryID}`, {
         method: 'PATCH'
         })
-        .then(res => { console.log('PATCH request successful'); })
+        .then(res => {
+          for (var i = 0; i < groups.length; i++) {
+            if (groups[i].id === categoryID) {
+              groups[i].category = catEdited;
+            }
+          }
+           elementForCustomMenu.style.visibility = '';
+           setCategory('');
+           setCategoryID('');
+           setIsEditing(false);
+           setElementForCustomMenu('');
+          console.log('PATCH request successful');
+        })
         .catch(err => { console.log('Error at PATCH request', err); });
-
-      // fetch('/update/cat', {
-      //   credentials: 'include',
-      //   mode: 'cors',
-      //   headers: {
-      //     'Accept': 'application/json',
-      //     'Content-Type': 'application/json'
-      //   },
-      //   method: 'PATCH',
-      //   body: JSON.stringify({ elementToEdit, catEdited })
-      // })
-      // .then(res => res.json())
-      // .then(data => {
-      //   console.log(data)
-      //   console.log('PATCH request successful')
-      //   // editUpdate(result);
-      // })
-      // .catch(err => { console.log('Error at PATCH request: ', err); });
     }
   };
 
@@ -62,7 +57,7 @@ const displayCatOnEdit = () => {
     return (
       <Fragment>
         <IconDown setIsOpen={setIsOpen} setCategory={setCategory} exitCategories={exitCategories}/>
-        <input id="edit-category" type="text" onBlur={reset} onKeyUp={handleEnter} onChange={handleCatEdit} defaultValue={cat} style={{border: '1px solid lightgray', boxShadow: '0px 1px 10px 0px rgba(32, 33, 36, 0.10)', padding: '7px 12px', marginRight: '8px', color: '#9E9D9D'}}/>
+        <input id="edit-category" type="text" onBlur={reset} onKeyUp={handleEnter} onChange={handleCatEdit} defaultValue={cat} autoComplete="off" style={{border: '1px solid lightgray', boxShadow: '0px 1px 10px 0px rgba(32, 33, 36, 0.10)', padding: '7px 12px', marginRight: '8px', color: '#9E9D9D'}}/>
       </Fragment>)
   }
   return(

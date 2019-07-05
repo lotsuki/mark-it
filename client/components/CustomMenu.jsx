@@ -9,6 +9,7 @@ const CustomMenu = ({ top, elementForCustomMenu, setElementForCustomMenu, isEdit
   //use useeffect to add event listener and return a clean up func
   //use memo for component caching/memoization
   const exitCustomMenu = (e) => {
+    console.log('hi')
     let target;
     if (e.target.id !== 'edit category' && e.target.className === 'app' || e.target.className === 'sidebar-container') {
       let menuIcons = document.getElementsByClassName('icon-custom-menu');
