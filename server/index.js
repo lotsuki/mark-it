@@ -33,7 +33,9 @@ app.use(express.static(`${__dirname}/../public/`));
 app.post('/form', (req, res) => {
   let category = req.body.category;
   let subject = req.body.subject;
-  console.log(req.body)
+  let categoryID = req.body.categoryID;
+  let categoryL = req.body.categoryL;
+
   Document.create({
         category: category,
         subject: subject,
@@ -46,11 +48,10 @@ app.post('/form', (req, res) => {
       res.send('Error at POST: ', err);
     }
     else {
-      let key = `bmarks.${category}`;
       let hasCategory = req.body.hasCategory;
       let hasSubject = req.body.hasSubject;
       if (!hasCategory && !hasSubject) {
-        Document.updateOne({username: {$exists:true}}, {$set:{[key]: [subject]}}, (err, result) => {
+        Document.updateOne({groups: {$exists: true}}, {$addToSet: {groups:{id: categoryL, category: category, color: 'blue', subjects: [{id: 0, subject: subject}], }}}, (err, result) => {
           if (err) { res.send(err); }
           else { res.send(result); }
         })
@@ -163,20 +164,20 @@ app.get('/update/cat/:catEdited/:categoryID', (req, res) => {
 
 
 
-app.delete('/delete/category/:id', (req, res) => {
+app.delete('/delete/:category/:id', (req, res) => {
   let id = parseInt(req.params.id);
-  // let key = `groups.${id}`
-  console.log(id)
+  let category = req.params.category;
+
   Document.updateOne({'groups.id': id}, {$pull:{groups: {id}}}, (err, result) => {
     console.log(result)
     if (err) { console.log('Failure to get user obj: ', err); }
     else { res.send(result); }
   });
 
-  // Document.deleteMany({ category: item }, (err) => {
-  //   if (err) { console.log('Error at DELETE request: ', err); }
-  //   else { console.log('Document successfully deleted'); }
-  // });
+  Document.deleteMany({ category }, (err) => {
+    if (err) { console.log('Error at DELETE request: ', err); }
+    else { res.send(result); }
+  });
 
 });
 

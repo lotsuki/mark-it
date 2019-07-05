@@ -32,7 +32,6 @@ const CustomMenu = ({ top, elementForCustomMenu, setElementForCustomMenu, isEdit
   };
 
   const confirmDeleteForCategory = async () => {
-
     let doc = document.getElementById('container');
     let confirmContainer = document.getElementById('confirm');
 

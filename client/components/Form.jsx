@@ -5,7 +5,7 @@ import _ from 'underscore';
 import { Spring } from 'react-spring/renderprops';
 
 
-const Form = ({ showForm, setShowForm, bmarks }) => {
+const Form = ({ groups, showForm, setShowForm, setCategoryID, categoryID }) => {
   const [ category, setCategory ] = useState('');
   const [ subject, setSubject ] = useState('');
   const [ title, setTitle ] = useState('');
@@ -14,10 +14,19 @@ const Form = ({ showForm, setShowForm, bmarks }) => {
   const [ selectSub, setSelectSub ] = useState(false);
 
   let subjects = [];
-  let categories = _.map(bmarks, (cat, key) => {
-    subjects = subjects.concat(cat);
-    return key;
+  let categories = groups.map((group, i) => {
+    group.subjects.forEach(subject => {
+      subjects.push(subject.subject);
+    });
+    return group.category;
   });
+  console.log(subjects, 'subjs');
+  console.log(categories, 'cats');
+
+  //  _.map(bmarks, (cat, key) => {
+  //   subjects = subjects.concat(cat);
+  //   return key;
+  // });
 
   const clearForm = () => {
     setCategory('');
@@ -27,20 +36,28 @@ const Form = ({ showForm, setShowForm, bmarks }) => {
   };
 
   const hasCategory = () => {
-    return bmarks.hasOwnProperty(category);
+    for (var i = 0; i < groups.length; i++) {
+      if (groups[i].category === category) {
+        setCategoryID(groups[i].id);
+        return true;
+      }
+    }
+    return false;
+    //return categories.indexOf(category) !== -1;
+    //return bmarks.hasOwnProperty(category);
   };
 
   const hasSubject = () => {
-    if (bmarks[category] && subject) {
-      return bmarks[category].indexOf(subject) !== -1;
-    }
-    return false;
+    return subjects.indexOf(subject) !== -1;
   };
 
   const submitForm = (e) => {
-    e.preventDefault();
 
+    e.preventDefault();
+    console.log(hasCategory(), hasSubject(), 'hascatandsub')
     const data = {
+      categoryL: groups.length,
+      categoryID,
       category,
       subject,
       title,
@@ -61,8 +78,11 @@ const Form = ({ showForm, setShowForm, bmarks }) => {
         })
         .then(res => res.json())
         .then(data => {
-          //TODO****
-          console.log(data);
+          console.log(hasCategory(), hasSubject(), 'after req')
+          //if (!hasCategory() && !hasSubject()) {
+            groups.push({id: groups.length, category, color: 'blue', subjects: [{id: 0, subject}]})
+         // }
+         setShowForm(false);
         })
         .catch(err => { console.log('Could not post document: ', err); });
     } else {
@@ -79,7 +99,7 @@ const Form = ({ showForm, setShowForm, bmarks }) => {
       setSelectSub(true);
     }
   };
-
+//onFocus={e => displaySelectMenu(e.target.className)}
   return(
   <Spring
     config={{duration: 2000}}
@@ -102,7 +122,7 @@ const Form = ({ showForm, setShowForm, bmarks }) => {
               data-testid="category-input"
               placeholder="Category"
               onChange={e => setCategory(e.target.value)}
-              onFocus={e => displaySelectMenu(e.target.className)}
+
               />
 
             <input name="form" type="color" defaultValue="#D00000" className="color"/>

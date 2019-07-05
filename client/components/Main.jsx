@@ -50,7 +50,7 @@ const Main = ({ groups, links }) => {
 
   const displayContainer = () => {
     if (showForm) {
-      return <Form showForm={showForm} setShowForm={setShowForm} groups={groups}/>
+      return <Form groups={groups} showForm={showForm} setShowForm={setShowForm} categoryID={categoryID} setCategoryID={setCategoryID}/>
     } else if (showEdit) {
       return <Edit groups={groups} links={links} />
     } else if (showConfirm) {

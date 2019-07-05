@@ -3,12 +3,13 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 
 const Confirm = ({ groups, setShowConfirm, titleToDelete, subjectOfTitle, showTitlesUpdate, setTitles, titles, groupToDelete, categoryID, setCategoryID, elementForCustomMenu, setElementForCustomMenu }) => {
-
+console.log()
   const handleConfirmClick = (e) => {
     if (e.target.innerText === 'Yes') {
+      let category = elementForCustomMenu.parentElement.children[1].innerText;
       setShowConfirm(false);
       if (groupToDelete === 'category') {
-        axios.delete(`/delete/category/${categoryID}`)
+        axios.delete(`/delete/${category}/${categoryID}`)
           .then(res => {
              for (var i = 0; i < groups.length; i++) {
                 if (groups[i].id === categoryID) {
