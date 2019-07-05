@@ -1,12 +1,45 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import _ from 'underscore';
 import PropTypes from 'prop-types';
 import Subjects from './Subjects';
 import Category from './Category';
 
-const Categories = ({ bmarks, showConfirm, setShowConfirm, titlesUpdate, setShowTitles, showTitles, setTitles, colors, openCustomMenu, setIsEditing, isEditing, elementToEdit, setElementToEdit, setElementForCustomMenu, elementForCustomMenu }) => {
+const Categories = ({ groups, showConfirm, setShowConfirm, titlesUpdate, setShowTitles, showTitles, setTitles, openCustomMenu, setIsEditing, isEditing, elementToEdit, setElementToEdit, setElementForCustomMenu, elementForCustomMenu }) => {
   const [ isOpen, setIsOpen ] = useState(false);
   const [ category, setCategory ] = useState('');
+  const [ categories, setCategories ] = useState([]);
+  const [ subjects, setSubjects ] = useState([]);
+
+  // if (categories)
+  // const setCatsAndSubs = () => {
+  //   let tempCats = [];
+  //   let tempSubs = [];
+  //   for (var key in bmarks) {
+  //     console.log(key, 'key')
+  //     for (var prop in bmarks[key]) {
+  //       console.log(prop, 'hi')
+  //       tempCats.push(prop);
+  //       tempSubs = tempSubs.concat(bmarks[key][prop])
+  //     }
+  //   }
+  //   setCategories(tempCats);
+  //   setSubjects(tempSubs);
+  // };
+
+  // useEffect(async () => {
+  //   console.log('categoreis')
+
+  //   setCatsAndSubs();
+    //  _.map(bmarks, (obj, index) => {
+    //   _.map(obj, (value, key) => {
+    //     console.log(key, 'KEY')
+    //   })
+    // })
+
+
+    //console.log(categories)
+    //return false;
+  //}, [])
 
   const exitCategories = (e) => {
     if (e.target.className === 'app' || e.target.className === 'sidebar-container') {
@@ -24,8 +57,10 @@ const Categories = ({ bmarks, showConfirm, setShowConfirm, titlesUpdate, setShow
     // }
   };
 
+  // (e.target.className.baseVal && e.target.className.baseVal.includes('icon-custom-menu')) || (e.target.tagName === 'path' && e.currentTarget.firstChild.lastChild.className.baseVal.includes('icon-custom-menu')))
+
   const handleCatClick = (e) => {
-    if ((e.target.className.baseVal && e.target.className.baseVal.includes('icon-custom-menu')) || (e.target.tagName === 'path' && e.currentTarget.firstChild.lastChild.className.baseVal.includes('icon-custom-menu'))) {
+    if (e.target.className && e.target.className.baseVal.includes('icon-custom-menu') || e.target.parentElement.className.baseVal && e.target.parentElement.className.baseVal.includes('icon-custom-menu')) {
       console.log('SVG')
     } else if (e.target.style.border === '1px solid lightgray') {
       setElementToEdit(e.target.value);
@@ -53,29 +88,46 @@ const Categories = ({ bmarks, showConfirm, setShowConfirm, titlesUpdate, setShow
 
   };
 
-
+  // const groups = new Document({
+  // groups: [
+  // {
+  //   id: 0,
+  //   category: 'Tech',
+  //   color: '#E58129',
+  //   subjects: [
+  //     {
+  //       id: 0,
+  //       subject: 'React'
+  //     },
+  //     {
+  //       id: 1,
+  //       subject: 'Python'
+  //     }
+  //   ]
+  // },
 
 
   return (
     <div className="section-container" >
      <div id="section-wrapper">
-       {_.map(bmarks, (cat, key) => {
+       {groups.map(group => {
+
          return (
-          <div className="category-container" key={key}>
+          <div className="category-container" key={group.category}>
            <div
              className="category-wrapper"
              onClick={handleCatClick}
-             key={key}>
-             <Category setCategory={setCategory} category={category} exitCategories={exitCategories} cat={key} setIsOpen={setIsOpen} isOpen={isOpen} colors={colors} openCustomMenu={openCustomMenu} setIsEditing={setIsEditing} isEditing={isEditing} setElementToEdit={setElementToEdit} elementToEdit={elementToEdit} elementForCustomMenu={elementForCustomMenu}/>
+             key={group.category}>
+             <Category setCategory={setCategory} category={category} exitCategories={exitCategories} cat={group.category} color={group.color} setIsOpen={setIsOpen} isOpen={isOpen} openCustomMenu={openCustomMenu} setIsEditing={setIsEditing} isEditing={isEditing} setElementToEdit={setElementToEdit} elementToEdit={elementToEdit} elementForCustomMenu={elementForCustomMenu}/>
            </div>
-           <div className="dropdown-container" key={cat[0]}>
+           <div className="dropdown-container" key={group.color}>
              {
-              category === key
+              category === group.category
               ? (
                 <div className="dropdown-wrapper" >
                   {
                     isOpen
-                      ? ( <Subjects bmarks={bmarks} category={category} setShowTitles={setShowTitles} setTitles={setTitles} showConfirm={showConfirm} showTitles={showTitles} setShowConfirm={setShowConfirm} titlesUpdate={titlesUpdate} handleCatClick={handleCatClick} setIsOpen={setIsOpen} setCategory={setCategory} colors={colors} isOpen={isOpen}/>)
+                      ? ( <Subjects groups={groups} category={category} setShowTitles={setShowTitles} setTitles={setTitles} showConfirm={showConfirm} showTitles={showTitles} setShowConfirm={setShowConfirm} titlesUpdate={titlesUpdate} handleCatClick={handleCatClick} setIsOpen={setIsOpen} setCategory={setCategory} color={group.color} isOpen={isOpen}/>)
                       : ( null )
                   }
                 </div>
@@ -94,15 +146,15 @@ const Categories = ({ bmarks, showConfirm, setShowConfirm, titlesUpdate, setShow
 
 export default Categories;
 
-Categories.propTypes = {
-  bmarks: PropTypes.object,
-  displayConfirm: PropTypes.func,
-  titlesUpdate: PropTypes.array
-};
+// Categories.propTypes = {
+//   bmarks: PropTypes.object,
+//   displayConfirm: PropTypes.func,
+//   titlesUpdate: PropTypes.array
+// };
 
-Categories.defaultProps = {
-  bmarks: {},
-  titlesUpdate: [],
-  displayConfirm: () => {}
-};
+// Categories.defaultProps = {
+//   bmarks: {},
+//   titlesUpdate: [],
+//   displayConfirm: () => {}
+// };
 

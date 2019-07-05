@@ -11,9 +11,8 @@ class App extends React.Component {
 
     this.state = {
       userID: '',
-      bmarks: {},
-      links: [],
-      colors: {}
+      groups: [],
+      links: []
     }
     this._isMounted = false;
   }
@@ -24,38 +23,52 @@ class App extends React.Component {
     this._isMounted = true;
 
     fetch('/user', {
-      headers: {
-        "Content-Type": "application/json",
-        "Cache-Control": "public, no-cache"
-      }
-    })
+        headers: {
+          "Content-Type": "application/json",
+          "Cache-Control": "public, no-cache"
+        }
+      })
       .then(res => res.json())
       .then(data =>  {
         this.setState({
-          userID: data.username,
-          bmarks: data.bmarks,
-          colors: data.colors
+          userID: data.username
         })
       })
       .catch(err => {
         console.log('GET request failed at /user: ', err)
       });
 
-    fetch('/titles', {
-      headers: {
-        "Content-Type": "application/json",
-        "Cache-Control": "public, no-cache"
-        }
-      })
-      .then(res => res.json())
-      .then(data =>  {
-        this.setState({
-          links: data
+      fetch('/groups', {
+          headers: {
+            "Content-Type": "application/json",
+            "Cache-Control": "public, no-cache"
+          }
         })
-      })
-      .catch(err => {
-        console.log('GET request failed at /users: ', err)
-      });
+        .then(res => res.json())
+        .then(data =>  {
+          this.setState({
+           groups: data.groups
+          })
+        })
+        .catch(err => {
+          console.log('GET request failed at /user: ', err)
+        });
+
+      fetch('/titles', {
+        headers: {
+          "Content-Type": "application/json",
+          "Cache-Control": "public, no-cache"
+          }
+        })
+        .then(res => res.json())
+        .then(data =>  {
+          this.setState({
+            links: data
+          })
+        })
+        .catch(err => {
+          console.log('GET request failed at /users: ', err)
+        });
   }
 
   componentWillUnMount() {
@@ -63,10 +76,10 @@ class App extends React.Component {
   }
 
   render() {
-    const { userID, bmarks, links, colors } = this.state;
+    const { userID, groups, links } = this.state;
     return (
       <ErrorBoundary>
-        <Main userID={userID} bmarks={bmarks} links={links} colors={colors}/>
+        <Main userID={userID} groups={groups} links={links}/>
       </ErrorBoundary>
     );
   }

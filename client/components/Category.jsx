@@ -4,21 +4,50 @@ import IconFolder from './IconFolder';
 import IconFolderOpen from './IconFolderOpen';
 import IconCustomMenu from './IconCustomMenu';
 import IconDown from './IconDown';
+import axios from 'axios';
  
 
-const Category = ({ setCategory, category, exitCategories, cat, isOpen, setIsOpen, colors, openCustomMenu, setIsEditing, isEditing, setElementToEdit, elementToEdit, elementForCustomMenu}) => {
+const Category = ({ setCategory, category, exitCategories, cat, isOpen, setIsOpen, color, openCustomMenu, setIsEditing, isEditing, setElementToEdit, elementToEdit, elementForCustomMenu}) => {
   const [ catEdited, setCatEdited ] = useState('');
   const reset = (e) => {
-    console.log('reset')
     setElementToEdit('');
     setIsEditing(false);
   };
 
-//const handleCatEdit = (e) => {
-//  setCatEdited(e.target.value);
-  // console.log(e.target, 'target')
-  // setIsOpen(false);
-//};
+  const handleCatEdit = (e) => {
+    setCatEdited(e.target.value);
+  };
+
+  const handleEnter = (e) => {
+    if (e.keyCode === 13) {
+      console.log(elementToEdit, 'elemtoedit')
+      console.log(catEdited, 'catEdited')
+
+      axios.get(`/update/cat/${elementToEdit}/${catEdited}`, {
+        method: 'PATCH'
+        })
+        .then(res => { console.log('PATCH request successful'); })
+        .catch(err => { console.log('Error at PATCH request', err); });
+
+      // fetch('/update/cat', {
+      //   credentials: 'include',
+      //   mode: 'cors',
+      //   headers: {
+      //     'Accept': 'application/json',
+      //     'Content-Type': 'application/json'
+      //   },
+      //   method: 'PATCH',
+      //   body: JSON.stringify({ elementToEdit, catEdited })
+      // })
+      // .then(res => res.json())
+      // .then(data => {
+      //   console.log(data)
+      //   console.log('PATCH request successful')
+      //   // editUpdate(result);
+      // })
+      // .catch(err => { console.log('Error at PATCH request: ', err); });
+    }
+  };
 
 
 const displayCatOnEdit = () => {
@@ -33,12 +62,12 @@ const displayCatOnEdit = () => {
     return (
       <Fragment>
         <IconDown setIsOpen={setIsOpen} setCategory={setCategory} exitCategories={exitCategories}/>
-        <input id="edit-category" type="text" onBlur={reset} defaultValue={cat} style={{border: '1px solid lightgray', boxShadow: '0px 1px 10px 0px rgba(32, 33, 36, 0.10)', padding: '7px 12px', marginRight: '8px', color: '#9E9D9D'}}/>
+        <input id="edit-category" type="text" onBlur={reset} onKeyUp={handleEnter} onChange={handleCatEdit} defaultValue={cat} style={{border: '1px solid lightgray', boxShadow: '0px 1px 10px 0px rgba(32, 33, 36, 0.10)', padding: '7px 12px', marginRight: '8px', color: '#9E9D9D'}}/>
       </Fragment>)
   }
   return(
     <Fragment>
-      <IconFolder viewBox={"-20 -9 55 55"} color={colors[cat]} width={"30"} height={"30"} />
+      <IconFolder viewBox={"-20 -9 55 55"} color={color} width={"30"} height={"30"} />
       <div className="category-text">{cat}</div>
     </Fragment>
     )
@@ -63,7 +92,6 @@ const displayCatOnEdit = () => {
     // e.target.parentElement.style.background = '';
   };
 
-
   return (
     <Fragment>
       {
@@ -80,7 +108,7 @@ const displayCatOnEdit = () => {
                   )
                 : (
                   <Fragment>
-                    <IconFolderOpen viewBox={"-20 -9 55 55"} color={colors[cat]} width={"30"} height={"30"} />
+                    <IconFolderOpen viewBox={"-20 -9 55 55"} color={color} width={"30"} height={"30"} />
                     <div className="category-text">{cat}</div>
                   </Fragment>
                   )
@@ -97,7 +125,7 @@ const displayCatOnEdit = () => {
                   )
                 : (
                   <Fragment>
-                    <IconFolder viewBox={"-20 -9 55 55"} color={colors[cat]} width={"30"} height={"30"}/>
+                    <IconFolder viewBox={"-20 -9 55 55"} color={color} width={"30"} height={"30"}/>
                     <div className="category-text">{cat}</div>
 
                   </Fragment>
@@ -113,14 +141,14 @@ const displayCatOnEdit = () => {
 
 export default Category;
 
-Category.propTypes = {
-  category: PropTypes.string,
-  cat: PropTypes.string
-};
+// Category.propTypes = {
+//   category: PropTypes.string,
+//   cat: PropTypes.string
+// };
 
-Category.defaultProps = {
-  category: '',
-  cat: ''
-};
+// Category.defaultProps = {
+//   category: '',
+//   cat: ''
+// };
 
 

@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import Navbar from './Navbar';
 import Bookmarks from './Bookmarks';
@@ -11,7 +11,7 @@ import { useSpring, animated } from 'react-spring';
 
 //try wihtout fragments
 
-const Main = ({ bmarks, links, colors }) => {
+const Main = ({ groups, links }) => {
   const [ showForm, setShowForm, ] = useState(false);
   const [ showEdit, setShowEdit ] = useState(false);
   const [ showConfirm, setShowConfirm ] = useState(false);
@@ -24,6 +24,7 @@ const Main = ({ bmarks, links, colors }) => {
   const [ elementForCustomMenu, setElementForCustomMenu ] = useState('');
   const [ isEditing, setIsEditing ] = useState(false);
   const [ elementToEdit, setElementToEdit ] = useState('');
+
 
   const showTitlesUpdate = (data) => {
     setTitlesUpdate(data);
@@ -47,9 +48,9 @@ const Main = ({ bmarks, links, colors }) => {
 
   const displayContainer = () => {
     if (showForm) {
-      return <Form showForm={showForm} setShowForm={setShowForm} bmarks={bmarks}/>
+      return <Form showForm={showForm} setShowForm={setShowForm} groups={groups}/>
     } else if (showEdit) {
-      return <Edit bmarks={bmarks} links={links} />
+      return <Edit groups={groups} links={links} />
     } else if (showConfirm) {
       return <Confirm showConfirm={showConfirm} setShowConfirm={setShowConfirm} titleToDelete={titleToDelete} subjectOfTitle={subjectOfTitle} showTitlesUpdate={showTitlesUpdate} setTitles={setTitles} titles={titles}/>
     }
@@ -67,8 +68,8 @@ const Main = ({ bmarks, links, colors }) => {
     }
     if (!elementForCustomMenu || elementForCustomMenu.className.baseVal !== target.className.baseVal) {
       let count = 0;
-      for (var key in bmarks) {
-        if (key === target.parentElement.children[1].innerText) {
+      for (var i = 0; i < groups.length; i++) {
+        if (groups[i].category === target.parentElement.children[1].innerText) {
           break;
         }
         ++count;
@@ -86,7 +87,7 @@ const Main = ({ bmarks, links, colors }) => {
       <Navbar showForm={showForm} setShowForm={setShowForm} showEdit={showEdit} setShowEdit={setShowEdit} links={links} />
       <div id="app-container" className="app" data-testid="app-container">
         <div className="sidebar-container">
-          <Bookmarks bmarks={bmarks} setShowTitles={setShowTitles} setTitles={setTitles} showConfirm={showConfirm} showTitles={showTitles} setShowConfirm={setShowConfirm} titlesUpdate={titlesUpdate} colors={colors} openCustomMenu={openCustomMenu} setIsEditing={setIsEditing} isEditing={isEditing} setElementToEdit={setElementToEdit} elementToEdit={elementToEdit} setElementForCustomMenu={setElementForCustomMenu} elementForCustomMenu={elementForCustomMenu}/>
+          <Bookmarks groups={groups} setShowTitles={setShowTitles} setTitles={setTitles} showConfirm={showConfirm} showTitles={showTitles} setShowConfirm={setShowConfirm} titlesUpdate={titlesUpdate} openCustomMenu={openCustomMenu} setIsEditing={setIsEditing} isEditing={isEditing} setElementToEdit={setElementToEdit} elementToEdit={elementToEdit} setElementForCustomMenu={setElementForCustomMenu} elementForCustomMenu={elementForCustomMenu}/>
         </div>
         {
           elementForCustomMenu

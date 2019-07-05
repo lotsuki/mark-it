@@ -16,13 +16,13 @@ const PORT = process.env.PORT || 3000;
 // }
 
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header(
+  res.set("Access-Control-Allow-Origin", "*");
+  res.set(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept"
   );
-  res.header("Access-Control-Allow-Methods", "GET,PATCH,PUT,POST,DELETE");
-  res.header("Cache-Control", "public, no cache");
+  res.set("Access-Control-Allow-Methods", "GET,PATCH,PUT,POST,DELETE,OPTIONS");
+  res.set("Cache-Control", "public, no cache");
   next();
 });
 app.use(compression());
@@ -72,6 +72,13 @@ app.get('/user', (req, res) => {
   });
 });
 
+app.get('/groups', (req, res) => {
+  Document.findOne({ groups: { $exists: true } }, (err, result) => {
+    if (err) { console.log('Failure to get user obj: ', err); }
+    else { res.send(result); }
+  });
+});
+
 app.get('/titles', (req, res) => {
   Document.find({title: {$exists:true}}, 'subject title url', (err, result) => {
     if (err) { console.log('Failure to get user obj: ', err); }
@@ -88,30 +95,57 @@ app.get('/titles/:category/:subject', (req, res) => {
   });
 });
 
-app.get('/update/subj/:defaultVal/:newVal/:category', (req, res) => {
-  let defaultVal = req.params.defaultVal;
-  let newVal = req.params.newVal;
-  let cat = req.params.category;
-  let key = `bmarks.${cat}`;
-  let key2 = `bmarks.${cat}.$`;
+// app.get('/update/subj/:defaultVal/:newVal/:category', (req, res) => {
+//   let defaultVal = req.params.defaultVal;
+//   let newVal = req.params.newVal;
+//   let cat = req.params.category;
+//   let key = `bmarks.${cat}`;
+//   let key2 = `bmarks.${cat}.$`;
 
-  Document.updateOne({[key]: defaultVal}, {$set: {[key2]: newVal}}, (err, result) => {
+//   Document.updateOne({[key]: defaultVal}, {$set: {[key2]: newVal}}, (err, result) => {
+//     if (err) { console.log('Failure to get user obj: ', err); }
+//     else { res.status(200).send(result); }
+//   });
+// });
+
+app.get('/update/cat/:elementToEdit/:catEdited', (req, res) => {
+  console.log('hi');
+
+  let elementToEdit = req.params.elementToEdit;
+  let catEdited = req.params.catEdited;
+  let key = `bmarks.${elementToEdit}`;
+  let value = `bmarks.${catEdited}`;
+  let key2 = `colors.${elementToEdit}`;
+  let value2 = `colors.${catEdited}`;
+  console.log(elementToEdit, 'elementToEdit')
+  console.log(catEdited, 'catEdited')
+  console.log(key, 'key')
+  console.log(value, 'value')
+
+
+  Document.updateOne({username: {$exists:true}}, {$rename:{[key]: value, [key2]: value2}}, (err, result) => {
+    console.log(result)
     if (err) { console.log('Failure to get user obj: ', err); }
-    else { res.status(200).send(result); }
+    else { res.send(result); }
   });
 });
 
-app.get('/update/cat/:defaultVal/:newVal', (req, res) => {
-  let defaultVal = req.params.defaultVal;
-  let newVal = req.params.newVal;
-  let key = `bmarks.${defaultVal}`;
-  let value = `bmarks.${newVal}`;
+//add subject
 
-  Document.updateOne({username: {$exists:true}}, {$rename:{[key]: value}}, (err, result) => {
-    if (err) { console.log('Failure to get user obj: ', err); }
-    else { res.status(200).send(result); }
-  });
-});
+// db.documents.updateOne({'groups.id': id}, {$addToSet:{'groups.id.subjects': {id: 4, subject: 'hey'}}})
+// db.documents.updateOne({groups: {$elemMatch: {id: 1}}}, {$addToSet:{'groups.$.subjects': {id: 3, subject: 'Mongo'}}})
+
+//add category
+// db.documents.updateOne({groups: {$exists: true}}, {$addToSet: {groups:{id: 4, category: 'Sports', color: 'blue', subjects: [], }}})
+
+
+//edit category
+//db.documents.updateOne({'groups.id': id}, {$set:{'groups.id.category': 'News'}})
+// db.documents.updateOne({groups: {$elemMatch: {category: 'Tech'}}}, {$set:{'groups.$.category': 'News'}})
+
+//edit subject
+//db.documents.updateOne({'groups.id': id},{$set:{'groups.id.subjects.subID.subject': 'Indian'}})
+
 
 // app.get('/update/title/:defaultVal/:newVal', (req, res) => {
 //   let defaultVal = req.params.defaultVal;

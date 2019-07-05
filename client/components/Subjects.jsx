@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'underscore';
 import Titles from './Titles';
@@ -6,16 +6,27 @@ import Subject from './Subject';
 import {useTrail, animated} from 'react-spring';
 
 
-const Subjects = ({ bmarks, category, showConfirm, setShowConfirm, titlesUpdate, showTitles, setShowTitles, setTitles, handleCatClick, setIsOpen, setCategory, colors, isOpen }) => {
+const Subjects = ({ groups, category, showConfirm, setShowConfirm, titlesUpdate, showTitles, setShowTitles, setTitles, handleCatClick, setIsOpen, setCategory, color, isOpen }) => {
   const [ subj, setSubj ] = useState('');
   const [ update, setUpdate ] = useState(false);
+  const [ subjects, setSubjects ] = useState([]);
 
-  let subjects = [];
-  _.forEach(bmarks, (cat, key) => {
-    if( category === key) {
-      subjects = subjects.concat(cat);
+  //let subjects = [];
+  useEffect(() => {
+    for (var i = 0; i < groups.length; i++) {
+      if (groups[i].category === category) {
+        setSubjects(groups[i].subjects);
+        break;
+      }
     }
-  });
+  }, [])
+
+  // _.forEach(bmarks, (cat, key) => {
+  //   if( category === key) {
+  //     subjects = subjects.concat(cat.slice(1));
+  //   }
+  // });
+
 
   const titleClasses = ['far fa-trash-alt', 'title', 'title-wrapper', 'titles-sub-container', 'titles-container', 'confirm-button yes-button', 'confirm-button no-button', 'delete-icon'];
   const subjectClasses = ['subject', 'subject-text'];
@@ -65,27 +76,37 @@ const Subjects = ({ bmarks, category, showConfirm, setShowConfirm, titlesUpdate,
     }
   };
 
-  const trail = useTrail(subjects.length, {
-    opacity: isOpen ? 1 : 0,
-    height: isOpen ? 50 : 0,
-    from: {opacity: isOpen ? 0 : 1, height: isOpen ? 0 : 50}},
-  );
+  // const trail = useTrail(subjects.length, {
+  //   opacity: isOpen ? 1 : 0,
+  //   height: isOpen ? 50 : 0,
+  //   from: {opacity: isOpen ? 0 : 1, height: isOpen ? 0 : 50}},
+  // );
+  // {trail.map(({height, opacity}, index) => (
+  //   )}
+  // {<div>
+  //            <animated.div
+  //              className="subject"
+  //              onClick={handleSubjClick}
+  //              style={{height, opacity}}
+  //              key={subjects[index]}>
+  //              <Subject clickedSubj={subj} subject={subjects[index]} color={color}/>
+  //            </animated.div>
+  //          </div>}
 
   return (
     <div className="subject-container">
-      {trail.map(({height, opacity}, index) => (
-         <div className="subject-wrapper" key={subjects[index]}>
-           <div>
-             <animated.div
-               className="subject"
-               onClick={handleSubjClick}
-               style={{height, opacity}}
-               key={subjects[index]}>
-               <Subject clickedSubj={subj} subject={subjects[index]} color={colors[category]}/>
-             </animated.div>
+      {
+        subjects.map(subject => (
+         <div className="subject-wrapper" key={subject.subject}>
+           <div
+             className="subject"
+             onClick={handleSubjClick}
+             key={subject.subject}>
+               <Subject clickedSubj={subj} subject={subject.subject} color={color}/>
            </div>
          </div>
-      ))}
+        ))
+      }
     </div>
   )
 };
@@ -94,17 +115,17 @@ const Subjects = ({ bmarks, category, showConfirm, setShowConfirm, titlesUpdate,
 
 export default Subjects;
 
-Subjects.propTypes = {
-  bmarks: PropTypes.object,
-  category: PropTypes.string,
-  titlesUpdate: PropTypes.array,
-  displayConfirm: PropTypes.func
-};
+// Subjects.propTypes = {
+//   bmarks: PropTypes.object,
+//   category: PropTypes.string,
+//   titlesUpdate: PropTypes.array,
+//   displayConfirm: PropTypes.func
+// };
 
-Subjects.defaultProps = {
-  bmarks: {},
-  category: '',
-  titlesUpdate: [],
-  displayConfirm: () => {}
-};
+// Subjects.defaultProps = {
+//   bmarks: {},
+//   category: '',
+//   titlesUpdate: [],
+//   displayConfirm: () => {}
+// };
 
