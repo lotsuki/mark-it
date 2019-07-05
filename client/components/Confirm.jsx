@@ -1,24 +1,32 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 
-const Confirm = ({ setShowConfirm, titleToDelete, subjectOfTitle, showTitlesUpdate, setTitles, titles }) => {
+const Confirm = ({ groups, setShowConfirm, titleToDelete, subjectOfTitle, showTitlesUpdate, setTitles, titles, groupToDelete, categoryID, setCategoryID, elementForCustomMenu, setElementForCustomMenu }) => {
 
   const handleConfirmClick = (e) => {
     if (e.target.innerText === 'Yes') {
       setShowConfirm(false);
+      if (groupToDelete === 'category') {
+        axios.delete(`/delete/category/${categoryID}`)
+          .then(res => {
+             for (var i = 0; i < groups.length; i++) {
+                if (groups[i].id === categoryID) {
+                  groups.splice(i, 1);
+                }
+              }
+             elementForCustomMenu.style.visibility = '';
+             setCategoryID('');
+             setElementForCustomMenu('');
+            console.log('DELETE request successful');
+          })
+          .catch(err => { console.log('Error at PATCH request', err); });
+      } else if (groupToDelete === 'subject') {
+          console.log('subject');
+      } else if(groupToDelete === 'title') {
+          console.log('title');
+      }
 
-      fetch(`bookmarks/${titleToDelete}/${subjectOfTitle}`, {
-         method: 'delete',
-         headers: {
-          "Content-Type": "application/json",
-          "Cache-Control": "public, max-age=365d"
-        }
-       })
-       .then(res => res.json())
-       .then(data => {
-         showTitlesUpdate(data);
-       })
-       .catch(err => { console.log('Could not delete document: ', err); });
     } else {
       setShowConfirm(false);
     }
@@ -31,7 +39,7 @@ const Confirm = ({ setShowConfirm, titleToDelete, subjectOfTitle, showTitlesUpda
         <div className="confirm-header-text">Delete</div>
       </div>
         <div className="confirm-text-wrapper">
-          <div className="confirm-text">Are you sure you want to delete this bookmark?</div>
+          <div className="confirm-text">Are you sure you want to delete this item?</div>
         </div>
         <div className="confirm-buttons-wrapper">
           <button type="button" className="confirm-button yes-button" onClick={handleConfirmClick}>Yes</button>

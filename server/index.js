@@ -111,18 +111,10 @@ app.get('/titles/:category/:subject', (req, res) => {
 //db.documents.updateOne({'groups.id': id}, {$set:{'groups.id.category': 'News'}})
 
 app.get('/update/cat/:catEdited/:categoryID', (req, res) => {
-  console.log('hi')
   let catEdited = req.params.catEdited;
   let id = parseInt(req.params.categoryID);
   let key = `groups.${id}.category`;
-  // let value = `bmarks.${catEdited}`;
-  // let key2 = `colors.${elementToEdit}`;
-  // let value2 = `colors.${catEdited}`;
-  console.log(catEdited, 'catEdited')
-  console.log(id, 'id')
-  //console.log(value, 'value'
 
-//db.documents.updateOne({'groups.id': id}, {$set:{'groups.id.category': 'News'}})
   Document.updateOne({'groups.id': id}, {$set:{[key]: catEdited}}, (err, result) => {
     console.log(result)
     if (err) { console.log('Failure to get user obj: ', err); }
@@ -167,6 +159,44 @@ app.get('/update/cat/:catEdited/:categoryID', (req, res) => {
 //     if (err) { console.log('Error at DELETE request: ', err); }
 //     else { console.log('Document successfully deleted'); }
 //   });
+// });
+
+
+
+app.delete('/delete/category/:id', (req, res) => {
+  let id = parseInt(req.params.id);
+  // let key = `groups.${id}`
+  console.log(id)
+  Document.updateOne({'groups.id': id}, {$pull:{groups: {id}}}, (err, result) => {
+    console.log(result)
+    if (err) { console.log('Failure to get user obj: ', err); }
+    else { res.send(result); }
+  });
+
+  // Document.deleteMany({ category: item }, (err) => {
+  //   if (err) { console.log('Error at DELETE request: ', err); }
+  //   else { console.log('Document successfully deleted'); }
+  // });
+
+});
+
+
+//   else if (group === 'subject') {
+//     Document.deleteMany({ subject: item }, (err) => {
+//       if (err) { console.log('Error at DELETE request: ', err); }
+//       else { console.log('Document successfully deleted'); }
+//     });
+
+//   } else if (group === 'title') {
+//     Document.deleteOne({ title: item }, (err) => {
+//       if (err) { console.log('Error at DELETE request: ', err); }
+//       else { console.log('Document successfully deleted'); }
+//     });
+
+//   }
+//   Document.deleteMany({ subject: subj }, (err) => {
+//     if (err) { console.log('Error at DELETE request: ', err); }
+//     else { console.log('Document successfully deleted'); }
 // });
 
 app.delete('/delete/subj/:subj', (req, res) => {

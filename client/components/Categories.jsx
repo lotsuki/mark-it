@@ -4,44 +4,11 @@ import PropTypes from 'prop-types';
 import Subjects from './Subjects';
 import Category from './Category';
 
-const Categories = ({ groups, categoryID, setCategoryID, showConfirm, setShowConfirm, titlesUpdate, setShowTitles, showTitles, setTitles, openCustomMenu, setIsEditing, isEditing, elementToEdit, setElementToEdit, setElementForCustomMenu, elementForCustomMenu }) => {
+const Categories = ({ groups, categoryID, setCategoryID, showConfirm, setShowConfirm, titlesUpdate, setShowTitles, showTitles, setTitles, openCustomMenu, setIsEditing, isEditing, elementToEdit, setElementToEdit, setElementForCustomMenu, elementForCustomMenu, setGroupToDelete }) => {
   const [ isOpen, setIsOpen ] = useState(false);
   const [ category, setCategory ] = useState('');
   const [ categories, setCategories ] = useState([]);
   const [ subjects, setSubjects ] = useState([]);
-
-
-  // if (categories)
-  // const setCatsAndSubs = () => {
-  //   let tempCats = [];
-  //   let tempSubs = [];
-  //   for (var key in bmarks) {
-  //     console.log(key, 'key')
-  //     for (var prop in bmarks[key]) {
-  //       console.log(prop, 'hi')
-  //       tempCats.push(prop);
-  //       tempSubs = tempSubs.concat(bmarks[key][prop])
-  //     }
-  //   }
-  //   setCategories(tempCats);
-  //   setSubjects(tempSubs);
-  // };
-
-  // useEffect(() => {
-  //   console.log('categoreis')
-  //   let categories = [];
-  //   groups.forEach
-  //   setCatsAndSubs();
-  //    _.map(bmarks, (obj, index) => {
-  //     _.map(obj, (value, key) => {
-  //       console.log(key, 'KEY')
-  //     })
-  // }, [])
-
-  console.log(groups, 'groups in categories')
-    //console.log(categories)
-    //return false;
-  //}, [])
 
   const exitCategories = (e) => {
     if (e.target.className === 'app' || e.target.className === 'sidebar-container') {
@@ -50,6 +17,7 @@ const Categories = ({ groups, categoryID, setCategoryID, showConfirm, setShowCon
       setCategory('');
       setCategoryID('');
       setShowTitles(false);
+      setGroupToDelete('');
     }
     // else if (_.contains(categoryClasses, e.target.className)) {
     //   setShowTitles(false);
@@ -60,11 +28,10 @@ const Categories = ({ groups, categoryID, setCategoryID, showConfirm, setShowCon
     // }
   };
 
-  // (e.target.className.baseVal && e.target.className.baseVal.includes('icon-custom-menu')) || (e.target.tagName === 'path' && e.currentTarget.firstChild.lastChild.className.baseVal.includes('icon-custom-menu')))
-
   const handleCatClick = (e) => {
     if (e.target.className.baseVal && e.target.className.baseVal.includes('icon-custom-menu') || e.target.parentElement.className.baseVal && e.target.parentElement.className.baseVal.includes('icon-custom-menu')) {
       console.log('SVG')
+      setGroupToDelete('category');
     } else if (e.target.style.border === '1px solid lightgray') {
       setElementToEdit(e.target.value);
     } else {
@@ -81,6 +48,7 @@ const Categories = ({ groups, categoryID, setCategoryID, showConfirm, setShowCon
         setIsOpen(false);
         setCategory('');
         setShowTitles(false);
+        setGroupToDelete('');
       } else {
 
         setIsOpen(true);
@@ -91,25 +59,6 @@ const Categories = ({ groups, categoryID, setCategoryID, showConfirm, setShowCon
     }
 
   };
-
-  // const groups = new Document({
-  // groups: [
-  // {
-  //   id: 0,
-  //   category: 'Tech',
-  //   color: '#E58129',
-  //   subjects: [
-  //     {
-  //       id: 0,
-  //       subject: 'React'
-  //     },
-  //     {
-  //       id: 1,
-  //       subject: 'Python'
-  //     }
-  //   ]
-  // },
-
 
   return (
     <div className="section-container" >

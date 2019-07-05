@@ -25,6 +25,7 @@ const Main = ({ groups, links }) => {
   const [ isEditing, setIsEditing ] = useState(false);
   const [ elementToEdit, setElementToEdit ] = useState('');
   const [ categoryID, setCategoryID ] = useState('');
+  const [ groupToDelete, setGroupToDelete ] = useState('');
 
 
   const showTitlesUpdate = (data) => {
@@ -53,11 +54,12 @@ const Main = ({ groups, links }) => {
     } else if (showEdit) {
       return <Edit groups={groups} links={links} />
     } else if (showConfirm) {
-      return <Confirm showConfirm={showConfirm} setShowConfirm={setShowConfirm} titleToDelete={titleToDelete} subjectOfTitle={subjectOfTitle} showTitlesUpdate={showTitlesUpdate} setTitles={setTitles} titles={titles}/>
+      return <Confirm groups={groups} showConfirm={showConfirm} setShowConfirm={setShowConfirm} titleToDelete={titleToDelete} subjectOfTitle={subjectOfTitle} showTitlesUpdate={showTitlesUpdate} setTitles={setTitles} titles={titles} groupToDelete={groupToDelete} categoryID={categoryID} setCategoryID={setCategoryID}  elementForCustomMenu={elementForCustomMenu} setElementForCustomMenu={setElementForCustomMenu}/>
     }
   };
 
   const openCustomMenu = (e) => {
+
     let target;
     if (e.target.tagName === 'path' && e.target.parentElement.className.baseVal.includes('icon-custom-menu')) {
       target = e.target.parentElement;
@@ -67,17 +69,18 @@ const Main = ({ groups, links }) => {
       setElementForCustomMenu('');
       setIsEditing(false);
       setCategoryID('');
+     // setCategory('');
     }
     if (!elementForCustomMenu || elementForCustomMenu.className.baseVal !== target.className.baseVal) {
       let count = 0;
       for (var i = 0; i < groups.length; i++) {
         if (groups[i].category === target.parentElement.children[1].innerText) {
-          console.log(groups[i]['id'], 'group')
           setCategoryID(groups[i]['id']);
           break;
         }
         ++count;
       }
+
       target.style.visibility = 'visible';
       let result = 165 + (count*53);
       setTop(result);
@@ -90,11 +93,11 @@ const Main = ({ groups, links }) => {
       <Navbar showForm={showForm} setShowForm={setShowForm} showEdit={showEdit} setShowEdit={setShowEdit} links={links} />
       <div id="app-container" className="app" data-testid="app-container">
         <div className="sidebar-container">
-          <Bookmarks groups={groups} categoryID={categoryID} setCategoryID={setCategoryID} setShowTitles={setShowTitles} setTitles={setTitles} showConfirm={showConfirm} showTitles={showTitles} setShowConfirm={setShowConfirm} titlesUpdate={titlesUpdate} openCustomMenu={openCustomMenu} setIsEditing={setIsEditing} isEditing={isEditing} setElementToEdit={setElementToEdit} elementToEdit={elementToEdit} setElementForCustomMenu={setElementForCustomMenu} elementForCustomMenu={elementForCustomMenu} setElementForCustomMenu={setElementForCustomMenu}/>
+          <Bookmarks groups={groups} categoryID={categoryID} setCategoryID={setCategoryID} setShowTitles={setShowTitles} setTitles={setTitles} showConfirm={showConfirm} showTitles={showTitles} setShowConfirm={setShowConfirm} titlesUpdate={titlesUpdate} openCustomMenu={openCustomMenu} setIsEditing={setIsEditing} isEditing={isEditing} setElementToEdit={setElementToEdit} elementToEdit={elementToEdit} setElementForCustomMenu={setElementForCustomMenu} elementForCustomMenu={elementForCustomMenu} setElementForCustomMenu={setElementForCustomMenu} setGroupToDelete={setGroupToDelete}/>
         </div>
         {
           elementForCustomMenu
-          &&  <CustomMenu top={top} elementForCustomMenu={elementForCustomMenu} setElementForCustomMenu={setElementForCustomMenu} isEditing={isEditing} setIsEditing={setIsEditing}/>
+          &&  <CustomMenu top={top} elementForCustomMenu={elementForCustomMenu} setElementForCustomMenu={setElementForCustomMenu} isEditing={isEditing} setIsEditing={setIsEditing} showConfirm={showConfirm} setShowConfirm={setShowConfirm} />
         }
         <Fragment>
           {

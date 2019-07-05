@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-const CustomMenu = ({ top, elementForCustomMenu, setElementForCustomMenu, isEditing, setIsEditing }) => {
+const CustomMenu = ({ top, elementForCustomMenu, setElementForCustomMenu, isEditing, setIsEditing, showConfirm, setShowConfirm }) => {
   useEffect(() => {
     document.addEventListener('click', exitCustomMenu);
   }, [])
@@ -9,7 +9,6 @@ const CustomMenu = ({ top, elementForCustomMenu, setElementForCustomMenu, isEdit
   //use useeffect to add event listener and return a clean up func
   //use memo for component caching/memoization
   const exitCustomMenu = (e) => {
-    console.log('hi')
     let target;
     if (e.target.id !== 'edit category' && e.target.className === 'app' || e.target.className === 'sidebar-container') {
       let menuIcons = document.getElementsByClassName('icon-custom-menu');
@@ -31,13 +30,34 @@ const CustomMenu = ({ top, elementForCustomMenu, setElementForCustomMenu, isEdit
 
     }
   };
-  //document.addEventListener('click', exitCustomMenu);
+
+  const confirmDeleteForCategory = async () => {
+
+    let doc = document.getElementById('container');
+    let confirmContainer = document.getElementById('confirm');
+
+    if (!showConfirm) {
+      await setShowConfirm(true);
+      //await deleteCategory(elementForCustomMenu.parentElement.children[1].innerText);
+      if (confirmContainer) {
+        confirmContainer.className = 'confirm-container is-visuallyHid';
+        doc.className = 'MainContainer is-blurred';
+        confirmContainer.className = 'confirm-container';
+        doc.parentElement.className = 'ModalOpen';
+      }
+    } else {
+      doc.parentElement.className = '';
+      doc.className = '';
+      confirmContainer.className = 'confirm-container is-hidden is-visuallyHid';
+      setShowConfirm(false)
+    }
+  };
 
   const customMenuClick = (e) => {
     if (e.target.innerText === 'Edit Item') {
       setIsEditing(true);
     } else if (e.target.innerText === 'Delete Item') {
-      //show confirmation box
+      confirmDeleteForCategory();
     }
   };
 
