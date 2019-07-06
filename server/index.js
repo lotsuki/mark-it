@@ -118,6 +118,9 @@ app.get('/update/cat/:catEdited/:categoryID', (req, res) => {
   let catEdited = req.params.catEdited;
   let id = parseInt(req.params.categoryID);
   let key = `groups.${id}.category`;
+  console.log(catEdited)
+  console.log(id)
+  console.log(key)
 
   Document.updateOne({'groups.id': id}, {$set:{[key]: catEdited}}, (err, result) => {
     console.log(result)

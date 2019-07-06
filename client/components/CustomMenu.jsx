@@ -4,7 +4,6 @@ const CustomMenu = ({ cords, elementForCustomMenu, setElementForCustomMenu, isEd
   useEffect(() => {
     document.addEventListener('click', exitCustomMenu);
   }, [])
-console.log(cords)
 
   //use useeffect to add event listener and return a clean up func
   //use memo for component caching/memoization

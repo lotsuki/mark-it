@@ -94,6 +94,12 @@ const Main = ({ groups, links }) => {
 
     if ((group === 'category' )&& ( !elementForCustomMenu || elementForCustomMenu && elementForCustomMenu.className.baseVal !== target.className.baseVal )) {
       let category = target.parentElement.children[1].innerText;
+
+      for (var i = 0; i < groups.length; i++) {
+        if (groups[i].category === category) {
+          setCategoryID(groups[i].id);
+        }
+      }
       target.style.visibility = 'visible';
       setCords([top, left]);
       setElementForCustomMenu(target);
