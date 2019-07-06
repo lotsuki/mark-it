@@ -1,33 +1,54 @@
-import React, { Fragment } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import IconFolder from './IconFolder';
 import IconFolderOpen from './IconFolderOpen';
 import IconCustomMenu from './IconCustomMenu';
 import IconDown from './IconDown';
 import utils from '../lib/utils';
+import axios from 'axios';
 
-const Subject = ({ clickedSubj, subject, color, openCustomMenu, id, catID, elementToEdit, elementForCustomMenu, isEditingSubject, setIsEditingSubject, subjectToEdit }) => {
+const Subject = ({ groups, clickedSubj, subject, color, openCustomMenu, id, catID, elementToEdit, elementForCustomMenu, isEditingSubject, setIsEditingSubject, subjectToEdit, setSubjectToEdit, setElementForCustomMenu }) => {
+  const [ subEdited, setSubEdited ] = useState('');
+  const [ subID, setSubID ] = useState('');
+
+  // useEffect(() => {
+  //   console.log('render')
+  // }, [subEdited])
+
+
 
   const resetSub = (e) => {
-    setElementToEdit('');
+    setSubjectToEdit('');
     setIsEditingSubject(false);
   };
 
-  const handleSubEnter = () => {
-
+  const handleSubEdit = (e) => {
+    setSubEdited(e.target.value);
   };
 
-  const handleSubEdit = () => {
-
+   const handleSubEnter = (e) => {
+    let subjID = utils.findSubjectID(groups, catID, subjectToEdit);
+    if (e.keyCode === 13) {
+      axios.get(`/update/sub/${subEdited}/${subjID}/${catID}`, {
+        method: 'PATCH'
+        })
+        .then(res => {
+           utils.editSubjects(groups, subjID, catID, subEdited);
+           elementForCustomMenu.style.visibility = '';
+           // setCategory('');
+           // setCategoryID('');
+           // setIsEditing(false);
+           setIsEditingSubject(false);
+           setElementForCustomMenu('');
+          console.log('PATCH request successful');
+        })
+        .catch(err => { console.log('Error at PATCH request', err); });
+    }
   };
 
 const displaySubOnEdit = () => {
-  let subjectToEdit = utils.getSubjectText(null, elementForCustomMenu, null, 'display');
-  // console.log(subjectToEdit, 'subjectToEdit')
-  //  console.log(subject, 'subject')
-  //  console.log(elementToEdit, 'elementToEdit')
-  if (subjectToEdit && subjectToEdit === subject || elementToEdit && subject === elementToEdit) {
-    console.log('yes')
+  let sub = utils.getSubjectText(null, elementForCustomMenu, null, 'display');
+  if (sub && sub === subject || subjectToEdit && subject === subjectToEdit) {
     return (
       <Fragment>
         <IconDown />

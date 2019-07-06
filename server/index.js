@@ -116,6 +116,17 @@ app.get('/update/cat/:catEdited/:categoryID', (req, res) => {
   });
 });
 
+app.get('/update/sub/:subEdited/:subjID/:catID', (req, res) => {
+  const subEdited = req.params.subEdited;
+  const catID = parseInt(req.params.catID);
+  const subjID = parseInt(req.params.subjID);
+  const key = `groups.${catID}.subjects.${subjID}.subject`;
+console.log('hey')
+  Document.updateOne({'groups.id': catID}, {$set:{[key]: subEdited}}, (err, result) => {
+    if (err) { console.log('Failure to get user obj: ', err); }
+    else { res.send(result); }
+  });
+});
 //edit subject
 //db.documents.updateOne({'groups.id': id},{$set:{'groups.id.subjects.subID.subject': 'Indian'}})
 

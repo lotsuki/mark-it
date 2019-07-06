@@ -29,7 +29,11 @@ const Subjects = ({ groups, category, showConfirm, setShowConfirm, titlesUpdate,
 
   const exitTitles = (e) => {
     let target = e.target;
-    if (utils.isCustomMenu(target, 'custom-menu')) { return; }
+    console.log(target.id, 'id')
+    if (utils.isCustomMenu(target, 'custom-menu') || target.id === 'edit-subject') {
+      console.log('SI')
+      return;
+    }
     if (target.className === 'app' || target.id === 'titles-container'){
       setIsOpen(false);
       setCategory('');
@@ -43,8 +47,7 @@ const Subjects = ({ groups, category, showConfirm, setShowConfirm, titlesUpdate,
 
   const handleSubjClick = (e) => {
     //refactor to use group obj, get rid of api calls and titles state
-    // console.log(isEditingSubject, 'iseditingsub');
-    // console.log(e.target, 'sub target')
+
     let isCustomMenuIcon = utils.isCustomMenuIcon(e.target);
     // if (isCustomMenuIcon) {
     //   console.log('SVG')
@@ -53,11 +56,9 @@ const Subjects = ({ groups, category, showConfirm, setShowConfirm, titlesUpdate,
     //   setGroupToDelete('subject');
     //   setElementToEdit(e.target.value);
     // } else
-    // if (isEditingSubject) {
-    //   console.log(e.target, 'TARGET')
-    //   setSubjectToEdit(e.target.value);
-    // }
-    console.log('hieee')
+    if (isEditingSubject) {
+      setSubjectToEdit(e.target.value);
+    }
     let subject;
     let target = e.target;
     if (!showTitles) {
@@ -117,7 +118,7 @@ const Subjects = ({ groups, category, showConfirm, setShowConfirm, titlesUpdate,
              className="subject"
              onClick={handleSubjClick}
              key={subject.subject}>
-               <Subject clickedSubj={subj} subject={subject.subject} color={color} openCustomMenu={openCustomMenu} id={subject.id} catID={catID} elementToEdit={elementToEdit} elementForCustomMenu={elementForCustomMenu} isEditingSubject={isEditingSubject} setIsEditingSubject={setIsEditingSubject} subjectToEdit={subjectToEdit}/>
+               <Subject groups={groups} clickedSubj={subj} subject={subject.subject} color={color} openCustomMenu={openCustomMenu} id={subject.id} catID={catID} elementToEdit={elementToEdit} elementForCustomMenu={elementForCustomMenu} isEditingSubject={isEditingSubject} setIsEditingSubject={setIsEditingSubject} subjectToEdit={subjectToEdit} setSubjectToEdit={setSubjectToEdit} setElementForCustomMenu={setElementForCustomMenu}/>
            </div>
          </div>
         ))

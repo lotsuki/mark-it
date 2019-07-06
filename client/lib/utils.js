@@ -19,6 +19,13 @@ module.exports = {
     }
     return null;
   },
+  findSubjectID: function(arr, catID, sub) {
+    let subjects = arr[catID].subjects;
+    for (var i = 0; i < subjects.length; i++) {
+      if (subjects[i].subject === sub) { return subjects[i].id; }
+    }
+    return null;
+  },
   whichGroup: function(arr, element) {
     let cat = element.parentElement.children[1].innerText;
     for (var i = 0; i < arr.length; i++) {
@@ -54,6 +61,12 @@ module.exports = {
       } else if (context === 'deleteCat' && arr[i].category === cat) {
         groups.splice(i, 1); return;
       }
+    }
+  },
+  editSubjects: function(arr, subjID, catID, newSubject) {
+    let subjects = arr[catID].subjects;
+    for (var i = 0; i < subjects.length; i++) {
+      if (subjects[i].id === subjID) { subjects[i].subject = newSubject; return; }
     }
   },
   editTitles: function(arr, titleToDelete, func) {

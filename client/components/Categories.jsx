@@ -11,6 +11,7 @@ const Categories = ({ groups, categoryID, setCategoryID, showConfirm, setShowCon
   const [ elementToEdit, setElementToEdit ] = useState('');
 
   const exitCategories = (e) => {
+    console.log('NOPE')
     if (e.target.className === 'app' || e.target.className === 'sidebar-container') {
       document.removeEventListener('click', exitCategories);
       setIsOpen(false);
