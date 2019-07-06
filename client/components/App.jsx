@@ -4,7 +4,8 @@ import Main from './Main';
 //import Landing from './Landing.jsx';
 import ErrorBoundary from './ErrorBoundary';
 
-
+//TODO: edit subjects, transition elements, refactor to usecontext, oauth, exit custom menu when click on category, fix form when click twice
+//TODO later: get rid of title apis, try to decrease renders/restructure main,
 class App extends React.Component {
   constructor(props) {
     super(props);

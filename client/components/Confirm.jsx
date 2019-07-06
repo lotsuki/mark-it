@@ -1,22 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import utils from '../lib/utils';
 import axios from 'axios';
 
 const Confirm = ({ groups, setShowConfirm, titleToDelete, titles, groupToDelete, categoryID, setCategoryID, elementForCustomMenu, setElementForCustomMenu, setTitlesUpdate }) => {
+
   const handleConfirmClick = async (e) => {
     if (e.target.innerText === 'Yes') {
       if (groupToDelete === 'category') {
         let cat = elementForCustomMenu.parentElement.children[1].innerText;
         await axios.delete(`/delete/${cat}/${categoryID}`)
           .then(res => {
-             for (var i = 0; i < groups.length; i++) {
-                if (groups[i].category === cat) {
-                  groups.splice(i, 1);
-                }
-              }
-             elementForCustomMenu.style.visibility = '';
-             setCategoryID('');
-             setElementForCustomMenu('');
+            utils.editCategories(groups, null, null, cat, 'deleteCat');
+            elementForCustomMenu.style.visibility = '';
+            setCategoryID('');
+            setElementForCustomMenu('');
             console.log('DELETE request successful');
           })
           .catch(err => { console.log('Error at PATCH request', err); });
@@ -25,13 +23,7 @@ const Confirm = ({ groups, setShowConfirm, titleToDelete, titles, groupToDelete,
       } else if(groupToDelete === 'title') {
          await axios.delete(`/delete/${titleToDelete}`)
             .then(res => {
-              for (var i = 0; i < titles.length; i++) {
-                if (titles[i].title === titleToDelete) {
-                  titles.splice(i, 1);
-                   setTitlesUpdate(titles);
-                  break;
-                }
-              }
+              utils.editTitles(titles, titleToDelete, setTitlesUpdate);
               console.log('DELETE request successful');
             })
             .catch(err => { console.log('Error at DELETE request', err); });

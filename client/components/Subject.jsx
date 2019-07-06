@@ -4,7 +4,6 @@ import IconFolder from './IconFolder';
 import IconFolderOpen from './IconFolderOpen';
 import IconCustomMenu from './IconCustomMenu';
 
-
 const Subject = ({ clickedSubj, subject, color, openCustomMenu, id, catID }) => {
   return (
     <div className="subject-wrapper">
@@ -20,9 +19,7 @@ const Subject = ({ clickedSubj, subject, color, openCustomMenu, id, catID }) => 
         </div>
         )
       : (
-        <div
-          className="subject"
-          style={{ }}>
+        <div className="subject">
           <IconFolder viewBox={"-50 -15 85 72"} color={color} width={"45"} height={"38"}/>
           <span className="subject-text">{subject}</span>
           <IconCustomMenu openCustomMenu={openCustomMenu} name={subject} subjectID={id} catID={catID}/>

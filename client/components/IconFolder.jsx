@@ -7,6 +7,6 @@ const IconFolder = ({ viewBox, color, width, height }) => {
       <path d="M14 4l4 4h14v22h-32v-26z"></path>
     </svg>
   )
-}
+};
 
 export default IconFolder;

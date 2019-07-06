@@ -1,14 +1,16 @@
-import React, { useState, useCallback, Fragment } from 'react';
+import React, { useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import IconFolder from './IconFolder';
 import IconFolderOpen from './IconFolderOpen';
 import IconCustomMenu from './IconCustomMenu';
 import IconDown from './IconDown';
+import utils from '../lib/utils';
 import axios from 'axios';
  
 
 const Category = ({ groups, categoryID, setCategoryID, setCategory, category, exitCategories, cat, isOpen, setIsOpen, color, openCustomMenu, setIsEditing, isEditing, setElementToEdit, elementToEdit, elementForCustomMenu, setElementForCustomMenu}) => {
   const [ catEdited, setCatEdited ] = useState('');
+
   const reset = (e) => {
     setElementToEdit('');
     setIsEditing(false);
@@ -18,21 +20,13 @@ const Category = ({ groups, categoryID, setCategoryID, setCategory, category, ex
     setCatEdited(e.target.value);
   };
 
-  const editGroups = () => {
-
-  };
-
   const handleEnter = (e) => {
     if (e.keyCode === 13) {
       axios.get(`/update/cat/${catEdited}/${categoryID}`, {
         method: 'PATCH'
         })
         .then(res => {
-          for (var i = 0; i < groups.length; i++) {
-            if (groups[i].id === categoryID) {
-              groups[i].category = catEdited;
-            }
-          }
+           utils.editCategories(groups, categoryID, catEdited, null, 'updateCat');
            elementForCustomMenu.style.visibility = '';
            setCategory('');
            setCategoryID('');
@@ -44,16 +38,9 @@ const Category = ({ groups, categoryID, setCategoryID, setCategory, category, ex
     }
   };
 
-
 const displayCatOnEdit = () => {
-  let target;
-
-  if (elementForCustomMenu && elementForCustomMenu.className.baseVal.includes('icon-custom-menu')) {
-    target = elementForCustomMenu.parentElement.children[1].innerText;
-  } else if (elementForCustomMenu) {
-    target = elementForCustomMenu.innerText;
-  }
-  if (target && cat === target || elementToEdit && cat === elementToEdit) {
+  let categoryToEdit = utils.getCategoryText(null, elementForCustomMenu, null, 'display');
+  if (categoryToEdit && categoryToEdit === cat || elementToEdit && cat === elementToEdit) {
     return (
       <Fragment>
         <IconDown setIsOpen={setIsOpen} setCategory={setCategory} exitCategories={exitCategories}/>
@@ -109,7 +96,6 @@ const displayCatOnEdit = () => {
                   <Fragment>
                     <IconFolder viewBox={"-20 -9 55 55"} color={color} width={"30"} height={"30"}/>
                     <div className="category-text">{cat}</div>
-
                   </Fragment>
                   )
               }

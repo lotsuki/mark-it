@@ -76,4 +76,3 @@ Titles.defaultProps = {
   displayConfirm: () => {}
 };
 
-// <i className="fa fa-trash-alt"  data-testid="delete-title" onClick={confirmDelete}></i>

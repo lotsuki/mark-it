@@ -2,9 +2,7 @@ import React from 'react';
 
 const IconPlus = ({ showForm, setShowForm }) => {
   const hideDisplay = (e) => {
-    console.log('hi')
     if (e.target.name !== 'form') {
-      console.log('bye')
       setShowForm(false);
       document.removeEventListener('click', hideDisplay);
     }
@@ -27,6 +25,6 @@ const IconPlus = ({ showForm, setShowForm }) => {
       </svg>
     </div>
   )
-}
+};
 
 export default IconPlus;

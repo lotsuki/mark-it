@@ -12,7 +12,6 @@ const Subjects = ({ groups, category, showConfirm, setShowConfirm, titlesUpdate,
   const [ subjects, setSubjects ] = useState([]);
   const [ catID, setCatID ] = useState('');
 
-  //let subjects = [];
   useEffect(() => {
     for (var i = 0; i < groups.length; i++) {
       if (groups[i].category === category) {
@@ -23,14 +22,7 @@ const Subjects = ({ groups, category, showConfirm, setShowConfirm, titlesUpdate,
     }
   }, [])
 
-  // _.forEach(bmarks, (cat, key) => {
-  //   if( category === key) {
-  //     subjects = subjects.concat(cat.slice(1));
-  //   }
-  // });
-
-
-  const titleClasses = ['far fa-trash-alt', 'title', 'title-wrapper', 'titles-sub-container', 'titles-container', 'confirm-button yes-button', 'confirm-button no-button', 'delete-icon'];
+  const titleClasses = ['title', 'title-wrapper', 'titles-sub-container', 'titles-container', 'confirm-button yes-button', 'confirm-button no-button', 'delete-icon'];
   const subjectClasses = ['subject', 'subject-text'];
 
   const exitTitles = (e) => {

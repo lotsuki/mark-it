@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import _ from 'underscore';
+import utils from '../lib/utils';
 import { Spring } from 'react-spring/renderprops';
-
 
 const Form = ({ groups, showForm, setShowForm, setCategoryID, categoryID }) => {
   const [ category, setCategory ] = useState('');
@@ -18,14 +18,6 @@ const Form = ({ groups, showForm, setShowForm, setCategoryID, categoryID }) => {
     setColor('#D00000');
   }, []);
 
-  let subjects = [];
-  let categories = groups.map((group, i) => {
-    group.subjects.forEach(subject => {
-      subjects.push(subject.subject);
-    });
-    return group.category;
-  });
-
   const clearForm = () => {
     setCategory('');
     setSubject('');
@@ -33,37 +25,11 @@ const Form = ({ groups, showForm, setShowForm, setCategoryID, categoryID }) => {
     setUrl('');
   };
 
-  const hasCategory = () => {
-    console.log(category, 'CATEGORY')
-    for (var i = 0; i < groups.length; i++) {
-      console.log(groups[i], 'objs')
-      console.log(groups[i].category, 'cat in group')
-      if (groups[i].category === category) {
-        return true;
-      }
-    }
-    return false;
-    //return categories.indexOf(category) !== -1;
-    //return bmarks.hasOwnProperty(category);
-  };
-
-  const hasSubject = () => {
-    return subjects.indexOf(subject) !== -1;
-  };
-  console.log(color, 'COLOR')
-
   const submitForm = (e) => {
-    console.log(showForm, 'showForm')
     e.preventDefault();
-    let catID;
-    for (var i = 0; i < groups.length; i++) {
-      if (groups[i].category === category) {
-        catID = groups[i].id;
-        console.log(groups[i].id, 'ID')
-      }
-    }
-    const hasCat = hasCategory();
-    const hasSubj = hasSubject();
+    const hasCat = utils.findCategory(groups, category);
+    const catID = utils.findCategoryID(groups, category);
+    const hasSubj = utils.findSubject(groups, subject, catID);
     let subjectL;
     if (catID) {
       subjectL = groups[catID].subjects.length;
@@ -139,9 +105,7 @@ const Form = ({ groups, showForm, setShowForm, setCategoryID, categoryID }) => {
               data-testid="category-input"
               placeholder="Category"
               onChange={e => setCategory(e.target.value)}
-
               />
-
             <input name="form" type="color" defaultValue="#D00000" className="color" onChange={e => setColor(e.target.value)}/>
           </div>
           <div className="form-dropdown-wrapper">

@@ -54,15 +54,10 @@ const Main = ({ groups, links }) => {
 
     if (elementForCustomMenu) {
       elementForCustomMenu.style.visibility = '';
-      // setElementForCustomMenu('');
-      // setIsEditing(false);
-      // setCategoryID('');
-      // setCords([]);
     }
     if ((group === 'category' )&& ( !elementForCustomMenu || elementForCustomMenu && elementForCustomMenu.className.baseVal !== target.className.baseVal )) {
       let cat = target.parentElement.children[1].innerText;
       let id = utils.findCategoryID(groups, cat);
-      console.log(id, 'ID IN MAIN')
       if (id >= 0) { setCategoryID(id); }
 
       target.style.visibility = 'visible';
