@@ -13,7 +13,8 @@ class App extends React.Component {
     this.state = {
       userID: '',
       groups: [],
-      links: []
+      links: [],
+      groupsID: ''
     }
     this._isMounted = false;
   }
@@ -46,7 +47,8 @@ class App extends React.Component {
         .then(res => res.json())
         .then(data =>  {
           this.setState({
-           groups: data.groups
+           groups: data.groups,
+           groupsID: data._id
           })
         })
         .catch(err => {
@@ -75,10 +77,10 @@ class App extends React.Component {
   }
 
   render() {
-    const { userID, groups, links } = this.state;
+    const { userID, groups, groupsID, links } = this.state;
     return (
       <ErrorBoundary>
-        <Main userID={userID} groups={groups} links={links}/>
+        <Main userID={userID} groups={groups} groupsID={groupsID} links={links}/>
       </ErrorBoundary>
     );
   }

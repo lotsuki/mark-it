@@ -7,7 +7,7 @@ import IconDown from './IconDown';
 import utils from '../lib/utils';
 import axios from 'axios';
 
-const Subject = ({ groups, clickedSubj, subject, color, openCustomMenu, id, catID, elementToEdit, elementForCustomMenu, isEditingSubject, setIsEditingSubject, subjectToEdit, setSubjectToEdit, setElementForCustomMenu }) => {
+const Subject = ({ groups, groupsID, clickedSubj, subject, color, openCustomMenu, id, catID, elementToEdit, elementForCustomMenu, isEditingSubject, setIsEditingSubject, subjectToEdit, setSubjectToEdit, setElementForCustomMenu }) => {
   const [ subEdited, setSubEdited ] = useState('');
   const [ subID, setSubID ] = useState('');
 
@@ -29,7 +29,7 @@ const Subject = ({ groups, clickedSubj, subject, color, openCustomMenu, id, catI
    const handleSubEnter = (e) => {
     let subjID = utils.findSubjectID(groups, catID, subjectToEdit);
     if (e.keyCode === 13) {
-      axios.get(`/update/sub/${subEdited}/${subjID}/${catID}`, {
+      axios.get(`/update/${subEdited}/${subjID}/${catID}/${groupsID}`, {
         method: 'PATCH'
         })
         .then(res => {

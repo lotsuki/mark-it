@@ -11,7 +11,7 @@ import { useSpring, animated } from 'react-spring';
 
 //try wihtout fragments
 
-const Main = ({ groups, links }) => {
+const Main = ({ groups, groupsID, links }) => {
   const [ showForm, setShowForm, ] = useState(false);
   const [ showConfirm, setShowConfirm ] = useState(false);
   const [ showTitles, setShowTitles ] = useState(false);
@@ -26,6 +26,8 @@ const Main = ({ groups, links }) => {
   const [ group, setGroup ] = useState('');
   const [ isEditingSubject, setIsEditingSubject ] = useState(false);
 
+  console.log(groupsID, 'groupsID')
+
   const deleteTitle = (target) => {
     let title = target.parentElement.firstChild.innerText;
     setTitleToDelete(title);
@@ -35,7 +37,7 @@ const Main = ({ groups, links }) => {
     if (showForm) {
       return <Form groups={groups} showForm={showForm} setShowForm={setShowForm} categoryID={categoryID} setCategoryID={setCategoryID}/>
     } else if (showConfirm) {
-      return <Confirm groups={groups} showConfirm={showConfirm} setShowConfirm={setShowConfirm} titleToDelete={titleToDelete} titles={titles} groupToDelete={groupToDelete} categoryID={categoryID} setCategoryID={setCategoryID}  elementForCustomMenu={elementForCustomMenu} setElementForCustomMenu={setElementForCustomMenu} setTitlesUpdate={setTitlesUpdate} isEditingSubject={isEditingSubject}/>
+      return <Confirm groups={groups} groupsID={groupsID} showConfirm={showConfirm} setShowConfirm={setShowConfirm} titleToDelete={titleToDelete} titles={titles} groupToDelete={groupToDelete} categoryID={categoryID} setCategoryID={setCategoryID}  elementForCustomMenu={elementForCustomMenu} setElementForCustomMenu={setElementForCustomMenu} setTitlesUpdate={setTitlesUpdate} isEditingSubject={isEditingSubject}/>
     }
   };
 
@@ -78,7 +80,7 @@ console.log('main render')
       <Navbar showForm={showForm} setShowForm={setShowForm} links={links} />
       <div id="app-container" className="app" data-testid="app-container">
         <div className="sidebar-container">
-          <Bookmarks groups={groups} categoryID={categoryID} setCategoryID={setCategoryID} setShowTitles={setShowTitles} setTitles={setTitles} showConfirm={showConfirm} showTitles={showTitles} setShowConfirm={setShowConfirm} titlesUpdate={titlesUpdate} openCustomMenu={openCustomMenu} setIsEditing={setIsEditing} isEditing={isEditing} setElementForCustomMenu={setElementForCustomMenu} elementForCustomMenu={elementForCustomMenu} setElementForCustomMenu={setElementForCustomMenu} setGroupToDelete={setGroupToDelete} isEditingSubject={isEditingSubject} setIsEditingSubject={setIsEditingSubject}/>
+          <Bookmarks groups={groups} groupsID={groupsID} categoryID={categoryID} setCategoryID={setCategoryID} setShowTitles={setShowTitles} setTitles={setTitles} showConfirm={showConfirm} showTitles={showTitles} setShowConfirm={setShowConfirm} titlesUpdate={titlesUpdate} openCustomMenu={openCustomMenu} setIsEditing={setIsEditing} isEditing={isEditing} setElementForCustomMenu={setElementForCustomMenu} elementForCustomMenu={elementForCustomMenu} setElementForCustomMenu={setElementForCustomMenu} setGroupToDelete={setGroupToDelete} isEditingSubject={isEditingSubject} setIsEditingSubject={setIsEditingSubject}/>
         </div>
         {
           elementForCustomMenu

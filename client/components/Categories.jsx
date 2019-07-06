@@ -5,13 +5,12 @@ import Subjects from './Subjects';
 import Category from './Category';
 import utils from '../lib/utils';
 
-const Categories = ({ groups, categoryID, setCategoryID, showConfirm, setShowConfirm, titlesUpdate, setShowTitles, showTitles, setTitles, openCustomMenu, setIsEditing, isEditing,  setElementForCustomMenu, elementForCustomMenu, setGroupToDelete, isEditingSubject, setIsEditingSubject }) => {
+const Categories = ({ groups, groupsID, categoryID, setCategoryID, showConfirm, setShowConfirm, titlesUpdate, setShowTitles, showTitles, setTitles, openCustomMenu, setIsEditing, isEditing,  setElementForCustomMenu, elementForCustomMenu, setGroupToDelete, isEditingSubject, setIsEditingSubject }) => {
   const [ isOpen, setIsOpen ] = useState(false);
   const [ category, setCategory ] = useState('');
   const [ elementToEdit, setElementToEdit ] = useState('');
 
   const exitCategories = (e) => {
-    console.log('NOPE')
     if (e.target.className === 'app' || e.target.className === 'sidebar-container') {
       document.removeEventListener('click', exitCategories);
       setIsOpen(false);
@@ -57,7 +56,7 @@ const Categories = ({ groups, categoryID, setCategoryID, showConfirm, setShowCon
              className="category-wrapper"
              onClick={handleCatClick}
              key={group.category}>
-             <Category groups={groups} categoryID={categoryID} setCategoryID={setCategoryID} setCategory={setCategory} category={category} exitCategories={exitCategories} cat={group.category} color={group.color} setIsOpen={setIsOpen} isOpen={isOpen} openCustomMenu={openCustomMenu} setIsEditing={setIsEditing} isEditing={isEditing} setElementToEdit={setElementToEdit} elementToEdit={elementToEdit} elementForCustomMenu={elementForCustomMenu} setElementForCustomMenu={setElementForCustomMenu}/>
+             <Category groups={groups} groupsID={groupsID} categoryID={categoryID} setCategoryID={setCategoryID} setCategory={setCategory} category={category} exitCategories={exitCategories} cat={group.category} color={group.color} setIsOpen={setIsOpen} isOpen={isOpen} openCustomMenu={openCustomMenu} setIsEditing={setIsEditing} isEditing={isEditing} setElementToEdit={setElementToEdit} elementToEdit={elementToEdit} elementForCustomMenu={elementForCustomMenu} setElementForCustomMenu={setElementForCustomMenu}/>
            </div>
            <div className="dropdown-container" key={group.color}>
              {
@@ -66,7 +65,7 @@ const Categories = ({ groups, categoryID, setCategoryID, showConfirm, setShowCon
                 <div className="dropdown-wrapper" >
                   {
                     isOpen
-                      ? ( <Subjects groups={groups} category={category} setShowTitles={setShowTitles} setTitles={setTitles} showConfirm={showConfirm} showTitles={showTitles} setShowConfirm={setShowConfirm} titlesUpdate={titlesUpdate} handleCatClick={handleCatClick} setIsOpen={setIsOpen} setCategory={setCategory} color={group.color} isOpen={isOpen} openCustomMenu={openCustomMenu} setGroupToDelete={setGroupToDelete} isEditingSubject={isEditingSubject} elementToEdit={elementToEdit} setElementToEdit={setElementToEdit} elementForCustomMenu={elementForCustomMenu} setIsEditingSubject={setIsEditingSubject} setElementForCustomMenu={setElementForCustomMenu}/>)
+                      ? ( <Subjects groups={groups} groupsID={groupsID} category={category} setShowTitles={setShowTitles} setTitles={setTitles} showConfirm={showConfirm} showTitles={showTitles} setShowConfirm={setShowConfirm} titlesUpdate={titlesUpdate} handleCatClick={handleCatClick} setIsOpen={setIsOpen} setCategory={setCategory} color={group.color} isOpen={isOpen} openCustomMenu={openCustomMenu} setGroupToDelete={setGroupToDelete} isEditingSubject={isEditingSubject} elementToEdit={elementToEdit} setElementToEdit={setElementToEdit} elementForCustomMenu={elementForCustomMenu} setIsEditingSubject={setIsEditingSubject} setElementForCustomMenu={setElementForCustomMenu}/>)
                       : ( null )
                   }
                 </div>

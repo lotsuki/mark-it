@@ -7,7 +7,7 @@ import utils from '../lib/utils';
 import {useTrail, animated} from 'react-spring';
 
 
-const Subjects = ({ groups, category, showConfirm, setShowConfirm, titlesUpdate, showTitles, setShowTitles, setTitles, handleCatClick, setIsOpen, setCategory, color, isOpen, openCustomMenu, setGroupToDelete, isEditingSubject, elementToEdit, setElementToEdit, elementForCustomMenu, setIsEditingSubject, setElementForCustomMenu }) => {
+const Subjects = ({ groups, groupsID, category, showConfirm, setShowConfirm, titlesUpdate, showTitles, setShowTitles, setTitles, handleCatClick, setIsOpen, setCategory, color, isOpen, openCustomMenu, setGroupToDelete, isEditingSubject, elementToEdit, setElementToEdit, elementForCustomMenu, setIsEditingSubject, setElementForCustomMenu }) => {
   const [ subj, setSubj ] = useState('');
   const [ update, setUpdate ] = useState(false);
   const [ subjects, setSubjects ] = useState([]);
@@ -29,9 +29,7 @@ const Subjects = ({ groups, category, showConfirm, setShowConfirm, titlesUpdate,
 
   const exitTitles = (e) => {
     let target = e.target;
-    console.log(target.id, 'id')
     if (utils.isCustomMenu(target, 'custom-menu') || target.id === 'edit-subject') {
-      console.log('SI')
       return;
     }
     if (target.className === 'app' || target.id === 'titles-container'){
@@ -49,14 +47,13 @@ const Subjects = ({ groups, category, showConfirm, setShowConfirm, titlesUpdate,
     //refactor to use group obj, get rid of api calls and titles state
 
     let isCustomMenuIcon = utils.isCustomMenuIcon(e.target);
-    // if (isCustomMenuIcon) {
-    //   console.log('SVG')
-    //   console.log(e.target, 'TARGET')
-    //   setElementForCustomMenu(e.target);
-    //   setGroupToDelete('subject');
-    //   setElementToEdit(e.target.value);
-    // } else
-    if (isEditingSubject) {
+    if (isCustomMenuIcon) {
+      console.log('custom menu for subject click')
+      // console.log(e.target, 'TARGET')
+      // setElementForCustomMenu(e.target);
+      setGroupToDelete('subject');
+      //setElementToEdit(e.target.value);
+    } else if (isEditingSubject) {
       setSubjectToEdit(e.target.value);
     }
     let subject;
@@ -118,7 +115,7 @@ const Subjects = ({ groups, category, showConfirm, setShowConfirm, titlesUpdate,
              className="subject"
              onClick={handleSubjClick}
              key={subject.subject}>
-               <Subject groups={groups} clickedSubj={subj} subject={subject.subject} color={color} openCustomMenu={openCustomMenu} id={subject.id} catID={catID} elementToEdit={elementToEdit} elementForCustomMenu={elementForCustomMenu} isEditingSubject={isEditingSubject} setIsEditingSubject={setIsEditingSubject} subjectToEdit={subjectToEdit} setSubjectToEdit={setSubjectToEdit} setElementForCustomMenu={setElementForCustomMenu}/>
+               <Subject groups={groups} groupsID={groupsID} clickedSubj={subj} subject={subject.subject} color={color} openCustomMenu={openCustomMenu} id={subject.id} catID={catID} elementToEdit={elementToEdit} elementForCustomMenu={elementForCustomMenu} isEditingSubject={isEditingSubject} setIsEditingSubject={setIsEditingSubject} subjectToEdit={subjectToEdit} setSubjectToEdit={setSubjectToEdit} setElementForCustomMenu={setElementForCustomMenu}/>
            </div>
          </div>
         ))

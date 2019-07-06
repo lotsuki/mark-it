@@ -59,7 +59,7 @@ module.exports = {
       if (context === 'updateCat' && arr[i].id === catID) {
         arr[i].category = newCateogry; return;
       } else if (context === 'deleteCat' && arr[i].category === cat) {
-        groups.splice(i, 1); return;
+        arr.splice(i, 1); return;
       }
     }
   },

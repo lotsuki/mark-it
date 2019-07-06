@@ -8,7 +8,7 @@ import utils from '../lib/utils';
 import axios from 'axios';
  
 
-const Category = ({ groups, categoryID, setCategoryID, setCategory, category, exitCategories, cat, isOpen, setIsOpen, color, openCustomMenu, setIsEditing, isEditing, setElementToEdit, elementToEdit, elementForCustomMenu, setElementForCustomMenu}) => {
+const Category = ({ groups, groupsID, categoryID, setCategoryID, setCategory, category, exitCategories, cat, isOpen, setIsOpen, color, openCustomMenu, setIsEditing, isEditing, setElementToEdit, elementToEdit, elementForCustomMenu, setElementForCustomMenu}) => {
   const [ catEdited, setCatEdited ] = useState('');
 
   const reset = (e) => {
@@ -22,7 +22,7 @@ const Category = ({ groups, categoryID, setCategoryID, setCategory, category, ex
 
   const handleEnter = (e) => {
     if (e.keyCode === 13) {
-      axios.get(`/update/cat/${catEdited}/${categoryID}`, {
+      axios.get(`/update/${catEdited}/${categoryID}/${groupsID}`, {
         method: 'PATCH'
         })
         .then(res => {

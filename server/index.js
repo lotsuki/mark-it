@@ -31,8 +31,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(`${__dirname}/../public/`));
 
 app.post('/form', (req, res) => {
-  const { category, subject, categoryID, categoryL, subjectL, color, hasCat, hasSubj } = req.body;
-  const key = `groups.${categoryID}.subjects`;
+  let { category, subject, categoryID, categoryL, subjectL, color, hasCat, hasSubj } = req.body;
+  let key = `groups.${categoryID}.subjects`;
   console.log(categoryL, 'catL')
   Document.create({
         category: category,
@@ -83,52 +83,35 @@ app.get('/titles', (req, res) => {
 });
 
 app.get('/titles/:category/:subject', (req, res) => {
-  const { subject, category } = req.params;
+  let { subject, category } = req.params;
   Document.find({ category: category, subject: subject }, 'title url', (err, result) => {
     if (err) { console.log('Failure to get titles: ', err); }
     else { res.status(200).send(result); }
   });
 });
 
-// app.get('/update/subj/:defaultVal/:newVal/:category', (req, res) => {
-//   let defaultVal = req.params.defaultVal;
-//   let newVal = req.params.newVal;
-//   let cat = req.params.category;
-//   let key = `bmarks.${cat}`;
-//   let key2 = `bmarks.${cat}.$`;
+app.get('/update/:catEdited/:categoryID/:groupsID', (req, res) => {
+  let { catEdited, groupsID } = req.params;
+  let catID = parseInt(req.params.categoryID);
+  let key = `groups.${catID}.category`;
 
-//   Document.updateOne({[key]: defaultVal}, {$set: {[key2]: newVal}}, (err, result) => {
-//     if (err) { console.log('Failure to get user obj: ', err); }
-//     else { res.status(200).send(result); }
-//   });
-// });
-
-//db.documents.updateOne({'groups.id': id}, {$set:{'groups.id.category': 'News'}})
-
-app.get('/update/cat/:catEdited/:categoryID', (req, res) => {
-  const catEdited = req.params.catEdited;
-  const id = parseInt(req.params.categoryID);
-  const key = `groups.${id}.category`;
-
-  Document.updateOne({'groups.id': id}, {$set:{[key]: catEdited}}, (err, result) => {
+  Document.updateOne({ _id: groupsID }, {$set:{[key]: catEdited}}, (err, result) => {
     if (err) { console.log('Failure to get user obj: ', err); }
     else { res.send(result); }
   });
 });
 
-app.get('/update/sub/:subEdited/:subjID/:catID', (req, res) => {
-  const subEdited = req.params.subEdited;
-  const catID = parseInt(req.params.catID);
-  const subjID = parseInt(req.params.subjID);
-  const key = `groups.${catID}.subjects.${subjID}.subject`;
-console.log('hey')
-  Document.updateOne({'groups.id': catID}, {$set:{[key]: subEdited}}, (err, result) => {
+app.get('/update/:subEdited/:subjID/:catID/:groupsID', (req, res) => {
+  let { subEdited, groupsID } = req.params;
+  let catID = parseInt(req.params.catID);
+  let subjID = parseInt(req.params.subjID);
+  let key = `groups.${catID}.subjects.${subjID}.subject`;
+
+  Document.updateOne({ _id: groupsID }, {$set:{[key]: subEdited}}, (err, result) => {
     if (err) { console.log('Failure to get user obj: ', err); }
     else { res.send(result); }
   });
 });
-//edit subject
-//db.documents.updateOne({'groups.id': id},{$set:{'groups.id.subjects.subID.subject': 'Indian'}})
 
 
 // app.get('/update/title/:defaultVal/:newVal', (req, res) => {
@@ -142,25 +125,32 @@ console.log('hey')
 // });
 
 
-app.delete('/delete/:cat/:id', (req, res) => {
-  const id = parseInt(req.params.id);
-  const category = req.params.cat;
+app.delete('/delete/:cat/:catID/:groupsID', (req, res) => {
+  let { cat, groupsID } = req.params;
+  let catID = parseInt(req.params.catID);
 
-  Document.updateOne({'groups.id': id}, {$pull:{groups: {id}}}, (err, result) => {
+  Document.updateOne({ _id: groupsID }, {$pull:{groups: {id: catID}}}, (err, result) => {
     if (err) { console.log('Failure to get user obj: ', err); }
     else { res.send(result); }
   });
-   Document.deleteMany({ category }, (err, result) => {
+   Document.deleteMany({ category: cat }, (err, result) => {
       if (err) { console.log('Error at DELETE request: ', err); }
-      else { console.log('Deleted categories'); }
+      else { console.log('Deleted category'); }
     });
 });
 
-app.delete('/delete/subj/:subj', (req, res) => {
-  const subj = req.params.subj;
-  Document.deleteMany({ subject: subj }, (err, result) => {
-    if (err) { console.log('Error at DELETE request: ', err); }
+app.delete('/delete/:subject/:catID/:groupsID', (req, res) => {
+  let { subject, groupsID } = req.params;
+  let catID = parseInt(req.params.catID);
+  let key = `groups.${catID}.subjects`;
+
+  Document.updateOne({ _id: groupsID }, {$pull:{[key]: { subject }}}, (err, result) => {
+    if (err) { console.log('Failure to get user obj: ', err); }
     else { res.send(result); }
+  });
+  Document.deleteMany({ subject }, (err, result) => {
+    if (err) { console.log('Error at DELETE request: ', err); }
+    else { console.log('Deleted subject'); }
   });
   // Document.deleteOne({}, (err) => {
   //   if (err) { console.log('Error at DELETE request: ', err); }
@@ -169,7 +159,7 @@ app.delete('/delete/subj/:subj', (req, res) => {
 });
 
 app.delete('/delete/:titleToDelete', (req, res) => {
-  const title = req.params.titleToDelete;
+  let title = req.params.titleToDelete;
   Document.deleteOne({ title }, (err, result) => {
     if (err) { console.log('Error at DELETE request: ', err); }
     else { res.send(result); }

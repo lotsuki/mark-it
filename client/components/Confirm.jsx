@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import utils from '../lib/utils';
 import axios from 'axios';
 
-const Confirm = ({ groups, setShowConfirm, titleToDelete, titles, groupToDelete, categoryID, setCategoryID, elementForCustomMenu, setElementForCustomMenu, setTitlesUpdate }) => {
+const Confirm = ({ groups, groupsID, setShowConfirm, titleToDelete, titles, groupToDelete, categoryID, setCategoryID, elementForCustomMenu, setElementForCustomMenu, setTitlesUpdate }) => {
 
   const handleConfirmClick = async (e) => {
     if (e.target.innerText === 'Yes') {
       if (groupToDelete === 'category') {
         let cat = elementForCustomMenu.parentElement.children[1].innerText;
-        await axios.delete(`/delete/${cat}/${categoryID}`)
+        await axios.delete(`/delete/${cat}/${categoryID}/${groupsID}`)
           .then(res => {
             utils.editCategories(groups, null, null, cat, 'deleteCat');
             elementForCustomMenu.style.visibility = '';
@@ -19,7 +19,18 @@ const Confirm = ({ groups, setShowConfirm, titleToDelete, titles, groupToDelete,
           })
           .catch(err => { console.log('Error at PATCH request', err); });
       } else if (groupToDelete === 'subject') {
-          console.log('subject');
+        let sub = elementForCustomMenu.parentElement.children[1].innerText;
+          console.log(sub, 'subject');
+
+        await axios.delete(`/delete/${sub}/${categoryID}/${groupsID}`)
+          .then(res => {
+            // utils.editCategories(groups, null, null, cat, 'deleteCat');
+            // elementForCustomMenu.style.visibility = '';
+            // setCategoryID('');
+            // setElementForCustomMenu('');
+            console.log('DELETE request successful');
+          })
+          .catch(err => { console.log('Error at PATCH request', err); });
       } else if(groupToDelete === 'title') {
          await axios.delete(`/delete/${titleToDelete}`)
             .then(res => {
