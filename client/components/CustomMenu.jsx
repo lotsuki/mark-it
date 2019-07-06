@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 
-const CustomMenu = ({ top, elementForCustomMenu, setElementForCustomMenu, isEditing, setIsEditing, showConfirm, setShowConfirm }) => {
+const CustomMenu = ({ cords, elementForCustomMenu, setElementForCustomMenu, isEditing, setIsEditing, showConfirm, setShowConfirm }) => {
   useEffect(() => {
     document.addEventListener('click', exitCustomMenu);
   }, [])
-
+console.log(cords)
 
   //use useeffect to add event listener and return a clean up func
   //use memo for component caching/memoization
@@ -61,7 +61,7 @@ const CustomMenu = ({ top, elementForCustomMenu, setElementForCustomMenu, isEdit
   };
 
   return (
-    <div className="custom-menu" onClick={customMenuClick} style={{left: '378px', top:`${top}px`}}>
+    <div className="custom-menu" onClick={customMenuClick} style={{top: `${cords[0]}px`, left: '378px'}}>
       <div  className="custom-menu-edit">
         <span className="custom-menu-text">Edit Item</span>
         <svg className="edit-item" xmlns="http://www.w3.org/2000/svg" width="25" height="30" viewBox="-10 -15 60 60" fill="#4a51d6" style={{cursor: "pointer"}}>

@@ -6,16 +6,18 @@ import Subject from './Subject';
 import {useTrail, animated} from 'react-spring';
 
 
-const Subjects = ({ groups, category, showConfirm, setShowConfirm, titlesUpdate, showTitles, setShowTitles, setTitles, handleCatClick, setIsOpen, setCategory, color, isOpen }) => {
+const Subjects = ({ groups, category, showConfirm, setShowConfirm, titlesUpdate, showTitles, setShowTitles, setTitles, handleCatClick, setIsOpen, setCategory, color, isOpen, openCustomMenu }) => {
   const [ subj, setSubj ] = useState('');
   const [ update, setUpdate ] = useState(false);
   const [ subjects, setSubjects ] = useState([]);
+  const [ catID, setCatID ] = useState('');
 
   //let subjects = [];
   useEffect(() => {
     for (var i = 0; i < groups.length; i++) {
       if (groups[i].category === category) {
         setSubjects(groups[i].subjects);
+        setCatID(groups[i].id);
         break;
       }
     }
@@ -32,15 +34,16 @@ const Subjects = ({ groups, category, showConfirm, setShowConfirm, titlesUpdate,
   const subjectClasses = ['subject', 'subject-text'];
 
   const exitTitles = (e) => {
-    console.log(e.target)
+    console.log(e.target, 'TARGET')
     let target = e.target;
-    if (!_.contains(titleClasses, target.className)) {
-     setShowTitles(false);
-     document.removeEventListener('click', exitTitles);
-    }
     if (target.className === 'app' || target.id === 'titles-container'){
       setIsOpen(false);
       setCategory('');
+      setShowTitles(false);
+      document.removeEventListener('click', exitTitles);
+    } else if (!_.contains(titleClasses, target.className)) {
+     setShowTitles(false);
+     document.removeEventListener('click', exitTitles);
     }
   };
 
@@ -67,6 +70,7 @@ const Subjects = ({ groups, category, showConfirm, setShowConfirm, titlesUpdate,
       } else if (e.target.className === 'subject') {
         subject = e.target.children[1].innerText;
       }
+      document.addEventListener('click', exitTitles);
       setSubj(subject);
       fetch(`/titles/${category}/${subject}`)
         .then(res => res.json())
@@ -103,7 +107,7 @@ const Subjects = ({ groups, category, showConfirm, setShowConfirm, titlesUpdate,
              className="subject"
              onClick={handleSubjClick}
              key={subject.subject}>
-               <Subject clickedSubj={subj} subject={subject.subject} color={color}/>
+               <Subject clickedSubj={subj} subject={subject.subject} color={color} openCustomMenu={openCustomMenu} id={subject.id} catID={catID}/>
            </div>
          </div>
         ))

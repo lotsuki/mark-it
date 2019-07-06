@@ -34,7 +34,6 @@ const Confirm = ({ groups, setShowConfirm, titleToDelete, subjectOfTitle, showTi
                   break;
                 }
               }
-              console.log(res, 'res');
               console.log('DELETE request successful');
             })
             .catch(err => { console.log('Error at DELETE request', err); });

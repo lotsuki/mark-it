@@ -29,7 +29,6 @@ const Titles = ({ titles, links, setTitles, showConfirm, setShowConfirm, deleteT
     }
   };
 
-  console.log(titles, 'titles')
 
   //const container = ['titles-container']
   // const titlesArr = () => {

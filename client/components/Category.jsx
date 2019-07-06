@@ -69,22 +69,9 @@ const displayCatOnEdit = () => {
 };
 
    const hoverOn = (e) => {
-  //
-  //   if (isEditing) {
-  //     categoryToEdit
-  //
-  //   }
    };
 
    const hoverOff = (e) => {
-  //   if (isEditing) {
-  //   let categoryToEdit = document.getElementById('edit-category');
-  //   console.log(categoryToEdit)
-    //categoryToEdit.parentElement.style.background = '';
-  //}
-  //   console.log(e.target, 'off')
-    // e.target.style.background = '';
-    // e.target.parentElement.style.background = '';
   };
 
   return (
@@ -108,7 +95,7 @@ const displayCatOnEdit = () => {
                   </Fragment>
                   )
               }
-              <IconCustomMenu openCustomMenu={openCustomMenu}/>
+              <IconCustomMenu openCustomMenu={openCustomMenu} name={cat}/>
             </div>
            )
         : (
@@ -126,7 +113,7 @@ const displayCatOnEdit = () => {
                   </Fragment>
                   )
               }
-              <IconCustomMenu openCustomMenu={openCustomMenu} cat={cat}/>
+              <IconCustomMenu openCustomMenu={openCustomMenu} name={cat}/>
             </div>
           )
       }

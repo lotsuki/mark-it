@@ -20,15 +20,14 @@ const Main = ({ groups, links }) => {
   const [ titleToDelete, setTitleToDelete ] = useState('');
   const [ subjectOfTitle, setSubjectOfTitle ] = useState('');
   const [ titlesUpdate, setTitlesUpdate ] = useState(null);
-  const [ top, setTop ] = useState(0);
+  const [ cords, setCords ] = useState([]);
   const [ elementForCustomMenu, setElementForCustomMenu ] = useState('');
   const [ isEditing, setIsEditing ] = useState(false);
   const [ elementToEdit, setElementToEdit ] = useState('');
   const [ categoryID, setCategoryID ] = useState('');
   const [ groupToDelete, setGroupToDelete ] = useState('');
 
- console.log(showForm, 'showForm')
-   const showTitlesUpdate = (data) => {
+  const showTitlesUpdate = (data) => {
   //   console.log(data, 'data')
   //   setTitlesUpdate(data);
   //   setShowTitles(true);
@@ -61,48 +60,63 @@ const Main = ({ groups, links }) => {
     }
   };
 
-  const openCustomMenu = (e) => {
+  const whichGroup = (element) => {
+    for (var i = 0; i < groups.length; i++) {
+      if (groups[i].category === element.parentElement.children[1].innerText) {
+        return 'category';
+      }
+    }
+    return 'subject';
+  };
 
+  const openCustomMenu = (e) => {
     let target;
+    let wrapper = document.getElementById('section-wrapper');
+
     if (e.target.tagName === 'path' && e.target.parentElement.className.baseVal.includes('icon-custom-menu')) {
       target = e.target.parentElement;
-    } else if (e.target.className.baseVal.includes('icon-custom-menu')) { target = e.target }
+    } else if (e.target.className.baseVal.includes('icon-custom-menu')) {
+      target = e.target
+    }
+    let rect = target.getBoundingClientRect();
+    let top = rect.top + 8;
+    let left = rect.left;
+
     if (elementForCustomMenu) {
       elementForCustomMenu.style.visibility = '';
       setElementForCustomMenu('');
       setIsEditing(false);
       setCategoryID('');
+      setCords([]);
      // setCategory('');
     }
-    if (!elementForCustomMenu || elementForCustomMenu.className.baseVal !== target.className.baseVal) {
-      let count = 0;
-      for (var i = 0; i < groups.length; i++) {
-        if (groups[i].category === target.parentElement.children[1].innerText) {
-          setCategoryID(groups[i]['id']);
-          break;
-        }
-        ++count;
-      }
+    let group = whichGroup(target);
 
+    if ((group === 'category' )&& ( !elementForCustomMenu || elementForCustomMenu && elementForCustomMenu.className.baseVal !== target.className.baseVal )) {
+      let category = target.parentElement.children[1].innerText;
       target.style.visibility = 'visible';
-      let result = 165 + (count*53);
-      setTop(result);
+      setCords([top, left]);
+      setElementForCustomMenu(target);
+    } else if ((group === 'subject') && ( !elementForCustomMenu || elementForCustomMenu && elementForCustomMenu.className.baseVal !== target.className.baseVal )){
+      let subject = target.parentElement.children[1].innerText;
+      target.style.visibility = 'visible';
+      setCords([top, left]);
       setElementForCustomMenu(target);
     }
   };
-  console.log(showTitles, 'SHOW TITLES')
+
   console.log('MAIN RENDER')
-  console.log(titles, 'TITLES IN MAIN')
+
   return (
     <div id="container">
       <Navbar showForm={showForm} setShowForm={setShowForm} showEdit={showEdit} setShowEdit={setShowEdit} links={links} />
       <div id="app-container" className="app" data-testid="app-container">
         <div className="sidebar-container">
-          <Bookmarks groups={groups} categoryID={categoryID} setCategoryID={setCategoryID} setShowTitles={setShowTitles} setTitles={setTitles} showConfirm={showConfirm} showTitles={showTitles} setShowConfirm={setShowConfirm} titlesUpdate={titlesUpdate} openCustomMenu={openCustomMenu} setIsEditing={setIsEditing} isEditing={isEditing} setElementToEdit={setElementToEdit} elementToEdit={elementToEdit} setElementForCustomMenu={setElementForCustomMenu} elementForCustomMenu={elementForCustomMenu} setElementForCustomMenu={setElementForCustomMenu} setGroupToDelete={setGroupToDelete}/>
+          <Bookmarks groups={groups} categoryID={categoryID} setCategoryID={setCategoryID} setShowTitles={setShowTitles} setTitles={setTitles} showConfirm={showConfirm} showTitles={showTitles} setShowConfirm={setShowConfirm} titlesUpdate={titlesUpdate} openCustomMenu={openCustomMenu} setIsEditing={setIsEditing} isEditing={isEditing} setElementToEdit={setElementToEdit} elementToEdit={elementToEdit} setElementForCustomMenu={setElementForCustomMenu} elementForCustomMenu={elementForCustomMenu} setElementForCustomMenu={setElementForCustomMenu} setGroupToDelete={setGroupToDelete} />
         </div>
         {
           elementForCustomMenu
-          &&  <CustomMenu top={top} elementForCustomMenu={elementForCustomMenu} setElementForCustomMenu={setElementForCustomMenu} isEditing={isEditing} setIsEditing={setIsEditing} showConfirm={showConfirm} setShowConfirm={setShowConfirm} />
+          &&  <CustomMenu cords={cords} elementForCustomMenu={elementForCustomMenu} setElementForCustomMenu={setElementForCustomMenu} isEditing={isEditing} setIsEditing={setIsEditing} showConfirm={showConfirm} setShowConfirm={setShowConfirm} />
         }
         <Fragment>
           {

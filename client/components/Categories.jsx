@@ -50,7 +50,6 @@ const Categories = ({ groups, categoryID, setCategoryID, showConfirm, setShowCon
         setShowTitles(false);
         setGroupToDelete('');
       } else {
-
         setIsOpen(true);
         setCategory(cat);
         setShowTitles(false);
@@ -80,7 +79,7 @@ const Categories = ({ groups, categoryID, setCategoryID, showConfirm, setShowCon
                 <div className="dropdown-wrapper" >
                   {
                     isOpen
-                      ? ( <Subjects groups={groups} category={category} setShowTitles={setShowTitles} setTitles={setTitles} showConfirm={showConfirm} showTitles={showTitles} setShowConfirm={setShowConfirm} titlesUpdate={titlesUpdate} handleCatClick={handleCatClick} setIsOpen={setIsOpen} setCategory={setCategory} color={group.color} isOpen={isOpen}/>)
+                      ? ( <Subjects groups={groups} category={category} setShowTitles={setShowTitles} setTitles={setTitles} showConfirm={showConfirm} showTitles={showTitles} setShowConfirm={setShowConfirm} titlesUpdate={titlesUpdate} handleCatClick={handleCatClick} setIsOpen={setIsOpen} setCategory={setCategory} color={group.color} isOpen={isOpen} openCustomMenu={openCustomMenu}/>)
                       : ( null )
                   }
                 </div>
