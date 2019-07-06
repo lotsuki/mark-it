@@ -33,6 +33,7 @@ app.use(express.static(`${__dirname}/../public/`));
 app.post('/form', (req, res) => {
   const { category, subject, categoryID, categoryL, subjectL, color, hasCat, hasSubj } = req.body;
   const key = `groups.${categoryID}.subjects`;
+  console.log(categoryL, 'catL')
   Document.create({
         category: category,
         subject: subject,

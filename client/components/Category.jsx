@@ -24,13 +24,10 @@ const Category = ({ groups, categoryID, setCategoryID, setCategory, category, ex
 
   const handleEnter = (e) => {
     if (e.keyCode === 13) {
-      console.log(catEdited, 'catEdited');
-      console.log(categoryID, 'categoryID');
       axios.get(`/update/cat/${catEdited}/${categoryID}`, {
         method: 'PATCH'
         })
         .then(res => {
-          console.log(res);
           for (var i = 0; i < groups.length; i++) {
             if (groups[i].id === categoryID) {
               groups[i].category = catEdited;

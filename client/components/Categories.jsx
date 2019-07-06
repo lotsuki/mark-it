@@ -4,11 +4,10 @@ import PropTypes from 'prop-types';
 import Subjects from './Subjects';
 import Category from './Category';
 
-const Categories = ({ groups, categoryID, setCategoryID, showConfirm, setShowConfirm, titlesUpdate, setShowTitles, showTitles, setTitles, openCustomMenu, setIsEditing, isEditing, elementToEdit, setElementToEdit, setElementForCustomMenu, elementForCustomMenu, setGroupToDelete }) => {
+const Categories = ({ groups, categoryID, setCategoryID, showConfirm, setShowConfirm, titlesUpdate, setShowTitles, showTitles, setTitles, openCustomMenu, setIsEditing, isEditing,  setElementForCustomMenu, elementForCustomMenu, setGroupToDelete }) => {
   const [ isOpen, setIsOpen ] = useState(false);
   const [ category, setCategory ] = useState('');
-  const [ categories, setCategories ] = useState([]);
-  const [ subjects, setSubjects ] = useState([]);
+  const [ elementToEdit, setElementToEdit ] = useState('');
 
   const exitCategories = (e) => {
     if (e.target.className === 'app' || e.target.className === 'sidebar-container') {

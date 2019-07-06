@@ -48,6 +48,7 @@ const Subjects = ({ groups, category, showConfirm, setShowConfirm, titlesUpdate,
   };
 
   const handleSubjClick = (e) => {
+    //refactor to use group obj, get rid of api calls and titles state
     let subject;
     let target = e.target;
     if (!showTitles) {
