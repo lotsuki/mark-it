@@ -35,7 +35,7 @@ const Main = ({ groups, groupsID, links }) => {
 
   const displayContainer = () => {
     if (showForm) {
-      return <Form groups={groups} showForm={showForm} setShowForm={setShowForm} categoryID={categoryID} setCategoryID={setCategoryID}/>
+      return <Form groups={groups} groupsID={groupsID} showForm={showForm} setShowForm={setShowForm} categoryID={categoryID} setCategoryID={setCategoryID}/>
     } else if (showConfirm) {
       return <Confirm groups={groups} groupsID={groupsID} showConfirm={showConfirm} setShowConfirm={setShowConfirm} titleToDelete={titleToDelete} titles={titles} groupToDelete={groupToDelete} categoryID={categoryID} setCategoryID={setCategoryID}  elementForCustomMenu={elementForCustomMenu} setElementForCustomMenu={setElementForCustomMenu} setTitlesUpdate={setTitlesUpdate} isEditingSubject={isEditingSubject}/>
     }

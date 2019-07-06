@@ -5,7 +5,7 @@ import _ from 'underscore';
 import utils from '../lib/utils';
 import { Spring } from 'react-spring/renderprops';
 
-const Form = ({ groups, showForm, setShowForm, setCategoryID, categoryID }) => {
+const Form = ({ groups, groupsID, showForm, setShowForm, setCategoryID, categoryID }) => {
   const [ category, setCategory ] = useState('');
   const [ subject, setSubject ] = useState('');
   const [ title, setTitle ] = useState('');
@@ -29,13 +29,16 @@ const Form = ({ groups, showForm, setShowForm, setCategoryID, categoryID }) => {
     e.preventDefault();
     const hasCat = utils.findCategory(groups, category);
     const catID = utils.findCategoryID(groups, category);
-    const hasSubj = utils.findSubject(groups, subject, catID);
+    let hasSubj;
     let subjectL;
-    if (catID) {
+
+    if (catID >= 0) {
+      hasSubj = utils.findSubject(groups, subject, catID);
       subjectL = groups[catID].subjects.length;
     }
 
     const data = {
+      groupsID,
       categoryL: groups.length,
       category,
       subject,

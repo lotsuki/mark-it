@@ -31,9 +31,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(`${__dirname}/../public/`));
 
 app.post('/form', (req, res) => {
-  let { category, subject, categoryID, categoryL, subjectL, color, hasCat, hasSubj } = req.body;
+  let { groupsID, category, subject, categoryID, categoryL, subjectL, color, hasCat, hasSubj } = req.body;
   let key = `groups.${categoryID}.subjects`;
-  console.log(categoryL, 'catL')
+
   Document.create({
         category: category,
         subject: subject,
@@ -46,7 +46,7 @@ app.post('/form', (req, res) => {
       res.send('Error at POST: ', err);
     } else {
       if (!hasCat && !hasSubj) {
-        Document.updateOne({groups: {$exists: true}}, {$addToSet: {groups:{id: categoryL, category, color, subjects: [{id: 0, subject: subject}], }}}, (err, result) => {
+        Document.updateOne({_id: groupsID}, {$addToSet: {groups:{id: categoryL, category, color, subjects: [{id: 0, subject: subject}], }}}, (err, result) => {
           if (err) { res.send(err); }
           else { res.send(result); }
         })
