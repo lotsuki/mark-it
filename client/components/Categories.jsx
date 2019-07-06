@@ -63,7 +63,6 @@ const Categories = ({ groups, categoryID, setCategoryID, showConfirm, setShowCon
     <div className="section-container" >
      <div id="section-wrapper">
        {groups.map(group => {
-
          return (
           <div className="category-container" key={group.category}>
            <div

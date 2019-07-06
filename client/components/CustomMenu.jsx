@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-const CustomMenu = ({ cords, elementForCustomMenu, setElementForCustomMenu, isEditing, setIsEditing, showConfirm, setShowConfirm }) => {
+const CustomMenu = ({ cords, elementForCustomMenu, setElementForCustomMenu, isEditing, setIsEditing, showConfirm, setShowConfirm, group, setIsEditingSubject }) => {
   useEffect(() => {
     document.addEventListener('click', exitCustomMenu);
   }, [])
@@ -30,7 +30,7 @@ const CustomMenu = ({ cords, elementForCustomMenu, setElementForCustomMenu, isEd
     }
   };
 
-  const confirmDeleteForCategory = async () => {
+  const confirmDeleteForGroup = async () => {
     let doc = document.getElementById('container');
     let confirmContainer = document.getElementById('confirm');
 
@@ -52,11 +52,28 @@ const CustomMenu = ({ cords, elementForCustomMenu, setElementForCustomMenu, isEd
   };
 
   const customMenuClick = (e) => {
-    if (e.target.innerText === 'Edit Item') {
-      setIsEditing(true);
-    } else if (e.target.innerText === 'Delete Item') {
-      confirmDeleteForCategory();
-    }
+    let className = elementForCustomMenu.parentElement.children[1].className;
+     if (className === 'category-text' && e.target.innerText === 'Edit Item') {
+       setIsEditing(true);
+     } else if (className === 'subject-text' && e.target.innerText === 'Edit Item') {
+       setIsEditingSubject(true);
+     } else if (e.target.innerText === 'Delete Item') {
+       confirmDeleteForGroup();
+     }
+
+    // if (group === 'category') {
+    //   if (e.target.innerText === 'Edit Item') {
+    //     setIsEditing(true);
+    //   } else if (e.target.innerText === 'Delete Item') {
+    //     confirmDeleteForCategory();
+    //   }
+    // } else if (group === 'subject') {
+    //   if (e.target.innerText === 'Edit Item') {
+    //     setIsEditingSub(true);
+    //   } else if (e.target.innerText === 'Delete Item') {
+    //     confirmDeleteForSubject();
+    //   }
+    // }
   };
 
   return (

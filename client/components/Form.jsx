@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import _ from 'underscore';
@@ -12,8 +12,12 @@ const Form = ({ groups, showForm, setShowForm, setCategoryID, categoryID }) => {
   const [ url, setUrl ] = useState('');
   const [ selectCat, setSelectCat ] = useState(false);
   const [ selectSub, setSelectSub ] = useState(false);
+  const [ color, setColor ] = useState('');
 
-  console.log('whatttt')
+  useEffect(() => {
+    setColor('#D00000');
+  }, []);
+
   let subjects = [];
   let categories = groups.map((group, i) => {
     group.subjects.forEach(subject => {
@@ -21,11 +25,6 @@ const Form = ({ groups, showForm, setShowForm, setCategoryID, categoryID }) => {
     });
     return group.category;
   });
-
-  //  _.map(bmarks, (cat, key) => {
-  //   subjects = subjects.concat(cat);
-  //   return key;
-  // });
 
   const clearForm = () => {
     setCategory('');
@@ -35,7 +34,10 @@ const Form = ({ groups, showForm, setShowForm, setCategoryID, categoryID }) => {
   };
 
   const hasCategory = () => {
+    console.log(category, 'CATEGORY')
     for (var i = 0; i < groups.length; i++) {
+      console.log(groups[i], 'objs')
+      console.log(groups[i].category, 'cat in group')
       if (groups[i].category === category) {
         return true;
       }
@@ -48,12 +50,12 @@ const Form = ({ groups, showForm, setShowForm, setCategoryID, categoryID }) => {
   const hasSubject = () => {
     return subjects.indexOf(subject) !== -1;
   };
+  console.log(color, 'COLOR')
 
   const submitForm = (e) => {
     console.log(showForm, 'showForm')
     e.preventDefault();
     let catID;
-    console.log(category, 'cat')
     for (var i = 0; i < groups.length; i++) {
       if (groups[i].category === category) {
         catID = groups[i].id;
@@ -78,6 +80,7 @@ const Form = ({ groups, showForm, setShowForm, setCategoryID, categoryID }) => {
       hasSubj,
       catID,
       subjectL,
+      color
     };
 
     if (category && subject && title && url) {
@@ -92,7 +95,7 @@ const Form = ({ groups, showForm, setShowForm, setCategoryID, categoryID }) => {
         .then(res => res.json())
         .then(data => {
           if (!hasCat && !hasSubj) {
-            groups.push({id: groups.length, category, color: 'blue', subjects: [{id: 0, subject}]})
+            groups.push({id: groups.length, category, color, subjects: [{id: 0, subject}]})
           } else if (!hasSubj) {
             groups[catID].subjects.push({id: subjectL, subject})
           }
@@ -139,7 +142,7 @@ const Form = ({ groups, showForm, setShowForm, setCategoryID, categoryID }) => {
 
               />
 
-            <input name="form" type="color" defaultValue="#D00000" className="color"/>
+            <input name="form" type="color" defaultValue="#D00000" className="color" onChange={e => setColor(e.target.value)}/>
           </div>
           <div className="form-dropdown-wrapper">
           {

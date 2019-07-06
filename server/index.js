@@ -31,13 +31,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(`${__dirname}/../public/`));
 
 app.post('/form', (req, res) => {
-  let category = req.body.category;
-  let subject = req.body.subject;
-  let categoryID = req.body.catID;
-  let categoryL = req.body.categoryL;
-  let subjectL = req.body.subjectL;
-  let key = `groups.${categoryID}.subjects`;
-
+  const { category, subject, categoryID, categoryL, subjectL, color, hasCat, hasSubj } = req.body;
+  const key = `groups.${categoryID}.subjects`;
   Document.create({
         category: category,
         subject: subject,
@@ -48,16 +43,14 @@ app.post('/form', (req, res) => {
     if (err) {
       console.log('error at post: ', err)
       res.send('Error at POST: ', err);
-    }
-    else {
-      let hasCategory = req.body.hasCat;
-      let hasSubject = req.body.hasSubj;
-      if (!hasCategory && !hasSubject) {
-        Document.updateOne({groups: {$exists: true}}, {$addToSet: {groups:{id: categoryL, category, color: 'blue', subjects: [{id: 0, subject: subject}], }}}, (err, result) => {
+    } else {
+      if (!hasCat && !hasSubj) {
+        Document.updateOne({groups: {$exists: true}}, {$addToSet: {groups:{id: categoryL, category, color, subjects: [{id: 0, subject: subject}], }}}, (err, result) => {
           if (err) { res.send(err); }
           else { res.send(result); }
         })
-      } else if(!hasSubject) {
+      } else if(!hasSubj) {
+        console.log('yes cat, no sub');
         Document.updateOne({'groups.id': categoryID}, {$addToSet:{[key]: {id: subjectL, subject}}}, (err, result) => {
           if (err) { console.log('Failed to update subjects at POST: ', err); }
           else { res.send(result); }
@@ -66,8 +59,6 @@ app.post('/form', (req, res) => {
     }
   });
 });
-
-
 
 app.get('/user', (req, res) => {
   Document.findOne({ username: { $exists: true } }, (err, result) => {
@@ -91,8 +82,7 @@ app.get('/titles', (req, res) => {
 });
 
 app.get('/titles/:category/:subject', (req, res) => {
-  let subject = req.params.subject;
-  let category = req.params.category;
+  const { subject, category } = req.params;
   Document.find({ category: category, subject: subject }, 'title url', (err, result) => {
     if (err) { console.log('Failure to get titles: ', err); }
     else { res.status(200).send(result); }
@@ -115,32 +105,15 @@ app.get('/titles/:category/:subject', (req, res) => {
 //db.documents.updateOne({'groups.id': id}, {$set:{'groups.id.category': 'News'}})
 
 app.get('/update/cat/:catEdited/:categoryID', (req, res) => {
-  let catEdited = req.params.catEdited;
-  let id = parseInt(req.params.categoryID);
-  let key = `groups.${id}.category`;
-  console.log(catEdited)
-  console.log(id)
-  console.log(key)
+  const catEdited = req.params.catEdited;
+  const id = parseInt(req.params.categoryID);
+  const key = `groups.${id}.category`;
 
   Document.updateOne({'groups.id': id}, {$set:{[key]: catEdited}}, (err, result) => {
-    console.log(result)
     if (err) { console.log('Failure to get user obj: ', err); }
     else { res.send(result); }
   });
 });
-
-//add subject
-
-// db.documents.updateOne({'groups.id': id}, {$addToSet:{'groups.id.subjects': {id: 4, subject: 'hey'}}})
-// db.documents.updateOne({groups: {$elemMatch: {id: 1}}}, {$addToSet:{'groups.$.subjects': {id: 3, subject: 'Mongo'}}})
-
-//add category
-// db.documents.updateOne({groups: {$exists: true}}, {$addToSet: {groups:{id: 4, category: 'Sports', color: 'blue', subjects: [], }}})
-
-
-//edit category
-//db.documents.updateOne({'groups.id': id}, {$set:{'groups.id.category': 'News'}})
-// db.documents.updateOne({groups: {$elemMatch: {category: 'Tech'}}}, {$set:{'groups.$.category': 'News'}})
 
 //edit subject
 //db.documents.updateOne({'groups.id': id},{$set:{'groups.id.subjects.subID.subject': 'Indian'}})
@@ -157,57 +130,22 @@ app.get('/update/cat/:catEdited/:categoryID', (req, res) => {
 // });
 
 
-
-//Have confirmation for this and show how many bookmarks this folder contains
-
-// app.delete('/delete/cat/:cat', (req, res) => {
-//   let cat = req.params.cat;
-//   Document.deleteMany({ category: cat }, (err) => {
-//     if (err) { console.log('Error at DELETE request: ', err); }
-//     else { console.log('Document successfully deleted'); }
-//   });
-// });
-
-
-
-app.delete('/delete/:category/:id', (req, res) => {
-  let id = parseInt(req.params.id);
-  let category = req.params.category;
+app.delete('/delete/:cat/:id', (req, res) => {
+  const id = parseInt(req.params.id);
+  const category = req.params.cat;
 
   Document.updateOne({'groups.id': id}, {$pull:{groups: {id}}}, (err, result) => {
-    console.log(result)
     if (err) { console.log('Failure to get user obj: ', err); }
     else { res.send(result); }
   });
-
-  Document.deleteMany({ category }, (err) => {
-    if (err) { console.log('Error at DELETE request: ', err); }
-    else { res.send(result); }
-  });
-
+   Document.deleteMany({ category }, (err, result) => {
+      if (err) { console.log('Error at DELETE request: ', err); }
+      else { console.log('Deleted categories'); }
+    });
 });
 
-
-//   else if (group === 'subject') {
-//     Document.deleteMany({ subject: item }, (err) => {
-//       if (err) { console.log('Error at DELETE request: ', err); }
-//       else { console.log('Document successfully deleted'); }
-//     });
-
-//   } else if (group === 'title') {
-//     Document.deleteOne({ title: item }, (err) => {
-//       if (err) { console.log('Error at DELETE request: ', err); }
-//       else { console.log('Document successfully deleted'); }
-//     });
-
-//   }
-//   Document.deleteMany({ subject: subj }, (err) => {
-//     if (err) { console.log('Error at DELETE request: ', err); }
-//     else { console.log('Document successfully deleted'); }
-// });
-
 app.delete('/delete/subj/:subj', (req, res) => {
-  let subj = req.params.subj;
+  const subj = req.params.subj;
   Document.deleteMany({ subject: subj }, (err, result) => {
     if (err) { console.log('Error at DELETE request: ', err); }
     else { res.send(result); }
@@ -219,25 +157,10 @@ app.delete('/delete/subj/:subj', (req, res) => {
 });
 
 app.delete('/delete/:titleToDelete', (req, res) => {
-  let title = req.params.titleToDelete;
+  const title = req.params.titleToDelete;
   Document.deleteOne({ title }, (err, result) => {
     if (err) { console.log('Error at DELETE request: ', err); }
     else { res.send(result); }
-  });
-});
-
-app.delete('/bookmarks/:title/:subject', (req, res) => {
-  let title = req.params.title;
-  let subject = req.params.subject;
-
-  Document.deleteOne({ title }, (err) => {
-    if (err) { console.log('Error at DELETE request: ', err); }
-    else {
-      Document.find({ subject }, (err, result) => {
-        if (err) { console.log('Failure to get user obj: ', err); }
-        else { console.log(result, 'find titles after delete'); res.send(result); }
-      });
-    }
   });
 });
 

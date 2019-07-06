@@ -2,8 +2,9 @@ import React from 'react';
 
 const IconPlus = ({ showForm, setShowForm }) => {
   const hideDisplay = (e) => {
+    console.log('hi')
     if (e.target.name !== 'form') {
-      console.log('hi')
+      console.log('bye')
       setShowForm(false);
       document.removeEventListener('click', hideDisplay);
     }

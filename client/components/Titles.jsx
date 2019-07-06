@@ -3,13 +3,12 @@ import PropTypes from 'prop-types';
 import {useTrail, animated} from 'react-spring';
 
 
-const Titles = ({ titles, links, setTitles, showConfirm, setShowConfirm, deleteTitle, titlesUpdate, setGroupToDelete, subjectOfTitle }) => {
+const Titles = ({ titles, links, showConfirm, setShowConfirm, deleteTitle, setGroupToDelete }) => {
 
   const confirmDelete = async (e) => {
     let target = e.target
     let doc = document.getElementById('container');
     let confirmContainer = document.getElementById('confirm');
-    console.log(showConfirm, 'showconfirm')
     if (!showConfirm) {
       await setGroupToDelete('title');
       await setShowConfirm(true);
@@ -69,13 +68,11 @@ export default Titles;
 
 Titles.propTypes = {
   links: PropTypes.array,
-  setTitles: PropTypes.func,
   displayConfirm: PropTypes.func
 };
 
 Titles.defaultProps = {
   links: [],
-  setTitles: () => {},
   displayConfirm: () => {}
 };
 

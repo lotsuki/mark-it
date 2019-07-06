@@ -17,8 +17,6 @@ class App extends React.Component {
     this._isMounted = false;
   }
 
-
-  //TODO: Fix state being called after unmount, then fix integration test
   componentDidMount() {
     this._isMounted = true;
 

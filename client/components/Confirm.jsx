@@ -2,15 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
-const Confirm = ({ groups, setShowConfirm, titleToDelete, subjectOfTitle, showTitlesUpdate, setTitles, titles, groupToDelete, categoryID, setCategoryID, elementForCustomMenu, setElementForCustomMenu, setShowTitles, titlesUpdate, setTitlesUpdate }) => {
+const Confirm = ({ groups, setShowConfirm, titleToDelete, setTitles, titles, groupToDelete, categoryID, setCategoryID, elementForCustomMenu, setElementForCustomMenu, setShowTitles, titlesUpdate, setTitlesUpdate }) => {
   const handleConfirmClick = async (e) => {
     if (e.target.innerText === 'Yes') {
       if (groupToDelete === 'category') {
-        let category = elementForCustomMenu.parentElement.children[1].innerText;
-        await axios.delete(`/delete/${category}/${categoryID}`)
+        let cat = elementForCustomMenu.parentElement.children[1].innerText;
+        console.log(cat, 'CAT IN CONFIRM');
+        console.log(categoryID, 'ID IN CONFIRM')
+        await axios.delete(`/delete/${cat}/${categoryID}`)
           .then(res => {
              for (var i = 0; i < groups.length; i++) {
-                if (groups[i].id === categoryID) {
+                if (groups[i].category === cat) {
                   groups.splice(i, 1);
                 }
               }
@@ -28,7 +30,7 @@ const Confirm = ({ groups, setShowConfirm, titleToDelete, subjectOfTitle, showTi
               for (var i = 0; i < titles.length; i++) {
                 if (titles[i].title === titleToDelete) {
                   titles.splice(i, 1);
-                   setTitles(titles);
+                   // setTitles(titles);
                    setTitlesUpdate(titles);
                    //setShowTitles(true);
                   break;
@@ -69,14 +71,10 @@ export default Confirm;
 
 Confirm.propTypes = {
   titleToDelete: PropTypes.string,
-  subjectOfTitle: PropTypes.string,
   setShowConfirm: PropTypes.func,
-  showTitlesUpdate:PropTypes.func
 };
 
 Confirm.defaultProps = {
   titleToDelete: '',
-  subjectOfTitle: '',
-  setShowConfirm: () => {},
-  showTitlesUpdate: () => {}
+  setShowConfirm: () => {}
 };

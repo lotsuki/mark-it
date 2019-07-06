@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import Navbar from './Navbar';
 import Bookmarks from './Bookmarks';
 import Form from './Form';
-import Edit from './Edit';
 import Confirm from './Confirm';
 import Titles from './Titles';
 import CustomMenu from './CustomMenu';
@@ -13,12 +12,10 @@ import { useSpring, animated } from 'react-spring';
 
 const Main = ({ groups, links }) => {
   const [ showForm, setShowForm, ] = useState(false);
-  const [ showEdit, setShowEdit ] = useState(false);
   const [ showConfirm, setShowConfirm ] = useState(false);
   const [ showTitles, setShowTitles ] = useState(false);
   const [ titles, setTitles ] = useState([]);
   const [ titleToDelete, setTitleToDelete ] = useState('');
-  const [ subjectOfTitle, setSubjectOfTitle ] = useState('');
   const [ titlesUpdate, setTitlesUpdate ] = useState(null);
   const [ cords, setCords ] = useState([]);
   const [ elementForCustomMenu, setElementForCustomMenu ] = useState('');
@@ -26,12 +23,8 @@ const Main = ({ groups, links }) => {
   const [ elementToEdit, setElementToEdit ] = useState('');
   const [ categoryID, setCategoryID ] = useState('');
   const [ groupToDelete, setGroupToDelete ] = useState('');
-
-  const showTitlesUpdate = (data) => {
-  //   console.log(data, 'data')
-  //   setTitlesUpdate(data);
-  //   setShowTitles(true);
-  };
+  const [ group, setGroup ] = useState('');
+  const [ isEditingSubject, setIsEditingSubject ] = useState(false);
 
   const findSubject = (titl) => {
     let subj;
@@ -53,10 +46,8 @@ const Main = ({ groups, links }) => {
   const displayContainer = () => {
     if (showForm) {
       return <Form groups={groups} showForm={showForm} setShowForm={setShowForm} categoryID={categoryID} setCategoryID={setCategoryID}/>
-    } else if (showEdit) {
-      return <Edit groups={groups} links={links} />
     } else if (showConfirm) {
-      return <Confirm groups={groups} showConfirm={showConfirm} setShowConfirm={setShowConfirm} titleToDelete={titleToDelete} subjectOfTitle={subjectOfTitle} setShowTitles={setShowTitles} showTitlesUpdate={showTitlesUpdate} setTitles={setTitles} titles={titles} groupToDelete={groupToDelete} categoryID={categoryID} setCategoryID={setCategoryID}  elementForCustomMenu={elementForCustomMenu} setElementForCustomMenu={setElementForCustomMenu} titlesUpdate={titlesUpdate} setTitlesUpdate={setTitlesUpdate} />
+      return <Confirm groups={groups} showConfirm={showConfirm} setShowConfirm={setShowConfirm} titleToDelete={titleToDelete} setShowTitles={setShowTitles} setTitles={setTitles} titles={titles} groupToDelete={groupToDelete} categoryID={categoryID} setCategoryID={setCategoryID}  elementForCustomMenu={elementForCustomMenu} setElementForCustomMenu={setElementForCustomMenu} titlesUpdate={titlesUpdate} setTitlesUpdate={setTitlesUpdate} isEditingSubject={isEditingSubject}/>
     }
   };
 
@@ -78,6 +69,8 @@ const Main = ({ groups, links }) => {
     } else if (e.target.className.baseVal.includes('icon-custom-menu')) {
       target = e.target
     }
+    let group = whichGroup(target);
+
     let rect = target.getBoundingClientRect();
     let top = rect.top + 8;
     let left = rect.left;
@@ -90,13 +83,11 @@ const Main = ({ groups, links }) => {
       setCords([]);
      // setCategory('');
     }
-    let group = whichGroup(target);
-
     if ((group === 'category' )&& ( !elementForCustomMenu || elementForCustomMenu && elementForCustomMenu.className.baseVal !== target.className.baseVal )) {
-      let category = target.parentElement.children[1].innerText;
-
+      let cat = target.parentElement.children[1].innerText;
+      console.log(cat, 'CAT IN OPENCUSTMENU')
       for (var i = 0; i < groups.length; i++) {
-        if (groups[i].category === category) {
+        if (groups[i].category === cat) {
           setCategoryID(groups[i].id);
         }
       }
@@ -111,23 +102,21 @@ const Main = ({ groups, links }) => {
     }
   };
 
-  console.log('MAIN RENDER')
-
   return (
     <div id="container">
-      <Navbar showForm={showForm} setShowForm={setShowForm} showEdit={showEdit} setShowEdit={setShowEdit} links={links} />
+      <Navbar showForm={showForm} setShowForm={setShowForm} links={links} />
       <div id="app-container" className="app" data-testid="app-container">
         <div className="sidebar-container">
           <Bookmarks groups={groups} categoryID={categoryID} setCategoryID={setCategoryID} setShowTitles={setShowTitles} setTitles={setTitles} showConfirm={showConfirm} showTitles={showTitles} setShowConfirm={setShowConfirm} titlesUpdate={titlesUpdate} openCustomMenu={openCustomMenu} setIsEditing={setIsEditing} isEditing={isEditing} setElementToEdit={setElementToEdit} elementToEdit={elementToEdit} setElementForCustomMenu={setElementForCustomMenu} elementForCustomMenu={elementForCustomMenu} setElementForCustomMenu={setElementForCustomMenu} setGroupToDelete={setGroupToDelete} />
         </div>
         {
           elementForCustomMenu
-          &&  <CustomMenu cords={cords} elementForCustomMenu={elementForCustomMenu} setElementForCustomMenu={setElementForCustomMenu} isEditing={isEditing} setIsEditing={setIsEditing} showConfirm={showConfirm} setShowConfirm={setShowConfirm} />
+          &&  <CustomMenu cords={cords} elementForCustomMenu={elementForCustomMenu} setElementForCustomMenu={setElementForCustomMenu} isEditing={isEditing} setIsEditing={setIsEditing} showConfirm={showConfirm} setShowConfirm={setShowConfirm} group={group} setIsEditingSubject={setIsEditingSubject}/>
         }
         <Fragment>
           {
             showTitles
-            ? (<Titles titles={titles} links={links} setTitles={setTitles} showConfirm={showConfirm} setShowConfirm={setShowConfirm} deleteTitle={deleteTitle} titlesUpdate={titlesUpdate} setGroupToDelete={setGroupToDelete} subjectOfTitle={subjectOfTitle}/>)
+            ? (<Titles titles={titles} links={links} showConfirm={showConfirm} setShowConfirm={setShowConfirm} deleteTitle={deleteTitle} setGroupToDelete={setGroupToDelete} />)
             : (null)
           }
         </Fragment>
