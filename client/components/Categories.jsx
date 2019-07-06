@@ -5,7 +5,7 @@ import Subjects from './Subjects';
 import Category from './Category';
 import utils from '../lib/utils';
 
-const Categories = ({ groups, categoryID, setCategoryID, showConfirm, setShowConfirm, titlesUpdate, setShowTitles, showTitles, setTitles, openCustomMenu, setIsEditing, isEditing,  setElementForCustomMenu, elementForCustomMenu, setGroupToDelete }) => {
+const Categories = ({ groups, categoryID, setCategoryID, showConfirm, setShowConfirm, titlesUpdate, setShowTitles, showTitles, setTitles, openCustomMenu, setIsEditing, isEditing,  setElementForCustomMenu, elementForCustomMenu, setGroupToDelete, isEditingSubject, setIsEditingSubject }) => {
   const [ isOpen, setIsOpen ] = useState(false);
   const [ category, setCategory ] = useState('');
   const [ elementToEdit, setElementToEdit ] = useState('');
@@ -65,7 +65,7 @@ const Categories = ({ groups, categoryID, setCategoryID, showConfirm, setShowCon
                 <div className="dropdown-wrapper" >
                   {
                     isOpen
-                      ? ( <Subjects groups={groups} category={category} setShowTitles={setShowTitles} setTitles={setTitles} showConfirm={showConfirm} showTitles={showTitles} setShowConfirm={setShowConfirm} titlesUpdate={titlesUpdate} handleCatClick={handleCatClick} setIsOpen={setIsOpen} setCategory={setCategory} color={group.color} isOpen={isOpen} openCustomMenu={openCustomMenu}/>)
+                      ? ( <Subjects groups={groups} category={category} setShowTitles={setShowTitles} setTitles={setTitles} showConfirm={showConfirm} showTitles={showTitles} setShowConfirm={setShowConfirm} titlesUpdate={titlesUpdate} handleCatClick={handleCatClick} setIsOpen={setIsOpen} setCategory={setCategory} color={group.color} isOpen={isOpen} openCustomMenu={openCustomMenu} setGroupToDelete={setGroupToDelete} isEditingSubject={isEditingSubject} elementToEdit={elementToEdit} setElementToEdit={setElementToEdit} elementForCustomMenu={elementForCustomMenu} setIsEditingSubject={setIsEditingSubject} setElementForCustomMenu={setElementForCustomMenu}/>)
                       : ( null )
                   }
                 </div>

@@ -3,14 +3,16 @@ import PropTypes from 'prop-types';
 import _ from 'underscore';
 import Titles from './Titles';
 import Subject from './Subject';
+import utils from '../lib/utils';
 import {useTrail, animated} from 'react-spring';
 
 
-const Subjects = ({ groups, category, showConfirm, setShowConfirm, titlesUpdate, showTitles, setShowTitles, setTitles, handleCatClick, setIsOpen, setCategory, color, isOpen, openCustomMenu }) => {
+const Subjects = ({ groups, category, showConfirm, setShowConfirm, titlesUpdate, showTitles, setShowTitles, setTitles, handleCatClick, setIsOpen, setCategory, color, isOpen, openCustomMenu, setGroupToDelete, isEditingSubject, elementToEdit, setElementToEdit, elementForCustomMenu, setIsEditingSubject, setElementForCustomMenu }) => {
   const [ subj, setSubj ] = useState('');
   const [ update, setUpdate ] = useState(false);
   const [ subjects, setSubjects ] = useState([]);
   const [ catID, setCatID ] = useState('');
+  const [ subjectToEdit, setSubjectToEdit ] = useState('');
 
   useEffect(() => {
     for (var i = 0; i < groups.length; i++) {
@@ -26,8 +28,8 @@ const Subjects = ({ groups, category, showConfirm, setShowConfirm, titlesUpdate,
   const subjectClasses = ['subject', 'subject-text'];
 
   const exitTitles = (e) => {
-    console.log(e.target, 'TARGET')
     let target = e.target;
+    if (utils.isCustomMenu(target, 'custom-menu')) { return; }
     if (target.className === 'app' || target.id === 'titles-container'){
       setIsOpen(false);
       setCategory('');
@@ -41,6 +43,21 @@ const Subjects = ({ groups, category, showConfirm, setShowConfirm, titlesUpdate,
 
   const handleSubjClick = (e) => {
     //refactor to use group obj, get rid of api calls and titles state
+    // console.log(isEditingSubject, 'iseditingsub');
+    // console.log(e.target, 'sub target')
+    let isCustomMenuIcon = utils.isCustomMenuIcon(e.target);
+    // if (isCustomMenuIcon) {
+    //   console.log('SVG')
+    //   console.log(e.target, 'TARGET')
+    //   setElementForCustomMenu(e.target);
+    //   setGroupToDelete('subject');
+    //   setElementToEdit(e.target.value);
+    // } else
+    // if (isEditingSubject) {
+    //   console.log(e.target, 'TARGET')
+    //   setSubjectToEdit(e.target.value);
+    // }
+    console.log('hieee')
     let subject;
     let target = e.target;
     if (!showTitles) {
@@ -100,7 +117,7 @@ const Subjects = ({ groups, category, showConfirm, setShowConfirm, titlesUpdate,
              className="subject"
              onClick={handleSubjClick}
              key={subject.subject}>
-               <Subject clickedSubj={subj} subject={subject.subject} color={color} openCustomMenu={openCustomMenu} id={subject.id} catID={catID}/>
+               <Subject clickedSubj={subj} subject={subject.subject} color={color} openCustomMenu={openCustomMenu} id={subject.id} catID={catID} elementToEdit={elementToEdit} elementForCustomMenu={elementForCustomMenu} isEditingSubject={isEditingSubject} setIsEditingSubject={setIsEditingSubject} subjectToEdit={subjectToEdit}/>
            </div>
          </div>
         ))

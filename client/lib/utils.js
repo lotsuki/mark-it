@@ -30,6 +30,11 @@ module.exports = {
     return (target.className.baseVal && target.className.baseVal.includes('icon-custom-menu')
        || target.parentElement.className.baseVal && target.parentElement.className.baseVal.includes('icon-custom-menu'));
   },
+  isCustomMenu: function(target, className) {
+    if (target.id === 'app-container') { return false; }
+    if (target.className === className) { return true; }
+    return this.isCustomMenu(target.parentElement, 'custom-menu');
+  },
   getCategoryText: function(e, target, className, context) {
     if (context === 'handle') {
       return className === 'category' ? target.children[1].innerText
@@ -59,6 +64,18 @@ module.exports = {
         return;
       }
     }
-  }
+  },
+  getSubjectText: function(e, target, className, context) {
+    if (context === 'handle') {
+      return className === 'category' ? target.children[1].innerText
+      : className === 'category-text' ? target.innerText : e.currentTarget.firstChild.children[1].innerText;
+    } else {
+      if (target && target.className.baseVal.includes('icon-custom-menu')) {
+        return target.parentElement.children[1].innerText;
+      } else if (target) {
+        return target.innerText;
+      }
+    }
+  },
 };
 
