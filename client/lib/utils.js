@@ -23,6 +23,7 @@ module.exports = {
       : className === 'category-text' ? target.innerText : e.currentTarget.firstChild.children[1].innerText;
     } else {
       if (target && target.className.baseVal.includes('icon-custom-menu')) {
+        console.log('YES')
         return target.parentElement.children[1].innerText;
       } else if (target) {
         return target.innerText;

@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, useContext, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import IconFolder from './IconFolder';
 import IconFolderOpen from './IconFolderOpen';
@@ -6,14 +6,23 @@ import IconCustomMenu from './IconCustomMenu';
 import IconDown from './IconDown';
 import utils from '../lib/utils';
 import axios from 'axios';
- 
+import MainContext from './MainContext';
+import CategoriesContext from './CategoriesContext';
 
-const Category = ({ groups, groupsID, categoryID, setCategoryID, setCategory, category, exitCategories, cat, isOpen, setIsOpen, color, openCustomMenu, setIsEditing, isEditing, setElementToEdit, elementToEdit, elementForCustomMenu, setElementForCustomMenu}) => {
+const Category = ({ cat, color }) => {
   const [ catEdited, setCatEdited ] = useState('');
-
+  const { groups, groupsID, categoryID, setCategoryID, setIsEditing, isEditing, setElementForCustomMenu, elementForCustomMenu } = useContext(MainContext);
+  const { setCategory, category, isOpen, elementToEdit, setElementToEdit } = useContext(CategoriesContext);
+  console.log('category render')
   const reset = (e) => {
+    console.log('no')
     setElementToEdit('');
     setIsEditing(false);
+  };
+
+  const handleFocus = (e) => {
+    setElementToEdit(e.target.value);
+    //console.log(e.target, 'handleFocus')
   };
 
   const handleCatEdit = (e) => {
@@ -40,11 +49,16 @@ const Category = ({ groups, groupsID, categoryID, setCategoryID, setCategory, ca
 
 const displayCatOnEdit = () => {
   let categoryToEdit = utils.getCategoryText(null, elementForCustomMenu, null, 'display');
+  // console.log(cat, 'cat')
+  // console.log(elementToEdit, 'el to edit')
+  //  console.log(categoryToEdit, 'cat to edit')
+  //  console.log(elementForCustomMenu, 'el menu')
+  //  console.log(elementForCustomMenu.parentElement.children[1].innerText)
   if (categoryToEdit && categoryToEdit === cat || elementToEdit && cat === elementToEdit) {
     return (
       <Fragment>
-        <IconDown setIsOpen={setIsOpen} setCategory={setCategory} exitCategories={exitCategories}/>
-        <input id="edit-category" type="text" onBlur={reset} onKeyUp={handleEnter} onChange={handleCatEdit} defaultValue={cat} autoComplete="off" style={{border: '1px solid lightgray', boxShadow: '0px 1px 10px 0px rgba(32, 33, 36, 0.10)', padding: '7px 12px', marginRight: '8px', color: '#9E9D9D'}}/>
+        <IconDown />
+        <input id="edit-category" type="text" onBlur={reset} onFocus={handleFocus} onKeyUp={handleEnter} onChange={handleCatEdit} defaultValue={cat} autoComplete="off" style={{border: '1px solid lightgray', boxShadow: '0px 1px 10px 0px rgba(32, 33, 36, 0.10)', padding: '7px 12px', marginRight: '8px', color: '#9E9D9D'}}/>
       </Fragment>)
   }
   return(
@@ -82,7 +96,7 @@ const displayCatOnEdit = () => {
                   </Fragment>
                   )
               }
-              <IconCustomMenu openCustomMenu={openCustomMenu} name={cat}/>
+              <IconCustomMenu name={cat}/>
             </div>
            )
         : (
@@ -99,7 +113,7 @@ const displayCatOnEdit = () => {
                   </Fragment>
                   )
               }
-              <IconCustomMenu openCustomMenu={openCustomMenu} name={cat}/>
+              <IconCustomMenu name={cat}/>
             </div>
           )
       }

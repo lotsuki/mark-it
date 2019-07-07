@@ -1,6 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
+import CategoriesContext from './CategoriesContext';
 
-const IconDown = ({ setIsOpen, setCategory, exitCategories }) => {
+const IconDown = () => {
+   const { setCategory, exitCategories, setIsOpen} = useContext(CategoriesContext);
   // useEffect(() => {
   //   document.removeEventListener('click', exitCategories);
   // }, [])

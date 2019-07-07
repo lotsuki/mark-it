@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, useContext, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import IconFolder from './IconFolder';
 import IconFolderOpen from './IconFolderOpen';
@@ -6,10 +6,12 @@ import IconCustomMenu from './IconCustomMenu';
 import IconDown from './IconDown';
 import utils from '../lib/utils';
 import axios from 'axios';
+import MainContext from './MainContext';
 
-const Subject = ({ groups, groupsID, clickedSubj, subject, color, openCustomMenu, id, catID, elementToEdit, elementForCustomMenu, isEditingSubject, setIsEditingSubject, subjectToEdit, setSubjectToEdit, setElementForCustomMenu }) => {
+const Subject = ({ subject, id, catID, subjectToEdit, setSubjectToEdit, color }) => {
   const [ subEdited, setSubEdited ] = useState('');
   const [ subID, setSubID ] = useState('');
+  const { groups, groupsID, clickedSubj, setElementForCustomMenu, elementForCustomMenu, setIsEditingSubject, isEditingSubject } = useContext(MainContext);
 
   const resetSub = (e) => {
     setSubjectToEdit('');
@@ -29,9 +31,6 @@ const Subject = ({ groups, groupsID, clickedSubj, subject, color, openCustomMenu
         .then(res => {
            utils.editSubjects(groups, catID, subjectToEdit, subEdited);
            elementForCustomMenu.style.visibility = '';
-           // setCategory('');
-           // setCategoryID('');
-           // setIsEditing(false);
            setIsEditingSubject(false);
            setElementForCustomMenu('');
           console.log('PATCH request successful');
@@ -67,7 +66,7 @@ const Subject = ({ groups, groupsID, clickedSubj, subject, color, openCustomMenu
           style={{ background:'#D1D0D3' }}>
           <IconFolderOpen viewBox={"-50 -17 85 72"} color={color} width={"45"} height={"38"}/>
           <div className="subject-text" style={{ background:'#D1D0D3'}}>{subject}</div>
-          <IconCustomMenu openCustomMenu={openCustomMenu} name={subject} subjectID={id} catID={catID}/>
+          <IconCustomMenu name={subject} subjectID={id} catID={catID}/>
         </div>
         )
       : (
@@ -82,7 +81,7 @@ const Subject = ({ groups, groupsID, clickedSubj, subject, color, openCustomMenu
             </Fragment>
             )
         }
-         <IconCustomMenu openCustomMenu={openCustomMenu} name={subject} subjectID={id} catID={catID}/>
+         <IconCustomMenu name={subject} subjectID={id} catID={catID}/>
        </div>
       )
     }

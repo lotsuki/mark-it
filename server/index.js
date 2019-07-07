@@ -32,7 +32,7 @@ app.use(express.static(`${__dirname}/../public/`));
 
 app.post('/form', (req, res) => {
   let { groupsID, category, subject, catID, categoryL, subjectL, color, hasCat, hasSubj } = req.body;
-  let key = `groups.${categoryID}.subjects`;
+  let key = `groups.${catID}.subjects`;
 
   Document.create({
         category: category,
@@ -56,7 +56,7 @@ app.post('/form', (req, res) => {
         })
       } else if(!hasSubj) {
         console.log('yes cat, no sub');
-        console.log(categoryID, 'catid')
+        console.log(catID, 'catid')
         console.log(subjectL, 'l')
         console.log(subject, 'sub')
         console.log(category, 'category')

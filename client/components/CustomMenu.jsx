@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-const CustomMenu = ({ cords, elementForCustomMenu, setElementForCustomMenu, isEditing, setIsEditing, showConfirm, setShowConfirm, group, setIsEditingSubject }) => {
+const CustomMenu = ({ cords, elementForCustomMenu, setElementForCustomMenu, isEditing, setIsEditing, showConfirm, setShowConfirm, setIsEditingSubject }) => {
   useEffect(() => {
     document.addEventListener('click', exitCustomMenu);
   }, [])

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import utils from '../lib/utils';
 import axios from 'axios';
 
-const Confirm = ({ groups, groupsID, setShowConfirm, titleToDelete, titles, groupToDelete, categoryID, setCategoryID, elementForCustomMenu, setElementForCustomMenu, setTitlesUpdate }) => {
+const Confirm = ({ groups, groupsID, setShowConfirm, titleToDelete, titles, groupToDelete, categoryID, setCategoryID, elementForCustomMenu, setElementForCustomMenu, setTitles }) => {
 
   const handleConfirmClick = async (e) => {
     if (e.target.innerText === 'Yes') {
@@ -37,7 +37,7 @@ const Confirm = ({ groups, groupsID, setShowConfirm, titleToDelete, titles, grou
       } else if(groupToDelete === 'title') {
          await axios.delete(`/delete/${titleToDelete}`)
             .then(res => {
-              utils.editTitles(titles, titleToDelete, setTitlesUpdate);
+              utils.editTitles(titles, titleToDelete, setTitles);
               console.log('DELETE request successful');
             })
             .catch(err => { console.log('Error at DELETE request', err); });

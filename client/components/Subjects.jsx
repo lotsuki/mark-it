@@ -1,18 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'underscore';
 import Titles from './Titles';
 import Subject from './Subject';
 import utils from '../lib/utils';
 import {useTrail, animated} from 'react-spring';
+import MainContext from './MainContext';
+import CategoriesContext from './CategoriesContext';
 
 
-const Subjects = ({ groups, groupsID, category, showConfirm, setShowConfirm, titlesUpdate, showTitles, setShowTitles, setTitles, handleCatClick, setIsOpen, setCategory, color, isOpen, openCustomMenu, setGroupToDelete, isEditingSubject, elementToEdit, setElementToEdit, elementForCustomMenu, setIsEditingSubject, setElementForCustomMenu }) => {
+const Subjects = ({ color }) => {
   const [ subj, setSubj ] = useState('');
   const [ update, setUpdate ] = useState(false);
   const [ subjects, setSubjects ] = useState([]);
   const [ catID, setCatID ] = useState('');
   const [ subjectToEdit, setSubjectToEdit ] = useState('');
+  const { groups, groupsID, showConfirm, showTitles, setShowTitles, setTitles, setGroupToDelete, isEditingSubject } = useContext(MainContext);
+  const { category, setCategory, setIsOpen } = useContext(CategoriesContext);
 
   useEffect(() => {
     for (var i = 0; i < groups.length; i++) {
@@ -115,7 +119,7 @@ const Subjects = ({ groups, groupsID, category, showConfirm, setShowConfirm, tit
              className="subject"
              onClick={handleSubjClick}
              key={subject.subject}>
-               <Subject groups={groups} groupsID={groupsID} clickedSubj={subj} subject={subject.subject} color={color} openCustomMenu={openCustomMenu} id={subject.id} catID={catID} elementToEdit={elementToEdit} elementForCustomMenu={elementForCustomMenu} isEditingSubject={isEditingSubject} setIsEditingSubject={setIsEditingSubject} subjectToEdit={subjectToEdit} setSubjectToEdit={setSubjectToEdit} setElementForCustomMenu={setElementForCustomMenu}/>
+               <Subject clickedSubj={subj} subject={subject.subject} id={subject.id} catID={catID} subjectToEdit={subjectToEdit} setSubjectToEdit={setSubjectToEdit} color={color}/>
            </div>
          </div>
         ))

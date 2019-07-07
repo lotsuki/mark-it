@@ -80,7 +80,6 @@ class App extends React.Component {
 
   render() {
     const { userID, groups, groupsID, links } = this.state;
-    console.log(groupsID, 'groupid')
     return (
       <ErrorBoundary>
         <Main userID={userID} groups={groups} groupsID={groupsID} links={links}/>

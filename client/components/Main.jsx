@@ -1,4 +1,4 @@
-import React, { useState, useCallback, Fragment } from 'react';
+import React, { useState, createContext, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import Navbar from './Navbar';
 import Bookmarks from './Bookmarks';
@@ -7,9 +7,11 @@ import Confirm from './Confirm';
 import Titles from './Titles';
 import CustomMenu from './CustomMenu';
 import utils from '../lib/utils';
+import MainContext from './MainContext';
 import { useSpring, animated } from 'react-spring';
 
 //try wihtout fragments
+//const MainContext = createContext();
 
 const Main = ({ groups, groupsID, links }) => {
   const [ showForm, setShowForm, ] = useState(false);
@@ -17,13 +19,11 @@ const Main = ({ groups, groupsID, links }) => {
   const [ showTitles, setShowTitles ] = useState(false);
   const [ titles, setTitles ] = useState([]);
   const [ titleToDelete, setTitleToDelete ] = useState('');
-  const [ titlesUpdate, setTitlesUpdate ] = useState(null);
   const [ cords, setCords ] = useState([]);
   const [ elementForCustomMenu, setElementForCustomMenu ] = useState('');
   const [ isEditing, setIsEditing ] = useState(false);
   const [ categoryID, setCategoryID ] = useState('');
   const [ groupToDelete, setGroupToDelete ] = useState('');
-  const [ group, setGroup ] = useState('');
   const [ isEditingSubject, setIsEditingSubject ] = useState(false);
 
   const deleteTitle = (target) => {
@@ -35,7 +35,7 @@ const Main = ({ groups, groupsID, links }) => {
     if (showForm) {
       return <Form groups={groups} groupsID={groupsID} showForm={showForm} setShowForm={setShowForm} categoryID={categoryID} setCategoryID={setCategoryID}/>
     } else if (showConfirm) {
-      return <Confirm groups={groups} groupsID={groupsID} showConfirm={showConfirm} setShowConfirm={setShowConfirm} titleToDelete={titleToDelete} titles={titles} groupToDelete={groupToDelete} categoryID={categoryID} setCategoryID={setCategoryID}  elementForCustomMenu={elementForCustomMenu} setElementForCustomMenu={setElementForCustomMenu} setTitlesUpdate={setTitlesUpdate} isEditingSubject={isEditingSubject} />
+      return <Confirm groups={groups} groupsID={groupsID} showConfirm={showConfirm} setShowConfirm={setShowConfirm} titleToDelete={titleToDelete} titles={titles} groupToDelete={groupToDelete} categoryID={categoryID} setCategoryID={setCategoryID}  elementForCustomMenu={elementForCustomMenu} setElementForCustomMenu={setElementForCustomMenu} isEditingSubject={isEditingSubject} setTitles={setTitles}/>
     }
   };
 
@@ -77,28 +77,30 @@ console.log('main render')
 
 //refactor structure
   return (
-    <div id="container">
-      <Navbar showForm={showForm} setShowForm={setShowForm} links={links} />
-      <div id="app-container" className="app" data-testid="app-container">
-        <div className="sidebar-container">
-          <Bookmarks groups={groups} groupsID={groupsID} categoryID={categoryID} setCategoryID={setCategoryID} setShowTitles={setShowTitles} setTitles={setTitles} showConfirm={showConfirm} showTitles={showTitles} setShowConfirm={setShowConfirm} titlesUpdate={titlesUpdate} openCustomMenu={openCustomMenu} setIsEditing={setIsEditing} isEditing={isEditing} setElementForCustomMenu={setElementForCustomMenu} elementForCustomMenu={elementForCustomMenu} setElementForCustomMenu={setElementForCustomMenu} setGroupToDelete={setGroupToDelete} isEditingSubject={isEditingSubject} setIsEditingSubject={setIsEditingSubject} setCords={setCords} cords={cords}/>
-        </div>
-        {
-          elementForCustomMenu
-          &&  <CustomMenu cords={cords} elementForCustomMenu={elementForCustomMenu} setElementForCustomMenu={setElementForCustomMenu} isEditing={isEditing} setIsEditing={setIsEditing} showConfirm={showConfirm} setShowConfirm={setShowConfirm} group={group} setIsEditingSubject={setIsEditingSubject} />
-        }
-        <Fragment>
+    <MainContext.Provider value={{ groups, groupsID, categoryID, setCategoryID, setShowTitles, setTitles, setShowConfirm, openCustomMenu, setIsEditing, isEditing, setElementForCustomMenu, elementForCustomMenu, setElementForCustomMenu, setGroupToDelete, isEditingSubject, setIsEditingSubject }}>
+      <div id="container">
+        <Navbar showForm={showForm} setShowForm={setShowForm} links={links} />
+        <div id="app-container" className="app" data-testid="app-container">
+          <div className="sidebar-container">
+            <Bookmarks />
+          </div>
           {
-            showTitles
-            ? (<Titles titles={titles} links={links} showConfirm={showConfirm} setShowConfirm={setShowConfirm} deleteTitle={deleteTitle} setGroupToDelete={setGroupToDelete} />)
-            : (null)
+            elementForCustomMenu
+            &&  <CustomMenu cords={cords} elementForCustomMenu={elementForCustomMenu} setElementForCustomMenu={setElementForCustomMenu} isEditing={isEditing} setIsEditing={setIsEditing} showConfirm={showConfirm} setShowConfirm={setShowConfirm} setIsEditingSubject={setIsEditingSubject} />
           }
+          <Fragment>
+            {
+              showTitles
+              ? (<Titles titles={titles} links={links} showConfirm={showConfirm} setShowConfirm={setShowConfirm} deleteTitle={deleteTitle} setGroupToDelete={setGroupToDelete} />)
+              : (null)
+            }
+          </Fragment>
+        </div>
+        <Fragment>
+          { displayContainer() }
         </Fragment>
       </div>
-      <Fragment>
-        { displayContainer() }
-      </Fragment>
-    </div>
+    </MainContext.Provider>
   );
 };
 
