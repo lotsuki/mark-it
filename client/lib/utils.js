@@ -1,12 +1,12 @@
 module.exports = {
-  findCategory: function(arr, cat) {
+  hasCategory: function(arr, cat) {
     for (var i = 0; i < arr.length; i++) {
       if (arr[i].category === cat) { return true; }
     }
     return false;
   },
 
-  findSubject: function(arr, subj, id) {
+  hasSubject: function(arr, subj, id) {
     let subjects = arr[id].subjects;
     for (var i = 0; i < subjects.length; i++) {
       if (subjects[i].subject === subj) { return true; }
@@ -17,7 +17,13 @@ module.exports = {
     for (var i = 0; i < arr.length; i++) {
       if (arr[i].category === cat) { return arr[i].id; }
     }
-    return null;
+  },
+  findCatIDWithSub: function(arr, sub) {
+    for (var i = 0; i < arr.length; i++) {
+      for (var x = 0; x < arr[i].subjects.length; x++) {
+        if (arr[i].subjects[x].subject === sub) { return arr[i].id; }
+      }
+    }
   },
   findSubjectID: function(arr, catID, sub) {
     let subjects = arr[catID].subjects;
@@ -54,19 +60,17 @@ module.exports = {
       }
     }
   },
-  editCategories: function(arr, catID, newCateogry, cat, context) {
+  editCategories: function(arr, oldCategory, newCateogry) {
     for (var i = 0; i < arr.length; i++) {
-      if (context === 'updateCat' && arr[i].id === catID) {
+      if (arr[i].category === oldCategory) {
         arr[i].category = newCateogry; return;
-      } else if (context === 'deleteCat' && arr[i].category === cat) {
-        arr.splice(i, 1); return;
       }
     }
   },
-  editSubjects: function(arr, subjID, catID, newSubject) {
+  editSubjects: function(arr, catID, oldSubject, newSubject) {
     let subjects = arr[catID].subjects;
     for (var i = 0; i < subjects.length; i++) {
-      if (subjects[i].id === subjID) { subjects[i].subject = newSubject; return; }
+      if (subjects[i].subject === oldSubject) { subjects[i].subject = newSubject; return; }
     }
   },
   editTitles: function(arr, titleToDelete, func) {
@@ -75,6 +79,21 @@ module.exports = {
         arr.splice(i, 1);
         func(arr);
         return;
+      }
+    }
+  },
+  deleteCategory: function(arr, category) {
+    for (var i = 0; i < arr.length; i++) {
+      if (arr[i].category === category) {
+        arr.splice(i, 1); return;
+      }
+    }
+  },
+  deleteSubject: function(arr, catID, subj) {
+    let subjects = arr[catID].subjects;
+    for (var i = 0; i < subjects.length; i++) {
+      if (subjects[i].subject === subj) {
+        subjects.splice(i, 1); return;
       }
     }
   },

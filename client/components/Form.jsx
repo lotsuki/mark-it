@@ -27,13 +27,13 @@ const Form = ({ groups, groupsID, showForm, setShowForm, setCategoryID, category
 
   const submitForm = (e) => {
     e.preventDefault();
-    const hasCat = utils.findCategory(groups, category);
+    const hasCat = utils.hasCategory(groups, category);
     const catID = utils.findCategoryID(groups, category);
     let hasSubj;
     let subjectL;
 
-    if (catID >= 0) {
-      hasSubj = utils.findSubject(groups, subject, catID);
+    if (catID) {
+      hasSubj = utils.hasSubject(groups, subject, catID);
       subjectL = groups[catID].subjects.length;
     }
 

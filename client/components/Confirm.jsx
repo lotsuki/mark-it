@@ -7,30 +7,31 @@ const Confirm = ({ groups, groupsID, setShowConfirm, titleToDelete, titles, grou
 
   const handleConfirmClick = async (e) => {
     if (e.target.innerText === 'Yes') {
+      console.log(groupToDelete, 'group')
       if (groupToDelete === 'category') {
         let cat = elementForCustomMenu.parentElement.children[1].innerText;
-        await axios.delete(`/delete/${cat}/${categoryID}/${groupsID}`)
+        await axios.delete(`/delete/${cat}/${groupsID}`)
           .then(res => {
-            utils.editCategories(groups, null, null, cat, 'deleteCat');
+            utils.deleteCategory(groups, cat);
             elementForCustomMenu.style.visibility = '';
             setCategoryID('');
             setElementForCustomMenu('');
             console.log('DELETE request successful');
           })
-          .catch(err => { console.log('Error at PATCH request', err); });
+          .catch(err => { console.log('Error at DELETE request', err); });
       } else if (groupToDelete === 'subject') {
         let sub = elementForCustomMenu.parentElement.children[1].innerText;
-          console.log(sub, 'subject');
+        let catID = utils.findCatIDWithSub(groups, sub);
 
-        await axios.delete(`/delete/${sub}/${categoryID}/${groupsID}`)
+        await axios.delete(`/delete/${sub}/${catID}/${groupsID}`)
           .then(res => {
-            // utils.editCategories(groups, null, null, cat, 'deleteCat');
-            // elementForCustomMenu.style.visibility = '';
-            // setCategoryID('');
-            // setElementForCustomMenu('');
+            utils.deleteSubject(groups, catID, sub);
+            elementForCustomMenu.style.visibility = '';
+            setCategoryID('');
+            setElementForCustomMenu('');
             console.log('DELETE request successful');
           })
-          .catch(err => { console.log('Error at PATCH request', err); });
+          .catch(err => { console.log('Error at DELETE request', err); });
       } else if(groupToDelete === 'title') {
          await axios.delete(`/delete/${titleToDelete}`)
             .then(res => {

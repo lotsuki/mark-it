@@ -28,12 +28,17 @@ const Subject = ({ groups, groupsID, clickedSubj, subject, color, openCustomMenu
 
    const handleSubEnter = (e) => {
     let subjID = utils.findSubjectID(groups, catID, subjectToEdit);
+    console.log(elementForCustomMenu, 'elem')
+    console.log(subjectToEdit, 'sub to edit')
+    console.log(subject, 'subj')
+    console.log(clickedSubj, 'clicked sub')
+    console.log(elementToEdit, 'elem to edit')
     if (e.keyCode === 13) {
       axios.get(`/update/${subEdited}/${subjID}/${catID}/${groupsID}`, {
         method: 'PATCH'
         })
         .then(res => {
-           utils.editSubjects(groups, subjID, catID, subEdited);
+           utils.editSubjects(groups, catID, subjectToEdit, subEdited);
            elementForCustomMenu.style.visibility = '';
            // setCategory('');
            // setCategoryID('');

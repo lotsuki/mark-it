@@ -125,11 +125,11 @@ app.get('/update/:subEdited/:subjID/:catID/:groupsID', (req, res) => {
 // });
 
 
-app.delete('/delete/:cat/:catID/:groupsID', (req, res) => {
+app.delete('/delete/:cat/:groupsID', (req, res) => {
   let { cat, groupsID } = req.params;
   let catID = parseInt(req.params.catID);
 
-  Document.updateOne({ _id: groupsID }, {$pull:{groups: {id: catID}}}, (err, result) => {
+  Document.updateOne({ _id: groupsID }, {$pull:{groups: {category: cat}}}, (err, result) => {
     if (err) { console.log('Failure to get user obj: ', err); }
     else { res.send(result); }
   });
@@ -139,16 +139,18 @@ app.delete('/delete/:cat/:catID/:groupsID', (req, res) => {
     });
 });
 
-app.delete('/delete/:subject/:catID/:groupsID', (req, res) => {
-  let { subject, groupsID } = req.params;
+app.delete('/delete/:sub/:catID/:groupsID', (req, res) => {
+  let { sub, groupsID } = req.params;
   let catID = parseInt(req.params.catID);
   let key = `groups.${catID}.subjects`;
+  console.log(sub, 'subject')
+  console.log(catID, 'catID')
 
-  Document.updateOne({ _id: groupsID }, {$pull:{[key]: { subject }}}, (err, result) => {
+  Document.updateOne({ _id: groupsID }, {$pull:{[key]: { subject: sub }}}, (err, result) => {
     if (err) { console.log('Failure to get user obj: ', err); }
     else { res.send(result); }
   });
-  Document.deleteMany({ subject }, (err, result) => {
+  Document.deleteMany({ subject: sub }, (err, result) => {
     if (err) { console.log('Error at DELETE request: ', err); }
     else { console.log('Deleted subject'); }
   });

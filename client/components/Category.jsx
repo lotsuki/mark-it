@@ -26,7 +26,7 @@ const Category = ({ groups, groupsID, categoryID, setCategoryID, setCategory, ca
         method: 'PATCH'
         })
         .then(res => {
-           utils.editCategories(groups, categoryID, catEdited, null, 'updateCat');
+           utils.editCategories(groups, cat, catEdited);
            elementForCustomMenu.style.visibility = '';
            setCategory('');
            setCategoryID('');

@@ -58,7 +58,7 @@ const CustomMenu = ({ cords, elementForCustomMenu, setElementForCustomMenu, isEd
      } else if (className === 'subject-text' && e.target.innerText === 'Edit Item') {
        setIsEditingSubject(true);
      } else if (e.target.innerText === 'Delete Item') {
-       confirmDeleteForGroup();
+      confirmDeleteForGroup();
      }
 
     // if (group === 'category') {
