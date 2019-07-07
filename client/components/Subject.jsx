@@ -6,12 +6,12 @@ import IconCustomMenu from './IconCustomMenu';
 import IconDown from './IconDown';
 import utils from '../lib/utils';
 import axios from 'axios';
-import MainContext from './MainContext';
+import ContentContext from './ContentContext';
 
 const Subject = ({ subject, id, catID, subjectToEdit, setSubjectToEdit, color }) => {
   const [ subEdited, setSubEdited ] = useState('');
   const [ subID, setSubID ] = useState('');
-  const { groups, groupsID, clickedSubj, setElementForCustomMenu, elementForCustomMenu, setIsEditingSubject, isEditingSubject } = useContext(MainContext);
+  const { groups, groupsID, clickedSubj, setElementForCustomMenu, elementForCustomMenu, setIsEditingSubject, isEditingSubject } = useContext(ContentContext);
 
   const resetSub = (e) => {
     setSubjectToEdit('');

@@ -4,7 +4,7 @@ import Main from './Main';
 //import Landing from './Landing.jsx';
 import ErrorBoundary from './ErrorBoundary';
 
-//TODO: transition elements, refactor to usecontext, oauth, exit custom menu when click on category, fix form when click twice, form wont update on submit, fix exitcustommenu
+//TODO: transition elements, oauth, exit custom menu when click on category, fix form when click twice, form wont update on submit, fix exitcustommenu, check if need proptypes for usecontext hook, plus icon not working, custom menu icon not working
 //refactor to useContext
 
 //TODO later: get rid of title apis, try to decrease renders/restructure main,

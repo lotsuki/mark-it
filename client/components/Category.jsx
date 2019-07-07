@@ -6,19 +6,21 @@ import IconCustomMenu from './IconCustomMenu';
 import IconDown from './IconDown';
 import utils from '../lib/utils';
 import axios from 'axios';
-import MainContext from './MainContext';
+import ContentContext from './ContentContext';
 import CategoriesContext from './CategoriesContext';
 
 const Category = ({ cat, color }) => {
   const [ catEdited, setCatEdited ] = useState('');
-  const { groups, groupsID, categoryID, setCategoryID, setIsEditing, isEditing, setElementForCustomMenu, elementForCustomMenu } = useContext(MainContext);
+  const { groups, groupsID, categoryID, setCategoryID, setIsEditing, isEditing, setElementForCustomMenu, elementForCustomMenu } = useContext(ContentContext);
   const { setCategory, category, isOpen, elementToEdit, setElementToEdit } = useContext(CategoriesContext);
-  console.log('category render')
+
   const reset = (e) => {
     console.log('no')
     setElementToEdit('');
     setIsEditing(false);
   };
+
+  //check if categoryID, setCategoryID is necessary, can get catID here without state value?
 
   const handleFocus = (e) => {
     setElementToEdit(e.target.value);

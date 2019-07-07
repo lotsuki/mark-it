@@ -1,9 +1,14 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, useContext, Fragment } from 'react';
 import PropTypes from 'prop-types';
+import ContentContext from './ContentContext';
 import {useTrail, animated} from 'react-spring';
 
-
-const Titles = ({ titles, links, showConfirm, setShowConfirm, deleteTitle, setGroupToDelete }) => {
+const Titles = () => {
+  const { titles, showConfirm, setShowConfirm, setGroupToDelete } = useContext(ContentContext);
+  const deleteTitle = (target) => {
+    let title = target.parentElement.firstChild.innerText;
+    setTitleToDelete(title);
+  };
 
   const confirmDelete = async (e) => {
     let target = e.target
@@ -28,23 +33,6 @@ const Titles = ({ titles, links, showConfirm, setShowConfirm, deleteTitle, setGr
     }
   };
 
-
-  //const container = ['titles-container']
-  // const titlesArr = () => {
-  //   if (titlesUpdate) { return titlesUpdate.map(obj => obj.title); }
-  //   return titles.map(obj => obj.title);
-  // };
-  // const urlsArr = links.map(obj => obj.url);
-  // const config = {duration: 100};
-
-  // const trail = useTrail(container.length, {
-  //   config,
-  //   height: 'auto',
-  //   from: {height: 0}}
-  // );
-   //trail.map(( {height}, index )=> ( ))
-   // { <animated.div  </animated.div>style={{height}}}
-
   return (
     <div id="titles-container">
       {
@@ -66,13 +54,22 @@ const Titles = ({ titles, links, showConfirm, setShowConfirm, deleteTitle, setGr
 
 export default Titles;
 
-Titles.propTypes = {
-  links: PropTypes.array,
-  displayConfirm: PropTypes.func
-};
 
-Titles.defaultProps = {
-  links: [],
-  displayConfirm: () => {}
-};
+
+
+  //const container = ['titles-container']
+  // const titlesArr = () => {
+  //   if (titlesUpdate) { return titlesUpdate.map(obj => obj.title); }
+  //   return titles.map(obj => obj.title);
+  // };
+  // const urlsArr = links.map(obj => obj.url);
+  // const config = {duration: 100};
+
+  // const trail = useTrail(container.length, {
+  //   config,
+  //   height: 'auto',
+  //   from: {height: 0}}
+  // );
+   //trail.map(( {height}, index )=> ( ))
+   // { <animated.div  </animated.div>style={{height}}}
 

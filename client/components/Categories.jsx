@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Subjects from './Subjects';
 import Category from './Category';
 import utils from '../lib/utils';
-import MainContext from './MainContext';
+import ContentContext from './ContentContext';
 import CategoriesContext from './CategoriesContext';
 
 
@@ -12,8 +12,7 @@ const Categories = () => {
   const [ isOpen, setIsOpen ] = useState(false);
   const [ category, setCategory ] = useState('');
   const [ elementToEdit, setElementToEdit ] = useState('');
-  const { groups, setCategoryID, setShowTitles, isEditing, setGroupToDelete } = useContext(MainContext);
-
+  const { groups, setCategoryID, setShowTitles, isEditing, setGroupToDelete } = useContext(ContentContext);
   const exitCategories = (e) => {
     console.log('hey')
     if (e.target.className === 'app' || e.target.className === 'sidebar-container') {
@@ -68,7 +67,7 @@ const Categories = () => {
       }
     }
   };
-
+//refactor dropdown container
   return (
     <CategoriesContext.Provider value={{ setCategory, category, exitCategories, setIsOpen, isOpen, setElementToEdit }}>
       <div className="section-container" >

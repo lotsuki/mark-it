@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import ContentContext from './ContentContext';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import _ from 'underscore';
@@ -6,7 +7,7 @@ import utils from '../lib/utils';
 import axios from 'axios';
 import { Spring } from 'react-spring/renderprops';
 
-const Form = ({ groups, groupsID, showForm, setShowForm, setCategoryID, categoryID }) => {
+const Form = () => {
   const [ category, setCategory ] = useState('');
   const [ subject, setSubject ] = useState('');
   const [ title, setTitle ] = useState('');
@@ -14,7 +15,8 @@ const Form = ({ groups, groupsID, showForm, setShowForm, setCategoryID, category
   const [ selectCat, setSelectCat ] = useState(false);
   const [ selectSub, setSelectSub ] = useState(false);
   const [ color, setColor ] = useState('');
-console.log(showForm, 'showform')
+  const { groups, groupsID, showForm, setShowForm } = useContext(ContentContext);
+
   useEffect(() => {
     setColor('#D00000');
   }, []);
@@ -34,29 +36,13 @@ console.log(showForm, 'showform')
     let subjectL;
 
     if (catID >= 0) {
-
       hasSubj = utils.hasSubject(groups, subject, catID);
       subjectL = groups[catID].subjects.length;
     }
     console.log(catID, 'catID')
     console.log(hasSubj, 'hassub')
-    // const data = {
-    //   groupsID,
-    //   categoryL: groups.length,
-    //   category,
-    //   subject,
-    //   title,
-    //   url,
-    //   date: moment().format('MM-DD-YYYY'),
-    //   hasCat,
-    //   hasSubj,
-    //   catID,
-    //   subjectL,
-    //   color
-    // };
 
     if (category && subject && title && url) {
-
       axios.post('/form', {
         groupsID,
         categoryL: groups.length,

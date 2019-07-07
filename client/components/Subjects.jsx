@@ -5,7 +5,7 @@ import Titles from './Titles';
 import Subject from './Subject';
 import utils from '../lib/utils';
 import {useTrail, animated} from 'react-spring';
-import MainContext from './MainContext';
+import ContentContext from './ContentContext';
 import CategoriesContext from './CategoriesContext';
 
 
@@ -15,7 +15,7 @@ const Subjects = ({ color }) => {
   const [ subjects, setSubjects ] = useState([]);
   const [ catID, setCatID ] = useState('');
   const [ subjectToEdit, setSubjectToEdit ] = useState('');
-  const { groups, groupsID, showConfirm, showTitles, setShowTitles, setTitles, setGroupToDelete, isEditingSubject } = useContext(MainContext);
+  const { groups, groupsID, showConfirm, showTitles, setShowTitles, setTitles, setGroupToDelete, isEditingSubject } = useContext(ContentContext);
   const { category, setCategory, setIsOpen } = useContext(CategoriesContext);
 
   useEffect(() => {

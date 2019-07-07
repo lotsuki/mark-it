@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import utils from '../lib/utils';
 import axios from 'axios';
+import ContentContext from './ContentContext';
 
-const Confirm = ({ groups, groupsID, setShowConfirm, titleToDelete, titles, groupToDelete, categoryID, setCategoryID, elementForCustomMenu, setElementForCustomMenu, setTitles }) => {
+const Confirm = () => {
+  const { groups, groupsID, setCategoryID, setShowConfirm, titleToDelete, titles, setTitles, groupToDelete, elementForCustomMenu, setElementForCustomMenu } = useContext(ContentContext);
 
+  //check if categoryID has value when delete subject, check if setCatID is necessary
   const handleConfirmClick = async (e) => {
+    console.log(categoryID, 'catID')
     if (e.target.innerText === 'Yes') {
       console.log(elementForCustomMenu, 'el')
       if (groupToDelete === 'category') {
@@ -66,17 +70,5 @@ const Confirm = ({ groups, groupsID, setShowConfirm, titleToDelete, titles, grou
   );
 };
 
-
-
 export default Confirm;
 
-
-Confirm.propTypes = {
-  titleToDelete: PropTypes.string,
-  setShowConfirm: PropTypes.func,
-};
-
-Confirm.defaultProps = {
-  titleToDelete: '',
-  setShowConfirm: () => {}
-};
