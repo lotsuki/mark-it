@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, useCallback, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import Navbar from './Navbar';
 import Bookmarks from './Bookmarks';
@@ -26,8 +26,6 @@ const Main = ({ groups, groupsID, links }) => {
   const [ group, setGroup ] = useState('');
   const [ isEditingSubject, setIsEditingSubject ] = useState(false);
 
-  console.log(groupsID, 'groupsID')
-
   const deleteTitle = (target) => {
     let title = target.parentElement.firstChild.innerText;
     setTitleToDelete(title);
@@ -42,6 +40,8 @@ const Main = ({ groups, groupsID, links }) => {
   };
 
   const openCustomMenu = (e) => {
+    console.log('hey')
+    //make recurse function to check if other dropdowns are open
     let target;
     let wrapper = document.getElementById('section-wrapper');
 
@@ -58,6 +58,7 @@ const Main = ({ groups, groupsID, links }) => {
       elementForCustomMenu.style.visibility = '';
     }
     if ((group === 'category' )&& ( !elementForCustomMenu || elementForCustomMenu && elementForCustomMenu.className.baseVal !== target.className.baseVal )) {
+
       let cat = target.parentElement.children[1].innerText;
       let id = utils.findCategoryID(groups, cat);
       if (id >= 0) { setCategoryID(id); }
@@ -80,7 +81,7 @@ console.log('main render')
       <Navbar showForm={showForm} setShowForm={setShowForm} links={links} />
       <div id="app-container" className="app" data-testid="app-container">
         <div className="sidebar-container">
-          <Bookmarks groups={groups} groupsID={groupsID} categoryID={categoryID} setCategoryID={setCategoryID} setShowTitles={setShowTitles} setTitles={setTitles} showConfirm={showConfirm} showTitles={showTitles} setShowConfirm={setShowConfirm} titlesUpdate={titlesUpdate} openCustomMenu={openCustomMenu} setIsEditing={setIsEditing} isEditing={isEditing} setElementForCustomMenu={setElementForCustomMenu} elementForCustomMenu={elementForCustomMenu} setElementForCustomMenu={setElementForCustomMenu} setGroupToDelete={setGroupToDelete} isEditingSubject={isEditingSubject} setIsEditingSubject={setIsEditingSubject}/>
+          <Bookmarks groups={groups} groupsID={groupsID} categoryID={categoryID} setCategoryID={setCategoryID} setShowTitles={setShowTitles} setTitles={setTitles} showConfirm={showConfirm} showTitles={showTitles} setShowConfirm={setShowConfirm} titlesUpdate={titlesUpdate} openCustomMenu={openCustomMenu} setIsEditing={setIsEditing} isEditing={isEditing} setElementForCustomMenu={setElementForCustomMenu} elementForCustomMenu={elementForCustomMenu} setElementForCustomMenu={setElementForCustomMenu} setGroupToDelete={setGroupToDelete} isEditingSubject={isEditingSubject} setIsEditingSubject={setIsEditingSubject} setCords={setCords} cords={cords}/>
         </div>
         {
           elementForCustomMenu

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 import _ from 'underscore';
 import utils from '../lib/utils';
+import axios from 'axios';
 import { Spring } from 'react-spring/renderprops';
 
 const Form = ({ groups, groupsID, showForm, setShowForm, setCategoryID, categoryID }) => {
@@ -13,7 +14,7 @@ const Form = ({ groups, groupsID, showForm, setShowForm, setCategoryID, category
   const [ selectCat, setSelectCat ] = useState(false);
   const [ selectSub, setSelectSub ] = useState(false);
   const [ color, setColor ] = useState('');
-
+console.log(showForm, 'showform')
   useEffect(() => {
     setColor('#D00000');
   }, []);
@@ -32,59 +33,88 @@ const Form = ({ groups, groupsID, showForm, setShowForm, setCategoryID, category
     let hasSubj;
     let subjectL;
 
-    if (catID) {
+    if (catID >= 0) {
+
       hasSubj = utils.hasSubject(groups, subject, catID);
       subjectL = groups[catID].subjects.length;
     }
-
-    const data = {
-      groupsID,
-      categoryL: groups.length,
-      category,
-      subject,
-      title,
-      url,
-      date: moment().format('MM-DD-YYYY'),
-      hasCat,
-      hasSubj,
-      catID,
-      subjectL,
-      color
-    };
+    console.log(catID, 'catID')
+    console.log(hasSubj, 'hassub')
+    // const data = {
+    //   groupsID,
+    //   categoryL: groups.length,
+    //   category,
+    //   subject,
+    //   title,
+    //   url,
+    //   date: moment().format('MM-DD-YYYY'),
+    //   hasCat,
+    //   hasSubj,
+    //   catID,
+    //   subjectL,
+    //   color
+    // };
 
     if (category && subject && title && url) {
-      fetch('/form', {
-        method: 'POST',
-        body: JSON.stringify(data),
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        }
+
+      axios.post('/form', {
+        groupsID,
+        categoryL: groups.length,
+        category,
+        subject,
+        title,
+        url,
+        date: moment().format('MM-DD-YYYY'),
+        hasCat,
+        hasSubj,
+        catID,
+        subjectL,
+        color
         })
-        .then(res => res.json())
-        .then(data => {
+        .then(res => {
           if (!hasCat && !hasSubj) {
-            groups.push({id: groups.length, category, color, subjects: [{id: 0, subject}]})
+            groups.push({id: groups.length, category, color, subjects: [{id: 0, subject}]});
           } else if (!hasSubj) {
-            groups[catID].subjects.push({id: subjectL, subject})
+            groups[catID].subjects.push({id: subjectL, subject});
           }
-         setShowForm(false);
+          setShowForm(false);
+          console.log('POST request successful');
         })
-        .catch(err => { console.log('Could not post document: ', err); });
+        .catch(err => { console.log('Error at POST request', err); });
+
+      // fetch('/form', {
+      //   method: 'POST',
+      //   body: JSON.stringify(data),
+      //   headers: {
+      //     'Accept': 'application/json',
+      //     'Content-Type': 'application/json'
+      //   }
+      //   })
+      //   .then(res => res.json())
+      //   .then(data => {
+      //     setShowForm(false);
+      //     if (!hasCat && !hasSubj) {
+      //       groups.push({id: groups.length, category, color, subjects: [{id: 0, subject}]});
+      //     } else if (!hasSubj) {
+      //       groups[catID].subjects.push({id: subjectL, subject});
+      //     }
+
+      //   })
+      //   .catch(err => { console.log('Could not post document: ', err); });
     } else {
       alert('All fields must be filled out')
     }
     clearForm();
   };
 
-  const displaySelectMenu = (className) => {
-    console.log(className)
-    if (className === 'category-input') {
-      setSelectCat(true);
-    } else if (className === 'subject-input') {
-      setSelectSub(true);
-    }
-  };
+  // const displaySelectMenu = (className) => {
+  //   console.log(className)
+  //   if (className === 'category-input') {
+  //     setSelectCat(true);
+  //   } else if (className === 'subject-input') {
+  //     setSelectSub(true);
+  //   }
+  // };
 //onFocus={e => displaySelectMenu(e.target.className)}
   return(
   <Spring

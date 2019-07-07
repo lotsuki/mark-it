@@ -31,7 +31,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(`${__dirname}/../public/`));
 
 app.post('/form', (req, res) => {
-  let { groupsID, category, subject, categoryID, categoryL, subjectL, color, hasCat, hasSubj } = req.body;
+  let { groupsID, category, subject, catID, categoryL, subjectL, color, hasCat, hasSubj } = req.body;
   let key = `groups.${categoryID}.subjects`;
 
   Document.create({
@@ -46,13 +46,21 @@ app.post('/form', (req, res) => {
       res.send('Error at POST: ', err);
     } else {
       if (!hasCat && !hasSubj) {
+        console.log(groupsID, 'groupID')
+        console.log(categoryL, 'cat l')
+        console.log(category, 'cat')
+        console.log(subject, 'sub in nocat nosub')
         Document.updateOne({_id: groupsID}, {$addToSet: {groups:{id: categoryL, category, color, subjects: [{id: 0, subject: subject}], }}}, (err, result) => {
           if (err) { res.send(err); }
           else { res.send(result); }
         })
       } else if(!hasSubj) {
         console.log('yes cat, no sub');
-        Document.updateOne({'groups.id': categoryID}, {$addToSet:{[key]: {id: subjectL, subject}}}, (err, result) => {
+        console.log(categoryID, 'catid')
+        console.log(subjectL, 'l')
+        console.log(subject, 'sub')
+        console.log(category, 'category')
+        Document.updateOne({'groups.id': catID}, {$addToSet:{[key]: {id: subjectL, subject}}}, (err, result) => {
           if (err) { console.log('Failed to update subjects at POST: ', err); }
           else { res.send(result); }
         })

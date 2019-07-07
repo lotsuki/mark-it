@@ -7,9 +7,11 @@ const Confirm = ({ groups, groupsID, setShowConfirm, titleToDelete, titles, grou
 
   const handleConfirmClick = async (e) => {
     if (e.target.innerText === 'Yes') {
-      console.log(groupToDelete, 'group')
+      console.log(elementForCustomMenu, 'el')
       if (groupToDelete === 'category') {
+        console.log(elementForCustomMenu, 'el for menu')
         let cat = elementForCustomMenu.parentElement.children[1].innerText;
+        console.log(cat, 'cat')
         await axios.delete(`/delete/${cat}/${groupsID}`)
           .then(res => {
             utils.deleteCategory(groups, cat);

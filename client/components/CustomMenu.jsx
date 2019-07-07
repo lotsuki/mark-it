@@ -9,25 +9,40 @@ const CustomMenu = ({ cords, elementForCustomMenu, setElementForCustomMenu, isEd
   //use memo for component caching/memoization
   const exitCustomMenu = (e) => {
     let target;
-    if (e.target.id !== 'edit category' && e.target.className === 'app' || e.target.className === 'sidebar-container') {
-      let menuIcons = document.getElementsByClassName('icon-custom-menu');
-      for (var i = 0; i < menuIcons.length; i++) {
-        menuIcons[i].style.visibility = '';
-      }
-      setIsEditing(false);
-      setElementForCustomMenu('');
-      document.removeEventListener('click', exitCustomMenu);
-    }
-    if (e.target.tagName === 'path' && e.target.parentElement.className.baseVal.includes('icon-custom-menu')) {
-      target = e.target.parentElement;
-    } else if (e.target.className.baseVal && e.target.className.baseVal.includes('icon-custom-menu')) { target = e.target }
-    if (target && target.parentElement.parentElement.className !== 'custom-menu' && e.target.className.baseVal && !target.className.baseVal.includes('icon-custom-menu')) {
-      elementForCustomMenu.style.visibility = '';
-      setIsEditing(false);
-      setElementForCustomMenu('');
-      document.removeEventListener('click', exitCustomMenu);
+//fix
 
-    }
+    //if target is custom menu
+      //if custom menu clicked is not the same as previous
+        //open custom menu
+   // else
+     //close menu
+    // if (e.target.id !== 'edit-category' && e.target.id !== 'edit-subject' || e.target.id === 'app' || e.target.className === 'sidebar-container' || e.target.id === 'titles-container') {
+    //   console.log('one')
+    //   let menuIcons = document.getElementsByClassName('icon-custom-menu');
+    //   for (var i = 0; i < menuIcons.length; i++) {
+    //     menuIcons[i].style.visibility = '';
+    //   }
+    //   setIsEditing(false);
+    //   setElementForCustomMenu('');
+    //   document.removeEventListener('click', exitCustomMenu);
+    // }
+    // if (e.target.tagName === 'path' && e.target.parentElement.className.baseVal.includes('icon-custom-menu')) {
+    //   target = e.target.parentElement;
+    // } else if (e.target.className.baseVal && e.target.className.baseVal.includes('icon-custom-menu')) { target = e.target }
+
+
+    // if (target && target.parentElement.parentElement.className !== 'custom-menu' && e.target.className.baseVal && !target.className.baseVal.includes('icon-custom-menu')) {
+    //   console.log('hey')
+    //   elementForCustomMenu.style.visibility = '';
+    //   setIsEditing(false);
+    //   setElementForCustomMenu('');
+    //   document.removeEventListener('click', exitCustomMenu);
+
+    // }
+    // if (e.target.className === 'category-text' || e.target.className === 'category') {
+    //   setElementForCustomMenu('');
+    //   document.removeEventListener('click', exitCustomMenu);
+    // }
   };
 
   const confirmDeleteForGroup = async () => {

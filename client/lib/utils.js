@@ -5,14 +5,6 @@ module.exports = {
     }
     return false;
   },
-
-  hasSubject: function(arr, subj, id) {
-    let subjects = arr[id].subjects;
-    for (var i = 0; i < subjects.length; i++) {
-      if (subjects[i].subject === subj) { return true; }
-    }
-    return false;
-  },
   findCategoryID: function(arr, cat) {
     for (var i = 0; i < arr.length; i++) {
       if (arr[i].category === cat) { return arr[i].id; }
@@ -24,29 +16,6 @@ module.exports = {
         if (arr[i].subjects[x].subject === sub) { return arr[i].id; }
       }
     }
-  },
-  findSubjectID: function(arr, catID, sub) {
-    let subjects = arr[catID].subjects;
-    for (var i = 0; i < subjects.length; i++) {
-      if (subjects[i].subject === sub) { return subjects[i].id; }
-    }
-    return null;
-  },
-  whichGroup: function(arr, element) {
-    let cat = element.parentElement.children[1].innerText;
-    for (var i = 0; i < arr.length; i++) {
-      if (arr[i].category === cat) { return 'category'; }
-    }
-    return 'subject';
-  },
-  isCustomMenuIcon: function(target) {
-    return (target.className.baseVal && target.className.baseVal.includes('icon-custom-menu')
-       || target.parentElement.className.baseVal && target.parentElement.className.baseVal.includes('icon-custom-menu'));
-  },
-  isCustomMenu: function(target, className) {
-    if (target.id === 'app-container') { return false; }
-    if (target.className === className) { return true; }
-    return this.isCustomMenu(target.parentElement, 'custom-menu');
   },
   getCategoryText: function(e, target, className, context) {
     if (context === 'handle') {
@@ -67,21 +36,6 @@ module.exports = {
       }
     }
   },
-  editSubjects: function(arr, catID, oldSubject, newSubject) {
-    let subjects = arr[catID].subjects;
-    for (var i = 0; i < subjects.length; i++) {
-      if (subjects[i].subject === oldSubject) { subjects[i].subject = newSubject; return; }
-    }
-  },
-  editTitles: function(arr, titleToDelete, func) {
-    for (var i = 0; i < arr.length; i++) {
-      if (arr[i].title === titleToDelete) {
-        arr.splice(i, 1);
-        func(arr);
-        return;
-      }
-    }
-  },
   deleteCategory: function(arr, category) {
     for (var i = 0; i < arr.length; i++) {
       if (arr[i].category === category) {
@@ -89,13 +43,19 @@ module.exports = {
       }
     }
   },
-  deleteSubject: function(arr, catID, subj) {
+  hasSubject: function(arr, subj, id) {
+    let subjects = arr[id].subjects;
+    for (var i = 0; i < subjects.length; i++) {
+      if (subjects[i].subject === subj) { return true; }
+    }
+    return false;
+  },
+  findSubjectID: function(arr, catID, sub) {
     let subjects = arr[catID].subjects;
     for (var i = 0; i < subjects.length; i++) {
-      if (subjects[i].subject === subj) {
-        subjects.splice(i, 1); return;
-      }
+      if (subjects[i].subject === sub) { return subjects[i].id; }
     }
+    return null;
   },
   getSubjectText: function(e, target, className, context) {
     if (context === 'handle') {
@@ -109,5 +69,44 @@ module.exports = {
       }
     }
   },
+  editSubjects: function(arr, catID, oldSubject, newSubject) {
+    let subjects = arr[catID].subjects;
+    for (var i = 0; i < subjects.length; i++) {
+      if (subjects[i].subject === oldSubject) { subjects[i].subject = newSubject; return; }
+    }
+  },
+  deleteSubject: function(arr, catID, subj) {
+    let subjects = arr[catID].subjects;
+    for (var i = 0; i < subjects.length; i++) {
+      if (subjects[i].subject === subj) {
+        subjects.splice(i, 1); return;
+      }
+    }
+  },
+  editTitles: function(arr, titleToDelete, func) {
+    for (var i = 0; i < arr.length; i++) {
+      if (arr[i].title === titleToDelete) {
+        arr.splice(i, 1);
+        func(arr);
+        return;
+      }
+    }
+  },
+  whichGroup: function(arr, element) {
+    let cat = element.parentElement.children[1].innerText;
+    for (var i = 0; i < arr.length; i++) {
+      if (arr[i].category === cat) { return 'category'; }
+    }
+    return 'subject';
+  },
+  isCustomMenuIcon: function(target) {
+    return (target.className.baseVal && target.className.baseVal.includes('icon-custom-menu')
+       || target.parentElement.className.baseVal && target.parentElement.className.baseVal.includes('icon-custom-menu'));
+  },
+  isCustomMenu: function(target, className) {
+    if (target.id === 'app-container') { return false; }
+    if (target.className === className) { return true; }
+    return this.isCustomMenu(target.parentElement, 'custom-menu');
+  }
 };
 
