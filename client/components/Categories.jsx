@@ -13,9 +13,17 @@ const Categories = () => {
   const [ category, setCategory ] = useState('');
   const [ elementToEdit, setElementToEdit ] = useState('');
   const { groups, setCategoryID, setShowTitles, isEditing, setGroupToDelete } = useContext(ContentContext);
+
+  console.log(isOpen, 'CATEGORIES isOpen');
+  console.log(category, 'CATEGORIES category');
+  console.log(elementToEdit, 'CATEGORIES elementToEdit');
+  console.log(isOpen, 'CATEGORIES isOpen');
+  console.log(groups, isEditing, 'CATEGORIES');
+
   const exitCategories = (e) => {
-    console.log('hey')
+    console.log(e.target, 'CATEGORIES exitCategories');
     if (e.target.className === 'app' || e.target.className === 'sidebar-container') {
+      console.log('CATEGORIES exitCategories if target == app or sidebar');
       document.removeEventListener('click', exitCategories);
       setIsOpen(false);
       setCategory('');
@@ -26,21 +34,25 @@ const Categories = () => {
   };
 
   const handleCatClick = (e) => {
-    console.log('click')
+    console.log(e.target, 'CATEGORIES handleCatClick');
     //if isCusotmMenuIcon, if isOpen, is the cateogry clicked teh one that is open?
     let isCustomMenuIcon = utils.isCustomMenuIcon(e.target);
+    console.log(isCustomMenuIcon, 'iscustmenu')
     if (isCustomMenuIcon) {
+      console.log('CATEGORIES handleCatClick isCustomMenuIcon == true');
       let target;
+    //    console.log('click')
       // if (e.target.tagName === 'path' && e.target.parentElement.className.baseVal.includes('icon-custom-menu')) {
       //   target = e.target.parentElement;
       // } else if (e.target.className.baseVal.includes('icon-custom-menu')) {
       //   target = e.target
-      // }
+      //}
       // let currentElem = utils.getCategoryText(e, e.target, null, 'handle');
 
-// else if (isEditing) {
-//       setElementToEdit(e.target.value);
-//     }
+     } else if (e.target.id === 'edit-category') {
+      console.log(e.target.value, 'CATEGOIRES handleCatClick isEdit == true')
+        setElementToEdit(e.target.value);
+      //}
       //IF CLICK ON MENU AND ANOTHER DROPDOWN IS OPEN
       // if (isOpen && category !== currentElem) {
       //   let rect = target.getBoundingClientRect();
@@ -52,14 +64,17 @@ const Categories = () => {
      // }
       setGroupToDelete('category');
     } else {
+      console.log('CATEGORIES handleCatClick isCustomMenuIcon !== true');
       let cat = utils.getCategoryText(e, e.target, e.target.className, 'handle');
       if (e.target.className === 'app' || cat === category) {
+        console.log('CATEGORIES handleCatClick isCustomMenuIcon !== true && class == app or category is different');
         document.removeEventListener('click', exitCategories);
         setIsOpen(false);
         setCategory('');
         setShowTitles(false);
         setGroupToDelete('');
       } else {
+        console.log('CATEGORIES handleCatClick openDropdown');
         setIsOpen(true);
         setCategory(cat);
         setShowTitles(false);
@@ -69,7 +84,7 @@ const Categories = () => {
   };
 //refactor dropdown container
   return (
-    <CategoriesContext.Provider value={{ setCategory, category, exitCategories, setIsOpen, isOpen, setElementToEdit }}>
+    <CategoriesContext.Provider value={{ setCategory, category, exitCategories, setIsOpen, isOpen, elementToEdit, setElementToEdit }}>
       <div className="section-container" >
        <div id="section-wrapper">
          {groups.map(group => {

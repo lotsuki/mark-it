@@ -6,6 +6,8 @@ import ContentContext from './ContentContext';
 const CustomMenu = () => {
   const { groups, cords, setCords, elementForCustomMenu, setElementForCustomMenu, setIsEditing, showConfirm, setShowConfirm, setIsEditingSubject } = useContext(ContentContext);
 
+  console.log(groups, cords, elementForCustomMenu, showConfirm, 'CUSTOM MENU');
+
   useEffect(() => {
     document.addEventListener('click', exitCustomMenu);
   }, [])
@@ -14,6 +16,7 @@ const CustomMenu = () => {
   //use memo for component caching/memoization
 
   const exitCustomMenu = (e) => {
+    console.log(e.target, 'CUSTOM MENU exitCustomMenu');
     let target;
 //fix
 
@@ -52,12 +55,13 @@ const CustomMenu = () => {
   };
 
   const confirmDeleteForGroup = async () => {
+    console.log(e.target, 'CUSTOM MENU confirmDeleteForGroup func');
     let doc = document.getElementById('container');
     let confirmContainer = document.getElementById('confirm');
 
     if (!showConfirm) {
       await setShowConfirm(true);
-      //await deleteCategory(elementForCustomMenu.parentElement.children[1].innerText);
+      await deleteCategory(elementForCustomMenu.parentElement.children[1].innerText);
       if (confirmContainer) {
         confirmContainer.className = 'confirm-container is-visuallyHid';
         doc.className = 'MainContainer is-blurred';
@@ -73,6 +77,7 @@ const CustomMenu = () => {
   };
 
   const customMenuClick = (e) => {
+    console.log(e.target, 'CUSTOM MENU customMenuClick func');
     let className = elementForCustomMenu.parentElement.children[1].className;
      if (className === 'category-text' && e.target.innerText === 'Edit Item') {
        setIsEditing(true);
@@ -98,40 +103,7 @@ const CustomMenu = () => {
   };
 
 
-  const openCustomMenu = (e) => {
-    console.log('hey')
-    //make recurse function to check if other dropdowns are open
-    let target;
-    let wrapper = document.getElementById('section-wrapper');
 
-    if (e.target.tagName === 'path' && e.target.parentElement.className.baseVal.includes('icon-custom-menu')) {
-      target = e.target.parentElement;
-    } else if (e.target.className.baseVal.includes('icon-custom-menu')) {
-      target = e.target
-    }
-    let group = utils.whichGroup(groups, target);
-    let rect = target.getBoundingClientRect();
-    let top = rect.top + 8;
-
-    if (elementForCustomMenu) {
-      elementForCustomMenu.style.visibility = '';
-    }
-    if ((group === 'category' )&& ( !elementForCustomMenu || elementForCustomMenu && elementForCustomMenu.className.baseVal !== target.className.baseVal )) {
-
-      let cat = target.parentElement.children[1].innerText;
-      let id = utils.findCategoryID(groups, cat);
-      if (id >= 0) { setCategoryID(id); }
-
-      target.style.visibility = 'visible';
-      setCords([top, rect.left]);
-      setElementForCustomMenu(target);
-    } else if ((group === 'subject') && ( !elementForCustomMenu || elementForCustomMenu && elementForCustomMenu.className.baseVal !== target.className.baseVal )){
-      let subject = target.parentElement.children[1].innerText;
-      target.style.visibility = 'visible';
-      setCords([top, rect.left]);
-      setElementForCustomMenu(target);
-    }
-  };
 
   return (
     <div className="custom-menu" onClick={customMenuClick} style={{top: `${cords[0]}px`, left: '378px'}}>

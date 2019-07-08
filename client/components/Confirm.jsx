@@ -7,17 +7,19 @@ import ContentContext from './ContentContext';
 const Confirm = () => {
   const { groups, groupsID, setCategoryID, setShowConfirm, titleToDelete, titles, setTitles, groupToDelete, elementForCustomMenu, setElementForCustomMenu } = useContext(ContentContext);
 
+  console.log(groups, titleToDelete, titles, groupToDelete, elementForCustomMenu, 'CONFIRM');
+
   //check if categoryID has value when delete subject, check if setCatID is necessary
   const handleConfirmClick = async (e) => {
-    console.log(categoryID, 'catID')
+    console.log(groupToDelete, 'CONFIRM handleConfirmClick group');
     if (e.target.innerText === 'Yes') {
       console.log(elementForCustomMenu, 'el')
       if (groupToDelete === 'category') {
-        console.log(elementForCustomMenu, 'el for menu')
         let cat = elementForCustomMenu.parentElement.children[1].innerText;
-        console.log(cat, 'cat')
+        console.log(elementForCustomMenu, cat, 'CONFIRM handleConfirmClick cateogry')
         await axios.delete(`/delete/${cat}/${groupsID}`)
           .then(res => {
+            console.log(elementForCustomMenu, cat, 'CONFIRM handleConfirmClick category delete api res');
             utils.deleteCategory(groups, cat);
             elementForCustomMenu.style.visibility = '';
             setCategoryID('');
@@ -28,9 +30,10 @@ const Confirm = () => {
       } else if (groupToDelete === 'subject') {
         let sub = elementForCustomMenu.parentElement.children[1].innerText;
         let catID = utils.findCatIDWithSub(groups, sub);
-
+         console.log(elementForCustomMenu, sub, catID, 'CONFIRM handleConfirmClick subject group');
         await axios.delete(`/delete/${sub}/${catID}/${groupsID}`)
           .then(res => {
+            console.log(elementForCustomMenu, sub, catID, 'CONFIRM handleConfirmClick subject delete api res');
             utils.deleteSubject(groups, catID, sub);
             elementForCustomMenu.style.visibility = '';
             setCategoryID('');
@@ -39,6 +42,7 @@ const Confirm = () => {
           })
           .catch(err => { console.log('Error at DELETE request', err); });
       } else if(groupToDelete === 'title') {
+        console.log(titleToDelete, 'titletodelete')
          await axios.delete(`/delete/${titleToDelete}`)
             .then(res => {
               utils.editTitles(titles, titleToDelete, setTitles);

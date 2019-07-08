@@ -14,29 +14,36 @@ const Category = ({ cat, color }) => {
   const { groups, groupsID, categoryID, setCategoryID, setIsEditing, isEditing, setElementForCustomMenu, elementForCustomMenu } = useContext(ContentContext);
   const { setCategory, category, isOpen, elementToEdit, setElementToEdit } = useContext(CategoriesContext);
 
+  console.log(catEdited, 'CATEGORY catEdited');
+  console.log(groups, categoryID, isEditing, elementForCustomMenu, category, isOpen, elementToEdit, 'CATEGORY');
+
   const reset = (e) => {
-    console.log('no')
+    console.log(e.target, 'CATEGORY reset input');
     setElementToEdit('');
     setIsEditing(false);
   };
 
   //check if categoryID, setCategoryID is necessary, can get catID here without state value?
 
-  const handleFocus = (e) => {
-    setElementToEdit(e.target.value);
+   //const handleFocus = (e) => {
+    //console.log(e.target, 'CATEGORY handleFocus');
+    //setElementToEdit(e.target.value);
     //console.log(e.target, 'handleFocus')
-  };
+  // };
 
   const handleCatEdit = (e) => {
+    console.log(e.target.value, 'CATEGORY handleCatEdit');
     setCatEdited(e.target.value);
   };
 
   const handleEnter = (e) => {
+    console.log(e.keyCode, catEdited, categoryID, groupsID, 'CATEGORY handleEnter');
     if (e.keyCode === 13) {
       axios.get(`/update/${catEdited}/${categoryID}/${groupsID}`, {
         method: 'PATCH'
         })
         .then(res => {
+          console.log(cat, catEdited, elementForCustomMenu, 'CATEGORY patch response');
            utils.editCategories(groups, cat, catEdited);
            elementForCustomMenu.style.visibility = '';
            setCategory('');
@@ -50,19 +57,25 @@ const Category = ({ cat, color }) => {
   };
 
 const displayCatOnEdit = () => {
-  let categoryToEdit = utils.getCategoryText(null, elementForCustomMenu, null, 'display');
+  let categoryToEdit = elementForCustomMenu.parentElement.children[1];
+  if (categoryToEdit.className === 'category-text') { categoryToEdit = categoryToEdit.innerText; }
+  else if (categoryToEdit.id === 'edit-category') { categoryToEdit = categoryToEdit.value; }
+  // let categoryToEdit = utils.getCategoryText(null, elementForCustomMenu, null, 'display');
+  console.log(elementForCustomMenu, 'elformenu', categoryToEdit, 'cattoedit', cat, 'cat', elementToEdit, 'eltoedit', 'CATEGORY displayCatOnEdit func');
   // console.log(cat, 'cat')
   // console.log(elementToEdit, 'el to edit')
   //  console.log(categoryToEdit, 'cat to edit')
   //  console.log(elementForCustomMenu, 'el menu')
   //  console.log(elementForCustomMenu.parentElement.children[1].innerText)
   if (categoryToEdit && categoryToEdit === cat || elementToEdit && cat === elementToEdit) {
+    console.log(categoryToEdit, cat, elementToEdit,'CATEGORY displayCatOnEdit func return input');
     return (
       <Fragment>
         <IconDown />
-        <input id="edit-category" type="text" onBlur={reset} onFocus={handleFocus} onKeyUp={handleEnter} onChange={handleCatEdit} defaultValue={cat} autoComplete="off" style={{border: '1px solid lightgray', boxShadow: '0px 1px 10px 0px rgba(32, 33, 36, 0.10)', padding: '7px 12px', marginRight: '8px', color: '#9E9D9D'}}/>
+        <input id="edit-category" type="text" onBlur={reset} onKeyUp={handleEnter} onChange={handleCatEdit} defaultValue={cat} autoComplete="off" style={{border: '1px solid lightgray', boxShadow: '0px 1px 10px 0px rgba(32, 33, 36, 0.10)', padding: '7px 12px', marginRight: '8px', color: '#9E9D9D'}}/>
       </Fragment>)
   }
+  console.log(categoryToEdit, cat, elementToEdit,'CATEGORY displayCatOnEdit func return div');
   return(
     <Fragment>
       <IconFolder viewBox={"-20 -9 55 55"} color={color} width={"30"} height={"30"} />

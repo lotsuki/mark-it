@@ -4,20 +4,19 @@ import ContentContext from './ContentContext';
 import {useTrail, animated} from 'react-spring';
 
 const Titles = () => {
-  const { titles, showConfirm, setShowConfirm, setGroupToDelete } = useContext(ContentContext);
-  const deleteTitle = (target) => {
-    let title = target.parentElement.firstChild.innerText;
-    setTitleToDelete(title);
-  };
+  const { titles, setTitleToDelete, showConfirm, setShowConfirm, setGroupToDelete } = useContext(ContentContext);
 
   const confirmDelete = async (e) => {
-    let target = e.target
+    //let target = e.target
     let doc = document.getElementById('container');
     let confirmContainer = document.getElementById('confirm');
+    let title = e.target.parentElement.firstChild.innerText;
     if (!showConfirm) {
-      await setGroupToDelete('title');
-      await setShowConfirm(true);
-      await deleteTitle(target);
+      console.log('YES')
+      setGroupToDelete('title');
+      setShowConfirm(true);
+      //deleteTitle(target);
+      setTitleToDelete(title);
       if (confirmContainer) {
         confirmContainer.className = 'confirm-container is-visuallyHid';
         doc.className = 'MainContainer is-blurred';
@@ -25,6 +24,7 @@ const Titles = () => {
         doc.parentElement.className = 'ModalOpen';
       }
     } else {
+      console.log('no')
       doc.parentElement.className = '';
       doc.className = '';
       confirmContainer.className = 'confirm-container is-hidden is-visuallyHid';

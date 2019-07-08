@@ -1,14 +1,21 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import MainContext from './MainContext';
 
-const IconPlus = ({ showForm, setShowForm }) => {
+const IconPlus = () => {
+  const { showForm, setShowForm } = useContext(MainContext);
+
+  console.log(showForm, 'ICONPLUS showForm');
   const hideDisplay = (e) => {
+    console.log(e.target, 'ICONPLUS hideDisplay');
     if (e.target.name !== 'form') {
+      console.log(e.target, 'ICONPLUS hideDisplay setShowForm(false)');
       setShowForm(false);
       document.removeEventListener('click', hideDisplay);
     }
   };
 
   const displayForm = (e) => {
+    console.log(showForm, 'ICONPLUS displayForm, showForm');
     if (!showForm) {
       setShowForm(true);
       document.addEventListener('click', hideDisplay);

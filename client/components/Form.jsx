@@ -17,11 +17,18 @@ const Form = () => {
   const [ color, setColor ] = useState('');
   const { groups, groupsID, showForm, setShowForm } = useContext(ContentContext);
 
+  console.log(category, 'FORM category');
+  console.log(subject, 'FORM subject');
+  console.log(title, 'FORM title');
+  console.log(color, 'FORM color');
+  console.log(groups, showForm, 'FORM');
+
   useEffect(() => {
     setColor('#D00000');
   }, []);
 
   const clearForm = () => {
+    console.log('FORM clearForm func');
     setCategory('');
     setSubject('');
     setTitle('');
@@ -30,6 +37,7 @@ const Form = () => {
 
   const submitForm = (e) => {
     e.preventDefault();
+
     const hasCat = utils.hasCategory(groups, category);
     const catID = utils.findCategoryID(groups, category);
     let hasSubj;
@@ -39,8 +47,7 @@ const Form = () => {
       hasSubj = utils.hasSubject(groups, subject, catID);
       subjectL = groups[catID].subjects.length;
     }
-    console.log(catID, 'catID')
-    console.log(hasSubj, 'hassub')
+   console.log(hasCat, catID, hasSubj, subjectL, 'FORM submitForm func');
 
     if (category && subject && title && url) {
       axios.post('/form', {
@@ -58,11 +65,13 @@ const Form = () => {
         color
         })
         .then(res => {
+          console.log(groups, 'FORM submitForm func GROUPS edit before api post');
           if (!hasCat && !hasSubj) {
             groups.push({id: groups.length, category, color, subjects: [{id: 0, subject}]});
           } else if (!hasSubj) {
             groups[catID].subjects.push({id: subjectL, subject});
           }
+          console.log(groups, 'FORM submitForm func GROUPS edit after api post');
           setShowForm(false);
           console.log('POST request successful');
         })

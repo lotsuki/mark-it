@@ -5,12 +5,12 @@ import Logo from './Logo';
 import NavbarIcons from './NavbarIcons';
 
 
-const Navbar = ({ showForm, setShowForm, showEdit, setShowEdit, links, showContainer, exitContainer }) => {
+const Navbar = ({ links }) => {
   return (
     <nav className="navbar">
       <Logo />
       <Searchbar links={links}/>
-      <NavbarIcons showForm={showForm} setShowForm={setShowForm} showEdit={showEdit} setShowEdit={setShowEdit}/>
+      <NavbarIcons />
     </nav>
   );
 };

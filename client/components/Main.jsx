@@ -1,19 +1,23 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, useContext, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import Navbar from './Navbar';
 import Content from './Content';
+import MainContext from './MainContext';
 
 //try wihtout fragments
 
 const Main = ({ groups, groupsID, links }) => {
   const [ showForm, setShowForm, ] = useState(false);
-  console.log('main render')
-
+  console.log(showForm, 'MAIN showForm');
+  console.log(groups, 'MAIN groups');
+  console.log(links, 'MAIN links');
   return (
+    <MainContext.Provider value={{showForm, setShowForm}}>
     <div id="container">
-      <Navbar showForm={showForm} setShowForm={setShowForm} links={links} />
+      <Navbar links={links} />
       <Content groups={groups} groupsID={groupsID}/>
     </div>
+    </MainContext.Provider>
   );
 };
 
@@ -24,5 +28,4 @@ Main.propTypes = {
   groupsID: PropTypes.string,
   links: PropTypes.array
 };
-
 

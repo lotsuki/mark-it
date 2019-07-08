@@ -1,10 +1,10 @@
 import React from 'react';
 import IconPlus from './IconPlus';
 
-const NavbarIcons = ({ showForm, setShowForm, showEdit, setShowEdit }) => {
+const NavbarIcons = () => {
   return (
     <div className="icons-wrapper">
-      <IconPlus showForm={showForm} setShowForm={setShowForm}/>
+      <IconPlus />
     </div>
   )
 };

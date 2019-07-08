@@ -105,8 +105,9 @@ module.exports = {
        || target.parentElement.className.baseVal && target.parentElement.className.baseVal.includes('icon-custom-menu'));
   },
   isCustomMenu: function(target, className) {
-    if (target.id === 'app-container') { return false; }
-    if (target.className === className) { return true; }
+    console.log(target.parentElement, 'target in recurse')
+    if (target && target.id === 'app-container') { return false; }
+    if (target && target.className === className) { return true; }
     return this.isCustomMenu(target.parentElement, 'custom-menu');
   }
 };
