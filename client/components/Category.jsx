@@ -1,15 +1,14 @@
 import React, { useState, useContext, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import IconFolder from './IconFolder';
-import IconFolderOpen from './IconFolderOpen';
-import IconCustomMenu from './IconCustomMenu';
 import IconDown from './IconDown';
+import CategoryChild from './CategoryChild';
 import utils from '../lib/utils';
 import axios from 'axios';
 import ContentContext from './ContentContext';
 import CategoriesContext from './CategoriesContext';
 
-const Category = ({ cat, color }) => {
+const Category = ({ color, cat }) => {
   const [ catEdited, setCatEdited ] = useState('');
   const { groups, groupsID, categoryID, setCategoryID, setIsEditing, isEditing, setElementForCustomMenu, elementForCustomMenu } = useContext(ContentContext);
   const { setCategory, category, isOpen, elementToEdit, setElementToEdit } = useContext(CategoriesContext);
@@ -50,28 +49,28 @@ const Category = ({ cat, color }) => {
     }
   };
 
-const displayCatOnEdit = () => {
-  let categoryToEdit = elementForCustomMenu.parentElement.children[1];
-  if (categoryToEdit.className === 'category-text') { categoryToEdit = categoryToEdit.innerText; }
-  else if (categoryToEdit.id === 'edit-category') { categoryToEdit = categoryToEdit.value; }
-  // let categoryToEdit = utils.getCategoryText(null, elementForCustomMenu, null, 'display');
-  console.log(elementForCustomMenu, 'elformenu', categoryToEdit, 'cattoedit', cat, 'cat', elementToEdit, 'eltoedit', 'CATEGORY displayCatOnEdit func');
-  if (categoryToEdit && categoryToEdit === cat || elementToEdit && cat === elementToEdit) {
-    console.log(categoryToEdit, cat, elementToEdit,'CATEGORY displayCatOnEdit func return input');
+  const displayCatOnEdit = (cat) => {
+    let categoryToEdit = elementForCustomMenu.parentElement.children[1];
+    if (categoryToEdit.className === 'category-text') { categoryToEdit = categoryToEdit.innerText; }
+    else if (categoryToEdit.id === 'edit-category') { categoryToEdit = categoryToEdit.value; }
+    // let categoryToEdit = utils.getCategoryText(null, elementForCustomMenu, null, 'display');
+    console.log(elementForCustomMenu, 'elformenu', categoryToEdit, 'cattoedit', cat, 'cat', elementToEdit, 'eltoedit', 'CATEGORY displayCatOnEdit func');
+    if (categoryToEdit && categoryToEdit === cat || elementToEdit && cat === elementToEdit) {
+      console.log(categoryToEdit, cat, elementToEdit,'CATEGORY displayCatOnEdit func return input');
+      return (
+        <div className="edit-category-wrapper" key={cat} style={{background: '#fff'}}>
+          <IconDown />
+          <input id="edit-category" type="text" onBlur={reset} onKeyUp={handleEnter} onChange={handleCatEdit} defaultValue={cat} autoComplete="off" style={{border: '1px solid lightgray', boxShadow: '0px 1px 10px 0px rgba(32, 33, 36, 0.10)', padding: '7px 12px', marginRight: '8px', color: '#9E9D9D'}}/>
+        </div>);
+    }
+    console.log(categoryToEdit, cat, elementToEdit,'CATEGORY displayCatOnEdit func return div');
     return (
-      <Fragment>
-        <IconDown />
-        <input id="edit-category" type="text" onBlur={reset} onKeyUp={handleEnter} onChange={handleCatEdit} defaultValue={cat} autoComplete="off" style={{border: '1px solid lightgray', boxShadow: '0px 1px 10px 0px rgba(32, 33, 36, 0.10)', padding: '7px 12px', marginRight: '8px', color: '#9E9D9D'}}/>
-      </Fragment>)
-  }
-  console.log(categoryToEdit, cat, elementToEdit,'CATEGORY displayCatOnEdit func return div');
-  return(
-    <Fragment>
-      <IconFolder viewBox={"-20 -9 55 55"} color={color} width={"30"} height={"30"} />
-      <div className="category-text">{cat}</div>
-    </Fragment>
-    )
-};
+      <div className="category" key={cat}>
+        <IconFolder viewBox={"-20 -9 55 55"} color={color} width={"30"} height={"30"} />
+        <div className="category-text">{cat}</div>
+      </div>
+    );
+  };
 
    const hoverOn = (e) => {
    };
@@ -82,44 +81,9 @@ const displayCatOnEdit = () => {
   return (
     <Fragment>
       {
-        category === cat && isOpen
-        ? (
-            <div className="category"
-                 key={cat}
-                 style={{backgroundColor: '#ECECEE'}}
-                 >
-              {
-                isEditing
-                ? (
-                  displayCatOnEdit()
-                  )
-                : (
-                  <Fragment>
-                    <IconFolderOpen viewBox={"-20 -9 55 55"} color={color} width={"30"} height={"30"} />
-                    <div className="category-text">{cat}</div>
-                  </Fragment>
-                  )
-              }
-              <IconCustomMenu name={cat}/>
-            </div>
-           )
-        : (
-            <div className="category" key={cat} >
-              {
-                isEditing
-                ? (
-                  displayCatOnEdit()
-                  )
-                : (
-                  <Fragment>
-                    <IconFolder viewBox={"-20 -9 55 55"} color={color} width={"30"} height={"30"}/>
-                    <div className="category-text">{cat}</div>
-                  </Fragment>
-                  )
-              }
-              <IconCustomMenu name={cat}/>
-            </div>
-          )
+        isEditing
+        ? ( displayCatOnEdit(cat) )
+        : <CategoryChild color={color} cat={cat}/>
       }
     </Fragment>
   );
@@ -127,14 +91,14 @@ const displayCatOnEdit = () => {
 
 export default Category;
 
-// Category.propTypes = {
-//   category: PropTypes.string,
-//   cat: PropTypes.string
-// };
+Category.propTypes = {
+  color: PropTypes.string,
+  cat: PropTypes.string
+};
 
-// Category.defaultProps = {
-//   category: '',
-//   cat: ''
-// };
+Category.defaultProps = {
+  color: '',
+  cat: ''
+};
 
 

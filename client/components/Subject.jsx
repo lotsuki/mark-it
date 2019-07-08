@@ -4,6 +4,7 @@ import IconFolder from './IconFolder';
 import IconFolderOpen from './IconFolderOpen';
 import IconCustomMenu from './IconCustomMenu';
 import IconDown from './IconDown';
+import SubjectChild from './SubjectChild';
 import utils from '../lib/utils';
 import axios from 'axios';
 import ContentContext from './ContentContext';
@@ -53,50 +54,28 @@ const Subject = ({ subject, id, catID, subjectToEdit, setSubjectToEdit, color })
     if (sub && sub === subject || subjectToEdit && subject === subjectToEdit) {
       console.log(sub, 'SUBJECT displaySubOnEdit func, return input');
       return (
-        <Fragment>
+         <div className="edit-subject-wrapper" >
           <IconDown />
           <input id="edit-subject" type="text" onBlur={resetSub} onKeyUp={handleSubEnter} onChange={handleSubEdit} defaultValue={subject} autoComplete="off" style={{border: '1px solid lightgray', boxShadow: '0px 1px 10px 0px rgba(32, 33, 36, 0.10)', padding: '7px 12px', marginRight: '8px', color: '#9E9D9D'}}/>
-        </Fragment>)
+        </div>)
     }
     console.log(sub, 'SUBJECT displaySubOnEdit func, return div');
     return(
-      <Fragment>
+      <div className="subject-wrapper">
         <IconFolder viewBox={"-50 -15 85 72"} color={color} width={"45"} height={"38"}/>
         <div className="subject-text">{subject}</div>
-      </Fragment>
+      </div>
       )
   };
 
   return (
-    <div className="subject-wrapper">
-    {
-      clickedSubj === subject
-      ? (
-        <div
-          className="subject"
-          style={{ background:'#D1D0D3' }}>
-          <IconFolderOpen viewBox={"-50 -17 85 72"} color={color} width={"45"} height={"38"}/>
-          <div className="subject-text" style={{ background:'#D1D0D3'}}>{subject}</div>
-          <IconCustomMenu name={subject} subjectID={id} catID={catID}/>
-        </div>
-        )
-      : (
-        <div className="subject">
-        {
-          isEditingSubject
-          ? ( displaySubOnEdit() )
-          : (
-            <Fragment>
-            <IconFolder viewBox={"-50 -15 85 72"} color={color} width={"45"} height={"38"}/>
-             <div className="subject-text">{subject}</div>
-            </Fragment>
-            )
-        }
-         <IconCustomMenu name={subject} subjectID={id} catID={catID}/>
-       </div>
-      )
-    }
-    </div>
+    <Fragment>
+      {
+        isEditingSubject
+        ? ( displaySubOnEdit() )
+        : ( <SubjectChild color={color} subject={subject} subjectID={id} catID={catID} clickedSubj={clickedSubj}/> )
+      }
+    </Fragment>
   );
 };
 

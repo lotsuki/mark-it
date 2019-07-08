@@ -98,17 +98,8 @@ const Categories = () => {
              </div>
              <div className="dropdown-container" key={group.color}>
                {
-                category === group.category
-                ? (
-                  <div className="dropdown-wrapper" >
-                    {
-                      isOpen
-                        ? ( <Subjects color={group.color}/>)
-                        : ( null )
-                    }
-                  </div>
-                )
-                : ( null )
+                category === group.category && isOpen &&
+                <Subjects color={group.color}/>
                }
               </div>
             </div>
@@ -134,4 +125,5 @@ export default Categories;
 //   titlesUpdate: [],
 //   displayConfirm: () => {}
 // };
+
 

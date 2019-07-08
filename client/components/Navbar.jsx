@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import Searchbar from './Searchbar';
 import Logo from './Logo';
 import NavbarIcons from './NavbarIcons';
 
-const Navbar = ({ links }) => {
+const Navbar = () => {
   return (
     <nav className="navbar">
       <Logo />
-      <Searchbar links={links}/>
+      <Searchbar />
       <NavbarIcons />
     </nav>
   );
@@ -18,11 +17,3 @@ const Navbar = ({ links }) => {
 
 export default Navbar;
 
-
-// Navbar.propTypes = {
-//   links:
-// };
-
-// Navbar.defaultProps = {
-//   links:
-// };

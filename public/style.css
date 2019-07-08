@@ -88,6 +88,10 @@
     background-color: #fff;
   }
 
+  .category:active {
+     background:#ECECEE;
+  }
+
   .category:hover {
     background:#ECECEE;
   }

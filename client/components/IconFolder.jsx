@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+import IconFolderClosed from './IconFolderClosed';
+import IconFolderOpen from './IconFolderOpen';
 
-const IconFolder = ({ viewBox, color, width, height }) => {
-  return (
-    <svg className="icon-folder" xmlns="http://www.w3.org/2000/svg" width={width} height={height} viewBox={viewBox} fill={color} >
-      <title>folder</title>
-      <path d="M14 4l4 4h14v22h-32v-26z"></path>
-    </svg>
-  )
-};
+const IconFolder = ({ viewBox, color, width, height, isOpen }) => (
+  <Fragment>
+    {
+      isOpen
+      ? ( <IconFolderOpen viewBox={viewBox} color={color} width={width} height={height}/> )
+      : ( <IconFolderClosed viewBox={viewBox} color={color} width={width} height={height}/> )
+    }
+  </Fragment>
+);
 
 export default IconFolder;

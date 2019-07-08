@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 import SearchbarInput from './SearchbarInput';
 import SearchbarContent from './SearchbarContent';
 
-const Searchbar = ({ links }) => {
+const Searchbar = () => {
   const [ isSearching, setIsSearching ] = useState(false);
   const [ input, setInput ] = useState('');
 
   return (
     <div className="searchbar-container">
       <SearchbarInput isSearching={isSearching} setIsSearching={setIsSearching} input={input} setInput={setInput}/>
-      <SearchbarContent links={links} isSearching={isSearching} input={input}/>
+      <SearchbarContent isSearching={isSearching} input={input}/>
     </div>
   );
 };

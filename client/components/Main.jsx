@@ -11,9 +11,9 @@ const Main = ({ groups, groupsID, links }) => {
   console.log(groups, 'MAIN groups');
   console.log(links, 'MAIN links');
   return (
-    <MainContext.Provider value={{showForm, setShowForm}}>
+    <MainContext.Provider value={{showForm, setShowForm, links}}>
     <div id="container">
-      <Navbar links={links} />
+      <Navbar />
       <Content groups={groups} groupsID={groupsID}/>
     </div>
     </MainContext.Provider>

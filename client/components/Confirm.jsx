@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import utils from '../lib/utils';
 import axios from 'axios';
@@ -9,6 +9,9 @@ const Confirm = () => {
 
   console.log(groups, titleToDelete, titles, groupToDelete, elementForCustomMenu, 'CONFIRM');
 
+  useEffect(() => {
+    //change background style when category changes, use useREf
+  }, [category])
   //check if categoryID has value when delete subject, check if setCatID is necessary
   const handleConfirmClick = async (e) => {
     console.log(groupToDelete, 'CONFIRM handleConfirmClick group');

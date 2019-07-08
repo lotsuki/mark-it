@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import ContentContext from './ContentContext';
 import MainContext from './MainContext';
 import PropTypes from 'prop-types';
@@ -13,11 +13,9 @@ const Form = () => {
   const [ subject, setSubject ] = useState('');
   const [ title, setTitle ] = useState('');
   const [ url, setUrl ] = useState('');
+  const [ color, setColor ] = useState('#D00000');
   const [ selectCat, setSelectCat ] = useState(false);
   const [ selectSub, setSelectSub ] = useState(false);
-  const [ color, setColor ] = useState('');
-  // const [ hasCat, setHasCat ] = useState(false);
-  // const [ hasSubj, setHasSubj ] = useState(false);
   const { groups, groupsID } = useContext(ContentContext);
   const { showForm, setShowForm } = useContext(MainContext);
 
@@ -26,11 +24,6 @@ const Form = () => {
   console.log(title, 'FORM title');
   console.log(color, 'FORM color');
   console.log(groups, showForm, 'FORM');
-
-  useEffect(() => {
-    setColor('#D00000');
-  }, []);
-
 
   const clearForm = () => {
     console.log('FORM clearForm func');
