@@ -24,7 +24,6 @@ const Subjects = ({ color }) => {
   console.log(subjectToEdit, 'SUBJECTS subjectToEdit');
   console.log(groups, showConfirm, showTitles, isEditingSubject, category, 'SUBJECTS');
 
-
   useEffect(() => {
     for (var i = 0; i < groups.length; i++) {
       if (groups[i].category === category) {
@@ -67,13 +66,10 @@ const Subjects = ({ color }) => {
 
     let isCustomMenuIcon = utils.isCustomMenuIcon(e.target);
     if (isCustomMenuIcon) {
-       console.log(e.target, 'SUBJECTS handleSubjClick func, isCustomMenuIcon == true');
-      // console.log(e.target, 'TARGET')
-      // setElementForCustomMenu(e.target);
+      console.log(e.target, 'SUBJECTS handleSubjClick func, isCustomMenuIcon == true');
       setGroupToDelete('subject');
-      //setElementToEdit(e.target.value);
     } else if (isEditingSubject) {
-       console.log(e.target, 'SUBJECTS handleSubjClick func, isEditingSubject == true');
+      console.log(e.target, 'SUBJECTS handleSubjClick func, isEditingSubject == true');
       setSubjectToEdit(e.target.value);
     }
     let subject;
@@ -116,23 +112,6 @@ const Subjects = ({ color }) => {
     }
   };
 
-  // const trail = useTrail(subjects.length, {
-  //   opacity: isOpen ? 1 : 0,
-  //   height: isOpen ? 50 : 0,
-  //   from: {opacity: isOpen ? 0 : 1, height: isOpen ? 0 : 50}},
-  // );
-  // {trail.map(({height, opacity}, index) => (
-  //   )}
-  // {<div>
-  //            <animated.div
-  //              className="subject"
-  //              onClick={handleSubjClick}
-  //              style={{height, opacity}}
-  //              key={subjects[index]}>
-  //              <Subject clickedSubj={subj} subject={subjects[index]} color={color}/>
-  //            </animated.div>
-  //          </div>}
-
   return (
     <div className="subject-container">
       {
@@ -168,4 +147,23 @@ export default Subjects;
 //   titlesUpdate: [],
 //   displayConfirm: () => {}
 // };
+
+
+
+  // const trail = useTrail(subjects.length, {
+  //   opacity: isOpen ? 1 : 0,
+  //   height: isOpen ? 50 : 0,
+  //   from: {opacity: isOpen ? 0 : 1, height: isOpen ? 0 : 50}},
+  // );
+  // {trail.map(({height, opacity}, index) => (
+  //   )}
+  // {<div>
+  //            <animated.div
+  //              className="subject"
+  //              onClick={handleSubjClick}
+  //              style={{height, opacity}}
+  //              key={subjects[index]}>
+  //              <Subject clickedSubj={subj} subject={subjects[index]} color={color}/>
+  //            </animated.div>
+  //          </div>}
 

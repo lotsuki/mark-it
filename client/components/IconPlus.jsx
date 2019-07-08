@@ -15,13 +15,15 @@ const IconPlus = () => {
   };
 
   const displayForm = (e) => {
-    console.log(showForm, 'ICONPLUS displayForm, showForm');
+    console.log(e.target, showForm, 'ICONPLUS displayForm, showForm');
     if (!showForm) {
       setShowForm(true);
       document.addEventListener('click', hideDisplay);
-    } else {
-      setShowForm(false);
     }
+
+    // else {
+    //   setShowForm(false);
+    // }
   };
 
   return (

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import Sidebar from './Sidebar';
 import DynamicContent from './DynamicContent';
@@ -18,6 +18,10 @@ const Content = ({ groups, groupsID, links }) => {
   const [ isEditingSubject, setIsEditingSubject ] = useState(false);
   const [ showForm, setShowForm, ] = useState(false);
   const [ cords, setCords ] = useState([]);
+
+  // const memoizedSidebar = useMemo(() => {
+  //   return <Sidebar />;
+  // }, [ groups ]);
 
   console.log(showConfirm, 'CONTENT showConfirm');
   console.log(showTitles, 'CONTENT showTitles');
@@ -46,6 +50,8 @@ const Content = ({ groups, groupsID, links }) => {
     let rect = target.getBoundingClientRect();
     let top = rect.top + 8;
 
+    console.log(group, target, 'GROUP AND TARGET IN OPEN CUSTOM MENU')
+
     if (elementForCustomMenu) {
       elementForCustomMenu.style.visibility = '';
     }
@@ -68,7 +74,7 @@ const Content = ({ groups, groupsID, links }) => {
   };
 
   return (
-    <ContentContext.Provider value={{ groups, groupsID, categoryID, setCategoryID, showTitles, setShowTitles, titles, setTitles, showConfirm, setShowConfirm, showForm, setShowForm, isEditing, setIsEditing, elementForCustomMenu, setElementForCustomMenu, setGroupToDelete, isEditingSubject, setIsEditingSubject, titleToDelete, setTitleToDelete, openCustomMenu, cords, setCords }}>
+    <ContentContext.Provider value={{ groups, groupsID, categoryID, setCategoryID, showTitles, setShowTitles, titles, setTitles, showConfirm, setShowConfirm, showForm, setShowForm, isEditing, setIsEditing, elementForCustomMenu, setElementForCustomMenu, groupToDelete, setGroupToDelete, isEditingSubject, setIsEditingSubject, titleToDelete, setTitleToDelete, openCustomMenu, cords, setCords }}>
       <div id="app-container" className="app" data-testid="app-container">
         <Sidebar />
         <DynamicContent />

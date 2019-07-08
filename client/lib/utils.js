@@ -1,7 +1,11 @@
 module.exports = {
   hasCategory: function(arr, cat) {
+    console.log(cat, 'CAT IN HAS CAT FUNC')
     for (var i = 0; i < arr.length; i++) {
-      if (arr[i].category === cat) { return true; }
+      if (arr[i].category === cat) {
+        console.log('TRUEEEEEE')
+        return true;
+      }
     }
     return false;
   },
@@ -109,6 +113,12 @@ module.exports = {
     if (target && target.id === 'app-container') { return false; }
     if (target && target.className === className) { return true; }
     return this.isCustomMenu(target.parentElement, 'custom-menu');
+  },
+  findCustomMenuIcon: function(target) {
+    if (target.tagName === 'path' && target.parentElement.className.baseVal.includes('icon-custom-menu')) {
+      return target.parentElement;
+    } else if (target.className.baseVal && target.className.baseVal.includes('icon-custom-menu')) { return target }
+    else { return false; }
   }
 };
 

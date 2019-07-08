@@ -4,7 +4,6 @@ import Searchbar from './Searchbar';
 import Logo from './Logo';
 import NavbarIcons from './NavbarIcons';
 
-
 const Navbar = ({ links }) => {
   return (
     <nav className="navbar">
@@ -20,14 +19,10 @@ const Navbar = ({ links }) => {
 export default Navbar;
 
 
-Navbar.propTypes = {
-  titles: PropTypes.array,
-  displayEdit: PropTypes.func,
-  displayForm:PropTypes.func
-};
+// Navbar.propTypes = {
+//   links:
+// };
 
-Navbar.defaultProps = {
-  titles: [],
-  displayForm: () => {},
-  displayEdit: () => {}
-};
+// Navbar.defaultProps = {
+//   links:
+// };

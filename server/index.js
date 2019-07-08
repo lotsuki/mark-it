@@ -31,7 +31,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(`${__dirname}/../public/`));
 
 app.post('/form', (req, res) => {
-  let { groupsID, category, subject, catID, categoryL, subjectL, color, hasCat, hasSubj } = req.body;
+  let { groupsID, category, subject, catID, categoryL, subjectL, foldColor, hasCat, hasSubj } = req.body;
   let key = `groups.${catID}.subjects`;
 
   Document.create({
@@ -50,7 +50,7 @@ app.post('/form', (req, res) => {
         console.log(categoryL, 'cat l')
         console.log(category, 'cat')
         console.log(subject, 'sub in nocat nosub')
-        Document.updateOne({_id: groupsID}, {$addToSet: {groups:{id: categoryL, category, color, subjects: [{id: 0, subject: subject}], }}}, (err, result) => {
+        Document.updateOne({_id: groupsID}, {$addToSet: {groups:{id: categoryL, category, color: foldColor, subjects: [{id: 0, subject: subject}], }}}, (err, result) => {
           if (err) { res.send(err); }
           else { res.send(result); }
         })

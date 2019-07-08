@@ -1,4 +1,4 @@
-import React, { useState, useContext, Fragment } from 'react';
+import React, { useContext, Fragment } from 'react';
 import CustomMenu from './CustomMenu';
 import Titles from './Titles';
 import Form from './Form';
@@ -8,7 +8,7 @@ import MainContext from './MainContext';
 
 const DynamicContent = () => {
   const { elementForCustomMenu, showTitles, showConfirm } = useContext(ContentContext);
-  const { showForm } = useContext(MainContext);
+  const { showForm, setShowForm } = useContext(MainContext);
 
   return (
     <Fragment>

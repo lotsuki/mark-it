@@ -27,7 +27,7 @@ const Subject = ({ subject, id, catID, subjectToEdit, setSubjectToEdit, color })
     setSubEdited(e.target.value);
   };
 
-   const handleSubEnter = (e) => {
+  const handleSubEnter = (e) => {
     console.log(e.keyCode, 'SUBJECT handleSubEnter');
     if (e.keyCode === 13) {
       let subjID = utils.findSubjectID(groups, catID, subjectToEdit);

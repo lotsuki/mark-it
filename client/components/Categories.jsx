@@ -12,7 +12,7 @@ const Categories = () => {
   const [ isOpen, setIsOpen ] = useState(false);
   const [ category, setCategory ] = useState('');
   const [ elementToEdit, setElementToEdit ] = useState('');
-  const { groups, setCategoryID, setShowTitles, isEditing, setGroupToDelete } = useContext(ContentContext);
+  const { groups, setCategoryID, setShowTitles, isEditing, setGroupToDelete, setElementForCustomMenu } = useContext(ContentContext);
 
   console.log(isOpen, 'CATEGORIES isOpen');
   console.log(category, 'CATEGORIES category');
@@ -42,13 +42,13 @@ const Categories = () => {
       console.log('CATEGORIES handleCatClick isCustomMenuIcon == true');
       let target;
     //    console.log('click')
-      // if (e.target.tagName === 'path' && e.target.parentElement.className.baseVal.includes('icon-custom-menu')) {
-      //   target = e.target.parentElement;
-      // } else if (e.target.className.baseVal.includes('icon-custom-menu')) {
-      //   target = e.target
-      //}
+      if (e.target.tagName === 'path' && e.target.parentElement.className.baseVal.includes('icon-custom-menu')) {
+        target = e.target.parentElement;
+      } else if (e.target.className.baseVal.includes('icon-custom-menu')) {
+        target = e.target
+      }
       // let currentElem = utils.getCategoryText(e, e.target, null, 'handle');
-
+       setGroupToDelete('category');
      } else if (e.target.id === 'edit-category') {
       console.log(e.target.value, 'CATEGOIRES handleCatClick isEdit == true')
         setElementToEdit(e.target.value);
@@ -62,7 +62,7 @@ const Categories = () => {
         //setElementForCustomMenu(target);
         //setIsOpen(false);
      // }
-      setGroupToDelete('category');
+
     } else {
       console.log('CATEGORIES handleCatClick isCustomMenuIcon !== true');
       let cat = utils.getCategoryText(e, e.target, e.target.className, 'handle');

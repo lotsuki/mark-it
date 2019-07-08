@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import ContentContext from './ContentContext';
+import MainContext from './MainContext';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import _ from 'underscore';
@@ -15,7 +16,10 @@ const Form = () => {
   const [ selectCat, setSelectCat ] = useState(false);
   const [ selectSub, setSelectSub ] = useState(false);
   const [ color, setColor ] = useState('');
-  const { groups, groupsID, showForm, setShowForm } = useContext(ContentContext);
+  // const [ hasCat, setHasCat ] = useState(false);
+  // const [ hasSubj, setHasSubj ] = useState(false);
+  const { groups, groupsID } = useContext(ContentContext);
+  const { showForm, setShowForm } = useContext(MainContext);
 
   console.log(category, 'FORM category');
   console.log(subject, 'FORM subject');
@@ -27,6 +31,7 @@ const Form = () => {
     setColor('#D00000');
   }, []);
 
+
   const clearForm = () => {
     console.log('FORM clearForm func');
     setCategory('');
@@ -37,19 +42,17 @@ const Form = () => {
 
   const submitForm = (e) => {
     e.preventDefault();
-
     const hasCat = utils.hasCategory(groups, category);
     const catID = utils.findCategoryID(groups, category);
     let hasSubj;
     let subjectL;
-
     if (catID >= 0) {
       hasSubj = utils.hasSubject(groups, subject, catID);
       subjectL = groups[catID].subjects.length;
     }
-   console.log(hasCat, catID, hasSubj, subjectL, 'FORM submitForm func');
-
+    console.log(hasCat, catID, hasSubj, subjectL, 'FORM submitForm func');
     if (category && subject && title && url) {
+      console.log(showForm, 'FORM showform before api')
       axios.post('/form', {
         groupsID,
         categoryL: groups.length,
@@ -62,44 +65,28 @@ const Form = () => {
         hasSubj,
         catID,
         subjectL,
-        color
+        foldColor: catID >= 0 ? groups[catID].color : color
         })
         .then(res => {
-          console.log(groups, 'FORM submitForm func GROUPS edit before api post');
+          console.log(groups, showForm, category, subject, catID, 'FORM submitForm func GROUPS edit before api post');
           if (!hasCat && !hasSubj) {
+            console.log(groups.length, category, color, subject, 'FORM submitForm NO CAT NO SUB')
             groups.push({id: groups.length, category, color, subjects: [{id: 0, subject}]});
           } else if (!hasSubj) {
+            console.log('FORM submit form YES CAT NO SUB');
             groups[catID].subjects.push({id: subjectL, subject});
           }
           console.log(groups, 'FORM submitForm func GROUPS edit after api post');
-          setShowForm(false);
+
           console.log('POST request successful');
         })
         .catch(err => { console.log('Error at POST request', err); });
-
-      // fetch('/form', {
-      //   method: 'POST',
-      //   body: JSON.stringify(data),
-      //   headers: {
-      //     'Accept': 'application/json',
-      //     'Content-Type': 'application/json'
-      //   }
-      //   })
-      //   .then(res => res.json())
-      //   .then(data => {
-      //     setShowForm(false);
-      //     if (!hasCat && !hasSubj) {
-      //       groups.push({id: groups.length, category, color, subjects: [{id: 0, subject}]});
-      //     } else if (!hasSubj) {
-      //       groups[catID].subjects.push({id: subjectL, subject});
-      //     }
-
-      //   })
-      //   .catch(err => { console.log('Could not post document: ', err); });
+      clearForm();
+      setShowForm(false);
     } else {
       alert('All fields must be filled out')
     }
-    clearForm();
+
   };
 
   // const displaySelectMenu = (className) => {

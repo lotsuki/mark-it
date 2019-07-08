@@ -13,7 +13,7 @@ const Confirm = () => {
   const handleConfirmClick = async (e) => {
     console.log(groupToDelete, 'CONFIRM handleConfirmClick group');
     if (e.target.innerText === 'Yes') {
-      console.log(elementForCustomMenu, 'el')
+      console.log(elementForCustomMenu, 'CONFIRM handleConfirmClick elcustmenu')
       if (groupToDelete === 'category') {
         let cat = elementForCustomMenu.parentElement.children[1].innerText;
         console.log(elementForCustomMenu, cat, 'CONFIRM handleConfirmClick cateogry')

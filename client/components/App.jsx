@@ -4,10 +4,9 @@ import Main from './Main';
 //import Landing from './Landing.jsx';
 import ErrorBoundary from './ErrorBoundary';
 
-//TODO: transition elements, oauth, exit custom menu when click on category, fix form when click twice, form wont update on submit, fix exitcustommenu, check if need proptypes for usecontext hook, plus icon not working, custom menu icon not working
-//refactor to useContext
+//TODO: transition elements, oauth, fix form when click twice, delete api not wokring for categories and subjects (elementForCustomMenu is not defined)
 
-//TODO later: get rid of title apis, try to decrease renders/restructure main,
+//TODO later: get rid of title apis, try to decrease renders
 class App extends React.Component {
   constructor(props) {
     super(props);
