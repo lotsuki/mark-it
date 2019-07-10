@@ -12,13 +12,13 @@ const Categories = () => {
   const [ isOpen, setIsOpen ] = useState(false);
   const [ category, setCategory ] = useState('');
   const [ elementToEdit, setElementToEdit ] = useState('');
-  const { groups, setCategoryID, setShowTitles, isEditing, setGroupToDelete, setElementForCustomMenu } = useContext(ContentContext);
+  const { groups, setCategoryID, setShowTitles, setGroupToDelete, setElementForCustomMenu } = useContext(ContentContext);
 
   console.log(isOpen, 'CATEGORIES isOpen');
   console.log(category, 'CATEGORIES category');
   console.log(elementToEdit, 'CATEGORIES elementToEdit');
   console.log(isOpen, 'CATEGORIES isOpen');
-  console.log(groups, isEditing, 'CATEGORIES');
+  console.log(groups, 'CATEGORIES');
 
   const exitCategories = (e) => {
     console.log(e.target, 'CATEGORIES exitCategories');

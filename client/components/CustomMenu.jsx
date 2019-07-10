@@ -16,10 +16,11 @@ const CustomMenu = () => {
   //use useeffect to add event listener and return a clean up func
 
   const exitCustomMenu = (e) => {
-    console.log('CUSTOM MENU exitCustomMenu');
     let customMenuIcon = utils.findCustomMenuIcon(e.target);
-    if(customMenuIcon && customMenuIcon.className.baseVal !== elementForCustomMenu.className.baseVal) {
-      console.log('KEEP CUSTOM MENU');
+    let isCustomMenu = utils.isCustomMenu(e.target, 'custom-menu');
+    console.log(isCustomMenu, 'emnu',customMenuIcon, 'icon', 'elementForCustomMenu', 'CUSTOM MENU exitCustomMenu exit');
+    if(isCustomMenu || e.target.id === 'edit-category-input'|| customMenuIcon && customMenuIcon.className.baseVal !== elementForCustomMenu.className.baseVal) {
+      console.log('KEEP CUSTOM MENU no exit');
       return;
     } else {
       let menuIcons = document.getElementsByClassName('icon-custom-menu');
@@ -56,13 +57,16 @@ const CustomMenu = () => {
   };
 
   const customMenuClick = (e) => {
-    console.log(e.target, 'CUSTOM MENU customMenuClick func');
     let className = elementForCustomMenu.parentElement.children[1].className;
+    console.log(e.target, 'CUSTOM MENU customMenuClick func');
      if (className === 'category-text' && e.target.innerText === 'Edit Item') {
+      console.log(e.target, 'customMenuClick edit cat');
        setIsEditing(true);
      } else if (className === 'subject-text' && e.target.innerText === 'Edit Item') {
+       console.log(e.target, 'customMenuClick edit sub');
        setIsEditingSubject(true);
      } else if (e.target.innerText === 'Delete Item') {
+       console.log(e.target, 'customMenuClick delete');
       confirmDeleteForGroup(e);
      }
   };

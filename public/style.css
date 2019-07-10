@@ -73,7 +73,6 @@
     font-size: 14px;
   }
 
-
   .category-container {
     position: relative;
     width: 22rem;
@@ -89,15 +88,8 @@
     background-color: transparent;
   }
 
-  .category:active {
-     background:#ECECEE;
-  }
-
   .category:hover {
-    background:#ECECEE;
-  }
-   .category:hover > .category-text {
-    background:#ECECEE;
+    background: #ECECEE;
   }
 
   .icon-custom-menu {
@@ -121,18 +113,19 @@
     letter-spacing: .05rem;
   }
 
-  #edit-category, #edit-subject {
+  #edit-category-input, #edit-subject {
     width: 260px;
-    padding-left: .3rem;
-    color: #3D3D3D;
+    margin-left: .3rem;
+    margin-right: 8px;
+    /*color: #3D3D3D;*/
     border: none;
     font-size: 1rem;
     letter-spacing: .05rem;
     cursor: text;
-  }
-
-  input.category-text:focus {
-    outline: none;
+    border: 1px solid lightgray;
+    box-shadow: 0px 1px 10px 0px rgba(32, 33, 36, 0.10);
+    padding: 7px 12px;
+    color: #9E9D9D;
   }
 
   .searchbar-content {

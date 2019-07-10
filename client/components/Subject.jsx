@@ -29,7 +29,7 @@ const Subject = ({ clickedSubj, subject, id, catID, subjectToEdit, setSubjectToE
   };
 
   const handleSubEnter = (e) => {
-    console.log(e.keyCode, 'SUBJECT handleSubEnter');
+    console.log(elementForCustomMenu, 'SUBJECT handleSubEnter');
     if (e.keyCode === 13) {
       let subjID = utils.findSubjectID(groups, catID, subjectToEdit);
       console.log(subjID, 'SUBJECT handleSubEnter subjID');
@@ -39,7 +39,6 @@ const Subject = ({ clickedSubj, subject, id, catID, subjectToEdit, setSubjectToE
         .then(res => {
            console.log(catID, subjectToEdit, subEdited, 'SUBJECT patch api res');
            utils.editSubjects(groups, catID, subjectToEdit, subEdited);
-           elementForCustomMenu.style.visibility = '';
            setIsEditingSubject(false);
            setElementForCustomMenu('');
           console.log('PATCH request successful');
@@ -55,17 +54,17 @@ const Subject = ({ clickedSubj, subject, id, catID, subjectToEdit, setSubjectToE
     if (sub && sub === subject || subjectToEdit && subject === subjectToEdit) {
       console.log(sub, 'SUBJECT displaySubOnEdit func, return input');
       return (
-         <div className="edit-subject-wrapper" >
+         <Fragment>
           <IconDown />
           <input id="edit-subject" type="text" onBlur={resetSub} onKeyUp={handleSubEnter} onChange={handleSubEdit} defaultValue={subject} autoComplete="off" style={{border: '1px solid lightgray', boxShadow: '0px 1px 10px 0px rgba(32, 33, 36, 0.10)', padding: '7px 12px', marginRight: '8px', color: '#9E9D9D'}}/>
-        </div>)
+        </Fragment>)
     }
     console.log(sub, 'SUBJECT displaySubOnEdit func, return div');
     return(
-      <div className="subject-wrapper">
+       <Fragment>
         <IconFolder viewBox={"-50 -15 85 72"} color={color} width={"45"} height={"38"}/>
         <div className="subject-text">{subject}</div>
-      </div>
+      </Fragment>
       )
   };
 
@@ -76,6 +75,7 @@ const Subject = ({ clickedSubj, subject, id, catID, subjectToEdit, setSubjectToE
         ? ( displaySubInputOnEdit(subject, subjectToEdit) )
         : ( <SubjectChild color={color} subject={subject} subjectID={id} catID={catID} clickedSubj={clickedSubj}/> )
       }
+      <IconCustomMenu name={subject}/>
     </Fragment>
   );
 };

@@ -111,6 +111,8 @@ const Subjects = ({ color }) => {
     }
   };
 
+  //get rid of subject wrapper or put subject element as conatiner div for subject component
+
   return (
     <div className="subject-container">
       {
@@ -119,8 +121,9 @@ const Subjects = ({ color }) => {
            <div
              className="subject"
              onClick={handleSubjClick}
-             key={subject.subject}>
-               <Subject clickedSubj={subj} subject={subject.subject} id={subject.id} catID={catID} subjectToEdit={subjectToEdit} setSubjectToEdit={setSubjectToEdit} color={color}/>
+             key={subject.subject}
+             style={subj === subject ? {background: '#D1D0D3'} : {background: ''}}>
+               <Subject clickedSubj={subj} subject={subject.subject} id={subject.id} catID={catID} subjectToEdit={subjectToEdit} setSubjectToEdit={setSubjectToEdit} color={color} />
            </div>
          </div>
         ))
