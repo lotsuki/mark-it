@@ -1,7 +1,6 @@
 import React, { useState, useContext, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import ContentContext from './ContentContext';
-import {useTrail, animated} from 'react-spring';
 
 const Titles = () => {
   const { titles, setTitleToDelete, showConfirm, setShowConfirm, setGroupToDelete } = useContext(ContentContext);
@@ -54,22 +53,4 @@ const Titles = () => {
 
 export default Titles;
 
-
-
-
-  //const container = ['titles-container']
-  // const titlesArr = () => {
-  //   if (titlesUpdate) { return titlesUpdate.map(obj => obj.title); }
-  //   return titles.map(obj => obj.title);
-  // };
-  // const urlsArr = links.map(obj => obj.url);
-  // const config = {duration: 100};
-
-  // const trail = useTrail(container.length, {
-  //   config,
-  //   height: 'auto',
-  //   from: {height: 0}}
-  // );
-   //trail.map(( {height}, index )=> ( ))
-   // { <animated.div  </animated.div>style={{height}}}
 

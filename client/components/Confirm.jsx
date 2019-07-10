@@ -9,9 +9,9 @@ const Confirm = () => {
 
   console.log(groups, titleToDelete, titles, groupToDelete, elementForCustomMenu, 'CONFIRM');
 
-  useEffect(() => {
+  //useEffect(() => {
     //change background style when category changes, use useREf
-  }, [category])
+  //}, [category])
   //check if categoryID has value when delete subject, check if setCatID is necessary
   const handleConfirmClick = async (e) => {
     console.log(groupToDelete, 'CONFIRM handleConfirmClick group');

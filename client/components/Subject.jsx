@@ -9,9 +9,9 @@ import utils from '../lib/utils';
 import axios from 'axios';
 import ContentContext from './ContentContext';
 
-const Subject = ({ subject, id, catID, subjectToEdit, setSubjectToEdit, color }) => {
+const Subject = ({ clickedSubj, subject, id, catID, subjectToEdit, setSubjectToEdit, color }) => {
   const [ subEdited, setSubEdited ] = useState('');
-  const { groups, groupsID, clickedSubj, setElementForCustomMenu, elementForCustomMenu, setIsEditingSubject, isEditingSubject } = useContext(ContentContext);
+  const { groups, groupsID, setElementForCustomMenu, elementForCustomMenu, setIsEditingSubject, isEditingSubject } = useContext(ContentContext);
 
   console.log(subEdited, 'SUBJECT subEdited');
   console.log(catID, 'SUBJECT catID');
@@ -48,7 +48,8 @@ const Subject = ({ subject, id, catID, subjectToEdit, setSubjectToEdit, color })
     }
   };
 
-  const displaySubOnEdit = () => {
+
+  const displaySubInputOnEdit = (subject, subjectToEdit) => {
     let sub = utils.getSubjectText(null, elementForCustomMenu, null, 'display');
     console.log(sub, 'SUBJECT displaySubOnEdit func sub');
     if (sub && sub === subject || subjectToEdit && subject === subjectToEdit) {
@@ -72,7 +73,7 @@ const Subject = ({ subject, id, catID, subjectToEdit, setSubjectToEdit, color })
     <Fragment>
       {
         isEditingSubject
-        ? ( displaySubOnEdit() )
+        ? ( displaySubInputOnEdit(subject, subjectToEdit) )
         : ( <SubjectChild color={color} subject={subject} subjectID={id} catID={catID} clickedSubj={clickedSubj}/> )
       }
     </Fragment>

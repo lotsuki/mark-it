@@ -82,24 +82,26 @@ const Categories = () => {
       }
     }
   };
+
 //refactor dropdown container
   return (
     <CategoriesContext.Provider value={{ setCategory, category, exitCategories, setIsOpen, isOpen, elementToEdit, setElementToEdit }}>
       <div className="section-container" >
        <div id="section-wrapper">
          {groups.map(group => {
+          let folderOpen = category === group.category;
            return (
             <div className="category-container" key={group.category}>
              <div
                className="category-wrapper"
                onClick={handleCatClick}
                key={group.category}>
-               <Category cat={group.category} color={group.color}/>
+               <Category cat={group.category} color={group.color} folderOpen={folderOpen}/>
              </div>
-             <div className="dropdown-container" key={group.color}>
+             <div className='dropdown-container' key={group.color} >
                {
                 category === group.category && isOpen &&
-                <Subjects color={group.color}/>
+                <Subjects color={group.color} folderOpen/>
                }
               </div>
             </div>

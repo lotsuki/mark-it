@@ -4,7 +4,7 @@ import Main from './Main';
 //import Landing from './Landing.jsx';
 import ErrorBoundary from './ErrorBoundary';
 
-//TODO: transition elements, fix form when click twice, delete api not wokring for categories and subjects (elementForCustomMenu is not defined), oauth
+//TODO: transition elements, fix form when click twice, patch api not wokring, delete api not wokring for categories and subjects (elementForCustomMenu is not defined), submit form does not live update when new category, openCustomMenu func, oauth
 
 //TODO later: get rid of title apis, try to decrease renders
 class App extends React.Component {

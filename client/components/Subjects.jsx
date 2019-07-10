@@ -4,7 +4,6 @@ import _ from 'underscore';
 import Titles from './Titles';
 import Subject from './Subject';
 import utils from '../lib/utils';
-import {useTrail, animated} from 'react-spring';
 import ContentContext from './ContentContext';
 import CategoriesContext from './CategoriesContext';
 
@@ -148,22 +147,4 @@ export default Subjects;
 //   displayConfirm: () => {}
 // };
 
-
-
-  // const trail = useTrail(subjects.length, {
-  //   opacity: isOpen ? 1 : 0,
-  //   height: isOpen ? 50 : 0,
-  //   from: {opacity: isOpen ? 0 : 1, height: isOpen ? 0 : 50}},
-  // );
-  // {trail.map(({height, opacity}, index) => (
-  //   )}
-  // {<div>
-  //            <animated.div
-  //              className="subject"
-  //              onClick={handleSubjClick}
-  //              style={{height, opacity}}
-  //              key={subjects[index]}>
-  //              <Subject clickedSubj={subj} subject={subjects[index]} color={color}/>
-  //            </animated.div>
-  //          </div>}
 

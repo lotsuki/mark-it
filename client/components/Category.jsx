@@ -8,7 +8,7 @@ import axios from 'axios';
 import ContentContext from './ContentContext';
 import CategoriesContext from './CategoriesContext';
 
-const Category = ({ color, cat }) => {
+const Category = ({ color, cat, folderOpen }) => {
   const [ catEdited, setCatEdited ] = useState('');
   const { groups, groupsID, categoryID, setCategoryID, setIsEditing, isEditing, setElementForCustomMenu, elementForCustomMenu } = useContext(ContentContext);
   const { setCategory, category, isOpen, elementToEdit, setElementToEdit } = useContext(CategoriesContext);
@@ -49,7 +49,7 @@ const Category = ({ color, cat }) => {
     }
   };
 
-  const displayCatOnEdit = (cat) => {
+  const displayInputOnEdit = (cat) => {
     let categoryToEdit = elementForCustomMenu.parentElement.children[1];
     if (categoryToEdit.className === 'category-text') { categoryToEdit = categoryToEdit.innerText; }
     else if (categoryToEdit.id === 'edit-category') { categoryToEdit = categoryToEdit.value; }
@@ -66,24 +66,18 @@ const Category = ({ color, cat }) => {
     console.log(categoryToEdit, cat, elementToEdit,'CATEGORY displayCatOnEdit func return div');
     return (
       <div className="category" key={cat}>
-        <IconFolder viewBox={"-20 -9 55 55"} color={color} width={"30"} height={"30"} />
+        <IconFolder viewBox={"-20 -9 55 55"} color={color} width={"30"} height={"30"} folderOpen={folderOpen}/>
         <div className="category-text">{cat}</div>
       </div>
     );
-  };
-
-   const hoverOn = (e) => {
-   };
-
-   const hoverOff = (e) => {
   };
 
   return (
     <Fragment>
       {
         isEditing
-        ? ( displayCatOnEdit(cat) )
-        : <CategoryChild color={color} cat={cat}/>
+        ? ( displayInputOnEdit(cat) )
+        : <CategoryChild color={color} cat={cat} folderOpen={folderOpen}/>
       }
     </Fragment>
   );
