@@ -6,8 +6,10 @@ const IconPlus = () => {
 
   console.log(showForm, 'ICONPLUS showForm');
   const hideDisplay = (e) => {
+    let className = e.target.className;
+    console.log(e.target.className, 'ICONPLUS class')
     console.log(e.target, 'ICONPLUS hideDisplay');
-    if (e.target.name !== 'form') {
+    if (showForm && e.target.name !== 'form' || className === 'app' || className === 'sidebar-container') {
       console.log(e.target, 'ICONPLUS hideDisplay setShowForm(false)');
       setShowForm(false);
       document.removeEventListener('click', hideDisplay);
