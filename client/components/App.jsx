@@ -4,9 +4,9 @@ import Main from './Main';
 //import Landing from './Landing.jsx';
 import ErrorBoundary from './ErrorBoundary';
 
-//TODO: patch api not wokring, delete api not wokring for categories and subjects (elementForCustomMenu is not defined), submit form does not live update when new category, openCustomMenu func, oauth
+//TODO: delete api not wokring for categories and subjects (elementForCustomMenu is not defined), submit form does not live update when new category,  oauth
 
-//TODO later: get rid of title apis, try to decrease renders, transition searchbar content
+//TODO later: get rid of title apis, try to decrease renders, transition searchbar content, openCustomMenu func, react lazy loaders, use refs
 class App extends React.Component {
   constructor(props) {
     super(props);

@@ -5,7 +5,7 @@ import axios from 'axios';
 import ContentContext from './ContentContext';
 
 const Confirm = () => {
-  const { groups, groupsID, setCategoryID, setShowConfirm, titleToDelete, titles, setTitles, groupToDelete, elementForCustomMenu, setElementForCustomMenu } = useContext(ContentContext);
+  const { groups, groupsID, categoryID, setCategoryID, setShowConfirm, titleToDelete, titles, setTitles, groupToDelete, elementForCustomMenu, setElementForCustomMenu, categoryToDelete, subjectToDelete } = useContext(ContentContext);
 
   console.log(groups, titleToDelete, titles, groupToDelete, elementForCustomMenu, 'CONFIRM');
 
@@ -16,28 +16,29 @@ const Confirm = () => {
   const handleConfirmClick = async (e) => {
     console.log(groupToDelete, 'CONFIRM handleConfirmClick group');
     if (e.target.innerText === 'Yes') {
+      setShowConfirm(false);
       console.log(elementForCustomMenu, 'CONFIRM handleConfirmClick elcustmenu')
       if (groupToDelete === 'category') {
         let cat = elementForCustomMenu.parentElement.children[1].innerText;
-        console.log(elementForCustomMenu, cat, 'CONFIRM handleConfirmClick cateogry')
-        await axios.delete(`/delete/${cat}/${groupsID}`)
+        console.log(elementForCustomMenu, cat, categoryID, 'CONFIRM handleConfirmClick cateogry')
+        console.log(categoryToDelete, 'CATEGORYTODELTE')
+        await axios.delete(`/delete/${categoryToDelete}/${groupsID}`)
           .then(res => {
             console.log(elementForCustomMenu, cat, 'CONFIRM handleConfirmClick category delete api res');
-            utils.deleteCategory(groups, cat);
-            elementForCustomMenu.style.visibility = '';
+            utils.deleteCategory(groups, categoryToDelete);
             setCategoryID('');
             setElementForCustomMenu('');
             console.log('DELETE request successful');
           })
           .catch(err => { console.log('Error at DELETE request', err); });
       } else if (groupToDelete === 'subject') {
-        let sub = elementForCustomMenu.parentElement.children[1].innerText;
-        let catID = utils.findCatIDWithSub(groups, sub);
-         console.log(elementForCustomMenu, sub, catID, 'CONFIRM handleConfirmClick subject group');
-        await axios.delete(`/delete/${sub}/${catID}/${groupsID}`)
+        // let sub = elementForCustomMenu.parentElement.children[1].innerText;
+        console.log(categoryID, 'categoryID')
+        console.log(elementForCustomMenu, subjectToDelete, categoryID, 'CONFIRM handleConfirmClick subject group');
+        await axios.delete(`/delete/${subjectToDelete}/${categoryID}/${groupsID}`)
           .then(res => {
-            console.log(elementForCustomMenu, sub, catID, 'CONFIRM handleConfirmClick subject delete api res');
-            utils.deleteSubject(groups, catID, sub);
+            console.log(elementForCustomMenu, subjectToDelete, categoryID, 'CONFIRM handleConfirmClick subject delete api res');
+            utils.deleteSubject(groups, categoryID, subjectToDelete);
             elementForCustomMenu.style.visibility = '';
             setCategoryID('');
             setElementForCustomMenu('');
@@ -53,7 +54,6 @@ const Confirm = () => {
             })
             .catch(err => { console.log('Error at DELETE request', err); });
       }
-      setShowConfirm(false);
     } else {
       setShowConfirm(false);
     }

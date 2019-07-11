@@ -42,6 +42,7 @@ const IconCustomMenu = ({ name }) => {
       target.style.visibility = 'visible';
       setCords([top, rect.left]);
       setElementForCustomMenu(target);
+      setSubjectToDelete(subject);
     }
   };
 

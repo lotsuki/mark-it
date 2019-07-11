@@ -5,7 +5,7 @@ import ContentContext from './ContentContext';
 import utils from '../lib/utils';
 
 const CustomMenu = () => {
-  const { groups, cords, setCords, elementForCustomMenu, setElementForCustomMenu, setIsEditing, showConfirm, setShowConfirm, setIsEditingSubject } = useContext(ContentContext);
+  const { groups, cords, setCords, elementForCustomMenu, setElementForCustomMenu, setIsEditing, showConfirm, setShowConfirm, setIsEditingSubject, setCategoryToDelete, setSubjectToDelete } = useContext(ContentContext);
 
   console.log(groups, cords, elementForCustomMenu, showConfirm, 'CUSTOM MENU');
 
@@ -58,6 +58,7 @@ const CustomMenu = () => {
 
   const customMenuClick = (e) => {
     let className = elementForCustomMenu.parentElement.children[1].className;
+    let category = elementForCustomMenu.parentElement.children[1].innerText;
     console.log(e.target, 'CUSTOM MENU customMenuClick func');
      if (className === 'category-text' && e.target.innerText === 'Edit Item') {
       console.log(e.target, 'customMenuClick edit cat');
@@ -67,7 +68,9 @@ const CustomMenu = () => {
        setIsEditingSubject(true);
      } else if (e.target.innerText === 'Delete Item') {
        console.log(e.target, 'customMenuClick delete');
+       console.log(category, 'customMenuClick category');
       confirmDeleteForGroup(e);
+      setCategoryToDelete(category);
      }
   };
 

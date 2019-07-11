@@ -74,14 +74,17 @@ const Categories = () => {
         setShowTitles(false);
         setGroupToDelete('');
       } else {
+        let catID = utils.findCategoryID(groups, cat);
         console.log('CATEGORIES handleCatClick openDropdown');
         setIsOpen(true);
         setCategory(cat);
         setShowTitles(false);
+        setCategoryID(catID);
         document.addEventListener('click', exitCategories);
       }
     }
   };
+
 
 //refactor dropdown container
   return (

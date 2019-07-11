@@ -19,6 +19,8 @@ const Content = ({ groups, groupsID, links }) => {
   const [ showForm, setShowForm, ] = useState(false);
   const [ cords, setCords ] = useState([]);
   const [ showMenu, setShowMenu ] = useState(false);
+  const [ categoryToDelete, setCategoryToDelete ] = useState('');
+  const [ subjectToDelete, setSubjectToDelete ] = useState('');
 
   // const memoizedSidebar = useMemo(() => {
   //   return <Sidebar />;
@@ -40,7 +42,7 @@ const Content = ({ groups, groupsID, links }) => {
 
 
   return (
-    <ContentContext.Provider value={{ groups, groupsID, categoryID, setCategoryID, showTitles, setShowTitles, titles, setTitles, showConfirm, setShowConfirm, showForm, setShowForm, isEditing,setIsEditing, elementForCustomMenu, setElementForCustomMenu, groupToDelete, setGroupToDelete, isEditingSubject, setIsEditingSubject, titleToDelete, setTitleToDelete, cords, setCords }}>
+    <ContentContext.Provider value={{ groups, groupsID, categoryID, setCategoryID, showTitles, setShowTitles, titles, setTitles, showConfirm, setShowConfirm, showForm, setShowForm, isEditing,setIsEditing, elementForCustomMenu, setElementForCustomMenu, groupToDelete, setGroupToDelete, isEditingSubject, setIsEditingSubject, titleToDelete, setTitleToDelete, cords, setCords, categoryToDelete, setCategoryToDelete, subjectToDelete, setSubjectToDelete }}>
       <div id="app-container" className="app" data-testid="app-container">
         <Sidebar />
         <DynamicContent />
