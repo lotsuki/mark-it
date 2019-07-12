@@ -4,7 +4,7 @@ import Main from './Main';
 //import Landing from './Landing.jsx';
 import ErrorBoundary from './ErrorBoundary';
 
-//TODO: delete api not wokring for subjects (subject is not defined), submit form does not live update when new category,  oauth
+//TODO: submit form does not live update when new category,  custom menu when subjects go longer than dropdown container length, oauth
 
 //TODO later: get rid of title apis, try to decrease renders, transition searchbar content, openCustomMenu func, react lazy loaders, use refs
 class App extends React.Component {
@@ -18,6 +18,7 @@ class App extends React.Component {
       groupsID: ''
     }
     this._isMounted = false;
+    this.updatePage = this.updatePage.bind(this);
   }
 
   componentDidMount() {
@@ -77,11 +78,16 @@ class App extends React.Component {
     this._isMounted = false;
   }
 
+  updatePage(updatedData) {
+    this.setState({ groups: updatedData});
+  }
+
   render() {
     const { userID, groups, groupsID, links } = this.state;
+    const { updatePage } = this;
     return (
       <ErrorBoundary>
-        <Main userID={userID} groups={groups} groupsID={groupsID} links={links}/>
+        <Main userID={userID} groups={groups} groupsID={groupsID} links={links} updatePage={updatePage}/>
       </ErrorBoundary>
     );
   }

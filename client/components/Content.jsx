@@ -6,7 +6,7 @@ import ContentContext from './ContentContext';
 import utils from '../lib/utils';
 //import { useSpring, animated } from 'react-spring';
 
-const Content = ({ groups, groupsID, links }) => {
+const Content = ({ groups, groupsID, links, updatePage }) => {
   const [ showConfirm, setShowConfirm ] = useState(false);
   const [ showTitles, setShowTitles ] = useState(false);
   const [ titles, setTitles ] = useState([]);
@@ -39,10 +39,8 @@ const Content = ({ groups, groupsID, links }) => {
   console.log(showForm, 'CONTENT showForm');
   console.log(cords, 'CONTENT cords');
 
-
-
   return (
-    <ContentContext.Provider value={{ groups, groupsID, categoryID, setCategoryID, showTitles, setShowTitles, titles, setTitles, showConfirm, setShowConfirm, showForm, setShowForm, isEditing,setIsEditing, elementForCustomMenu, setElementForCustomMenu, groupToDelete, setGroupToDelete, isEditingSubject, setIsEditingSubject, titleToDelete, setTitleToDelete, cords, setCords, categoryToDelete, setCategoryToDelete, subjectToDelete, setSubjectToDelete }}>
+    <ContentContext.Provider value={{ groups, groupsID, categoryID, setCategoryID, showTitles, setShowTitles, titles, setTitles, showConfirm, setShowConfirm, showForm, setShowForm, isEditing,setIsEditing, elementForCustomMenu, setElementForCustomMenu, groupToDelete, setGroupToDelete, isEditingSubject, setIsEditingSubject, titleToDelete, setTitleToDelete, cords, setCords, categoryToDelete, setCategoryToDelete, subjectToDelete, setSubjectToDelete, updatePage }}>
       <div id="app-container" className="app" data-testid="app-container">
         <Sidebar />
         <DynamicContent />

@@ -4,7 +4,7 @@ import Navbar from './Navbar';
 import Content from './Content';
 import MainContext from './MainContext';
 
-const Main = ({ groups, groupsID, links }) => {
+const Main = ({ groups, groupsID, links, updatePage }) => {
   const [ showForm, setShowForm, ] = useState(false);
   const [ groupState, setGroupState ] = useState(groups);
   console.log(showForm, 'MAIN showForm');
@@ -14,7 +14,7 @@ const Main = ({ groups, groupsID, links }) => {
     <MainContext.Provider value={{showForm, setShowForm, links}}>
     <div id="container">
       <Navbar />
-      <Content groups={groups} groupsID={groupsID}/>
+      <Content groups={groups} groupsID={groupsID} updatePage={updatePage}/>
     </div>
     </MainContext.Provider>
   );
