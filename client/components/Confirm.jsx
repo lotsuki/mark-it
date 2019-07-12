@@ -35,11 +35,11 @@ const Confirm = () => {
         // let sub = elementForCustomMenu.parentElement.children[1].innerText;
         console.log(categoryID, 'categoryID')
         console.log(elementForCustomMenu, subjectToDelete, categoryID, 'CONFIRM handleConfirmClick subject group');
+        console.log(groupsID, subjectToDelete, 'subjectToDelete')
         await axios.delete(`/delete/${subjectToDelete}/${categoryID}/${groupsID}`)
           .then(res => {
-            console.log(elementForCustomMenu, subjectToDelete, categoryID, 'CONFIRM handleConfirmClick subject delete api res');
+            console.log(groupsID, subjectToDelete, categoryID, 'CONFIRM handleConfirmClick subject delete api res');
             utils.deleteSubject(groups, categoryID, subjectToDelete);
-            elementForCustomMenu.style.visibility = '';
             setCategoryID('');
             setElementForCustomMenu('');
             console.log('DELETE request successful');

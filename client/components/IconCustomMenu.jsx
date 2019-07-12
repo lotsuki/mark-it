@@ -3,7 +3,7 @@ import ContentContext from './ContentContext';
 import utils from '../lib/utils';
 
 const IconCustomMenu = ({ name }) => {
-  const { groups, elementForCustomMenu, setCords, setElementForCustomMenu, setCategoryID } = useContext(ContentContext);
+  const { groups, elementForCustomMenu, setCords, setElementForCustomMenu, setCategoryID, setSubjectToDelete } = useContext(ContentContext);
   //console.log(openCustomMenu, 'ICON CUSTOM MENU openCustomMenu');
 
   const openCustomMenu = (e) => {

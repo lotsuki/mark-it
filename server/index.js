@@ -147,18 +147,18 @@ app.delete('/delete/:categoryToDelete/:groupsID', (req, res) => {
     });
 });
 
-app.delete('/delete/:sub/:categoryID/:groupsID', (req, res) => {
-  let { sub, groupsID } = req.params;
+app.delete('/delete/:subjectToDelete/:categoryID/:groupsID', (req, res) => {
+  let { subjectToDelete, groupsID } = req.params;
   let catID = parseInt(req.params.categoryID);
   let key = `groups.${catID}.subjects`;
-  console.log(sub, 'subject')
+  console.log(subjectToDelete, 'subject')
   console.log(catID, 'catID')
 
-  Document.updateOne({ _id: groupsID }, {$pull:{[key]: { subject: sub }}}, (err, result) => {
+  Document.updateOne({ _id: groupsID }, {$pull:{[key]: { subject: subjectToDelete }}}, (err, result) => {
     if (err) { console.log('Failure to get user obj: ', err); }
     else { res.send(result); }
   });
-  Document.deleteMany({ subject: sub }, (err, result) => {
+  Document.deleteMany({ subject: subjectToDelete }, (err, result) => {
     if (err) { console.log('Error at DELETE request: ', err); }
     else { console.log('Deleted subject'); }
   });
