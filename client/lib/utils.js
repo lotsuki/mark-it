@@ -137,6 +137,14 @@ module.exports = {
       return target.parentElement;
     } else if (target.className.baseVal && target.className.baseVal.includes('icon-custom-menu')) { return target }
     else { return false; }
+  },
+  updateLinks: function(arr, titl) {
+    for (var i = 0; i < arr.length; i++) {
+      if (arr[i].title === titl) {
+        arr.splice(i, 1); break;
+      }
+    }
+    return arr;
   }
 };
 

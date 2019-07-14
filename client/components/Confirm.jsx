@@ -66,7 +66,10 @@ const Confirm = () => {
         let subjectOfTitle = titleToDelete[1];
           axios.delete(`/delete/title/${titl}/${subjectOfTitle}`)
             .then(res => {
+              //displays titles of subject
               setTitles(res.data);
+              //updates links array
+              utils.updateLinks(links, titl);
             })
             .catch(err => { console.log('Error at DELETE request', err); });
       }

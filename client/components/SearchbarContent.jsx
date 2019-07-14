@@ -4,7 +4,7 @@ import MainContext from './MainContext';
 
 const SearchbarContent = ({ isSearching, input }) => {
   const { links } = useContext(MainContext);
-
+  console.log(links, 'links')
   //dynamically filters and displays searchbar content
   return (
     <div className="searchbar-content">
