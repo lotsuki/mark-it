@@ -15,7 +15,7 @@ const Form = () => {
   const [ selectCat, setSelectCat ] = useState(false);
   const [ selectSub, setSelectSub ] = useState(false);
   const { groups, groupsID, updatePage } = useContext(ContentContext);
-  const { showForm, setShowForm } = useContext(MainContext);
+  const { showForm, setShowForm, links } = useContext(MainContext);
 
   //update indices of categories or subjects in groups array after deletion
   const updateGroups = (_groups, _hasCat, _hasSubj, _catID, _subject) => {
@@ -57,9 +57,9 @@ const Form = () => {
         foldColor: catID >= 0 ? groups[catID].color : color
         })
         .then(res => {
+          console.log(res, 'res in post')
           //updated groups array with correct indices
           let updatedArr = updateGroups(groups, hasCat, hasSubj, catID, subject);
-
           //update page with new groups array
           updatePage(updatedArr);
           console.log('POST request successful');

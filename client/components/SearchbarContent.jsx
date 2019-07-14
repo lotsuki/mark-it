@@ -1,9 +1,13 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import MainContext from './MainContext';
+import ContentContext from './ContentContext';
 
 const SearchbarContent = ({ isSearching, input }) => {
   const { links } = useContext(MainContext);
+  const { titles } = useContext(ContentContext);
+
+  console.log(titles, 'titles')
 
   //dynamically filters and displays searchbar content
   return (

@@ -22,14 +22,14 @@ app.use((req, res, next) => {
     "Origin, X-Requested-With, Content-Type, Accept"
   );
   res.set("Access-Control-Allow-Methods", "GET,PATCH,PUT,POST,DELETE,OPTIONS");
-  res.set("Cache-Control", "public, max-age=0");
+  res.set("Cache-Control", "public, no-cache");
   next();
 });
 app.use(compression());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(`${__dirname}/../public/`, {maxAge:'30d'}));
-
+app.use(express.static(`${__dirname}/../public/`));
+//{maxAge:'30d'}
 
 app.post('/form', (req, res) => {
   let { groupsID, category, subject, catID, categoryL, subjectL, foldColor, hasCat, hasSubj } = req.body;
@@ -90,7 +90,7 @@ app.post('/update/catIds', (req,res) => {
 app.get('/user', (req, res) => {
   Document.findOne({ username: { $exists: true } }, (err, result) => {
     if (err) { console.log('Failure to get user obj: ', err); }
-    else { console.log(result, 'user'); res.send(result); }
+    else { res.send(result); }
   });
 });
 
@@ -98,7 +98,7 @@ app.get('/user', (req, res) => {
 app.get('/groups', (req, res) => {
   Document.findOne({ groups: { $exists: true } }, (err, result) => {
     if (err) { console.log('Failure to get user obj: ', err); }
-    else { console.log(result, 'groups'); res.send(result); }
+    else { res.send(result); }
   });
 });
 
@@ -106,7 +106,7 @@ app.get('/groups', (req, res) => {
 app.get('/titles', (req, res) => {
   Document.find({title: {$exists:true}}, 'subject, title url', (err, result) => {
     if (err) { console.log('Failure to get user obj: ', err); }
-    else { console.log(result, 'titles'); res.send(result); }
+    else { res.send(result); }
   });
 });
 
