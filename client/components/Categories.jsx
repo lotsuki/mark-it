@@ -1,6 +1,4 @@
 import React, { useState, useContext } from 'react';
-import _ from 'underscore';
-import PropTypes from 'prop-types';
 import Subjects from './Subjects';
 import Category from './Category';
 import utils from '../lib/utils';
@@ -26,31 +24,17 @@ const Categories = () => {
   };
 
   const handleCatClick = (e) => {
-    //if isCusotmMenuIcon, if isOpen, is the cateogry clicked teh one that is open?
     let isCustomMenuIcon = utils.isCustomMenuIcon(e.target);
     if (isCustomMenuIcon) {
       let target;
-    //    console.log('click')
       if (e.target.tagName === 'path' && e.target.parentElement.className.baseVal.includes('icon-custom-menu')) {
         target = e.target.parentElement;
       } else if (e.target.className.baseVal.includes('icon-custom-menu')) {
         target = e.target
       }
-      // let currentElem = utils.getCategoryText(e, e.target, null, 'handle');
        setGroupToDelete('category');
      } else if (e.target.id === 'edit-category') {
         setElementToEdit(e.target.value);
-      //}
-      //IF CLICK ON MENU AND ANOTHER DROPDOWN IS OPEN
-      // if (isOpen && category !== currentElem) {
-      //   let rect = target.getBoundingClientRect();
-      //   let top = rect.top + 8;
-      //   console.log(rect, 'RECT')
-      //   setCords([top, rect.left]);
-        //setElementForCustomMenu(target);
-        //setIsOpen(false);
-     // }
-
     } else {
       let cat = utils.getCategoryText(e, e.target, e.target.className, 'handle');
       if (e.target.className === 'app' || cat === category) {
@@ -70,7 +54,6 @@ const Categories = () => {
     }
   };
 
-//refactor dropdown container
   return (
     <CategoriesContext.Provider value={{ setCategory, category, exitCategories, setIsOpen, isOpen, elementToEdit, setElementToEdit }}>
       <div className="section-container" >
@@ -103,16 +86,5 @@ const Categories = () => {
 
 export default Categories;
 
-// Categories.propTypes = {
-//   bmarks: PropTypes.object,
-//   displayConfirm: PropTypes.func,
-//   titlesUpdate: PropTypes.array
-// };
-
-// Categories.defaultProps = {
-//   bmarks: {},
-//   titlesUpdate: [],
-//   displayConfirm: () => {}
-// };
 
 

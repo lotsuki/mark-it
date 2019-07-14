@@ -1,13 +1,11 @@
 import React, { useState, useEffect, useContext, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import _ from 'underscore';
 import Titles from './Titles';
 import Subject from './Subject';
 import utils from '../lib/utils';
 import ContentContext from './ContentContext';
 import CategoriesContext from './CategoriesContext';
 import axios from 'axios';
-
 
 const Subjects = ({ color }) => {
   const [ subj, setSubj ] = useState('');
@@ -33,55 +31,46 @@ const Subjects = ({ color }) => {
 
   const exitTitles = (e) => {
     let target = e.target;
-    if (utils.isCustomMenu(target, 'custom-menu') || target.id === 'edit-subject') {
-      return;
-    }
     if (target.className === 'app' || target.id === 'titles-container'){
       setIsOpen(false);
       setCategory('');
       setShowTitles(false);
       document.removeEventListener('click', exitTitles);
-    } else if (!_.contains(titleClasses, target.className)) {
+    } else if (titleClasses.indexOf(target.className) === -1) {
      setShowTitles(false);
      document.removeEventListener('click', exitTitles);
     }
   };
 
+  //handles subject click
   const handleSubjClick = (e) => {
-    //refactor to use group obj, get rid of api calls and titles state
-
     let isCustomMenuIcon = utils.isCustomMenuIcon(e.target);
     if (isCustomMenuIcon) {
+      //if user clicked on custom menu icon, set group to delete (category or subject)
       setGroupToDelete('subject');
     } else if (isEditingSubject) {
+      //if user clicked on edit button in custom menu
       setSubjectToEdit(e.target.value);
     }
     let subject;
     let target = e.target;
-    // if (!showTitles) {
-    //   console.log(category, 'category');
 
-    //   setSubj(e.target.innerText);
-    //   document.addEventListener('click', exitTitles);
-    //   fetch(`/titles/${category}/${e.target.innerText}`)
-    //     .then(res => res.json())
-    //     .then(data => {
-    //      setTitles(data);
-    //      setShowTitles(true);
-    //     })
-    //    .catch(err => { console.log('Error at GET', err); });
-    // } else
-
+    //if user clicks on subject that is open, close subject
     if (e.target.innerText === subj) {
       setShowTitles(false);
       setTitles([]);
       setSubj('');
-    } else if(_.contains(subjectClasses, e.target.className)) {
+
+    //if user click on new subject
+    } else if(subjectClasses.indexOf(e.target.className) !== -1) {
+      //set subject based on target clicked
       if (e.target.className === 'subject-text') {
         subject = e.target.innerText;
       } else if (e.target.className === 'subject') {
         subject = e.target.children[1].innerText;
       }
+
+      //get titles of subject clicked
       document.addEventListener('click', exitTitles);
       setSubj(subject);
       axios.get(`/titles/${category}/${subject}`)
@@ -93,8 +82,6 @@ const Subjects = ({ color }) => {
     }
   };
 
-  //get rid of subject wrapper or put subject element as conatiner div for subject component
-
   return (
     <div className="subject-container">
       {
@@ -105,7 +92,7 @@ const Subjects = ({ color }) => {
              onClick={handleSubjClick}
              key={subject.subject}
              style={subj === subject ? {background: '#D1D0D3'} : {background: ''}}>
-               <Subject clickedSubj={subj} subject={subject.subject} id={subject.id} catID={catID} subjectToEdit={subjectToEdit} setSubjectToEdit={setSubjectToEdit} color={color} />
+               <Subject clickedSubj={subj} subject={subject.subject} catID={catID} subjectToEdit={subjectToEdit} setSubjectToEdit={setSubjectToEdit} color={color} />
            </div>
          </div>
         ))
@@ -115,21 +102,14 @@ const Subjects = ({ color }) => {
 };
 
 
-
 export default Subjects;
 
-// Subjects.propTypes = {
-//   bmarks: PropTypes.object,
-//   category: PropTypes.string,
-//   titlesUpdate: PropTypes.array,
-//   displayConfirm: PropTypes.func
-// };
+Subjects.propTypes = {
+  color: PropTypes.string
+};
 
-// Subjects.defaultProps = {
-//   bmarks: {},
-//   category: '',
-//   titlesUpdate: [],
-//   displayConfirm: () => {}
-// };
+Subjects.defaultProps = {
+  color: ''
+};
 
 

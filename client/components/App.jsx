@@ -1,12 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Main from './Main';
-//import Landing from './Landing.jsx';
 import ErrorBoundary from './ErrorBoundary';
 
-//TODO: oauth
-
-//TODO later: get rid of title apis, try to decrease renders, transition searchbar content, openCustomMenu func, react lazy loaders, use refs, give title documnets an index
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -96,5 +92,3 @@ class App extends React.Component {
 
 
 export default App;
-
-// <Landing />

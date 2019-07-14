@@ -9,7 +9,7 @@
   "scripts": {
     "start": "nodemon server/index.js",
     "build-dev": "webpack --config webpack.dev.js --watch --open",
-    "build-prod": "webpack --config webpack.prod.js --open",
+    "build-prod": "webpack --config webpack.prod.js --watch --open",
     "test": "NODE_ENV=test jest --watch --verbose --runInBand",
     "test:db": "NODE_ENV=test jest db/__tests__/ --runInBand",
     "test:server": "NODE_ENV=test jest server/__tests__ --runInBand ",
@@ -38,8 +38,7 @@
     "mongoose": "^5.3.14",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "underscore": "^1.9.1"
+    "react-dom": "^16.8.6"
   },
   "devDependencies": {
     "@babel/core": "^7.1.6",

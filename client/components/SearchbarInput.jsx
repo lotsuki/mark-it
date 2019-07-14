@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
 const SearchbarInput = ({ isSearching, setIsSearching, input, setInput }) => {
 
+  //hide searchbar when click outside
   const hideSearchbar = (e) => {
     if (e.target.className !== 'searchbar-container' ||
         e.target.className !== 'searchbar-content') {
@@ -13,12 +15,15 @@ const SearchbarInput = ({ isSearching, setIsSearching, input, setInput }) => {
     }
   };
 
+  //handles searchbar input
   const handleSearch = (e) => {
     let target = e.target;
+    //if target is an input, display dynamic searchbar content
     if (target.value) {
       setInput(target.value);
       setIsSearching(true);
       document.addEventListener('click', hideSearchbar);
+    //if target is not input, reset input and hide searchbar content
     } else {
       setInput('');
       setIsSearching(false);
@@ -41,3 +46,18 @@ const SearchbarInput = ({ isSearching, setIsSearching, input, setInput }) => {
 };
 
 export default SearchbarInput;
+
+
+SearchbarInput.propTypes = {
+  isSearching: PropTypes.bool,
+  setIsSearching: PropTypes.func,
+  input: PropTypes.string,
+  setInput: PropTypes.func
+};
+
+SearchbarInput.defaultProps = {
+  isSearching: false,
+  setIsSearching: () => {},
+  input: '',
+  setInput: () => {}
+};

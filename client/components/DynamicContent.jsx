@@ -10,6 +10,7 @@ const DynamicContent = () => {
   const { elementForCustomMenu, showTitles, showConfirm } = useContext(ContentContext);
   const { showForm, setShowForm } = useContext(MainContext);
 
+  //determines what content to display on page
   return (
     <Fragment>
       { elementForCustomMenu && <CustomMenu /> }
@@ -17,7 +18,7 @@ const DynamicContent = () => {
       { showForm && <Form /> }
       { showConfirm && <Confirm /> }
     </Fragment>
-  )
+  );
 };
 
 export default DynamicContent;

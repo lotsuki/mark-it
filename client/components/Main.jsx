@@ -23,6 +23,14 @@ export default Main;
 Main.propTypes = {
   groups: PropTypes.array,
   groupsID: PropTypes.string,
-  links: PropTypes.array
+  links: PropTypes.array,
+  updatePage:PropTypes.func
+};
+
+Main.defaultProps = {
+  groups: [],
+  groupsID: '',
+  links: [],
+  updatePage: () => {}
 };
 

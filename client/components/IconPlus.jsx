@@ -4,23 +4,21 @@ import MainContext from './MainContext';
 const IconPlus = () => {
   const { showForm, setShowForm } = useContext(MainContext);
 
-  const hideDisplay = (e) => {
+  //exit form when click outside
+  const hideForm = (e) => {
     let className = e.target.className;
-    if (showForm && e.target.name !== 'form' || className === 'app' || className === 'sidebar-container') {
+    if (showForm && e.target.name !== 'form' || className === 'app' || className === 'sidebar-container' || className === 'navbar' || className === 'logo-wrapper') {
       setShowForm(false);
-      document.removeEventListener('click', hideDisplay);
+      document.removeEventListener('click', hideForm);
     }
   };
 
+  //display form
   const displayForm = (e) => {
     if (!showForm) {
       setShowForm(true);
-      document.addEventListener('click', hideDisplay);
+      document.addEventListener('click', hideForm);
     }
-
-    // else {
-    //   setShowForm(false);
-    // }
   };
 
   return (

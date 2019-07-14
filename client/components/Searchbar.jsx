@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import SearchbarInput from './SearchbarInput';
 import SearchbarContent from './SearchbarContent';
 
@@ -17,10 +16,3 @@ const Searchbar = () => {
 
 export default Searchbar;
 
-Searchbar.propTypes = {
-  links: PropTypes.array
-};
-
-Searchbar.defaultProps = {
-  links: []
-};

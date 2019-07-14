@@ -1,8 +1,11 @@
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 import MainContext from './MainContext';
 
 const SearchbarContent = ({ isSearching, input }) => {
   const { links } = useContext(MainContext);
+
+  //dynamically filters and displays searchbar content
   return (
     <div className="searchbar-content">
       {
@@ -28,3 +31,13 @@ const SearchbarContent = ({ isSearching, input }) => {
 };
 
 export default SearchbarContent;
+
+SearchbarContent.propTypes = {
+  isSearching: PropTypes.bool,
+  input: PropTypes.string
+};
+
+SearchbarContent.defaultProps = {
+  isSearching: false,
+  input: ''
+};

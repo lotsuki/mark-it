@@ -14,47 +14,41 @@ const Category = ({ color, cat, folderOpen }) => {
   const { groups, groupsID, categoryID, setCategoryID, setIsEditing, isEditing, setElementForCustomMenu, elementForCustomMenu } = useContext(ContentContext);
   const { setCategory, category, isOpen, elementToEdit, setElementToEdit } = useContext(CategoriesContext);
 
-  const reset = (e) => {
-    setElementToEdit('');
-    setIsEditing(false);
-  };
-
-  //check if categoryID, setCategoryID is necessary, can get catID here without state value?
-
-  const handleCatEdit = (e) => {
-    setCatEdited(e.target.value);
-  };
-
+  //handle category edit
   const handleEnter = (e) => {
     if (e.keyCode === 13) {
       axios.get(`/update/${catEdited}/${categoryID}/${groupsID}`, {
         method: 'PATCH'
         })
         .then(res => {
+            //updates data in react and exits menu
            utils.editCategories(groups, cat, catEdited);
+           //hides custom menu and resets state
            elementForCustomMenu.style.visibility = '';
            setCategory('');
            setCategoryID('');
            setIsEditing(false);
            setElementForCustomMenu('');
-          console.log('PATCH request successful');
         })
         .catch(err => { console.log('Error at PATCH request', err); });
     }
   };
 
+  //when edit button clicked, displays input field
   const displayInputOnEdit = () => {
     let categoryToEdit = elementForCustomMenu.parentElement.children[1];
     if (categoryToEdit.className === 'category-text') { categoryToEdit = categoryToEdit.innerText; }
     else if (categoryToEdit.id === 'edit-category-input') { categoryToEdit = categoryToEdit.defaultValue; }
+    //if category is category clicked, render input
     if (categoryToEdit && categoryToEdit === cat || elementToEdit && cat === elementToEdit) {
       return (
         <Fragment>
           <IconDown />
-          <input id="edit-category-input" type="text" onBlur={reset} onKeyUp={handleEnter} onChange={handleCatEdit} defaultValue={cat} autoComplete="off" />
+          <input id="edit-category-input" type="text" onKeyUp={handleEnter} onChange={e => setCatEdited(e.target.value)} defaultValue={cat} autoComplete="off" />
           </Fragment>
         );
     }
+    //if category is not category clicked, render div
     return (
       <Fragment>
         <IconFolder viewBox={"-20 -9 55 55"} color={color} width={"30"} height={"30"} folderOpen={folderOpen}/>
@@ -79,12 +73,14 @@ export default Category;
 
 Category.propTypes = {
   color: PropTypes.string,
-  cat: PropTypes.string
+  cat: PropTypes.string,
+  folderOpen: PropTypes.bool
 };
 
 Category.defaultProps = {
   color: '',
-  cat: ''
+  cat: '',
+  folderOpen: false
 };
 
 

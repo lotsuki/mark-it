@@ -1,19 +1,19 @@
-import React, { useState, useContext, Fragment } from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext } from 'react';
 import ContentContext from './ContentContext';
 
 const Titles = () => {
   const { titles, setTitleToDelete, showConfirm, setShowConfirm, setGroupToDelete } = useContext(ContentContext);
 
+  //handles delete button click
   const confirmDelete = async (e, subject) => {
-    //let target = e.target
     let doc = document.getElementById('container');
     let confirmContainer = document.getElementById('confirm');
     let title = e.target.parentElement.firstChild.innerText;
+
+    //displays confirmation popup
     if (!showConfirm) {
       setGroupToDelete('title');
       setShowConfirm(true);
-      //deleteTitle(target);
       setTitleToDelete([title, subject]);
       if (confirmContainer) {
         confirmContainer.className = 'confirm-container is-visuallyHid';
@@ -21,6 +21,7 @@ const Titles = () => {
         confirmContainer.className = 'confirm-container';
         doc.parentElement.className = 'ModalOpen';
       }
+    //hides confirmation popup
     } else {
       doc.parentElement.className = '';
       doc.className = '';
