@@ -4,8 +4,6 @@ const DIST_DIR = pth.join(__dirname, "/public");
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 
-
-
 module.exports = {
   entry: `${SRC_DIR}/index.jsx`,
   output: {
