@@ -4,7 +4,6 @@ const path = require('path');
 const compression = require('compression');
 const Document = require('../db/Document.js');
 const db = require('../db/index.js');
-const ObjectId = require("mongodb").ObjectID;
 // const spdy = require('spdy');
 // const fs = require('fs');
 
@@ -23,13 +22,13 @@ app.use((req, res, next) => {
     "Origin, X-Requested-With, Content-Type, Accept"
   );
   res.set("Access-Control-Allow-Methods", "GET,PATCH,PUT,POST,DELETE,OPTIONS");
-  res.set("Cache-Control", "public, no cache");
+  res.set("Cache-Control", "public, max-age=0");
   next();
 });
 app.use(compression());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(`${__dirname}/../public/`));
+app.use(express.static(`${__dirname}/../public/`, {maxAge:'30d'}));
 
 
 app.post('/form', (req, res) => {

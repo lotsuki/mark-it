@@ -29,6 +29,7 @@ const Subjects = ({ color }) => {
   const titleClasses = ['title', 'title-wrapper', 'titles-sub-container', 'titles-container', 'confirm-button yes-button', 'confirm-button no-button', 'delete-icon'];
   const subjectClasses = ['subject', 'subject-text'];
 
+  //hides titles
   const exitTitles = (e) => {
     let target = e.target;
     if (target.className === 'app' || target.id === 'titles-container'){
