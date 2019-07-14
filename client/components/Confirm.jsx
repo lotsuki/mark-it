@@ -3,9 +3,11 @@ import PropTypes from 'prop-types';
 import utils from '../lib/utils';
 import axios from 'axios';
 import ContentContext from './ContentContext';
+import MainContext from './MainContext';
 
 const Confirm = () => {
   const { groups, groupsID, categoryID, setCategoryID, setShowConfirm, titleToDelete, titles, setTitles, groupToDelete, elementForCustomMenu, setElementForCustomMenu, categoryToDelete, subjectToDelete, setSubjectToDelete } = useContext(ContentContext);
+  const { links } = useContext(MainContext);
 
   //handles click to delete item
   const handleConfirmClick = async (e) => {

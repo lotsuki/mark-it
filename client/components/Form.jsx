@@ -18,14 +18,22 @@ const Form = () => {
   const { showForm, setShowForm, links } = useContext(MainContext);
 
   //update indices of categories or subjects in groups array after deletion
-  const updateGroups = (_groups, _hasCat, _hasSubj, _catID, _subject) => {
+  const updateData = (_hasCat, _hasSubj, _catID, _subject, response) => {
     if (!_hasCat && !_hasSubj) {
-      _groups.push({id: groups.length, category, color, subjects: [{id: 0, subject:_subject}]});
-      return _groups;
+      groups.push({id: groups.length, category, color, subjects: [{id: 0, subject:_subject}]});
+      return groups;
     } else if (!_hasSubj) {
-      let _subjects = _groups[_catID].subjects;
+      let _subjects = groups[_catID].subjects;
       _subjects.push({id: _subjects.length, subject:_subject});
-      return _groups;
+      return groups;
+    } else {
+      let data = response.data;
+      let newTitleObj = {
+        _id: data._id,
+        title: data.title,
+        url: data.url
+      };
+      links.push(newTitleObj);
     }
   };
 
@@ -57,12 +65,10 @@ const Form = () => {
         foldColor: catID >= 0 ? groups[catID].color : color
         })
         .then(res => {
-          console.log(res, 'res in post')
           //updated groups array with correct indices
-          let updatedArr = updateGroups(groups, hasCat, hasSubj, catID, subject);
-          //update page with new groups array
-          updatePage(updatedArr);
-          console.log('POST request successful');
+          let updatedArr = updateData(hasCat, hasSubj, catID, subject, res);
+          //if new category or new subject, update page with new groups array
+          if (updatedArr) {  updatePage(updatedArr); }
         })
         .catch(err => { console.log('Error at POST request', err); });
       setShowForm(false);

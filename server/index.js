@@ -46,6 +46,7 @@ app.post('/form', (req, res) => {
       console.log('error at post: ', err)
       res.send('Error at POST: ', err);
     } else {
+      res.send(result);
       if (!hasCat && !hasSubj) {
 
         Document.updateOne({_id: groupsID}, {$addToSet: {groups:{id: categoryL, category, color: foldColor, subjects: [{id: 0, subject: subject}]}}}, (err, result) => {
@@ -53,7 +54,6 @@ app.post('/form', (req, res) => {
           else { res.send(result); }
         })
       } else if(!hasSubj) {
-
         Document.updateOne({'groups.id': catID}, {$addToSet:{[key]: {id: subjectL, subject: subject}}}, (err, result) => {
           if (err) { console.log('Failed to update subjects at POST: ', err); }
           else { res.send(result); }
