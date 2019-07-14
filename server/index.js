@@ -91,7 +91,7 @@ app.post('/update/catIds', (req,res) => {
 app.get('/user', (req, res) => {
   Document.findOne({ username: { $exists: true } }, (err, result) => {
     if (err) { console.log('Failure to get user obj: ', err); }
-    else { res.send(result); }
+    else { console.log(result, 'user'); res.send(result); }
   });
 });
 
@@ -99,7 +99,7 @@ app.get('/user', (req, res) => {
 app.get('/groups', (req, res) => {
   Document.findOne({ groups: { $exists: true } }, (err, result) => {
     if (err) { console.log('Failure to get user obj: ', err); }
-    else { res.send(result); }
+    else { console.log(result, 'groups'); res.send(result); }
   });
 });
 
@@ -107,7 +107,7 @@ app.get('/groups', (req, res) => {
 app.get('/titles', (req, res) => {
   Document.find({title: {$exists:true}}, 'subject, title url', (err, result) => {
     if (err) { console.log('Failure to get user obj: ', err); }
-    else { res.send(result); }
+    else { console.log(result, 'titles'); res.send(result); }
   });
 });
 

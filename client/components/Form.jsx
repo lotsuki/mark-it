@@ -89,7 +89,7 @@ const Form = () => {
                 name="form"
                 type="text"
                 value={category}
-                className="category-input"
+                className="form-input category-input"
                 data-testid="category-input"
                 placeholder="Category"
                 onChange={e => setCategory(e.target.value)}
@@ -112,7 +112,7 @@ const Form = () => {
               name="form"
               type="text"
               value={subject}
-              className="subject-input"
+              className="form-input subject-input"
               data-testid="subject-input"
               placeholder="Subject"
               onChange={e => {

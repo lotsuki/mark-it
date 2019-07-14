@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Main from './Main';
 import ErrorBoundary from './ErrorBoundary';
+import axios from 'axios';
 
 class App extends React.Component {
   constructor(props) {
@@ -11,63 +12,104 @@ class App extends React.Component {
       userID: '',
       groups: [],
       links: [],
-      groupsID: ''
+      groupsID: '',
+      countUser: 0,
+      countGroups: 0,
+      countTitles: 0
     }
     this._isMounted = false;
     this.updatePage = this.updatePage.bind(this);
+    this.fetchUserRetry = this.fetchUserRetry.bind(this);
+    this.fetchGroupsRetry = this.fetchGroupsRetry.bind(this);
+    this.fetchTitlesRetry = this.fetchTitlesRetry.bind(this);
   }
 
-  componentDidMount() {
-    this._isMounted = true;
+  fetchUserRetry(err) {
+    this.setState(prevState => ({countUser: prevState.countUser + 1}));
+    if (this.state.countUser >= 3) { return err; }
 
-    fetch('/user', {
-        headers: {
-          "Content-Type": "application/json",
-          "Cache-Control": "public, no-cache"
-        }
-      })
-      .then(res => res.json())
-      .then(data =>  {
+    axios.get('/user')
+      .then(res =>  {
+        let data = res.data;
         this.setState({
           userID: data.username
         })
       })
       .catch(err => {
-        console.log('GET request failed at /user: ', err)
+        fetchUserRetry(err);
+      });
+  }
+
+  fetchGroupsRetry(err) {
+    this.setState(prevState => ({countGroups: prevState.countGroups + 1}));
+    if (this.state.countGroups >= 3) { return err; }
+
+    axios.get('/groups')
+      .then(res =>  {
+        let data = res.data;
+        this.setState({
+          groups: data.groups,
+          groupsID: data._id
+        })
+      })
+      .catch(err => {
+        fetchGroupsRetry(err);
+      });
+  }
+
+  fetchTitlesRetry(err) {
+    this.setState(prevState => ({countTitles: prevState.countTitles + 1}));
+    if (this.state.countTitles >= 3) { return err; }
+
+
+    axios.get('/titles')
+      .then(res =>  {
+        let data = res.data;
+        this.setState({
+          links: data
+        })
+      })
+      .catch(err => {
+        fetchTitlesRetry(err);
+      });
+  }
+
+  componentDidMount() {
+    this._isMounted = true;
+
+    axios.get('/user')
+      .then(res =>  {
+        let data = res.data;
+        this.setState({
+          userID: data.username
+        })
+      })
+      .catch(err => {
+        fetchUserRetry(err);
       });
 
-      fetch('/groups', {
-          headers: {
-            "Content-Type": "application/json",
-            "Cache-Control": "public, no-cache"
-          }
+    axios.get('/groups')
+      .then(res =>  {
+        let data = res.data;
+        this.setState({
+          groups: data.groups,
+          groupsID: data._id
         })
-        .then(res => res.json())
-        .then(data =>  {
-          this.setState({
-           groups: data.groups,
-           groupsID: data._id
-          })
-        })
-        .catch(err => {
-          console.log('GET request failed at /user: ', err)
-        });
+      })
+      .catch(err => {
+        fetchGroupsRetry(err);
+      });
 
-      fetch('/titles', {
-        headers: {
-          "Content-Type": "application/json",
-          "Cache-Control": "public, no-cache"
-          }
+    axios.get('/titles')
+      .then(res =>  {
+        let data = res.data;
+        this.setState({
+          links: data
         })
-        .then(res => res.json())
-        .then(data =>  {
-          this.setState({
-            links: data
-          })
-        })
-        .catch(err => {
-          console.log('GET request failed at /users: ', err)
-        });
+      })
+      .catch(err => {
+        fetchTitlesRetry(err);
+      });
   }
 
   componentWillUnMount() {
