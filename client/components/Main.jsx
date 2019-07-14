@@ -7,9 +7,7 @@ import MainContext from './MainContext';
 const Main = ({ groups, groupsID, links, updatePage }) => {
   const [ showForm, setShowForm, ] = useState(false);
   const [ groupState, setGroupState ] = useState(groups);
-  console.log(showForm, 'MAIN showForm');
-  console.log(groups, 'MAIN groups');
-  console.log(links, 'MAIN links');
+
   return (
     <MainContext.Provider value={{showForm, setShowForm, links}}>
     <div id="container">

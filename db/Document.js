@@ -5,8 +5,8 @@ const Schema = mongoose.Schema;
 
 
 const documentSchema = new Schema ({
-  category: String,
-  subject: String,
+  categoryId: String,
+  subjectId: String,
   title: String,
   url: String,
   date: String,

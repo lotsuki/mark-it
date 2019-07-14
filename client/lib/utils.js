@@ -1,9 +1,7 @@
 module.exports = {
   hasCategory: function(arr, cat) {
-    console.log(cat, 'CAT IN HAS CAT FUNC')
     for (var i = 0; i < arr.length; i++) {
       if (arr[i].category === cat) {
-        console.log('TRUEEEEEE')
         return true;
       }
     }
@@ -42,10 +40,19 @@ module.exports = {
     }
   },
   deleteCategory: function(arr, category) {
+    let count = 0;
     for (var i = 0; i < arr.length; i++) {
       if (arr[i].category === category) {
-        arr.splice(i, 1); return;
+        arr.splice(i, 1); break;
       }
+    }
+    if (arr.length < 1) { return []; }
+    else {
+      for (var x = 0; x < arr.length; x++) {
+        arr[x].id = count;
+        ++count;
+      }
+      return arr;
     }
   },
   hasSubject: function(arr, subj, id) {
@@ -82,10 +89,20 @@ module.exports = {
   },
   deleteSubject: function(arr, catID, subj) {
     let subjects = arr[catID].subjects;
+    let count = 0;
     for (var i = 0; i < subjects.length; i++) {
       if (subjects[i].subject === subj) {
-        subjects.splice(i, 1); return;
+        subjects.splice(i, 1);
       }
+    }
+    if (arr.length < 1) { return []; }
+    else {
+      for (var x = 0; x < subjects.length; x++) {
+        subjects[x].id = count;
+        ++count;
+      }
+      console.log(subjects, 'subjects')
+      return subjects;
     }
   },
   editTitles: function(arr, titleToDelete, func) {
@@ -109,7 +126,6 @@ module.exports = {
        || target.parentElement.className.baseVal && target.parentElement.className.baseVal.includes('icon-custom-menu'));
   },
   isCustomMenu: function(target, className) {
-    console.log(target.parentElement, 'target in recurse')
     if (target && target.id === 'app-container') { return false; }
     if (target && target.className === className) { return true; }
     return this.isCustomMenu(target.parentElement, 'custom-menu');

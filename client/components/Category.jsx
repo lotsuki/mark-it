@@ -14,11 +14,7 @@ const Category = ({ color, cat, folderOpen }) => {
   const { groups, groupsID, categoryID, setCategoryID, setIsEditing, isEditing, setElementForCustomMenu, elementForCustomMenu } = useContext(ContentContext);
   const { setCategory, category, isOpen, elementToEdit, setElementToEdit } = useContext(CategoriesContext);
 
-  console.log(catEdited, 'CATEGORY catEdited');
-  console.log(groups, categoryID, isEditing, elementForCustomMenu, category, isOpen, elementToEdit, 'CATEGORY');
-
   const reset = (e) => {
-    console.log(e.target, 'CATEGORY reset input');
     setElementToEdit('');
     setIsEditing(false);
   };
@@ -26,18 +22,15 @@ const Category = ({ color, cat, folderOpen }) => {
   //check if categoryID, setCategoryID is necessary, can get catID here without state value?
 
   const handleCatEdit = (e) => {
-    console.log(e.target.value, 'CATEGORY handleCatEdit');
     setCatEdited(e.target.value);
   };
 
   const handleEnter = (e) => {
-    console.log(e.keyCode, catEdited, categoryID, groupsID, 'CATEGORY handleEnter');
     if (e.keyCode === 13) {
       axios.get(`/update/${catEdited}/${categoryID}/${groupsID}`, {
         method: 'PATCH'
         })
         .then(res => {
-          console.log(cat, catEdited, elementForCustomMenu, 'CATEGORY patch response');
            utils.editCategories(groups, cat, catEdited);
            elementForCustomMenu.style.visibility = '';
            setCategory('');
@@ -54,9 +47,7 @@ const Category = ({ color, cat, folderOpen }) => {
     let categoryToEdit = elementForCustomMenu.parentElement.children[1];
     if (categoryToEdit.className === 'category-text') { categoryToEdit = categoryToEdit.innerText; }
     else if (categoryToEdit.id === 'edit-category-input') { categoryToEdit = categoryToEdit.defaultValue; }
-    console.log(elementForCustomMenu, 'elformenu', categoryToEdit, 'cattoedit', cat, 'cat', elementToEdit, 'eltoedit', 'CATEGORY displayCatOnEdit func wha');
     if (categoryToEdit && categoryToEdit === cat || elementToEdit && cat === elementToEdit) {
-      console.log(categoryToEdit, cat, elementToEdit,'CATEGORY displayCatOnEdit func return input wha');
       return (
         <Fragment>
           <IconDown />
@@ -64,7 +55,6 @@ const Category = ({ color, cat, folderOpen }) => {
           </Fragment>
         );
     }
-    console.log(categoryToEdit, cat, elementToEdit,'CATEGORY displayCatOnEdit func return div');
     return (
       <Fragment>
         <IconFolder viewBox={"-20 -9 55 55"} color={color} width={"30"} height={"30"} folderOpen={folderOpen}/>
@@ -72,8 +62,6 @@ const Category = ({ color, cat, folderOpen }) => {
       </Fragment>
     );
   };
-
-  console.log(isEditing, 'CATEGORY isEditing wha')
 
   return (
      <div className="category" key={cat}>
@@ -85,7 +73,7 @@ const Category = ({ color, cat, folderOpen }) => {
       <IconCustomMenu name={cat}/>
     </div>
   );
-}
+};
 
 export default Category;
 

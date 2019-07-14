@@ -14,16 +14,8 @@ const Categories = () => {
   const [ elementToEdit, setElementToEdit ] = useState('');
   const { groups, setCategoryID, setShowTitles, setGroupToDelete, setElementForCustomMenu } = useContext(ContentContext);
 
-  console.log(isOpen, 'CATEGORIES isOpen');
-  console.log(category, 'CATEGORIES category');
-  console.log(elementToEdit, 'CATEGORIES elementToEdit');
-  console.log(isOpen, 'CATEGORIES isOpen');
-  console.log(groups, 'CATEGORIES');
-
   const exitCategories = (e) => {
-    console.log(e.target, 'CATEGORIES exitCategories');
     if (e.target.className === 'app' || e.target.className === 'sidebar-container') {
-      console.log('CATEGORIES exitCategories if target == app or sidebar');
       document.removeEventListener('click', exitCategories);
       setIsOpen(false);
       setCategory('');
@@ -34,12 +26,9 @@ const Categories = () => {
   };
 
   const handleCatClick = (e) => {
-    console.log(e.target, 'CATEGORIES handleCatClick');
     //if isCusotmMenuIcon, if isOpen, is the cateogry clicked teh one that is open?
     let isCustomMenuIcon = utils.isCustomMenuIcon(e.target);
-    console.log(isCustomMenuIcon, 'iscustmenu')
     if (isCustomMenuIcon) {
-      console.log('CATEGORIES handleCatClick isCustomMenuIcon == true');
       let target;
     //    console.log('click')
       if (e.target.tagName === 'path' && e.target.parentElement.className.baseVal.includes('icon-custom-menu')) {
@@ -50,7 +39,6 @@ const Categories = () => {
       // let currentElem = utils.getCategoryText(e, e.target, null, 'handle');
        setGroupToDelete('category');
      } else if (e.target.id === 'edit-category') {
-      console.log(e.target.value, 'CATEGOIRES handleCatClick isEdit == true')
         setElementToEdit(e.target.value);
       //}
       //IF CLICK ON MENU AND ANOTHER DROPDOWN IS OPEN
@@ -64,10 +52,8 @@ const Categories = () => {
      // }
 
     } else {
-      console.log('CATEGORIES handleCatClick isCustomMenuIcon !== true');
       let cat = utils.getCategoryText(e, e.target, e.target.className, 'handle');
       if (e.target.className === 'app' || cat === category) {
-        console.log('CATEGORIES handleCatClick isCustomMenuIcon !== true && class == app or category is different');
         document.removeEventListener('click', exitCategories);
         setIsOpen(false);
         setCategory('');
@@ -75,7 +61,6 @@ const Categories = () => {
         setGroupToDelete('');
       } else {
         let catID = utils.findCategoryID(groups, cat);
-        console.log('CATEGORIES handleCatClick openDropdown');
         setIsOpen(true);
         setCategory(cat);
         setShowTitles(false);
@@ -84,7 +69,6 @@ const Categories = () => {
       }
     }
   };
-
 
 //refactor dropdown container
   return (

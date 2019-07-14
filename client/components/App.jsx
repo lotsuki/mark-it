@@ -4,9 +4,9 @@ import Main from './Main';
 //import Landing from './Landing.jsx';
 import ErrorBoundary from './ErrorBoundary';
 
-//TODO: submit form does not live update when new category,  custom menu when subjects go longer than dropdown container length, oauth
+//TODO: oauth
 
-//TODO later: get rid of title apis, try to decrease renders, transition searchbar content, openCustomMenu func, react lazy loaders, use refs
+//TODO later: get rid of title apis, try to decrease renders, transition searchbar content, openCustomMenu func, react lazy loaders, use refs, give title documnets an index
 class App extends React.Component {
   constructor(props) {
     super(props);

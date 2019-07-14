@@ -4,20 +4,15 @@ import MainContext from './MainContext';
 const IconPlus = () => {
   const { showForm, setShowForm } = useContext(MainContext);
 
-  console.log(showForm, 'ICONPLUS showForm');
   const hideDisplay = (e) => {
     let className = e.target.className;
-    console.log(e.target.className, 'ICONPLUS class')
-    console.log(e.target, 'ICONPLUS hideDisplay');
     if (showForm && e.target.name !== 'form' || className === 'app' || className === 'sidebar-container') {
-      console.log(e.target, 'ICONPLUS hideDisplay setShowForm(false)');
       setShowForm(false);
       document.removeEventListener('click', hideDisplay);
     }
   };
 
   const displayForm = (e) => {
-    console.log(e.target, showForm, 'ICONPLUS displayForm, showForm');
     if (!showForm) {
       setShowForm(true);
       document.addEventListener('click', hideDisplay);

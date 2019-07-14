@@ -10,7 +10,7 @@ const Content = ({ groups, groupsID, links, updatePage }) => {
   const [ showConfirm, setShowConfirm ] = useState(false);
   const [ showTitles, setShowTitles ] = useState(false);
   const [ titles, setTitles ] = useState([]);
-  const [ titleToDelete, setTitleToDelete ] = useState('');
+  const [ titleToDelete, setTitleToDelete ] = useState([]);
   const [ elementForCustomMenu, setElementForCustomMenu ] = useState('');
   const [ isEditing, setIsEditing ] = useState(false);
   const [ categoryID, setCategoryID ] = useState('');
@@ -25,19 +25,6 @@ const Content = ({ groups, groupsID, links, updatePage }) => {
   // const memoizedSidebar = useMemo(() => {
   //   return <Sidebar />;
   // }, [ groups ]);
-  console.log(isEditing, 'custommenuclick')
-
-  console.log(showConfirm, 'CONTENT showConfirm');
-  console.log(showTitles, 'CONTENT showTitles');
-  console.log(titles, 'CONTENT titles');
-  console.log(titleToDelete, 'CONTENT titleToDelete');
-  console.log(elementForCustomMenu, 'CONTENT elementForCustomMenu');
-  console.log(isEditing, 'CONTENT isEditing');
-  console.log(categoryID, 'CONTENT categoryID');
-  console.log(groupToDelete, 'CONTENT groupToDelete');
-  console.log(isEditingSubject, 'CONTENT isEditingSubject');
-  console.log(showForm, 'CONTENT showForm');
-  console.log(cords, 'CONTENT cords');
 
   return (
     <ContentContext.Provider value={{ groups, groupsID, categoryID, setCategoryID, showTitles, setShowTitles, titles, setTitles, showConfirm, setShowConfirm, showForm, setShowForm, isEditing,setIsEditing, elementForCustomMenu, setElementForCustomMenu, groupToDelete, setGroupToDelete, isEditingSubject, setIsEditingSubject, titleToDelete, setTitleToDelete, cords, setCords, categoryToDelete, setCategoryToDelete, subjectToDelete, setSubjectToDelete, updatePage }}>

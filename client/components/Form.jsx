@@ -19,14 +19,7 @@ const Form = () => {
   const { groups, groupsID, updatePage } = useContext(ContentContext);
   const { showForm, setShowForm } = useContext(MainContext);
 
-  console.log(category, 'FORM category');
-  console.log(subject, 'FORM subject');
-  console.log(title, 'FORM title');
-  console.log(color, 'FORM color');
-  console.log(groups, showForm, 'FORM');
-
   const clearForm = () => {
-    console.log('FORM clearForm func');
     setCategory('');
     setSubject('');
     setTitle('');
@@ -34,14 +27,15 @@ const Form = () => {
   };
 
 
-  const updateGroups = (_groups, _hasCat, _hasSubj, _catID) => {
+  const updateGroups = (_groups, _hasCat, _hasSubj, _catID, _subject) => {
+    console.log(_groups, 'groups');
     if (!_hasCat && !_hasSubj) {
-      console.log('FORM submitForm NO CAT NO SUB')
-      _groups.push({id: groups.length, category, color, subjects: [{id: 0, subject}]});
+      _groups.push({id: groups.length, category, color, subjects: [{id: 0, subject:_subject}]});
       return _groups;
     } else if (!_hasSubj) {
-      console.log('FORM submit form YES CAT NO SUB');
-      _groups[_catID].subjects.push({id: subjectL, subject});
+      console.log(_catID, 'catid');
+      let _subjects = _groups[_catID].subjects;
+      _subjects.push({id: _subjects.length, subject:_subject});
       return _groups;
     }
   };
@@ -52,15 +46,13 @@ const Form = () => {
     const catID = utils.findCategoryID(groups, category);
     let hasSubj;
     let subjectL;
+
     if (catID >= 0) {
       hasSubj = utils.hasSubject(groups, subject, catID);
       subjectL = groups[catID].subjects.length;
     }
 
-
-    console.log(hasCat, catID, hasSubj, subjectL, 'FORM submitForm func');
     if (category && subject && title && url) {
-      console.log(showForm, 'FORM showform before api')
       axios.post('/form', {
         groupsID,
         categoryL: groups.length,
@@ -76,12 +68,8 @@ const Form = () => {
         foldColor: catID >= 0 ? groups[catID].color : color
         })
         .then(res => {
-          console.log(groups, showForm, category, subject, catID, 'FORM submitForm func GROUPS edit before api post');
-          console.log(!hasCat && !hasSubj, 'hasCat hasSubj');
-          let updatedArr = updateGroups(groups, hasCat, hasSubj, catID);
+          let updatedArr = updateGroups(groups, hasCat, hasSubj, catID, subject);
           updatePage(updatedArr);
-          console.log(groups, 'FORM submitForm func GROUPS edit after api post');
-
           console.log('POST request successful');
         })
         .catch(err => { console.log('Error at POST request', err); });

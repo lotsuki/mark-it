@@ -4,10 +4,8 @@ import utils from '../lib/utils';
 
 const IconCustomMenu = ({ name }) => {
   const { groups, elementForCustomMenu, setCords, setElementForCustomMenu, setCategoryID, setSubjectToDelete } = useContext(ContentContext);
-  //console.log(openCustomMenu, 'ICON CUSTOM MENU openCustomMenu');
 
   const openCustomMenu = (e) => {
-    console.log(e.target, 'CONTENT openCustomMenu func');
     //make recurse function to check if other dropdowns are open
     let target;
     let wrapper = document.getElementById('section-wrapper');
@@ -21,14 +19,39 @@ const IconCustomMenu = ({ name }) => {
     let rect = target.getBoundingClientRect();
     let top = rect.top + 8;
 
-    console.log(group, target, 'GROUP AND TARGET IN OPEN CUSTOM MENU')
+//tech
+// height: 52
+// left: 318
+// right: 348
+// top: 55.390625
+// width: 30
+// x: 318
+// y: 55.39062
+
+//news
+// bottom: 315.984375
+// height: 52
+// left: 318
+// right: 348
+// top: 263.984375
+// width: 30
+// x: 318
+// y: 263.984375
+
+//s
+// bottom: 527.171875
+// height: 52
+// left: 318
+// right: 348
+// top: 475.171875
+// width: 30
+// x: 318
+// y: 475.17187
 
     if (elementForCustomMenu) {
       elementForCustomMenu.style.visibility = '';
     }
-    console.log(elementForCustomMenu, 'OPENCUSTOMMENU elementforcustommenu')
     if ((group === 'category' )&& ( !elementForCustomMenu || elementForCustomMenu && elementForCustomMenu.className.baseVal !== target.className.baseVal )) {
-      console.log('ICONMENU openCustomMenu, group === category');
       let cat = target.parentElement.children[1].innerText;
       let id = utils.findCategoryID(groups, cat);
       if (id >= 0) { setCategoryID(id); }
@@ -37,7 +60,6 @@ const IconCustomMenu = ({ name }) => {
       setCords([top, rect.left]);
       setElementForCustomMenu(target);
     } else if ((group === 'subject') && ( !elementForCustomMenu || elementForCustomMenu && elementForCustomMenu.className.baseVal !== target.className.baseVal )){
-       console.log('ICONMENU openCustomMenu, group === subject');
       let subject = target.parentElement.children[1].innerText;
       target.style.visibility = 'visible';
       setCords([top, rect.left]);
