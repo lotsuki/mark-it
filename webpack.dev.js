@@ -1,9 +1,27 @@
-const paths = require('path');
-const merge = require("webpack-merge");
-const common = require("./webpack.common.js");
-// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const pth = require('path');
+const SRC_DIR = pth.join(__dirname, "/client");
+const DIST_DIR = pth.join(__dirname, "/public");
 
-
-module.exports = merge(common, {
+module.exports = {
   mode: "development",
-});
+  entry: `${SRC_DIR}/index.jsx`,
+  output: {
+    path: DIST_DIR,
+    filename: 'bundle.js'
+  },
+  module: {
+    rules: [
+      {
+        test: /\.(js|jsx|css)$/,
+        exclude: [/node_modules/, /__tests__/, /__mocks__/, /coverage/],
+        include: SRC_DIR,
+        use: {
+          loader: 'babel-loader'
+        }
+      }
+    ]
+  },
+  resolve: {
+    extensions: ['*', '.js', '.jsx', '.css']
+  }
+};

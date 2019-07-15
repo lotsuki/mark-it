@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Main from './Main';
+import Landing from './Landing';
 import ErrorBoundary from './ErrorBoundary';
 import axios from 'axios';
 
@@ -126,6 +127,7 @@ class App extends React.Component {
     return (
       <ErrorBoundary>
         <Main userID={userID} groups={groups} groupsID={groupsID} links={links} updatePage={updatePage}/>
+        <Landing />
       </ErrorBoundary>
     );
   }
