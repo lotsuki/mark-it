@@ -4,7 +4,6 @@ import MainContext from './MainContext';
 import moment from 'moment';
 import utils from '../lib/utils';
 import axios from 'axios';
-import { Spring } from 'react-spring/renderprops';
 
 const Form = () => {
   const [ category, setCategory ] = useState('');
@@ -78,78 +77,72 @@ const Form = () => {
   };
 
   return(
-    <Spring
-      config={{duration: 2000}}
-      from={{ height: 0 }}
-      to={{ height: 240}}>
-      {props =>
-        <div id="form-container">
-          <form className="form"
-              data-testid="form"
-              name="form"
-              autoComplete="off"
-              onSubmit={submitForm}>
-          <div className="form-category-container">
-            <div className="cat-input-wrapper">
-              <input
-                name="form"
-                type="text"
-                value={category}
-                className="form-input category-input"
-                data-testid="category-input"
-                placeholder="Category"
-                onChange={e => setCategory(e.target.value)}
-                />
-              <input name="form" type="color" defaultValue="#D00000" className="color" onChange={e => setColor(e.target.value)}/>
-            </div>
-            <div className="form-dropdown-wrapper">
-            {
-              selectCat &&
-              (<ul>
-                { categories.map(category => (
-                  <li>{category}</li>
-                ))}
-              </ul>)
-            }
-            </div>
-          </div>
-          <div className="sub-input-wrapper">
-            <input
-              name="form"
-              type="text"
-              value={subject}
-              className="form-input subject-input"
-              data-testid="subject-input"
-              placeholder="Subject"
-              onChange={e => {
-                setSubject(e.target.value);
-              }}/>
-          </div>
+    <div id="form-container">
+      <form className="form"
+          data-testid="form"
+          name="form"
+          autoComplete="off"
+          onSubmit={submitForm}>
+      <div className="form-category-container">
+        <div className="cat-input-wrapper">
           <input
             name="form"
             type="text"
-            value={title}
-            className="form-inputs"
-            data-testid="title-input"
-            placeholder="Title"
-            onChange={e=> setTitle(e.target.value)}/>
-          <input
-            name="form"
-            type="text"
-            value={url}
-            className="form-inputs"
-            data-testid="url-input"
-            placeholder="URL"
-            onChange={e => setUrl(e.target.value)}/>
-          <input
-            name="form"
-            type="submit"
-            className="form-inputs"
-            data-testid="submit"
-            value="Submit"/>
-        </form>
-        </div>}
-    </Spring>
+            value={category}
+            className="form-input category-input"
+            data-testid="category-input"
+            placeholder="Category"
+            onChange={e => setCategory(e.target.value)}
+            />
+          <input name="form" type="color" defaultValue="#D00000" className="color" onChange={e => setColor(e.target.value)}/>
+        </div>
+        <div className="form-dropdown-wrapper">
+        {
+          selectCat &&
+          (<ul>
+            { categories.map(category => (
+              <li>{category}</li>
+            ))}
+          </ul>)
+        }
+        </div>
+      </div>
+      <div className="sub-input-wrapper">
+        <input
+          name="form"
+          type="text"
+          value={subject}
+          className="form-input subject-input"
+          data-testid="subject-input"
+          placeholder="Subject"
+          onChange={e => {
+            setSubject(e.target.value);
+          }}/>
+      </div>
+      <input
+        name="form"
+        type="text"
+        value={title}
+        className="form-inputs"
+        data-testid="title-input"
+        placeholder="Title"
+        onChange={e=> setTitle(e.target.value)}/>
+      <input
+        name="form"
+        type="text"
+        value={url}
+        className="form-inputs"
+        data-testid="url-input"
+        placeholder="URL"
+        onChange={e => setUrl(e.target.value)}/>
+      <input
+        name="form"
+        type="submit"
+        className="form-inputs"
+        data-testid="submit"
+        value="Submit"/>
+    </form>
+    </div>
   );
 };
 

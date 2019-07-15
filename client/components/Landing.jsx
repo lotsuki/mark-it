@@ -1,27 +1,24 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import landingPhoto from '../assests/booksmartphoto3.jpg';
 
 const Landing = (props) => {
   return (
     <div className="landing-container">
-      <div className="landing-header-container">
-        <div className="landing-logo-wrapper">
-          <div className="landing-logo-title">Booksmart</div>
-          <i className="fas fa-bookmark" className="landing-logo"></i>
-        </div>
-        <div className="landing-header-wrapper">
-        <div className="landing-header">
-          <div className="landing-main-text-wrapper">
-            <span className="landing-main-text">Bookmark with Book <span className="smart">smart</span> </span>
-          </div>
-          <span className="landing-text-sub">A simple and efficient way to store your bookmarks</span>
+      <img src={landingPhoto} className="landing-photo" alt="landing-photo"/>
+      <div className="landing-text-container">
+        <div className="landing-text-wrapper">
+          <div className="landing-header-text">Book<span className="smart">smart</span> </div>
+          <div className="landing-sub-text">A simple and efficient way to organize bookmarks</div>
+          <div className="landing-button-wrapper">
+            <Link to="/app">
+              <span className="landing-button">Get Started</span>
+            </Link>
           </div>
         </div>
       </div>
-      <div className="landing-button-wrapper">
-        <button type="button" className="landing-button">Get Started</button>
-      </div>
-      <img src="../assests/Booksmartphoto1.jpg" alt="landing-photo"/>
     </div>
+
   );
 };
 

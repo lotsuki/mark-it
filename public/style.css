@@ -578,17 +578,84 @@
   }
 
 
-
-  .landing-container {
+  .landing-photo {
+    position: absolute;
+    z-index: 0;
     width: 100%;
-    display: flex;
-    flex-flow: column nowrap;
+    height: 100%;
   }
 
-  .landing-header-container {
+  .landing-text-container {
+    position: absolute;
+    z-index: 99999;
+    top: 53%;
+    left: 51%;
+    height: 40%;
+    width: 40%;
+  }
+
+  .landing-text-wrapper {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    height: 100%;
     width: 100%;
-    height: 450px;
-    /*background-color: #1F1F1F;*/
+  }
+
+  .landing-header-text {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 60px;
+    font-weight: 300;
+    color: #fff;
+    margin-bottom: 5px;
+    letter-spacing: 2px;
+  }
+
+  .smart {
+    font-style: italic;
+    color: #7348EB;
+  }
+
+  .landing-sub-text {
+    font-weight: lighter;
+    font-family: 'Open Sans', sans-serif;
+    color: #403e3e;
+  }
+
+  .landing-button-wrapper {
+    display: flex;
+    flex: 2;
+    align-items: flex-end;
+  }
+
+  .landing-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 143px;
+    height: 60px;
+    border: none;
+    background: #7348EB;
+    /*background: #ac48eb;*/
+    color: #fff;
+    font-size: 18px;
+    border-radius: 5px;
+    font-weight: lighter;
+    cursor: pointer;
+    margin-bottom: 15px;
+  }
+
+  .landing-button-text {
+
+  }
+
+
+
+  /*.landing-container {
+    width: 100%;
+    height: 650px;
+    display: flex;
+    flex-flow: column nowrap;
   }
 
   .landing-logo-wrapper {
@@ -599,15 +666,8 @@
     height: 50px;
   }
 
-  .landing-logo-title {
-    letter-spacing: .1rem;
-    font-size: 1.2rem;
-    padding: .7rem;
-    color: #fff;
-    font-family: 'Open Sans', sans-serif;
-  }
 
-  .landing-header-wrapper {
+  .landing-text-wrapper {
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
@@ -616,21 +676,9 @@
     width: 100%;
   }
 
-  .landing-header {
-    display: flex;
-    flex-flow: column nowrap;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .landing-main-text-wrapper {
-    display: flex;
-    flex-flow: row nowrap;
-  }
-
-  .landing-main-text {
+  .landing-header-text {
     font-family: 'Open Sans', sans-serif;
-    font-family: 'Roboto', sans-serif;
+
     font-size: 60px;
     font-weight: 300;
     color: #fff;
@@ -639,13 +687,13 @@
   .smart {
     margin-left: -13px;
     padding: 0;
+    font-style: italic;
   }
 
-  .landing-text-sub {
+  .landing-sub-text {
     font-family: 'Open Sans', sans-serif;
     font-family: 'Roboto', sans-serif;
     font-weight: lighter;
-    color: #fff;
   }
 
   .landing-button {
@@ -666,4 +714,4 @@
     flex: 2;
     width: 10rem;
     align-items: center;
-  }
+  }*/
