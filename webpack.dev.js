@@ -16,7 +16,7 @@ module.exports = {
         exclude: [/node_modules/, /__tests__/, /__mocks__/, /coverage/],
         include: SRC_DIR,
         use: {
-          loaders: ['babel-loader']
+          loader: 'babel-loader'
         }
       },
       {

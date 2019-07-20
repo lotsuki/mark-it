@@ -38,9 +38,9 @@ class ErrorBoundary extends React.Component {
 export default ErrorBoundary;
 
 ErrorBoundary.propTypes = {
-  children: PropTypes.array,
+  children: PropTypes.object,
 };
 
 ErrorBoundary.defaultProps = {
-  children: [],
+  children: {},
 };
