@@ -1,6 +1,5 @@
-import React, { useState, useEffect, useContext, Fragment } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
-import Titles from './Titles';
 import Subject from './Subject';
 import utils from '../lib/utils';
 import ContentContext from './ContentContext';
@@ -9,11 +8,10 @@ import axios from 'axios';
 
 const Subjects = ({ color }) => {
   const [ subj, setSubj ] = useState('');
-  const [ update, setUpdate ] = useState(false);
   const [ subjects, setSubjects ] = useState([]);
   const [ catID, setCatID ] = useState('');
   const [ subjectToEdit, setSubjectToEdit ] = useState('');
-  const { groups, groupsID, showConfirm, showTitles, setShowTitles, setTitles, setGroupToDelete, isEditingSubject } = useContext(ContentContext);
+  const { groups, setShowTitles, setTitles, setGroupToDelete, isEditingSubject } = useContext(ContentContext);
   const { category, setCategory, setIsOpen } = useContext(CategoriesContext);
 
   useEffect(() => {
@@ -54,7 +52,6 @@ const Subjects = ({ color }) => {
       setSubjectToEdit(e.target.value);
     }
     let subject;
-    let target = e.target;
 
     //if user clicks on subject that is open, close subject
     if (e.target.innerText === subj) {

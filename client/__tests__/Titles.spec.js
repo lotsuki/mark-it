@@ -1,7 +1,7 @@
 
 
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { mount } from 'enzyme';
 import Titles from '../components/Titles.jsx';
 import data from '../../db/mockData.js'
 afterAll(async done => {

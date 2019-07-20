@@ -3,12 +3,13 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const compression = require('compression');
 const Document = require('../db/Document.js');
-const db = require('../db/index.js');
+//const db = require('../db/index.js');
 // const spdy = require('spdy');
-// const fs = require('fs');
+//const fs = require('fs');
+//const groupFile = require('../client/groups.txt');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+let PORT = process.env.PORT || 3000;
 
 // const options = {
 //     key: fs.readFileSync(__dirname + '/../domain.key'),
@@ -165,7 +166,7 @@ app.delete('/delete/subject/:subjectToDelete/:categoryID/:groupsID', (req, res) 
     if (err) { console.log('Failure to get user obj: ', err); }
     else { res.send(result); }
   });
-  Document.deleteMany({ subject: subjectToDelete }, (err, result) => {
+  Document.deleteMany({ subject: subjectToDelete }, (err) => {
     if (err) { console.log('Error at DELETE request: ', err); }
     else { console.log('Deleted subject'); }
   });
@@ -175,7 +176,7 @@ app.delete('/delete/subject/:subjectToDelete/:categoryID/:groupsID', (req, res) 
 app.delete('/delete/title/:titl/:subjectOfTitle', (req, res) => {
   let {titl, subjectOfTitle } = req.params;
 
-  Document.deleteOne({ title: titl }, (err, result) => {
+  Document.deleteOne({ title: titl }, (err) => {
     if (err) { console.log('Error at DELETE request: ', err); }
     else {
       Document.find({$and: [{subject: subjectOfTitle}, {title: {$ne: titl}}]}, (err, result) => {
@@ -193,7 +194,7 @@ app.delete('/delete/category/:categoryToDelete/:groupsID', (req, res) => {
     if (err) { console.log('Failure to get user obj: ', err); }
     else {res.send(result); }
   });
-   Document.deleteMany({ category: categoryToDelete }, (err, result) => {
+   Document.deleteMany({ category: categoryToDelete }, (err) => {
       if (err) { console.log('Error at DELETE request: ', err); }
       else { console.log('Deleted category'); }
     });

@@ -12,7 +12,7 @@ import CategoriesContext from './CategoriesContext';
 const Category = ({ color, cat, folderOpen }) => {
   const [ catEdited, setCatEdited ] = useState('');
   const { groups, groupsID, categoryID, setCategoryID, setIsEditing, isEditing, setElementForCustomMenu, elementForCustomMenu } = useContext(ContentContext);
-  const { setCategory, category, isOpen, elementToEdit, setElementToEdit } = useContext(CategoriesContext);
+  const { setCategory, elementToEdit } = useContext(CategoriesContext);
 
   //handle category edit
   const handleEnter = (e) => {
@@ -20,7 +20,7 @@ const Category = ({ color, cat, folderOpen }) => {
       axios.get(`/update/${catEdited}/${categoryID}/${groupsID}`, {
         method: 'PATCH'
         })
-        .then(res => {
+        .then(() => {
             //updates data in react and exits menu
            utils.editCategories(groups, cat, catEdited);
            //hides custom menu and resets state

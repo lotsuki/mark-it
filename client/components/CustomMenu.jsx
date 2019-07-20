@@ -5,7 +5,7 @@ import ContentContext from './ContentContext';
 import utils from '../lib/utils';
 
 const CustomMenu = () => {
-  const { groups, cords, setCords, elementForCustomMenu, setElementForCustomMenu, setIsEditing, showConfirm, setShowConfirm, setIsEditingSubject, setCategoryToDelete, setSubjectToDelete } = useContext(ContentContext);
+  const { cords, elementForCustomMenu, setElementForCustomMenu, setIsEditing, showConfirm, setShowConfirm, setIsEditingSubject, setCategoryToDelete } = useContext(ContentContext);
 
   useEffect(() => {
     document.addEventListener('click', exitCustomMenu);

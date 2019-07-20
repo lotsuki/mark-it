@@ -11,10 +11,10 @@ const Form = () => {
   const [ title, setTitle ] = useState('');
   const [ url, setUrl ] = useState('');
   const [ color, setColor ] = useState('#D00000');
-  const [ selectCat, setSelectCat ] = useState(false);
-  const [ selectSub, setSelectSub ] = useState(false);
+  //const [ selectCat, setSelectCat ] = useState(false);
+  //const [ selectSub, setSelectSub ] = useState(false);
   const { groups, groupsID, updatePage } = useContext(ContentContext);
-  const { showForm, setShowForm, links } = useContext(MainContext);
+  const { setShowForm, links } = useContext(MainContext);
 
   //update indices of categories or subjects in groups array after deletion
   const updateData = (_hasCat, _hasSubj, _catID, _subject, response) => {
@@ -96,16 +96,6 @@ const Form = () => {
             />
           <input name="form" type="color" defaultValue="#D00000" className="color" onChange={e => setColor(e.target.value)}/>
         </div>
-        <div className="form-dropdown-wrapper">
-        {
-          selectCat &&
-          (<ul>
-            { categories.map(category => (
-              <li>{category}</li>
-            ))}
-          </ul>)
-        }
-        </div>
       </div>
       <div className="sub-input-wrapper">
         <input
@@ -159,5 +149,17 @@ export default Form;
   //   }
   // };
 //onFocus={e => displaySelectMenu(e.target.className)}
+// {
+//    <div className="form-dropdown-wrapper">
+//         // {
+//         //   selectCat &&
+//         //   (<ul>
+//         //     { categories.map(category => (
+//         //       <li>{category}</li>
+//         //     ))}
+//         //   </ul>)
+//         // }
+//         </div>
+// }
 
 

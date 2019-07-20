@@ -6,7 +6,6 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 import App from '../components/App';
 import Main from '../components/Main';
-import {render, fireEvent, cleanup, waitForElement, waitForDomChange} from 'react-testing-library';
 import 'jest-dom/extend-expect';
 const db = require('../../db/index.js');
 
@@ -17,7 +16,6 @@ describe('<App />',  () => {
     await db.close();
     done();
   });
-
   it('renders without error', () => {
      shallow(<App />);
   });
@@ -40,17 +38,11 @@ describe('<App />',  () => {
   });
   it('invokes componentDidMount when loading', () => {
     const spy = jest.spyOn(App.prototype, 'componentDidMount');
-    spy.mockImplementation(() => {data: {}})
+    spy.mockImplementation(() => {});
     const wrapper = shallow(<App />);
     wrapper.instance().componentDidMount();
     expect(spy).toHaveBeenCalled();
     spy.mockRestore();
   });
-
 });
-
-
-
-
-
 

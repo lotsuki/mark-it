@@ -8,7 +8,7 @@ import MainContext from './MainContext';
 
 const DynamicContent = () => {
   const { elementForCustomMenu, showTitles, showConfirm } = useContext(ContentContext);
-  const { showForm, setShowForm } = useContext(MainContext);
+  const { showForm } = useContext(MainContext);
 
   //determines what content to display on page
   return (

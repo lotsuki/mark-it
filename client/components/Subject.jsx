@@ -1,7 +1,6 @@
 import React, { useState, useContext, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import IconFolder from './IconFolder';
-import IconFolderOpen from './IconFolderOpen';
 import IconCustomMenu from './IconCustomMenu';
 import IconDown from './IconDown';
 import SubjectChild from './SubjectChild';
@@ -9,7 +8,7 @@ import utils from '../lib/utils';
 import axios from 'axios';
 import ContentContext from './ContentContext';
 
-const Subject = ({ clickedSubj, subject, catID, subjectToEdit, setSubjectToEdit, color }) => {
+const Subject = ({ clickedSubj, subject, catID, subjectToEdit, color }) => {
   const [ subEdited, setSubEdited ] = useState('');
   const { groups, groupsID, setElementForCustomMenu, elementForCustomMenu, setIsEditingSubject, isEditingSubject } = useContext(ContentContext);
 
@@ -20,7 +19,7 @@ const Subject = ({ clickedSubj, subject, catID, subjectToEdit, setSubjectToEdit,
       axios.get(`/update/${subEdited}/${subjID}/${catID}/${groupsID}`, {
         method: 'PATCH'
         })
-        .then(res => {
+        .then(() => {
           //update react data and exit custom menu
            utils.editSubjects(groups, catID, subjectToEdit, subEdited);
            setIsEditingSubject(false);

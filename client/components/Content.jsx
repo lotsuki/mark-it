@@ -4,7 +4,7 @@ import Sidebar from './Sidebar';
 import DynamicContent from './DynamicContent';
 import ContentContext from './ContentContext';
 
-const Content = ({ groups, groupsID, links, updatePage }) => {
+const Content = ({ groups, groupsID, updatePage }) => {
   const [ showConfirm, setShowConfirm ] = useState(false);
   const [ showTitles, setShowTitles ] = useState(false);
   const [ titles, setTitles ] = useState([]);
@@ -16,7 +16,6 @@ const Content = ({ groups, groupsID, links, updatePage }) => {
   const [ isEditingSubject, setIsEditingSubject ] = useState(false);
   const [ showForm, setShowForm, ] = useState(false);
   const [ cords, setCords ] = useState([]);
-  const [ showMenu, setShowMenu ] = useState(false);
   const [ categoryToDelete, setCategoryToDelete ] = useState('');
   const [ subjectToDelete, setSubjectToDelete ] = useState('');
 

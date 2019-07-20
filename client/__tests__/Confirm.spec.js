@@ -48,11 +48,6 @@ describe('<Confirm />', () => {
   });
   it('renders a div with text "Are you sure you want to delete this bookmark?"', () => {
     const wrapper = shallow(<Confirm />);
-    expect(wrapper.containsAnyMatchingElements([<div>Are you sure you want to delete this bookmark?</div>])).toBe(true);
+    expect(wrapper.containsAnyMatchingElements([<div key="key">Are you sure you want to delete this bookmark?</div>])).toBe(true);
   });
 });
-
-
-
-
-

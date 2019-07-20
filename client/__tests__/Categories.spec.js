@@ -5,7 +5,7 @@
 */
 
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import Categories from '../components/Categories';
 
 //if caateogry-wrapper is clicked, should render subjects comp
@@ -28,7 +28,7 @@ describe('<Categories />', () => {
     const wrapper = shallow(<Categories {...props}/>);
     expect(wrapper.find('.section-wrapper').children().length).toEqual(Object.keys(props.bmarks).length)
   });
-  it('when category div is clicked, handleClick is invoked', () => {
+  // it('when category div is clicked, handleClick is invoked', () => {
   //   const mockHandleClick = jest.fn()
   //   const wrapper = mount(<Categories {...props}/>);
   //   const span = wrapper.find('.category-wrapper').filterWhere(elem => elem.getElement().key === 'Tech')
@@ -36,7 +36,3 @@ describe('<Categories />', () => {
   //   expect(mockHandleClick).toHaveBeenCalled()
   // });
 });
-
-
-
-

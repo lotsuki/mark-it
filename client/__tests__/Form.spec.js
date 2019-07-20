@@ -1,7 +1,6 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 import Form from '../components/Form';
-import mockAxios from 'axios';
 const db = require('../../db/index.js');
 
 //renders form with 4 inputs and submit button
@@ -9,13 +8,13 @@ const db = require('../../db/index.js');
 //clears form after submit
 //if one field is without a value, form will not submit
 
-const updateInput = (wrapper, instance, newVal) => {
-  const input = wrapper.find(instance)
-  input.simulate('change', {
-    target: {value: newVal}
-  })
-  return wrapper.find(instance)
-};
+// const updateInput = (wrapper, instance, newVal) => {
+//   const input = wrapper.find(instance)
+//   input.simulate('change', {
+//     target: {value: newVal}
+//   })
+//   return wrapper.find(instance)
+// };
 
 describe('<Form />', () => {
   afterAll(async done => {
@@ -42,8 +41,8 @@ describe('<Form />', () => {
   it('form submit invokes submitForm', () => {
 
   });
-  it('allows users to fill out form', () => {
-    const wrapper = shallow(<Form />)
+  //it('allows users to fill out form', () => {
+    //const wrapper = shallow(<Form />)
    // const categoryInput = updateInput(wrapper, 'category-input', 'Category')
    // const subjectInput = updateInput(wrapper, '[data-testid="subject-input"]', 'Subject')
    // const titleInput = updateInput(wrapper, '[data-testid="title-input"]', 'Title')
@@ -52,5 +51,5 @@ describe('<Form />', () => {
    // expect(subjectInput.props().value).toBe('Subject')
    // expect(titleInput.props().value).toBe('Title')
    // expect(urlInput.props().value).toBe('url')
-  });
+  //});
 });

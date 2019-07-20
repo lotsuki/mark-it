@@ -1,7 +1,7 @@
 
 
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import Subjects from '../components/Subjects';
 import data from '../../db/mockData.js'
 
@@ -16,12 +16,7 @@ describe('<Subjects />', () => {
   it('renders without error', () => {
      shallow(<Subjects {...props}/>);
   });
-  it('container has same number of children as bmarks length', () => {
-     const wrapper = shallow(<Subjects {...props}/>)
-     const container = wrapper.find('.subject-container').children().length
-  });
-
-
+  // it('container has same number of children as bmarks length', () => {
+     //const wrapper = shallow(<Subjects {...props}/>)
+  //});
 });
-
-

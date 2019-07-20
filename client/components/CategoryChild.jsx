@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
 import IconFolder from './IconFolder';
 
 const CategoryChild = ({ cat, color, folderOpen }) => {
-  let style = folderOpen ? {background: "#ECECEE"} : {background: ""};
 
   //returns section of category row
   return (
@@ -14,3 +14,15 @@ const CategoryChild = ({ cat, color, folderOpen }) => {
 };
 
 export default CategoryChild;
+
+CategoryChild.propTypes = {
+  cat: PropTypes.string,
+  color: PropTypes.string,
+  folderOpen: PropTypes.bool
+};
+
+CategoryChild.defaultProps = {
+  cat: '',
+  color: '',
+  folderOpen: false
+};

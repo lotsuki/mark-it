@@ -9,7 +9,6 @@ const IconCustomMenu = ({ name }) => {
   //handle icon custom menu click
   const openCustomMenu = (e) => {
     let target;
-    let wrapper = document.getElementById('section-wrapper');
 
     //set target to custom menu icon
     if (e.target.tagName === 'path' && e.target.parentElement.className.baseVal.includes('icon-custom-menu')) {

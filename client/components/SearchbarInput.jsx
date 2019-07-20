@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-const SearchbarInput = ({ isSearching, setIsSearching, input, setInput }) => {
+const SearchbarInput = ({ setIsSearching, input, setInput }) => {
 
   //hide searchbar when click outside
   const hideSearchbar = (e) => {

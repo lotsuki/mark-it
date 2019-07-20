@@ -39,7 +39,7 @@ const Titles = () => {
           {
             titles.map(title => (
               <div className="title-wrapper" key={title.url}>
-                <a target="_blank" href={title.url} className="title" key={title.title}>{title.title}</a>
+                <a target="_blank"  rel="noopener noreferrer" href={title.url} className="title" key={title.title}>{title.title}</a>
                 <div className="delete-icon" onClick={(e) => confirmDelete(e, title.subject)}>X</div>
               </div>
             ))

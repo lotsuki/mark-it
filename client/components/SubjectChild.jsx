@@ -1,11 +1,8 @@
-import React, { useContext, Fragment } from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import IconFolder from './IconFolder';
-import IconCustomMenu from './IconCustomMenu';
-import CategoriesContext from './CategoriesContext';
 
 const SubjectChild = ({ color, subject, clickedSubj }) => {
-  const { isOpen } = useContext(CategoriesContext);
   let folderOpen = clickedSubj === subject;
 
   return (

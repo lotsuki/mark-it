@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import Bookmarks from '../components/Bookmarks';
 import SidebarHeader from '../components/SidebarHeader';
 import Categories from '../components/Categories';

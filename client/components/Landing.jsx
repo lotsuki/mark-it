@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import landingPhoto from '../assests/booksmartphoto3.jpg';
 
-const Landing = (props) => {
+const Landing = () => {
   return (
     <div className="landing-container">
       <img src={landingPhoto} className="landing-photo" alt="landing-photo"/>

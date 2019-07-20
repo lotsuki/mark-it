@@ -10,7 +10,7 @@ const Categories = () => {
   const [ isOpen, setIsOpen ] = useState(false);
   const [ category, setCategory ] = useState('');
   const [ elementToEdit, setElementToEdit ] = useState('');
-  const { groups, setCategoryID, setShowTitles, setGroupToDelete, setElementForCustomMenu } = useContext(ContentContext);
+  const { groups, setCategoryID, setShowTitles, setGroupToDelete } = useContext(ContentContext);
 
   const exitCategories = (e) => {
     if (e.target.className === 'app' || e.target.className === 'sidebar-container') {
@@ -26,12 +26,12 @@ const Categories = () => {
   const handleCatClick = (e) => {
     let isCustomMenuIcon = utils.isCustomMenuIcon(e.target);
     if (isCustomMenuIcon) {
-      let target;
-      if (e.target.tagName === 'path' && e.target.parentElement.className.baseVal.includes('icon-custom-menu')) {
-        target = e.target.parentElement;
-      } else if (e.target.className.baseVal.includes('icon-custom-menu')) {
-        target = e.target
-      }
+      // let target;
+      // if (e.target.tagName === 'path' && e.target.parentElement.className.baseVal.includes('icon-custom-menu')) {
+      //   target = e.target.parentElement;
+      // } else if (e.target.className.baseVal.includes('icon-custom-menu')) {
+      //   target = e.target
+      // }
        setGroupToDelete('category');
      } else if (e.target.id === 'edit-category') {
         setElementToEdit(e.target.value);

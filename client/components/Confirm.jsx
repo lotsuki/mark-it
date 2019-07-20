@@ -1,12 +1,11 @@
-import React, { useContext, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext } from 'react';
 import utils from '../lib/utils';
 import axios from 'axios';
 import ContentContext from './ContentContext';
 import MainContext from './MainContext';
 
 const Confirm = () => {
-  const { groups, groupsID, categoryID, setCategoryID, setShowConfirm, titleToDelete, titles, setTitles, groupToDelete, elementForCustomMenu, setElementForCustomMenu, categoryToDelete, subjectToDelete, setSubjectToDelete } = useContext(ContentContext);
+  const { groups, groupsID, categoryID, setCategoryID, setShowConfirm, titleToDelete, setTitles, groupToDelete, setElementForCustomMenu, categoryToDelete, subjectToDelete, setSubjectToDelete } = useContext(ContentContext);
   const { links } = useContext(MainContext);
 
   //handles click to delete item
@@ -17,11 +16,10 @@ const Confirm = () => {
 
       //delete category
       if (groupToDelete === 'category') {
-        let cat = elementForCustomMenu.parentElement.children[1].innerText;
 
         //send request and exit custom menu
         try {
-          const res = await axios.delete(`/delete/category/${categoryToDelete}/${groupsID}`);
+          await axios.delete(`/delete/category/${categoryToDelete}/${groupsID}`);
 
           //update indices of categories
           updatedGroups = utils.deleteCategory(groups, categoryToDelete);
@@ -32,7 +30,7 @@ const Confirm = () => {
         //update database with new groups array
         try {
           if (updatedGroups.length > 1) {
-            const postRes = await axios.post('/update/catIds', updatedGroups);
+            await axios.post('/update/catIds', updatedGroups);
           }
         } catch(err) { console.log('Error at update category groups: ', err); }
 
@@ -41,7 +39,7 @@ const Confirm = () => {
 
         //send request, exit custom menu and update page
         try {
-          const resSub = await axios.delete(`/delete/subject/${subjectToDelete}/${categoryID}/${groupsID}`);
+          await axios.delete(`/delete/subject/${subjectToDelete}/${categoryID}/${groupsID}`);
 
           //update subject indices
           updatedGroups =  utils.deleteSubject(groups, categoryID, subjectToDelete);
@@ -54,7 +52,7 @@ const Confirm = () => {
         //update database with new groups array
         try {
           if (updatedGroups.length > 1) {
-            const postSubRes = await axios.post(`/update/subIds/${categoryID}`, updatedGroups);
+            await axios.post(`/update/subIds/${categoryID}`, updatedGroups);
           }
         } catch(err) {
           console.log('Error at update subject groups: ', err);

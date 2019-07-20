@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import Main from './Main';
 import Landing from './Landing';
 import ErrorBoundary from './ErrorBoundary';
@@ -116,13 +115,13 @@ class App extends React.Component {
         <BrowserRouter>
           <Switch>
             <Route path='/' exact component={Landing}></Route>
-            <Route path='/app' render={props => <Main userID={userID} groups={groups} groupsID={groupsID} links={links} updatePage={updatePage} />}></Route>
+            <Route path='/app' render={() => <Main userID={userID} groups={groups} groupsID={groupsID} links={links} updatePage={updatePage} />}></Route>
           </Switch>
         </BrowserRouter>
       </ErrorBoundary>
     );
   }
-};
+}
 
 
 

@@ -14,7 +14,7 @@ const IconPlus = () => {
   };
 
   //display form
-  const displayForm = (e) => {
+  const displayForm = () => {
     if (!showForm) {
       setShowForm(true);
       document.addEventListener('click', hideForm);

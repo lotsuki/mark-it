@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import CategoriesContext from './CategoriesContext';
 
 const IconDown = () => {
-   const { setCategory, exitCategories, setIsOpen} = useContext(CategoriesContext);
+   const { setCategory, setIsOpen} = useContext(CategoriesContext);
 
   const handleDownClick = (e) => {
     setIsOpen(true);
