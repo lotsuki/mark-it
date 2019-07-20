@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useRef } from 'react';
 import Subjects from './Subjects';
 import Category from './Category';
 import utils from '../lib/utils';
@@ -11,6 +11,7 @@ const Categories = () => {
   const [ category, setCategory ] = useState('');
   const [ elementToEdit, setElementToEdit ] = useState('');
   const { groups, setCategoryID, setShowTitles, setGroupToDelete } = useContext(ContentContext);
+  const categoryText = useRef(null);
 
   const exitCategories = (e) => {
     if (e.target.className === 'app' || e.target.className === 'sidebar-container') {
@@ -55,7 +56,7 @@ const Categories = () => {
   };
 
   return (
-    <CategoriesContext.Provider value={{ setCategory, category, exitCategories, setIsOpen, isOpen, elementToEdit, setElementToEdit }}>
+    <CategoriesContext.Provider value={{ setCategory, category, exitCategories, setIsOpen, isOpen, elementToEdit, setElementToEdit, categoryText }}>
       <div className="section-container" >
        <div id="section-wrapper">
          {groups.map(group => {

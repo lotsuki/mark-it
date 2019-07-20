@@ -18,7 +18,7 @@ module.exports = {
     // "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
     // "no-undef": "off",
     // "no-underscore-dangle": "off",
-    // "no-unused-vars": "off",
+    "no-unused-vars": "warn",
     // "block-scoped-var": "off",
     // "no-plusplus": "off",
     // "jsx-a11y/click-events-have-key-events": "off",

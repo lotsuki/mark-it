@@ -12,7 +12,7 @@ import CategoriesContext from './CategoriesContext';
 const Category = ({ color, cat, folderOpen }) => {
   const [ catEdited, setCatEdited ] = useState('');
   const { groups, groupsID, categoryID, setCategoryID, setIsEditing, isEditing, setElementForCustomMenu, elementForCustomMenu } = useContext(ContentContext);
-  const { setCategory, elementToEdit } = useContext(CategoriesContext);
+  const { setCategory, elementToEdit, categoryText } = useContext(CategoriesContext);
 
   //handle category edit
   const handleEnter = (e) => {
@@ -52,7 +52,7 @@ const Category = ({ color, cat, folderOpen }) => {
     return (
       <Fragment>
         <IconFolder viewBox={"-20 -9 55 55"} color={color} width={"30"} height={"30"} folderOpen={folderOpen}/>
-        <div className="category-text">{cat}</div>
+        <div className="category-text" ref={categoryText}>{cat}</div>
       </Fragment>
     );
   };
