@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import axios from 'axios'
+import axios from 'axios';
+import moment from 'moment';
 
 class Signup extends Component {
   constructor() {
@@ -20,16 +21,21 @@ class Signup extends Component {
   }
   handleSubmit(event) {
     console.log('sign-up handleSubmit, username: ')
-    console.log(this.state.username)
-    event.preventDefault()
 
+    const date = moment().format('MM-DD-YYYY');
+    const { username, password } = this.state;
+     console.log(username, 'uname')
+    console.log(password, 'pwd')
+    console.log(date, 'date')
+    event.preventDefault()
     //request to server to add a new username/password
-    axios.post('/user/', {
-      username: this.state.username,
-      password: this.state.password
+    axios.post('/user', {
+      username,
+      password,
+      date
     })
       .then(response => {
-        console.log(response)
+        console.log(response, 'response')
         if (!response.data.errmsg) {
           console.log('successful signup')
           this.setState({ //redirect to login page

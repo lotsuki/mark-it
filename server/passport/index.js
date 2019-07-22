@@ -1,7 +1,7 @@
 const passport = require('passport')
 const LocalStrategy = require('./localStrategy')
 const User = require('../../db/models/User');
-
+console.log('in index.js in passport')
 // called on login, saves the id to session req.session.passport.user = {id:'..'}
 passport.serializeUser((user, done) => {
   console.log('*** serializeUser called, user: ')

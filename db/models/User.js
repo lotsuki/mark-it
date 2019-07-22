@@ -16,8 +16,7 @@ const userSchema = new Schema({
     required: true
   },
   registed_date: {
-    type: Date,
-    default: Date.now
+    type: String
   },
 });
 

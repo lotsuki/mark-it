@@ -21,8 +21,9 @@ class App extends React.Component {
   }
 
   //fetch user object
-  fetchUser() {
-    axios.get('/user')
+   fetchUser() {
+    console.log('no')
+    axios.get('/user/')
       .then(res =>  {
         let data = res.data;
         if (data.username) {
@@ -38,7 +39,7 @@ class App extends React.Component {
         console.log('cant get user: ', err);
         // this.fetchUser();
       });
-  }
+   }
 
   componentDidMount() {
     this._isMounted = true;

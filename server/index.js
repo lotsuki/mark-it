@@ -4,10 +4,11 @@ const path = require('path');
 const morgan = require('morgan')
 const session = require('express-session')
 const compression = require('compression');
+const db = require('../db/index.js');
 const MongoStore = require('connect-mongo')(session);
 const passport = require('./passport');
-const Document = require('../db/models/Document.js');
-const db = require('../db/index.js');
+const Document = require('../db/models/Document');
+const User = require('../db/models/User')
 // const spdy = require('spdy');
 //const fs = require('fs');
 //const groupFile = require('../client/groups.txt');
@@ -58,6 +59,29 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(`${__dirname}/../public/`));
 
+
+app.post('/user', (req, res) => {
+    console.log(req.body, 'user signup');
+
+    const { username, password, date } = req.body
+    // ADD VALIDATION
+    User.findOne({ username: username }, (err, user) => {
+        if (err) {
+            console.log('User.js post error: ', err)
+        } else if (user) {
+            res.json({
+                error: `Sorry, already a user with the username: ${username}`
+            })
+        }
+        else {
+            const newUser = new User({ username, password, date });
+            newUser.save((err, savedUser) => {
+                if (err) return res.json(err)
+                res.json(savedUser)
+            })
+        }
+    })
+})
 
 app.post('/form', (req, res) => {
   let { groupsID, category, subject, catID, categoryL, subjectL, foldColor, hasCat, hasSubj } = req.body;
@@ -111,9 +135,18 @@ app.post('/update/catIds', (req,res) => {
   })
 })
 
+app.get('/user/', (req, res, next) => {
+    console.log('===== user!!======')
+    console.log(req.user, 'user')
+    if (req.user) {
+        res.json({ user: req.user })
+    } else {
+        res.json({ user: null })
+    }
+})
 
 // app.get('/user', (req, res) => {
-//   Document.findOne({ username: { $exists: true } }, (err, result) => {
+//   User.findOne({ username: { $exists: true } }, (err, result) => {
 //     if (err) { console.log('Failure to get user obj: ', err); }
 //     else { res.send(result); }
 //   });
