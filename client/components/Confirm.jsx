@@ -5,7 +5,7 @@ import ContentContext from './ContentContext';
 import MainContext from './MainContext';
 
 const Confirm = () => {
-  const { groups, groupsID, categoryID, setCategoryID, setShowConfirm, titleToDelete, setTitles, groupToDelete, setElementForCustomMenu, categoryToDelete, subjectToDelete, setSubjectToDelete } = useContext(ContentContext);
+  const { groups, groupsID, group, categoryID, setCategoryID, setShowConfirm, titleToDelete, setTitles,  setElementForCustomMenu, categoryToDelete, subjectToDelete, setSubjectToDelete } = useContext(ContentContext);
   const { links } = useContext(MainContext);
 
   //handles click to delete item
@@ -13,34 +13,27 @@ const Confirm = () => {
     if (e.target.innerText === 'Yes') {
       setShowConfirm(false);
       let updatedGroups;
-
-      //delete category
-      if (groupToDelete === 'category') {
-
+      //DELETE CATEGORY
+      if (group === 'category') {
         //send request and exit custom menu
         try {
           await axios.delete(`/delete/category/${categoryToDelete}/${groupsID}`);
-
           //update indices of categories
           updatedGroups = utils.deleteCategory(groups, categoryToDelete);
           setCategoryID('');
           setElementForCustomMenu('');
         } catch(err) { console.log('Error at delete category: ', err); }
-
         //update database with new groups array
         try {
           if (updatedGroups.length > 1) {
             await axios.post('/update/catIds', updatedGroups);
           }
         } catch(err) { console.log('Error at update category groups: ', err); }
-
-      //delete subject
-      } else if (groupToDelete === 'subject') {
-
+      //DELETE SUBJECT
+      } else if (group === 'subject') {
         //send request, exit custom menu and update page
         try {
           await axios.delete(`/delete/subject/${subjectToDelete}/${categoryID}/${groupsID}`);
-
           //update subject indices
           updatedGroups =  utils.deleteSubject(groups, categoryID, subjectToDelete);
           setElementForCustomMenu('');
@@ -48,7 +41,6 @@ const Confirm = () => {
         } catch(err) {
           console.log('Error at delete subject: ', err);
         }
-
         //update database with new groups array
         try {
           if (updatedGroups.length > 1) {
@@ -57,12 +49,11 @@ const Confirm = () => {
         } catch(err) {
           console.log('Error at update subject groups: ', err);
         }
-
-      //delete title
-      } else if(groupToDelete === 'title') {
+      //DELETE TITLE
+      } else if(group === 'title') {
         let titl = titleToDelete[0];
-        let subjectOfTitle = titleToDelete[1];
-          axios.delete(`/delete/title/${titl}/${subjectOfTitle}`)
+        let subj = titleToDelete[1];
+          axios.delete(`/delete/title/${titl}/${subj}`)
             .then(res => {
               //displays titles of subject
               setTitles(res.data);

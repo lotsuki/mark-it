@@ -13,18 +13,28 @@ const Form = () => {
   const [ color, setColor ] = useState('#D00000');
   //const [ selectCat, setSelectCat ] = useState(false);
   //const [ selectSub, setSelectSub ] = useState(false);
-  const { groups, groupsID, updatePage } = useContext(ContentContext);
+  const { groups, setGroups, groupsID } = useContext(ContentContext);
   const { setShowForm, links } = useContext(MainContext);
 
   //update indices of categories or subjects in groups array after deletion
   const updateData = (_hasCat, _hasSubj, _catID, _subject, response) => {
     if (!_hasCat && !_hasSubj) {
-      groups.push({id: groups.length, category, color, subjects: [{id: 0, subject:_subject}]});
+      console.log('no')
+      setGroups(prevState => prevState.concat({id: groups.length, category, color, subjects: [{id: 0, subject:_subject}]}))
+      // groups.push({id: groups.length, category, color, subjects: [{id: 0, subject:_subject}]});
       return groups;
     } else if (!_hasSubj) {
-      let _subjects = groups[_catID].subjects;
-      _subjects.push({id: _subjects.length, subject:_subject});
-      return groups;
+      console.log(groups, 'groups before')
+      setGroups(prevState => {
+        console.log(prevState, 'prevstate before')
+        let _subjects = prevState[_catID].subjects;
+        prevState[_catID].subjects.push({id: _subjects.length, subject:_subject});
+        console.log(prevState, 'prevstate after')
+        return prevState;
+      });
+      // let _subjects = groups[_catID].subjects;
+      // _subjects.push({id: _subjects.length, subject:_subject});
+      //return groups;
     } else {
       let data = response.data;
       let newTitleObj = {
@@ -35,7 +45,6 @@ const Form = () => {
       links.push(newTitleObj);
     }
   };
-
   //submit bookmark
   const submitForm = (e) => {
     e.preventDefault();
@@ -65,9 +74,7 @@ const Form = () => {
         })
         .then(res => {
           //updated groups array with correct indices
-          let updatedArr = updateData(hasCat, hasSubj, catID, subject, res);
-          //if new category or new subject, update page with new groups array
-          if (updatedArr) {  updatePage(updatedArr); }
+          updateData(hasCat, hasSubj, catID, subject, res);
         })
         .catch(err => { console.log('Error at POST request', err); });
       setShowForm(false);

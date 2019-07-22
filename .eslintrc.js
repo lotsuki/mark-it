@@ -13,6 +13,7 @@ module.exports = {
   },
   "rules": {
     "no-console": "off",
+    "no-debugger": "off",
     // "prefer-destructuring": "off",
     // "import/extensions": [".js", ".jsx"],
     // "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
@@ -28,7 +29,7 @@ module.exports = {
     // "jsx-a11y/label-has-for": "off",
     // "jsx-a11y/mouse-events-have-key-events": "off",
     // "react/destructuring-assignment": "off",
-    // "react/prop-types": 0,
+    "react/prop-types": "warn",
     "react/jsx-filename-extension": [
       "error",
       {

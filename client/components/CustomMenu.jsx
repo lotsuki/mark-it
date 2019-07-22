@@ -5,7 +5,7 @@ import ContentContext from './ContentContext';
 import utils from '../lib/utils';
 
 const CustomMenu = () => {
-  const { cords, elementForCustomMenu, setElementForCustomMenu, setIsEditing, showConfirm, setShowConfirm, setIsEditingSubject, setCategoryToDelete } = useContext(ContentContext);
+  const { cords, elementForCustomMenu, setElementForCustomMenu, setIsEditing, showConfirm, setShowConfirm, setCategoryToDelete, setGroup } = useContext(ContentContext);
 
   useEffect(() => {
     document.addEventListener('click', exitCustomMenu);
@@ -17,11 +17,14 @@ const CustomMenu = () => {
     let isCustomMenu = utils.isCustomMenu(e.target, 'custom-menu');
 
     //don't exit if target is certain elements
-    if(isCustomMenu || e.target.id === 'edit-category-input' || customMenuIcon && customMenuIcon.className.baseVal !== elementForCustomMenu.className.baseVal) {
+    if(isCustomMenu || e.target.id === 'edit-category-input' || e.target.id === 'edit-subject' || customMenuIcon && customMenuIcon.className.baseVal !== elementForCustomMenu.className.baseVal) {
       return;
 
     //exit custom menu
     } else {
+      console.log('no')
+      //TODO: CLEAR TARGET (FROM CONTENT)
+
       let menuIcons = document.getElementsByClassName('icon-custom-menu');
       for (var i = 0; i < menuIcons.length; i++) {
         menuIcons[i].style.visibility = '';
@@ -57,24 +60,19 @@ const CustomMenu = () => {
 
   //handle custom menu click
   const customMenuClick = (e) => {
-    let className = elementForCustomMenu.parentElement.children[1].className;
-    let category = elementForCustomMenu.parentElement.children[1].innerText;
-
-     //edit category
-     if (className === 'category-text' && e.target.innerText === 'Edit Item') {
+    const CN = elementForCustomMenu.parentElement.children[1].className;
+    const category = elementForCustomMenu.parentElement.children[1].innerText;
+      //edit group
+     if (e.target.innerText === 'Edit Item') {
        setIsEditing(true);
-
-     //edit subject
-     } else if (className === 'subject-text' && e.target.innerText === 'Edit Item') {
-       setIsEditingSubject(true);
-
-     //delete category or subject
+       CN === 'category-text' ? setGroup('category') : setGroup('subject');
+     //delete group
      } else if (e.target.innerText === 'Delete Item') {
       confirmDeleteForGroup(e);
       setCategoryToDelete(category);
      }
   };
-
+  console.log(cords, 'cords')
   return (
     <div className="custom-menu" onClick={customMenuClick} style={{top: `${cords[0]}px`, left: '378px'}}>
       <IconEdit />

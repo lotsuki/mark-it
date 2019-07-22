@@ -11,7 +11,7 @@ const Subjects = ({ color }) => {
   const [ subjects, setSubjects ] = useState([]);
   const [ catID, setCatID ] = useState('');
   const [ subjectToEdit, setSubjectToEdit ] = useState('');
-  const { groups, setShowTitles, setTitles, setGroupToDelete, isEditingSubject } = useContext(ContentContext);
+  const { groups, setGroup, setTitles, isEditing } = useContext(ContentContext);
   const { category, setCategory, setIsOpen } = useContext(CategoriesContext);
 
   useEffect(() => {
@@ -33,10 +33,10 @@ const Subjects = ({ color }) => {
     if (target.className === 'app' || target.id === 'titles-container'){
       setIsOpen(false);
       setCategory('');
-      setShowTitles(false);
+      setTitles(null);
       document.removeEventListener('click', exitTitles);
     } else if (titleClasses.indexOf(target.className) === -1) {
-     setShowTitles(false);
+      setTitles(null);
      document.removeEventListener('click', exitTitles);
     }
   };
@@ -46,8 +46,8 @@ const Subjects = ({ color }) => {
     let isCustomMenuIcon = utils.isCustomMenuIcon(e.target);
     if (isCustomMenuIcon) {
       //if user clicked on custom menu icon, set group to delete (category or subject)
-      setGroupToDelete('subject');
-    } else if (isEditingSubject) {
+      setGroup('subject');
+    } else if (isEditing) {
       //if user clicked on edit button in custom menu
       setSubjectToEdit(e.target.value);
     }
@@ -55,8 +55,7 @@ const Subjects = ({ color }) => {
 
     //if user clicks on subject that is open, close subject
     if (e.target.innerText === subj) {
-      setShowTitles(false);
-      setTitles([]);
+      setTitles(null);
       setSubj('');
 
     //if user click on new subject
@@ -72,11 +71,7 @@ const Subjects = ({ color }) => {
       document.addEventListener('click', exitTitles);
       setSubj(subject);
       axios.get(`/titles/${category}/${subject}`)
-        .then(res => {
-          let data = res.data;
-         setTitles(data);
-         setShowTitles(true);
-        })
+        .then(res => setTitles(res.data))
     }
   };
 

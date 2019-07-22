@@ -2,58 +2,100 @@ import React, { useState, useRef, useEffect } from 'react';
 import Main from './Main';
 import Landing from './Landing';
 import ErrorBoundary from './ErrorBoundary';
+import LoginForm from './LoginForm';
+import Signup from './Signup';
 import axios from 'axios';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-const App = () => {
-  const [ userID, setUserID ] = useState('');
-  const [ groups, setGroups ] = useState([]);
-  const [ links, setLinks ] = useState([]);
-  const [ groupsID, setGroupsID ] = useState('');
-  const countRetry = useRef(0);
+class App extends React.Component {
+  constructor(props) {
+    super(props);
 
-  const updateGroups = (data) => {
-    setGroups(data.groups);
-    setGroupsID(data._id);
-  };
-  const updateLinks = data => setLinks(data);
-  const updateUserID = data => setUserID(data.username);
-  const updatePage = updatedData => setGroups(updatedData);
+    this.state = {
+      isLoggedIn: false,
+      username: '',
+      userID: ''
+    }
+    this._isMounted = false;
+    this.fetchUser = this.fetchUser.bind(this);
+  }
 
-  const fetchRetry = (err, url, updateFunc) => {
-    countRetry.current++;
-    //fix error handle
-    if (countRetry.current >= 3) { return err; }
-    fetchData(url, updateFunc);
-  };
-
-  const fetchData = (url, updateFunc) => {
-    axios.get(url)
+  //fetch user object
+  fetchUser() {
+    axios.get('/user')
       .then(res =>  {
         let data = res.data;
-        updateFunc(data);
+        if (data.username) {
+          this.setState({
+            userID: data._id,
+            username: data.username,
+            isLoggedIn: true
+          })
+        }
       })
       .catch(err => {
-        fetchRetry(err);
+        //fix handle error
+        console.log('cant get user: ', err);
+        // this.fetchUser();
       });
-  };
+  }
 
-  useEffect(() => {
-    fetchData('/user', updateUserID);
-    fetchData('/groups', updateGroups);
-    fetchData('/titles', updateLinks);
-  }, []);
+  componentDidMount() {
+    this._isMounted = true;
+    this.fetchUser();
+  }
 
-  return (
-    <ErrorBoundary>
-      <BrowserRouter>
-        <Switch>
-          <Route path='/' exact component={Landing}></Route>
-          <Route path='/app' render={() => <Main userID={userID} groups={groups} groupsID={groupsID} links={links} updatePage={updatePage} />}></Route>
-        </Switch>
-      </BrowserRouter>
-    </ErrorBoundary>
-  );
+  componentWillUnMount() {
+    this._isMounted = false;
+  }
+
+  render() {
+    const { isLoggedIn, username, userID } = this.state;
+
+    if (isLoggedIn) {
+      return (
+        <ErrorBoundary>
+          <Main
+            userID={userID}
+          />
+        </ErrorBoundary>
+      );
+    } else {
+      return (
+        <ErrorBoundary>
+          <BrowserRouter>
+            <Switch>
+              <Route
+                path='/'
+                exact component={Landing}
+              />
+              <Route
+                path="/login"
+                render={() =>
+                <LoginForm
+                  updateUser={this.updateUser}
+                />}
+              />
+              <Route
+                path="/signup"
+                render={() =>
+                <Signup
+                  updateUser={this.updateUser}
+                />}
+              />
+              <Route
+                path='/app'
+                render={() =>
+                  <Main
+                    userID={userID}
+                  />}
+              />
+            </Switch>
+          </BrowserRouter>
+        </ErrorBoundary>
+      );
+    }
+  }
 }
 
 export default App;

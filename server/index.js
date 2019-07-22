@@ -1,9 +1,13 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
+const morgan = require('morgan')
+const session = require('express-session')
 const compression = require('compression');
-const Document = require('../db/Document.js');
-//const db = require('../db/index.js');
+const MongoStore = require('connect-mongo')(session);
+const passport = require('./passport');
+const Document = require('../db/models/Document.js');
+const db = require('../db/index.js');
 // const spdy = require('spdy');
 //const fs = require('fs');
 //const groupFile = require('../client/groups.txt');
@@ -15,6 +19,29 @@ let PORT = process.env.PORT || 3000;
 //     key: fs.readFileSync(__dirname + '/../domain.key'),
 //     cert:  fs.readFileSync(__dirname + '/../domain.crt')
 // }
+
+// Route requires
+const user = require('./routes/user');
+
+// MIDDLEWARE
+app.use(morgan('dev'));
+
+// Sessions
+app.use(
+  session({
+    secret: 'fraggle-rock', //pick a random string to make the hash that is generated secure
+    store: new MongoStore({ mongooseConnection: db }),
+    resave: false, //required
+    saveUninitialized: false //required
+  })
+);
+
+// Passport
+app.use(passport.initialize());
+app.use(passport.session()); // calls the deserializeUser
+
+// Routes
+app.use('/user', user);
 
 app.use((req, res, next) => {
   res.set("Access-Control-Allow-Origin", "*");
@@ -28,8 +55,9 @@ app.use((req, res, next) => {
 });
 app.use(compression());
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(`${__dirname}/../public/`));
+
 
 app.post('/form', (req, res) => {
   let { groupsID, category, subject, catID, categoryL, subjectL, foldColor, hasCat, hasSubj } = req.body;
@@ -46,9 +74,7 @@ app.post('/form', (req, res) => {
       console.log('error at post: ', err)
       res.send('Error at POST: ', err);
     } else {
-      res.send(result);
       if (!hasCat && !hasSubj) {
-
         Document.updateOne({_id: groupsID}, {$addToSet: {groups:{id: categoryL, category, color: foldColor, subjects: [{id: 0, subject: subject}]}}}, (err, result) => {
           if (err) { res.send(err); }
           else { res.send(result); }
@@ -58,8 +84,7 @@ app.post('/form', (req, res) => {
           if (err) { console.log('Failed to update subjects at POST: ', err); }
           else { res.send(result); }
         })
-
-      }
+      } else { res.send(result); }
     }
   });
 });
@@ -87,12 +112,12 @@ app.post('/update/catIds', (req,res) => {
 })
 
 
-app.get('/user', (req, res) => {
-  Document.findOne({ username: { $exists: true } }, (err, result) => {
-    if (err) { console.log('Failure to get user obj: ', err); }
-    else { res.send(result); }
-  });
-});
+// app.get('/user', (req, res) => {
+//   Document.findOne({ username: { $exists: true } }, (err, result) => {
+//     if (err) { console.log('Failure to get user obj: ', err); }
+//     else { res.send(result); }
+//   });
+// });
 
 
 app.get('/groups', (req, res) => {
@@ -173,13 +198,13 @@ app.delete('/delete/subject/:subjectToDelete/:categoryID/:groupsID', (req, res) 
 });
 
 
-app.delete('/delete/title/:titl/:subjectOfTitle', (req, res) => {
-  let {titl, subjectOfTitle } = req.params;
+app.delete('/delete/title/:titl/:subj', (req, res) => {
+  let {titl, subj } = req.params;
 
   Document.deleteOne({ title: titl }, (err) => {
     if (err) { console.log('Error at DELETE request: ', err); }
     else {
-      Document.find({$and: [{subject: subjectOfTitle}, {title: {$ne: titl}}]}, (err, result) => {
+      Document.find({$and: [{subject: subj}, {title: {$ne: titl}}]}, (err, result) => {
         if (err) { console.log('Error at DELETE request: ', err); }
         else { res.send(result); }
       });

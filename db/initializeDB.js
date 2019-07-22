@@ -1,4 +1,4 @@
-// const Document = require("./Document.js");
+// const Document = require("./models/Document.js");
 // const db = require("./index.js");
 // const ObjectId = require("mongodb").ObjectID;
 
@@ -9,6 +9,7 @@
 // });
 
 // const groups = new Document({
+//   userID: 'userID',
 //   groups: [{
 //     id: 0,
 //     category: 'Tech',

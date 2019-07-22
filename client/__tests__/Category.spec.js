@@ -25,8 +25,5 @@ describe('<Category />', () => {
     const wrapper = shallow(<Category {...props}/>);
     expect(wrapper.find('span').text()).toBe(props.cat)
   });
-  it('renders down arrow icon', () => {
-    const wrapper = shallow(<Category />);
-    expect(wrapper.find('i').exists()).toBe(true)
-  });
+
 });

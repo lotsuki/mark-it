@@ -1,25 +1,31 @@
-import React, { useContext, useRef } from 'react';
+import React, { useState, useContext, useRef } from 'react';
 import PropTypes from 'prop-types';
 import ContentContext from './ContentContext';
 import CategoriesContext from './CategoriesContext';
 import utils from '../lib/utils';
 
 const IconCustomMenu = ({ name }) => {
+  const [ iconClicked, setIconClicked ] = useState(null);
   const { groups, elementForCustomMenu, setCords, setElementForCustomMenu, setCategoryID, setSubjectToDelete } = useContext(ContentContext);
   const { categoryText } = useContext(CategoriesContext);
   const iconMenu = useRef(null);
 
   //handle icon custom menu click
   const openCustomMenu = () => {
+    //TODO: STORE TARGET, CATEGORY OR SUBJECT (SEND TO CONTENT)
     const target = iconMenu.current;
     //find coordinates of icon clicked to position custom menu
     const group = utils.whichGroup(groups, target);
     const rect = target.getBoundingClientRect();
     const cords = [rect.top + 8, rect.left];
     //hide cusotm menu icon
-    if (elementForCustomMenu) {
-      elementForCustomMenu.style.visibility = '';
-    }
+    // if (elementForCustomMenu) {
+    //   elementForCustomMenu.style.visibility = '';
+    // }
+    console.log(iconClicked, 'previosu icon');
+    console.log(target, 'curr target');
+    console.log
+    if (iconClicked) { iconClicked.style.visibility = ''; }
     //open custom menu
     if (group === 'category') {
       //set categoryID

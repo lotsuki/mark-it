@@ -10,7 +10,7 @@ const Categories = () => {
   const [ isOpen, setIsOpen ] = useState(false);
   const [ category, setCategory ] = useState('');
   const [ elementToEdit, setElementToEdit ] = useState('');
-  const { groups, setCategoryID, setShowTitles, setGroupToDelete } = useContext(ContentContext);
+  const { groups, setCategoryID, setGroup } = useContext(ContentContext);
   const categoryText = useRef(null);
 
   const exitCategories = (e) => {
@@ -19,21 +19,14 @@ const Categories = () => {
       setIsOpen(false);
       setCategory('');
       setCategoryID('');
-      setShowTitles(false);
-      setGroupToDelete('');
+      setGroup('');
     }
   };
 
   const handleCatClick = (e) => {
     let isCustomMenuIcon = utils.isCustomMenuIcon(e.target);
     if (isCustomMenuIcon) {
-      // let target;
-      // if (e.target.tagName === 'path' && e.target.parentElement.className.baseVal.includes('icon-custom-menu')) {
-      //   target = e.target.parentElement;
-      // } else if (e.target.className.baseVal.includes('icon-custom-menu')) {
-      //   target = e.target
-      // }
-       setGroupToDelete('category');
+       setGroup('category');
      } else if (e.target.id === 'edit-category') {
         setElementToEdit(e.target.value);
     } else {
@@ -42,13 +35,11 @@ const Categories = () => {
         document.removeEventListener('click', exitCategories);
         setIsOpen(false);
         setCategory('');
-        setShowTitles(false);
-        setGroupToDelete('');
+        setGroup('');
       } else {
         let catID = utils.findCategoryID(groups, cat);
         setIsOpen(true);
         setCategory(cat);
-        setShowTitles(false);
         setCategoryID(catID);
         document.addEventListener('click', exitCategories);
       }
@@ -58,14 +49,13 @@ const Categories = () => {
   return (
     <CategoriesContext.Provider value={{ setCategory, category, exitCategories, setIsOpen, isOpen, elementToEdit, setElementToEdit, categoryText }}>
       <div className="section-container" >
-       <div id="section-wrapper">
+       <div id="section-wrapper" onClick={handleCatClick}>
          {groups.map(group => {
           let folderOpen = category === group.category;
            return (
             <div className="category-container" key={group.category}>
              <div
                className="category-wrapper"
-               onClick={handleCatClick}
                key={group.category}>
                <Category cat={group.category} color={group.color} folderOpen={folderOpen}/>
              </div>
@@ -86,6 +76,3 @@ const Categories = () => {
 
 
 export default Categories;
-
-
-

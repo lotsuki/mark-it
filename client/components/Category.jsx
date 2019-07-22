@@ -11,7 +11,7 @@ import CategoriesContext from './CategoriesContext';
 
 const Category = ({ color, cat, folderOpen }) => {
   const [ catEdited, setCatEdited ] = useState('');
-  const { groups, groupsID, categoryID, setCategoryID, setIsEditing, isEditing, setElementForCustomMenu, elementForCustomMenu } = useContext(ContentContext);
+  const { groups, groupsID, group,categoryID, setCategoryID, setIsEditing, isEditing, setElementForCustomMenu, elementForCustomMenu } = useContext(ContentContext);
   const { setCategory, elementToEdit, categoryText } = useContext(CategoriesContext);
 
   //handle category edit
@@ -60,7 +60,7 @@ const Category = ({ color, cat, folderOpen }) => {
   return (
      <div className="category" key={cat}>
       {
-        isEditing
+        isEditing && group === 'category'
         ? ( displayInputOnEdit() )
         : (<CategoryChild color={color} cat={cat} folderOpen={folderOpen}/>)
       }

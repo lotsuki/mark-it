@@ -10,7 +10,7 @@ import ContentContext from './ContentContext';
 
 const Subject = ({ clickedSubj, subject, catID, subjectToEdit, color }) => {
   const [ subEdited, setSubEdited ] = useState('');
-  const { groups, groupsID, setElementForCustomMenu, elementForCustomMenu, setIsEditingSubject, isEditingSubject } = useContext(ContentContext);
+  const { groups, groupsID, group, setElementForCustomMenu, elementForCustomMenu, isEditing, setIsEditing } = useContext(ContentContext);
 
   //handle enter when user edits subject
   const handleSubEnter = (e) => {
@@ -22,7 +22,7 @@ const Subject = ({ clickedSubj, subject, catID, subjectToEdit, color }) => {
         .then(() => {
           //update react data and exit custom menu
            utils.editSubjects(groups, catID, subjectToEdit, subEdited);
-           setIsEditingSubject(false);
+           setIsEditing(false);
            setElementForCustomMenu('');
         })
         .catch(err => { console.log('Error at PATCH request', err); });
@@ -53,7 +53,7 @@ const Subject = ({ clickedSubj, subject, catID, subjectToEdit, color }) => {
   return (
     <Fragment>
       {
-        isEditingSubject
+        isEditing && group === 'subject'
         ? ( displaySubInputOnEdit(subject, subjectToEdit) )
         : ( <SubjectChild color={color} subject={subject} clickedSubj={clickedSubj}/> )
       }

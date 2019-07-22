@@ -6,7 +6,8 @@ mongoose.Promise = global.Promise;
 
 mongoose.connect(uri, {
   useNewUrlParser: true,
-  autoIndex: true
+  autoIndex: true,
+  useCreateIndex: true
 });
 
 const db = mongoose.connection

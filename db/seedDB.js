@@ -1,4 +1,4 @@
-// const Document = require("./Document.js");
+// const Document = require("./models/Document.js");
 // const db = require("./index.js");
 // const data = require('./mockData.js');
 // const faker = require('faker');
